@@ -1,0 +1,81 @@
+
+dataType entityId {
+    pattern: '\d{12}';
+}
+
+dataType languageCode {
+    allowedValues: 'en', 'fr', 'es';
+}
+
+dataType dialectCode {
+    allowedValues: 'british', 'american';
+}
+
+dataType emailAddress {
+    pattern: '[A-Za-z0-9\.]+@nagwa.com';
+}
+
+dataType partType {
+    allowedValues: 'mcq', 'frq', 'tfq', 'ynq', 'statement';
+}
+
+root element question {
+    attribute id {
+        type: <entityId>;
+    }
+    optional attribute language_code {
+        type: <languageCode>;
+    }
+    optional attribute dialect_code {
+        type: <dialectCode>;
+    }
+    subelements [
+        developers, n = 1;
+        title, n <= 1;
+        parameters, n = 1;
+        parts, n = 1;
+    ]
+}
+
+element developers {
+    subelements [
+        developer, n >= 1;
+    ]
+}
+
+element developer {
+    subelements [
+        name, n = 1;
+        email_address, n = 1;
+    ]
+}
+
+element name {
+    allowedContent: <text>;
+}
+
+element email_address {
+    allowedContent: <emailAddress>;
+}
+
+element title {
+    allowedContent: <text>;
+}
+
+element parts {
+    subelements [
+        part, n >= 1;
+    ]
+}
+
+element part {
+    attribute type {
+        type: <partType>;
+    }
+}
+
+element image {
+    attribute id {
+        type: <entityId>;
+    }
+}

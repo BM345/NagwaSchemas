@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<image id="000000000000" type="raster">
+    <upload_date>2021-03-03T10:00:00</upload_date>
+    <last_modification_date>2021-03-04T10:00:00</last_modification_date>
+    <attribution>
+        <source_id>000000000000</source_id>
+    </attribution>
+    <developers>
+        <developer>
+            <name>Benjamin Milnes</name>
+            <email_address>example@example.com</email_address>
+        </developer>
+    </developers>
+    <language>en</language>
+    <dialect>british</dialect>
+    <caption>A top-down view of the Milky Way</caption>
+    <keywords>galaxy, Milky Way</keywords>
+    <resources>
+        <resource size="small" file_name="000000000000_small.png">
+        <resource size="large" file_name="000000000000_large.png">
+    </resources>
+</image>
