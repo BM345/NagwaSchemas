@@ -23,14 +23,20 @@ root element question {
     attribute id {
         type: <entityId>;
     }
-    optional attribute language_code {
-        type: <languageCode>;
+    optional attribute derivative_of {
+        type: <entityId>;
     }
-    optional attribute dialect_code {
-        type: <dialectCode>;
+    optional attribute derivative_type {
+        allowedValues: 'translation', 'localisation';
     }
-    subelements [
-        developers, n = 1;
+    subelement developers, n = 1 {}
+    unordered subelements [
+        language, n = 1;
+        dialect, n = 1;
+        calendar, n = 1;
+        currency, n = 1;
+    ]
+    ordered subelements [
         title, n <= 1;
         parameters, n = 1;
         parts, n = 1;

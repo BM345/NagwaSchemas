@@ -7,7 +7,7 @@
         <pages>77-79</pages>
     </attribution>
     <developers>
-        <developer>
+        <developer role="writer">
             <name>Benjamin Milnes</name>
             <email_address>example@example.com</email_address>
         </developer>
@@ -19,19 +19,19 @@
     <title>A Question About Lots of Different Things</title>
     <parameters>
         <instance>
-            <parameter></parameter>
-            <parameter></parameter>
-            <parameter></parameter>
+            <parameter n="1">17</parameter>
+            <parameter n="2">12</parameter>
+            <parameter n="3">24</parameter>
         </instance>
         <instance>
-            <parameter></parameter>
-            <parameter></parameter>
-            <parameter></parameter>
+            <parameter n="1">34</parameter>
+            <parameter n="2">55</parameter>
+            <parameter n="3">42</parameter>
         </instance>
         <instance>
-            <parameter></parameter>
-            <parameter></parameter>
-            <parameter></parameter>
+            <parameter n="1">7</parameter>
+            <parameter n="2">9</parameter>
+            <parameter n="3">2</parameter>
         </instance>
     </parameters>
     <parts>
@@ -55,6 +55,7 @@
             <solution>
                 <p>This is how you can work out the answer to this part.</p>
             </solution>
+            <marks>2</marks>
         </part>
         <part type="frq">
             <main_text>
