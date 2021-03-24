@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<question id="409158921650">
+    <upload_date></upload_date>
+    <last_modification_date></last_modification_date>
+    <attribution>
+        <source_id>314185910980</source_id>
+    </attribution>
+    <developers>
+        <developer role="writer">
+            <name>Benjamin Milnes</name>
+            <email_address>benjamin.milnes@nagwa.com</email_address>
+        </developer>
+    </developers>
+    <language>en</language>
+    <dialect>american</dialect>
+    <calendar>none</calendar>
+    <currency>none</currency>
+    <unit_system>si</unit_system>
+    <type>lesson</type>
+    <title>Relating the Units of a Quantity to its Dimensions</title>
+    <parameters>
+        <instance n="1">
+            <parameter n="1">newton meter</parameter>
+            <parameter n="2">M L^2 T^{-2}</parameter>
+            <parameter n="3">M L^2 T^{-1}</parameter>
+            <parameter n="4">M L T^{-2}</parameter>
+            <parameter n="5">M L T^{-1}</parameter>
+            <parameter n="6">M L^3 T^{-2}</parameter>
+        </instance>
+        <instance n="2">
+            <parameter n="1">joule second</parameter>
+            <parameter n="2">M L^2 T^{-1}</parameter>
+            <parameter n="3">M L^2</parameter>
+            <parameter n="4">M L^2 T^{-2}</parameter>
+            <parameter n="5">M L^3 T^{-1}</parameter>
+            <parameter n="6">M L T^{-2}</parameter>
+        </instance>
+        <instance n="3">
+            <parameter n="1">watt per meter^2</parameter>
+            <parameter n="2">M T^{-3}</parameter>
+            <parameter n="3">M L^{-1}</parameter>
+            <parameter n="4">M T^{-2}</parameter>
+            <parameter n="5">M L T^{-3}</parameter>
+            <parameter n="6">M T^2</parameter>
+        </instance>
+        <instance n="4">
+            <parameter n="1">coulomb per second</parameter>
+            <parameter n="2">I</parameter>
+            <parameter n="3">Cd</parameter>
+            <parameter n="4">I T^{-1}</parameter>
+            <parameter n="5">T^{-1}</parameter>
+            <parameter n="6">M</parameter>
+        </instance>
+        <instance n="5">
+            <parameter n="1">newton per meter^2</parameter>
+            <parameter n="2">M L^{-1} T^{-2}</parameter>
+            <parameter n="3">M L^{-1} T^{-1}</parameter>
+            <parameter n="4">M T^{-2}</parameter>
+            <parameter n="5">M L T^{-2}</parameter>
+            <parameter n="6">M L^{-2} T^{-2}</parameter>
+        </instance>
+    </parameters>
+    <parts>
+        <part type="mcq" must_show_choices="false">
+            <main_text>
+                <p>
+                    <s>What are the dimensions of a quantity that can be measured in units of 
+                    <unit><parameter n="1" /></unit>?</s>
+                </p>
+            </main_text>
+            <choices>
+                <choice is_correct_answer="true">
+                    <m><parameter n="2" /></m>
+                </choice>
+                <choice>
+                    <m><parameter n="3" /></m>
+                </choice>
+                <choice>
+                    <m><parameter n="4" /></m>
+                </choice>
+                <choice>
+                    <m><parameter n="5" /></m>
+                </choice>
+                <choice>
+                    <m><parameter n="6" /></m>
+                </choice>
+            </choices>
+            <solutions>
+                <solution for_instances="1">
+                    <p>
+                        <s>Recall that units of newtons are equivalent to units of kilogram meters per second-squared ...</s>
+                    </p>
+                </solution>
+                <solution for_instances="4">
+                    <p>
+                        <s>Recall that coulombs are the unit of electric charge, and that seconds are the unit of time ...</s>
+                    </p>
+                </solution>
+            </solutions>
+            <marks>1</marks>
+        </part>
+    </parts>
+</question>

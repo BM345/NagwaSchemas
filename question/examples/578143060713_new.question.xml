@@ -36,16 +36,18 @@
             <choices>
                 <choice is_correct_answer="true">A smaller orbital radius</choice>
                 <choice>A larger orbital radius</choice>
-            </choices> 
-            <solution>
-                <p>
-                    <s>Recall that the astronomical unit, with the symbol <unit>astronomical_unit</unit>, is a unit of length 
-                    approximately equal to the distance between the Earth and the Sun - the distance between the Earth and the Sun
-                    is approximately <quantity><value>1</value><unit>astronomical_unit</unit></quantity>.</s>
-                    <s>Therefore, if the distance between any planet and its host star is less than <quantity><value>1</value><unit>astronomical_unit</unit></quantity>,
-                    it is closer to its host star than Earth is to the Sun.</s>
-                </p>
-            </solution>
+            </choices>
+            <solutions> 
+                <solution>
+                    <p>
+                        <s>Recall that the astronomical unit, with the symbol <unit>astronomical_unit</unit>, is a unit of length 
+                        approximately equal to the distance between the Earth and the Sun - the distance between the Earth and the Sun
+                        is approximately <quantity><value>1</value><unit>astronomical_unit</unit></quantity>.</s>
+                        <s>Therefore, if the distance between any planet and its host star is less than <quantity><value>1</value><unit>astronomical_unit</unit></quantity>,
+                        it is closer to its host star than Earth is to the Sun.</s>
+                    </p>
+                </solution>
+            </solutions>
             <marks>1</marks>
         </part>
         <part type="mcq" must_show_choices="false">
@@ -101,8 +103,10 @@
                     </quantity>
                 </choice>
             </choices>
-            <solution>
-            </solution>
+            <solutions>
+                <solution>
+                </solution>
+            </solutions>
             <marks>1</marks>
         </part>
         <part type="mcq" must_show_choices="false">
@@ -155,8 +159,10 @@
                     </quantity>
                 </choice>
             </choices>
-            <solution>
-            </solution>
+            <solutions>
+                <solution>
+                </solution>
+            </solutions>
             <marks>1</marks>
         </part>
     </parts>
