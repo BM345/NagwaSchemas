@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<question id="578143060713">
+    <upload_date></upload_date>
+    <last_modification_date></last_modification_date>
+    <attribution>
+    </attribution>
+    <developers>
+        <developer role="writer">
+            <name>Benjamin Milnes</name>
+            <email_address>benjamin.milnes@nagwa.com</email_address>
+        </developer>
+    </developers>
+    <language>en</language>
+    <dialect>american</dialect>
+    <calendar>none</calendar>
+    <currency>none</currency>
+    <unit_system>si</unit_system>
+    <type>lesson</type>
+    <title></title>
+    <parameters>
+        <instance>
+        </instance>
+    </parameters>
+    <parts>
+        <part type="statement">
+            <p>
+                <s>TRAPPIST-1e is an exoplanet that orbits the star TRAPPIST-1.</s>
+                <s>The exoplanet orbits the star on a roughly circular orbit at a distance of
+                <quantity><value>0.029</value><unit>astronomical_unit</unit></quantity>.</s>
+            </p>
+        </part>
+        <part type="mcq" must_show_choices="false">
+            <main_text>
+                <p>
+                    <s>Does TRAPPIST-1e orbit its star at a smaller or at a larger orbital radius than 
+                Earth’s orbital radius around the Sun?</s>
+                </p>
+            </main_text>
+            <choices>
+                <choice is_correct_answer="true">A smaller orbital radius</choice>
+                <choice>A larger orbital radius</choice>
+            </choices>   
+            <solution_text>
+            </solution_text>
+            <marks>1</marks>
+        </part>
+        <part type="mcq" must_show_choices="false">
+            <main_text>
+                <p>
+                    <s>Use the formula <m>@T = \sqrt{\frac{4 @pi^{2} @r^{3}}{@G@M}}</m>, where <m>@r</m> 
+                    is the radius of the exoplanet’s orbit, <m>@M</m> is the mass of the host star, and 
+                    <m>@G</m> is the universal gravitational constant, to find <m>@T</m>, the period of 
+                    the exoplanet’s orbit.</s> 
+                    <s>TRAPPIST-1 has a mass of <m><quantity><value>1.8 \times 10^{29}</value><unit>kilogram</unit></quantity></m>.</s>
+                    <s>Use a value of <m><quantity><value>6.67 \times 10^{-11}</value><unit>meter^3 per kilogram second^2</unit></quantity></m> for <m>@G</m>.</s> 
+                    <s>Give your answer in <unit form="word/plural">day</unit> to two decimal places.</s>
+                </p>
+            </main_text>
+            <answer type="decimal" must_have_exactly_ndp="2">
+                <prefix></prefix>
+                <values>
+                    <value>6.02</value>
+                </values>
+                <suffix>
+                    <unit form="word/plural">day</unit>
+                </suffix>
+            </answer>
+            <choices>
+                <choice is_correct_answer="true">
+                    <quantity>
+                        <value>6.02</value>
+                        <unit form="word/plural">day</unit>
+                    </quantity>
+                </choice>
+                <choice>
+                    <quantity>
+                        <value>7.89</value>
+                        <unit form="word/plural">day</unit>
+                    </quantity>
+                </choice>
+                <choice>
+                    <quantity>
+                        <value>3.39</value>
+                        <unit form="word/plural">day</unit>
+                    </quantity>
+                </choice>
+                <choice>
+                    <quantity>
+                        <value>78.88</value>
+                        <unit form="word/plural">day</unit>
+                    </quantity>
+                </choice>
+                <choice>
+                    <quantity>
+                        <value>60.21</value>
+                        <unit form="word/plural">day</unit>
+                    </quantity>
+                </choice>
+            </choices>
+            <solution>
+            </solution>
+            <marks>1</marks>
+        </part>
+        <part type="mcq" must_show_choices="false">
+            <main_text>
+                <p>
+                    <s>TRAPPIST-1e has a mass, <m>@m</m>, of <m><quantity><value>4.6 \times 10^{24}</value><unit>kilogram</unit></quantity></m> 
+                    and a planet radius, <m>@r</m>, of <quantity><value>5800</value><unit>kilometer</unit></quantity>.</s>
+                    <s>Use the formula <m>@a = \frac{@G@m}{@r^{2}}</m> to find <m>@a</m>, the surface gravity on TRAPPIST-1e.</s> 
+                    <s>Give your answer to 1 decimal place.</s>
+                </p>
+            </main_text>
+            <answer type="decimal" must_have_exactly_ndp="1">
+                <prefix></prefix>
+                <values>
+                    <value>9.1</value>
+                </values>
+                <suffix>
+                    <unit>meter per second^2</unit>
+                </suffix>
+            </answer>
+            <choices>
+                <choice is_correct_answer="true">
+                    <quantity>
+                        <value>9.1</value>
+                        <unit>meter per second^2</unit>
+                    </quantity>
+                </choice>
+                <choice>
+                    <quantity>
+                        <value>91.3</value>
+                        <unit>meter per second^2</unit>
+                    </quantity>
+                </choice>
+                <choice>
+                    <quantity>
+                        <value>9.8</value>
+                        <unit>meter per second^2</unit>
+                    </quantity>
+                </choice>
+                <choice>
+                    <quantity>
+                        <value>98.1</value>
+                        <unit>meter per second^2</unit>
+                    </quantity>
+                </choice>
+                <choice>
+                    <quantity>
+                        <value>7.3</value>
+                        <unit>meter per second^2</unit>
+                    </quantity>
+                </choice>
+            </choices>
+            <solution>
+            </solution>
+            <marks>1</marks>
+        </part>
+    </parts>
+</question>
