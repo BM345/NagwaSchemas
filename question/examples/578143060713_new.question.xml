@@ -3,6 +3,7 @@
     <upload_date></upload_date>
     <last_modification_date></last_modification_date>
     <attribution>
+        <source_id>314185910980</source_id>
     </attribution>
     <developers>
         <developer role="writer">
@@ -16,11 +17,7 @@
     <currency>none</currency>
     <unit_system>si</unit_system>
     <type>lesson</type>
-    <title></title>
-    <parameters>
-        <instance>
-        </instance>
-    </parameters>
+    <title>Calculating the Physical Properties of an Exoplanet</title>
     <parts>
         <part type="statement">
             <p>
@@ -39,20 +36,27 @@
             <choices>
                 <choice is_correct_answer="true">A smaller orbital radius</choice>
                 <choice>A larger orbital radius</choice>
-            </choices>   
-            <solution_text>
-            </solution_text>
+            </choices> 
+            <solution>
+                <p>
+                    <s>Recall that the astronomical unit, with the symbol <unit>astronomical_unit</unit>, is a unit of length 
+                    approximately equal to the distance between the Earth and the Sun - the distance between the Earth and the Sun
+                    is approximately <quantity><value>1</value><unit>astronomical_unit</unit></quantity>.</s>
+                    <s>Therefore, if the distance between any planet and its host star is less than <quantity><value>1</value><unit>astronomical_unit</unit></quantity>,
+                    it is closer to its host star than Earth is to the Sun.</s>
+                </p>
+            </solution>
             <marks>1</marks>
         </part>
         <part type="mcq" must_show_choices="false">
             <main_text>
                 <p>
-                    <s>Use the formula <m>@T = \sqrt{\frac{4 @pi^{2} @r^{3}}{@G@M}}</m>, where <m>@r</m> 
-                    is the radius of the exoplanet’s orbit, <m>@M</m> is the mass of the host star, and 
-                    <m>@G</m> is the universal gravitational constant, to find <m>@T</m>, the period of 
+                    <s>Use the formula <m>T = \sqrt{\frac{4 \pi^{2} r^{3}}{GM}}</m>, where <m>r</m> 
+                    is the radius of the exoplanet’s orbit, <m>M</m> is the mass of the host star, and 
+                    <m>G</m> is the universal gravitational constant, to find <m>T</m>, the period of 
                     the exoplanet’s orbit.</s> 
-                    <s>TRAPPIST-1 has a mass of <m><quantity><value>1.8 \times 10^{29}</value><unit>kilogram</unit></quantity></m>.</s>
-                    <s>Use a value of <m><quantity><value>6.67 \times 10^{-11}</value><unit>meter^3 per kilogram second^2</unit></quantity></m> for <m>@G</m>.</s> 
+                    <s>TRAPPIST-1 has a mass of <quantity><value>1.8 \times 10^{29}</value><unit>kilogram</unit></quantity>.</s>
+                    <s>Use a value of <quantity><value>6.67 \times 10^{-11}</value><unit>meter^3 per kilogram second^2</unit></quantity> for <m>G</m>.</s> 
                     <s>Give your answer in <unit form="word/plural">day</unit> to two decimal places.</s>
                 </p>
             </main_text>
@@ -104,9 +108,9 @@
         <part type="mcq" must_show_choices="false">
             <main_text>
                 <p>
-                    <s>TRAPPIST-1e has a mass, <m>@m</m>, of <m><quantity><value>4.6 \times 10^{24}</value><unit>kilogram</unit></quantity></m> 
-                    and a planet radius, <m>@r</m>, of <quantity><value>5800</value><unit>kilometer</unit></quantity>.</s>
-                    <s>Use the formula <m>@a = \frac{@G@m}{@r^{2}}</m> to find <m>@a</m>, the surface gravity on TRAPPIST-1e.</s> 
+                    <s>TRAPPIST-1e has a mass, <m>m</m>, of <quantity><value>4.6 \times 10^{24}</value><unit>kilogram</unit></quantity> 
+                    and a planet radius, <m>r</m>, of <quantity><value>5800</value><unit>kilometer</unit></quantity>.</s>
+                    <s>Use the formula <m>a = \frac{Gm}{r^{2}}</m> to find <m>a</m>, the surface gravity on TRAPPIST-1e.</s> 
                     <s>Give your answer to 1 decimal place.</s>
                 </p>
             </main_text>
