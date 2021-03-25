@@ -16,11 +16,11 @@ Below are listed links to examples of the new question XML format that are based
 
 Many different changes to the structure of question XML documents have been made. Below are described some of the key design decisions.
 
-### `&lt;unit&gt;` tags can now exist on there own
+### &lt;unit&gt; tags can now exist on there own
 
 Previously, `&lt;unit&gt;` tags could only exist within `&lt;quantity&gt;` tags. However, there are many occasions where we want to express a unit only, and not a quantity (such as in expressions like 'Give your answer in days to 2 significant figures.'). `&lt;unit&gt;` tags can now exist on there own, and the `type` attribute on the `&lt;quantity&gt;` tag has been replaced by the `form` attribute on the `&lt;unit&gt;` tag.
 
-### `&lt;solution&gt;` tags added to every question part
+### &lt;solution&gt; tags added to every question part
 
 Now that we have started writing explainers, and we have some solution text for many questions, we will need to store this somewhere. It makes sense to store the solution text for a question in the question XML document. Each part now has at least one `&lt;solution&gt;` element to contain this text.
 
