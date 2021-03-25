@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<question id="818183672624">
+    <upload_date></upload_date>
+    <last_modification_date></last_modification_date>
+    <attribution>
+        <source_id>314185910980</source_id>
+    </attribution>
+    <developers>
+        <developer role="writer">
+            <name>Benjamin Milnes</name>
+            <email_address>benjamin.milnes@nagwa.com</email_address>
+        </developer>
+    </developers>
+    <language>en</language>
+    <dialect>american</dialect>
+    <calendar>none</calendar>
+    <currency>none</currency>
+    <unit_system>si</unit_system>
+    <type>lesson</type>
+    <title>Describing Distances using Light-years</title>
+    <parts>
+        <part type="statement">
+            <main_text>
+                <p>
+                    <s>The table below lists four stars and how far away they are from the Sun.</s>
+                </p>
+                <table>
+                    <tr>
+                        <th>Star</th>
+                        <th>Distance</th>
+                    </tr>
+                    <tr>
+                        <td>Sirius</td>
+                        <td>
+                            <quantity>
+                                <value>8.7</value>
+                                <unit form="word">light_year</unit>
+                            </quantity>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tau Ceti</td>
+                        <td>
+                            <quantity>
+                                <value>11.8</value>
+                                <unit form="word">light_year</unit>
+                            </quantity>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Barnard’s Star</td>
+                        <td>
+                            <quantity>
+                                <value>6.0</value>
+                                <unit form="word">light_year</unit>
+                            </quantity>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alpha Centauri</td>
+                        <td>
+                            <quantity>
+                                <value>4.4</value>
+                                <unit form="word">light_year</unit>
+                            </quantity>
+                        </td>
+                    </tr>
+                </table>
+            </main_text>
+        </part>
+        <part type="mcq" must_show_choices="false">
+            <main_text>
+                <p>
+                    <s>Which star is closest to the Sun?</s>
+                </p>
+            </main_text>
+            <choices>
+                <choice is_correct_answer="true">Alpha Centauri</choice>
+                <choice>Sirius</choice>
+                <choice>Tau Ceti</choice>
+                <choice>Barnard’s Star</choice>
+            </choices>
+            <solutions> 
+                <solution>
+                </solution>
+            </solutions>
+            <marks>1</marks>
+        </part>
+        <part type="mcq" must_show_choices="false">
+            <main_text>
+                <p>
+                    <s>Which star is furthest away from the Sun?</s>
+                </p>
+            </main_text>
+            <choices>
+                <choice>Alpha Centauri</choice>
+                <choice>Sirius</choice>
+                <choice is_correct_answer="true">Tau Ceti</choice>
+                <choice>Barnard’s Star</choice>
+            </choices>
+            <solutions> 
+                <solution>
+                </solution>
+            </solutions>
+            <marks>1</marks>
+        </part>
+    </parts>
+</question>
