@@ -16,6 +16,14 @@ Below are listed links to examples of the new question XML format that are based
 
 Many different changes to the structure of question XML documents have been made. Below are described some of the key design decisions.
 
+### Introduction of &lt;s&gt; tags
+
+`<s>` tags are now used to identify sentences in text. This improves readability and allows for more automated analysis of questions.
+
+### &lt;m&gt; tags replace &lt;latex&gt; tags and dollar signs
+
+In the content currently, sections of mathematical notation are indicated by both `<latex>` tags and dollar signs - normally something like `<latex>$y = mx + c$<latex>`. This makes the XML harder to read and is excessive. The new XML structure introduces `<m>` 'mathematics' tags. This makes the XML easier to read.
+
 ### &lt;unit&gt; tags can now exist on there own
 
 Previously, `<unit>` tags could only exist within `<quantity>` tags. However, there are many occasions where we want to express a unit only, and not a quantity (such as in expressions like 'Give your answer in days to 2 significant figures.'). `<unit>` tags can now exist on there own, and the `type` attribute on the `<quantity>` tag has been replaced by the `form` attribute on the `<unit>` tag.
