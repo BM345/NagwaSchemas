@@ -18,11 +18,11 @@ Many different changes to the structure of question XML documents have been made
 
 ### &lt;unit&gt; tags can now exist on there own
 
-Previously, `<unit>` tags could only exist within `<quantity>` tags. However, there are many occasions where we want to express a unit only, and not a quantity (such as in expressions like 'Give your answer in days to 2 significant figures.'). `<unit>` tags can now exist on there own, and the `type` attribute on the `&lt;quantity&gt;` tag has been replaced by the `form` attribute on the `&lt;unit&gt;` tag.
+Previously, `<unit>` tags could only exist within `<quantity>` tags. However, there are many occasions where we want to express a unit only, and not a quantity (such as in expressions like 'Give your answer in days to 2 significant figures.'). `<unit>` tags can now exist on there own, and the `type` attribute on the `<quantity>` tag has been replaced by the `form` attribute on the `<unit>` tag.
 
 ### &lt;solution&gt; tags added to every question part
 
-Now that we have started writing explainers, and we have some solution text for many questions, we will need to store this somewhere. It makes sense to store the solution text for a question in the question XML document. Each part now has at least one `&lt;solution&gt;` element to contain this text.
+Now that we have started writing explainers, and we have some solution text for many questions, we will need to store this somewhere. It makes sense to store the solution text for a question in the question XML document. Each part now has at least one `<solution>` element to contain this text.
 
 ### FITBQs become their own question type
 
@@ -32,4 +32,4 @@ So far, FITBQs (fill-in-the-blanks questions) have been made using the MCQ forma
 
 MRQs (multiple-response questions) and MCQs (multiple-choice questions) become one and the same - both known as MCQs. This is because the only difference between them is that MCQs have one correct answer choice, and MRQs have more than one. MCQs are just the special case of an MRQ where n, the number of correct answer choices, equals 1.
 
-MRQs can still be identified, because the number of `&lt;choice&gt;` elements with `is_correct_answer="true"` is greater than 1.
+MRQs can still be identified, because the number of `<choice>` elements with `is_correct_answer="true"` is greater than 1.
