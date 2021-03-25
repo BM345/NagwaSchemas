@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<question id="682162714504">
+    <upload_date></upload_date>
+    <last_modification_date></last_modification_date>
+    <attribution>
+        <source_id>314185910980</source_id>
+    </attribution>
+    <developers>
+        <developer role="writer">
+            <name>Benjamin Milnes</name>
+            <email_address>benjamin.milnes@nagwa.com</email_address>
+        </developer>
+    </developers>
+    <language>en</language>
+    <dialect>american british</dialect>
+    <calendar>none</calendar>
+    <currency>none</currency>
+    <unit_system>none</unit_system>
+    <type>lesson</type>
+    <title>Understanding the Structure of the Universe</title>
+    <parts>
+        <part type="frq" must_not_have_multiple_instances="true">
+            <main_text>
+                <p>
+                    <s>What is a galaxy?</s>
+                </p>
+            </main_text>
+            <answer>
+                <p>
+                    <s>A galaxy is a collection of billions of stars.</s>
+                </p>
+            </answer>
+            <solutions> 
+                <solution>
+                    <p>
+                        <s>Earth and the other planets in the solar system orbit the Sun, which is a star.</s> 
+                        <s>The Sun and lots of other stars together form a large group of stars which form a spiral pattern.</s> 
+                        <s>This large group of stars is called a galaxy.</s> 
+                        <s>Our galaxy is called the Milky Way, and there are billions of galaxies in the universe.</s>
+                        <s>Each galaxy contains billions of stars.</s>
+                        <s>So we can write 'A galaxy is a collection of billions of stars.'</s>
+                    </p>
+                </solution>
+            </solutions>
+            <marks>3</marks>
+        </part>
+    </parts>
+</question>
