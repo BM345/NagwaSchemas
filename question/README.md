@@ -18,7 +18,7 @@ Many different changes to the structure of question XML documents have been made
 
 ### &lt;unit&gt; tags can now exist on there own
 
-Previously, `&lt;unit&gt;` tags could only exist within `&lt;quantity&gt;` tags. However, there are many occasions where we want to express a unit only, and not a quantity (such as in expressions like 'Give your answer in days to 2 significant figures.'). `&lt;unit&gt;` tags can now exist on there own, and the `type` attribute on the `&lt;quantity&gt;` tag has been replaced by the `form` attribute on the `&lt;unit&gt;` tag.
+Previously, `<unit>` tags could only exist within `<quantity>` tags. However, there are many occasions where we want to express a unit only, and not a quantity (such as in expressions like 'Give your answer in days to 2 significant figures.'). `<unit>` tags can now exist on there own, and the `type` attribute on the `&lt;quantity&gt;` tag has been replaced by the `form` attribute on the `&lt;unit&gt;` tag.
 
 ### &lt;solution&gt; tags added to every question part
 
