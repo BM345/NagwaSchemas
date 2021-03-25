@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<question id="676140256919">
+    <upload_date></upload_date>
+    <last_modification_date></last_modification_date>
+    <attribution>
+        <source_id>314185910980</source_id>
+    </attribution>
+    <developers>
+        <developer role="writer">
+            <name>Benjamin Milnes</name>
+            <email_address>benjamin.milnes@nagwa.com</email_address>
+        </developer>
+    </developers>
+    <language>en</language>
+    <dialect>american</dialect>
+    <calendar>none</calendar>
+    <currency>none</currency>
+    <unit_system>si</unit_system>
+    <type>lesson</type>
+    <title>Understanding Different Types of Exoplanet</title>
+    <parts>
+        <part type="mcq" must_show_choices="false" must_not_have_multiple_instances="true">
+            <main_text>
+                <p>
+                    <s>The graph shows the orbital period and planet radius of more than three thousand real exoplanets.</s> 
+                    <s>Both the <m>x</m>-axis and <m>y</m>-axis scales are logarithmic.</s> 
+                    <s>The <m>x</m>-axis shows the orbital period of the exoplanet in <unit form="word/plural">day</unit>, and 
+                    the <m>y</m>-axis shows the radius of the planet as a multiple of the radius of Jupiter.</s>
+                </p>
+                <p>
+                    <s>A Hot Jupiter is an exoplanet that has a mass and a planet radius similar to or slightly larger 
+                    than those of Jupiter but also has an orbital period of less than 
+                    <quantity><value>10</value><unit form="word/plural">day</unit></quantity>.</s> 
+                    <s>Which of the regions labeled on the graph shows where Hot Jupiters appear?</s>
+                </p>
+                <figure show_figure_number="false" show_figure_caption="false">
+                    <image id="" />
+                </figure>
+            </main_text>
+            <answer_formats>
+                <answer_format type="letter" ranges="A-D" case_must_match="false">
+                    <prefix>Region</prefix>
+                    <values>
+                        <value>B</value>
+                    </values>
+                    <suffix></suffix>
+                </answer_format>
+                <answer_format type="full" case_must_match="false">
+                    <values>
+                        <value>Region B</value>
+                        <value>B</value>
+                    </values>
+                </answer_format>
+            </answer_formats>
+            <choices>
+                <choice order_index="1">
+                    Region A 
+                </choice>
+                <choice is_correct_answer="true" order_index="2">
+                    Region B
+                </choice>
+                <choice order_index="3">
+                    Region C
+                </choice>
+                <choice order_index="4">
+                    Region D
+                </choice>
+            </choices>
+            <solutions>
+                <solution>
+                </solution>
+            </solutions>
+            <marks>1</marks>
+        </part>
+    </parts>
+</question>
