@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<question id="000000000000">
+    <upload_date></upload_date>
+    <last_modification_date></last_modification_date>
+    <attribution>
+        <source_id></source_id>
+    </attribution>
+    <developers>
+        <developer role="writer">
+            <name>Benjamin Milnes</name>
+            <email_address>benjamin.milnes@nagwa.com</email_address>
+        </developer>
+    </developers>
+    <language>en</language>
+    <dialect>american</dialect>
+    <calendar>none</calendar>
+    <currency>none</currency>
+    <unit_system>si</unit_system>
+    <type>lesson</type>
+    <title>A Select Question</title>
+    <parts>
+        <part type="sq">
+            <main_text>
+                <p>
+                    <s>Select the nouns in the following sentence.</s>
+                </p>
+                <p>
+                    <s>James <selectable_text n="1">went</selectable_text> to the <selectable_text n="2">supermarket</selectable_text> 
+                    and <selectable_text n="3">bought</selectable_text> a <selectable_text n="4">pineapple</selectable_text> and 
+                    <selectable_text n="5">two</selectable_text> <selectable_text n="6">bunches</selectable_text> of 
+                    <selectable_text n="7">bananas</selectable_text>.</s>
+                </p>
+            </main_text>
+            <response_formats>
+                <response_format type="select_text">
+                    <correct_answers>
+                        <selectable_text n="2" />
+                        <selectable_text n="4" />
+                        <selectable_text n="6" />
+                        <selectable_text n="7" />
+                    </correct_answers>              
+                </response_format>
+            </response_formats>
+            <solutions> 
+                <solution>
+                </solution>
+            </solutions>
+            <marks>1</marks>
+        </part>
+    </parts>
+</question>
