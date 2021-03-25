@@ -19,6 +19,7 @@ Below are listed links to examples of new question XML documents for new questio
 | [ynq1](examples/ynq1.question.xml) | YNQ (yes-no question) | 
 | [tfq1](examples/tfq1.question.xml) | TFQ (true-false question) | 
 | [sq1](examples/sq1.question.xml) | SQ (select question) | 
+| [mq1](examples/mq1.question.xml) | MQ (matching question) | 
 
 ## Important Changes
 
