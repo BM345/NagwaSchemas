@@ -10,3 +10,4 @@ Below are listed links to examples of the new question XML format that are based
 | [505183812139](examples/505183812139_current.question.xml) | [505183812139](examples/505183812139_new.question.xml) | New FITBQ type |
 | [682162714504](examples/682162714504_current.question.xml) | [682162714504](examples/682162714504_new.question.xml) | FRQ |
 | [818183672624](examples/818183672624_current.question.xml) | [818183672624](examples/818183672624_new.question.xml) | With tables |
+| [625137396409](examples/625137396409_current.question.xml) | [625137396409](examples/625137396409_new.question.xml) | MRQ becoming MCQ |

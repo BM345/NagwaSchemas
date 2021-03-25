@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<question id="625137396409">
+    <upload_date></upload_date>
+    <last_modification_date></last_modification_date>
+    <attribution>
+        <source_id>314185910980</source_id>
+    </attribution>
+    <developers>
+        <developer role="writer">
+            <name>Benjamin Milnes</name>
+            <email_address>benjamin.milnes@nagwa.com</email_address>
+        </developer>
+    </developers>
+    <language>en</language>
+    <dialect>american</dialect>
+    <calendar>none</calendar>
+    <currency>none</currency>
+    <unit_system>none</unit_system>
+    <type>lesson</type>
+    <title>Recalling Types of Telescope</title>
+    <parts>
+        <part type="mcq" must_show_choices="true">
+            <main_text>
+                <p>
+                    <s>Which of the following are types of optical telescopes?</s>
+                </p>
+            </main_text>
+            <choices>
+                <choice is_correct_answer="true">A reflecting telescope</choice>
+                <choice is_correct_answer="true">A refracting telescope</choice>
+                <choice>A dispersing telescope</choice>
+                <choice>A diffracting telescope</choice>
+                <choice>A polarizing telescope</choice>
+            </choices>
+            <solutions> 
+                <solution>
+                </solution>
+            </solutions>
+            <marks>1</marks>
+        </part>
+    </parts>
+</question>
