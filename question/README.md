@@ -53,9 +53,16 @@ Below are listed links to examples of new question XML documents for new questio
 
 ## Overview of Important Changes
 
+This section describes some of the bigger changes to the design of the question XML format, and, in some cases, the reasons for the change. Not all changes are described in this section - only the more significant ones.
 
+### Question parts are moved into the &lt;parts&gt; tag
 
-Many different changes to the structure of question XML documents have been made. Below are described some of the key design decisions.
+Previously, the different question parts in a question existed as `<mcq>`, `<mrq>`, `<frq>`, and `<statement>` elements which were direct subelements of the root `<question>` element.
+
+In the new format, question parts are denoted by the new `<part>` tag, which has an attribute `type` for specifying the part type. The `<part>` elements in a question are grouped together under the new `<parts>` element, which is itself a direct subelement of the `<question>` root element.
+
+This change improves the readability of the XML, and it may also make querying the XML easier (as a multi-part question is now just one where `//question/parts/part` > 1).
+
 
 ### Introduction of &lt;s&gt; tags
 
