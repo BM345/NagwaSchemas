@@ -1,5 +1,24 @@
 # Question XML
 
+## Question Types
+
+The table below briefly describes the different question types - including new question types - that can exist in Nagwa content.
+
+| Abbreviation | Name | Description |
+|---|---|---|
+| MCQ | Multiple-Choice Question | A question where the student is given a set of answer options to choose from, one or more of which is correct. MCQs can also double-up as numerical-response or text-response questions, where the student types in a number or short piece of text as their answer, which is then compared to the correct answer. |
+| FRQ | Free-Response Question | A question where the student may enter a long text answer that they have written. |
+| CTSQ | Complete-The-Sentence Question | A question where the student is given an incomplete sentence or sentences, and must find words or phrases that correctly complete them. Also known as Fill-In-The-Blanks Questions. |
+| CTTQ | Complete-The-Table Question | A question where the student is given an incomplete table, and must find the words, phrases, or numbers that correctly complete it. |
+| CTEQ | Complete-The-Equation Question | A question where the student is given an incomplete equation, and must find the numbers or terms that correctly complete it. |
+| SQ | Select Question | A question where the student is given a sentence or sentences, and must select certain words or phrases from them. |
+| OQ | Ordering Question | A question where the student is given a list of items, and must put them in the correct order. |
+| MQ | Matching Question | A question where the student is given two or more lists, and must match the items in the different lists. |
+| DLQ | Diagram-Labelling Question | A question where the student is presented with a diagram, and must label different parts of it, either being given the labels to use, and having to drag and drop them into place, or having to type out the correct labels. |
+| CQ | Classifying Question | A question where the student must place given items into different category boxes. |
+| TFQ | True-False Question | A question where the answer is either true or false. (No other answer options are permitted. If an option such as 'It is not possible to determine.' is desired, the question must be an MCQ instead.) |
+| YNQ | Yes-No Question | A question where the answer is either yes or no. (No other answer options are permitted. If an option such as 'It is not possible to determine.' is desired, the question must be an MCQ instead.) |
+
 Below are listed links to examples of the new question XML format that are based on existing questions.
 
 Changes are still being made to the format - use these links just to get a sense of what the new format will be like.
