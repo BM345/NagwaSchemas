@@ -99,14 +99,12 @@ In the new format, `<unit>` tags can exist on their own, as well as within `<qua
 
 This simplifies the XML - removing unnecessary elements - and improves readability.
 
+### Fill-In-The-Blanks questions become their own type
 
+So far, fill-in-the-blanks questions have been made using the MCQ format. This is very non-ideal.
 
-### FITBQs become their own question type
+In the new format, there is a new question part type - the Complete-The-Sentence question part type - for this. The `<fillable_space>` element can be used to indicate where blanks are. Students can either drag and drop words or phrases into these spaces, or type answers in.
 
-So far, FITBQs (fill-in-the-blanks questions) have been made using the MCQ format. This is very non-ideal. Since we will probably want students to be able to drag and drop terms into the blanks of an FITBQ question (it will require a new XML structure to describe how to do this for a given question), and since there are quite a few FITBQs in the content, it makes sense to make these a new question type.
+### MRQs and MCQs are merged
 
-### MRQs are now just a type of MCQ
-
-MRQs (multiple-response questions) and MCQs (multiple-choice questions) become one and the same - both known as MCQs. This is because the only difference between them is that MCQs have one correct answer choice, and MRQs have more than one. MCQs are just the special case of an MRQ where n, the number of correct answer choices, equals 1.
-
-MRQs can still be identified, because the number of `<choice>` elements with `is_correct_answer="true"` is greater than 1.
+The only difference between MRQs and MCQs is that MRQs can have more than one correct answer option. In the case where an MRQ is set to only have one answer option, it is the same as an MCQ. This is not a big enough difference to merit having separate question part types, so in the new format, these types become the same.
