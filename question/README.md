@@ -85,15 +85,20 @@ Each question part now has a `<solutions>` subelement. This can have any number 
 
 The new format introduces `<s>` tags, which are used to identify sentences. This allows for determining more things about the question programmatically (for example, a question with more sentences in it might be considered a harder question - this can now be determined easily programmatically), and it improves the readability of the XML.
 
-
-
 ### &lt;m&gt; tags replace &lt;latex&gt; tags and dollar signs
 
-In the content currently, sections of mathematical notation are indicated by both `<latex>` tags and dollar signs - normally something like `<latex>$y = mx + c$<latex>`. This makes the XML harder to read and is excessive. The new XML structure introduces `<m>` 'mathematics' tags. This makes the XML easier to read.
+In the question XML at the moment, sections of mathematical notation are indicated by both `<latex>` tags and dollar signs - for example, `<latex>$y = mx + c$</latex>`. It shouldn't be necessary to have both `<latex>` tags _and_ dollar signs, and considering that a lot of our questions contain several sections of mathematical notation, it's also excessive.
 
-### &lt;unit&gt; tags can now exist on there own
+The new format simplifies this by introducing the `<m>` 'mathematical notation' tag. This makes the XML easier to read. A section of mathematical notation would be marked-up as something like `<m>y = mx + c</m>`.
 
-Previously, `<unit>` tags could only exist within `<quantity>` tags. However, there are many occasions where we want to express a unit only, and not a quantity (such as in expressions like 'Give your answer in days to 2 significant figures.'). `<unit>` tags can now exist on there own, and the `type` attribute on the `<quantity>` tag has been replaced by the `form` attribute on the `<unit>` tag.
+### &lt;unit&gt; tags can now exist on their own
+
+Previously, `<unit>` tags could only exist within `<quantity>` tags. However, there are many occasions where we want to express a unit only - not a quantity (such as in expressions like 'Give your answer in kilometres.').
+
+In the new format, `<unit>` tags can exist on their own, as well as within `<quantity>` tags. The `type` attribute on the `<quantity>` tag has been replaced by the `form` attribute on the `<unit>` tag.
+
+This simplifies the XML - removing unnecessary elements - and improves readability.
+
 
 
 ### FITBQs become their own question type
