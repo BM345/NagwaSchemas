@@ -63,10 +63,29 @@ In the new format, question parts are denoted by the new `<part>` tag, which has
 
 This change improves the readability of the XML, and it may also make querying the XML easier (as a multi-part question is now just one where `//question/parts/part` > 1).
 
+### &lt;developers&gt; and &lt;developer&gt; tags allow for a more comprehensive description of who has interacted with a question
+
+Previously, the `<developer_name>` and `<developer_email>` tags were the only ones that denoted who had worked on a file, and they always denoted who had created the question.
+
+In the new format, this has been made more general and extensible. There is now a `<developers>` element, which is a direct subelement of the root element, and which can contain any number of `<developer>` elements. Each `<developer>` element can have a `role` attribute, denoting how to developer has interacted with the question. The developer's name and email address are contained within `<name>` and `<email_address>` subelements.
+
+This allows for any number of developers to be listed, if necessary. It also improves the readability of the XML.
+
+### More date information can be stored
+
+The new format introduces the `<upload_date>` tag and the `<last_modification_date>` tag. This makes it easier to track the progress of a question while it is being developed.
+
+### Solutions can now be stored in the question XML
+
+Now that we have started writing explainers, we have the written solutions for many questions. Since these are intrinsically linked to the questions, the best place to store them is in the question XML.
+
+Each question part now has a `<solutions>` subelement. This can have any number of `<solution>` subelements, which contain the solution text for different instances of the question. (While most of the time the solution text will be the same for the different instances of the question, there are some cases where the exact wording needs to be slightly different. Hence, multiple `<solution>` elements can exist for each question part.)
 
 ### Introduction of &lt;s&gt; tags
 
-`<s>` tags are now used to identify sentences in text. This improves readability and allows for more automated analysis of questions.
+The new format introduces `<s>` tags, which are used to identify sentences. This allows for determining more things about the question programmatically (for example, a question with more sentences in it might be considered a harder question - this can now be determined easily programmatically), and it improves the readability of the XML.
+
+
 
 ### &lt;m&gt; tags replace &lt;latex&gt; tags and dollar signs
 
@@ -76,9 +95,6 @@ In the content currently, sections of mathematical notation are indicated by bot
 
 Previously, `<unit>` tags could only exist within `<quantity>` tags. However, there are many occasions where we want to express a unit only, and not a quantity (such as in expressions like 'Give your answer in days to 2 significant figures.'). `<unit>` tags can now exist on there own, and the `type` attribute on the `<quantity>` tag has been replaced by the `form` attribute on the `<unit>` tag.
 
-### &lt;solution&gt; tags added to every question part
-
-Now that we have started writing explainers, and we have some solution text for many questions, we will need to store this somewhere. It makes sense to store the solution text for a question in the question XML document. Each part now has at least one `<solution>` element to contain this text.
 
 ### FITBQs become their own question type
 
