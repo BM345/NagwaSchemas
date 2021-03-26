@@ -63,17 +63,11 @@ In the new format, question parts are denoted by the new `<part>` tag, which has
 
 This change improves the readability of the XML, and it may also make querying the XML easier (as a multi-part question is now just one where `//question/parts/part` > 1).
 
-### &lt;developers&gt; and &lt;developer&gt; tags allow for a more comprehensive description of who has interacted with a question
+### Fill-In-The-Blanks questions become their own type
 
-Previously, the `<developer_name>` and `<developer_email>` tags were the only ones that denoted who had worked on a file, and they always denoted who had created the question.
+So far, fill-in-the-blanks questions have been made using the MCQ format. This is very non-ideal.
 
-In the new format, this has been made more general and extensible. There is now a `<developers>` element, which is a direct subelement of the root element, and which can contain any number of `<developer>` elements. Each `<developer>` element can have a `role` attribute, denoting how to developer has interacted with the question. The developer's name and email address are contained within `<name>` and `<email_address>` subelements.
-
-This allows for any number of developers to be listed, if necessary. It also improves the readability of the XML.
-
-### More date information can be stored
-
-The new format introduces the `<upload_date>` tag and the `<last_modification_date>` tag. This makes it easier to track the progress of a question while it is being developed.
+In the new format, there is a new question part type - the Complete-The-Sentence question part type - for this. The `<fillable_space>` element can be used to indicate where blanks are. Students can either drag and drop words or phrases into these spaces, or type answers in.
 
 ### Solutions can now be stored in the question XML
 
@@ -99,11 +93,17 @@ In the new format, `<unit>` tags can exist on their own, as well as within `<qua
 
 This simplifies the XML - removing unnecessary elements - and improves readability.
 
-### Fill-In-The-Blanks questions become their own type
+### &lt;developers&gt; and &lt;developer&gt; tags allow for a more comprehensive description of who has interacted with a question
 
-So far, fill-in-the-blanks questions have been made using the MCQ format. This is very non-ideal.
+Previously, the `<developer_name>` and `<developer_email>` tags were the only ones that denoted who had worked on a file, and they always denoted who had created the question.
 
-In the new format, there is a new question part type - the Complete-The-Sentence question part type - for this. The `<fillable_space>` element can be used to indicate where blanks are. Students can either drag and drop words or phrases into these spaces, or type answers in.
+In the new format, this has been made more general and extensible. There is now a `<developers>` element, which is a direct subelement of the root element, and which can contain any number of `<developer>` elements. Each `<developer>` element can have a `role` attribute, denoting how to developer has interacted with the question. The developer's name and email address are contained within `<name>` and `<email_address>` subelements.
+
+This allows for any number of developers to be listed, if necessary. It also improves the readability of the XML.
+
+### More date information can be stored
+
+The new format introduces the `<upload_date>` tag and the `<last_modification_date>` tag. This makes it easier to track the progress of a question while it is being developed.
 
 ### MRQs and MCQs are merged
 
