@@ -2,9 +2,14 @@
 
 This document gives the specification for the new question XML format (version 2.0), and describes the important changes that have been made from the previous question XML format.
 
-## Question Types
+## Table of Contents
 
-The table below briefly describes the different question types - including new question types - that can exist in Nagwa content. New question types are indicated by an asterisk (*).
+- [Question Part Types] (#question-part-types)
+- [Examples of the New Format] (#examples-of-the-new-format)
+
+## Question Part Types
+
+The table below briefly describes the different question part types - including new question part types - that can exist in Nagwa content. New question part types are indicated by an asterisk (*).
 
 | Abbreviation | Name | Description |
 |---|---|---|
@@ -20,6 +25,8 @@ The table below briefly describes the different question types - including new q
 | CQ* | Classifying Question | A question where the student must place given items into different category boxes. |
 | TFQ* | True-False Question | A question where the answer is either true or false. (No other answer options are permitted. If an option such as 'It is not possible to determine.' is desired, the question must be an MCQ instead.) |
 | YNQ* | Yes-No Question | A question where the answer is either yes or no. (No other answer options are permitted. If an option such as 'It is not possible to determine.' is desired, the question must be an MCQ instead.) |
+
+## Examples of the New Format
 
 Below are listed links to examples of the new question XML format that are based on existing questions.
 
