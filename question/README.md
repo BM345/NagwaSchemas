@@ -30,27 +30,25 @@ The table below briefly describes the different question part types - including 
 
 Below are listed links to examples of the new question XML format that are based on existing questions.
 
-Changes are still being made to the format - use these links just to get a sense of what the new format will be like.
-
-| Current XML | New XML | Key Features |
+| Previous XML | New XML | Key Features |
 |---|---|---|
-| [578143060713](examples/578143060713_current.question.xml) | [578143060713](examples/578143060713_new.question.xml) | Multi-part question with MCQs; single instance |
-| [409158921650](examples/409158921650_current.question.xml) | [409158921650](examples/409158921650_new.question.xml) | Single-part; multiple instances; different solution text required for different instances |
+| [578143060713](examples/578143060713_current.question.xml) | [578143060713](examples/578143060713_new.question.xml) | Multi-part; MCQs; single instance |
+| [409158921650](examples/409158921650_current.question.xml) | [409158921650](examples/409158921650_new.question.xml) | Single-part; MCQ; multiple instances; different solution text required for different instances |
 | [676140256919](examples/676140256919_current.question.xml) | [676140256919](examples/676140256919_new.question.xml) | Figures; different answer formats |
-| [505183812139](examples/505183812139_current.question.xml) | [505183812139](examples/505183812139_new.question.xml) | New FITBQ type |
+| [505183812139](examples/505183812139_current.question.xml) | [505183812139](examples/505183812139_new.question.xml) | New CTSQ type |
 | [682162714504](examples/682162714504_current.question.xml) | [682162714504](examples/682162714504_new.question.xml) | FRQ |
 | [818183672624](examples/818183672624_current.question.xml) | [818183672624](examples/818183672624_new.question.xml) | With tables |
 | [625137396409](examples/625137396409_current.question.xml) | [625137396409](examples/625137396409_new.question.xml) | MRQ becoming MCQ | 
 
-Below are listed links to examples of new question XML documents for new question types.
+Below are listed links to examples of new question XML documents for new question part types.
 
 | New XML | Key Features |
 |---|---|
-| [ynq1](examples/ynq1.question.xml) | YNQ (yes-no question) | 
-| [tfq1](examples/tfq1.question.xml) | TFQ (true-false question) | 
-| [sq1](examples/sq1.question.xml) | SQ (select question) | 
-| [mq1](examples/mq1.question.xml) | MQ (matching question) | 
-| [oq1](examples/oq1.question.xml) | OQ (ordering question) | 
+| [sq1](examples/sq1.question.xml) | SQ | 
+| [oq1](examples/oq1.question.xml) | OQ | 
+| [mq1](examples/mq1.question.xml) | MQ | 
+| [tfq1](examples/tfq1.question.xml) | TFQ | 
+| [ynq1](examples/ynq1.question.xml) | YNQ | 
 
 ## Important Changes
 
