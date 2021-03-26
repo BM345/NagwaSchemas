@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<question id="000000000000" version="1">
+    <upload_date></upload_date>
+    <last_modification_date></last_modification_date>
+    <attribution>
+        <source_id></source_id>
+    </attribution>
+    <developers>
+        <developer role="writer">
+            <name>Benjamin Milnes</name>
+            <email_address>benjamin.milnes@nagwa.com</email_address>
+        </developer>
+    </developers>
+    <language>en</language>
+    <dialect>american</dialect>
+    <calendar>none</calendar>
+    <currency>none</currency>
+    <unit_system>si</unit_system>
+    <type>lesson</type>
+    <title>An Ordering Question</title>
+    <parts>
+        <part type="oq">
+            <main_text>
+                <p>
+                    <s>Put the following numbers in order from smallest to largest.</s>
+                </p>
+            </main_text>
+            <response_formats>
+                <response_format type="order_items">
+                    <orderable_items>
+                        <orderable_item correct_order_index="1">23</orderable_item>
+                        <orderable_item correct_order_index="2">65</orderable_item>
+                        <orderable_item correct_order_index="3">99</orderable_item>
+                        <orderable_item correct_order_index="4">148</orderable_item>
+                        <orderable_item correct_order_index="5">289</orderable_item>
+                    </orderable_items>            
+                </response_format>
+            </response_formats>
+            <solutions> 
+                <solution>
+                </solution>
+            </solutions>
+            <marks>1</marks>
+        </part>
+    </parts>
+</question>
