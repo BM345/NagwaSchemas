@@ -4,8 +4,8 @@ This document gives the specification for the new question XML format (version 2
 
 ## Table of Contents
 
-+ [Question Part Types] (#question-part-types)
-+ [Examples of the New Format] (#examples-of-the-new-format)
++ [Question Part Types](#question-part-types)
++ [Examples of the New Format](#examples-of-the-new-format)
 
 ## Question Part Types
 
