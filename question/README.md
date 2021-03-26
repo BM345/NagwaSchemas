@@ -6,6 +6,7 @@ This document gives the specification for the new question XML format (version 2
 
 + [Question Part Types](#question-part-types)
 + [Examples of the New Format](#examples-of-the-new-format)
++ [Overview of Important Changes](#overview-of-important-changes)
 
 ## Question Part Types
 
@@ -50,7 +51,9 @@ Below are listed links to examples of new question XML documents for new questio
 | [tfq1](examples/tfq1.question.xml) | TFQ | 
 | [ynq1](examples/ynq1.question.xml) | YNQ | 
 
-## Important Changes
+## Overview of Important Changes
+
+
 
 Many different changes to the structure of question XML documents have been made. Below are described some of the key design decisions.
 
