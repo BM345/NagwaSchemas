@@ -33,10 +33,14 @@
                 Earth’s orbital radius around the Sun?</s>
                 </p>
             </main_text>
-            <choices>
-                <choice is_correct_answer="true">A smaller orbital radius</choice>
-                <choice>A larger orbital radius</choice>
-            </choices>
+            <response_formats>
+                <response_format type="choices">
+                    <choices>
+                        <choice is_correct_answer="true">A smaller orbital radius</choice>
+                        <choice>A larger orbital radius</choice>
+                    </choices>
+                </response_format>
+            </response_formats>
             <solutions> 
                 <solution>
                     <p>
@@ -62,47 +66,51 @@
                     <s>Give your answer in <unit form="word/plural">day</unit> to two decimal places.</s>
                 </p>
             </main_text>
-            <answer type="decimal" must_have_exactly_ndp="2">
-                <prefix></prefix>
-                <values>
-                    <value>6.02</value>
-                </values>
-                <suffix>
-                    <unit form="word/plural">day</unit>
-                </suffix>
-            </answer>
-            <choices>
-                <choice is_correct_answer="true">
-                    <quantity>
-                        <value>6.02</value>
+            <response_formats>
+                <response_format type="input_text">
+                    <prefix></prefix>
+                    <values>
+                        <value type="decimal" must_have_exactly_ndp="2">6.02</value>
+                    </values>
+                    <suffix>
                         <unit form="word/plural">day</unit>
-                    </quantity>
-                </choice>
-                <choice>
-                    <quantity>
-                        <value>7.89</value>
-                        <unit form="word/plural">day</unit>
-                    </quantity>
-                </choice>
-                <choice>
-                    <quantity>
-                        <value>3.39</value>
-                        <unit form="word/plural">day</unit>
-                    </quantity>
-                </choice>
-                <choice>
-                    <quantity>
-                        <value>78.88</value>
-                        <unit form="word/plural">day</unit>
-                    </quantity>
-                </choice>
-                <choice>
-                    <quantity>
-                        <value>60.21</value>
-                        <unit form="word/plural">day</unit>
-                    </quantity>
-                </choice>
-            </choices>
+                    </suffix>
+                </response_format>
+                <response_format type="choices">
+                    <choices>
+                        <choice is_correct_answer="true">
+                            <quantity>
+                                <value>6.02</value>
+                                <unit form="word">day</unit>
+                            </quantity>
+                        </choice>
+                        <choice>
+                            <quantity>
+                                <value>7.89</value>
+                                <unit form="word">day</unit>
+                            </quantity>
+                        </choice>
+                        <choice>
+                            <quantity>
+                                <value>3.39</value>
+                                <unit form="word">day</unit>
+                            </quantity>
+                        </choice>
+                        <choice>
+                            <quantity>
+                                <value>78.88</value>
+                                <unit form="word">day</unit>
+                            </quantity>
+                        </choice>
+                        <choice>
+                            <quantity>
+                                <value>60.21</value>
+                                <unit form="word">day</unit>
+                            </quantity>
+                        </choice>
+                    </choices>
+                </response_format>
+            </response_formats>
             <solutions>
                 <solution>
                 </solution>
@@ -118,47 +126,51 @@
                     <s>Give your answer to 1 decimal place.</s>
                 </p>
             </main_text>
-            <answer type="decimal" must_have_exactly_ndp="1">
-                <prefix></prefix>
-                <values>
-                    <value>9.1</value>
-                </values>
-                <suffix>
-                    <unit>meter per second^2</unit>
-                </suffix>
-            </answer>
-            <choices>
-                <choice is_correct_answer="true">
-                    <quantity>
-                        <value>9.1</value>
+            <response_formats>
+                <response_format type="input_text">
+                    <prefix></prefix>
+                    <values>
+                        <value type="decimal" must_have_exactly_ndp="1">9.1</value>
+                    </values>
+                    <suffix>
                         <unit>meter per second^2</unit>
-                    </quantity>
-                </choice>
-                <choice>
-                    <quantity>
-                        <value>91.3</value>
-                        <unit>meter per second^2</unit>
-                    </quantity>
-                </choice>
-                <choice>
-                    <quantity>
-                        <value>9.8</value>
-                        <unit>meter per second^2</unit>
-                    </quantity>
-                </choice>
-                <choice>
-                    <quantity>
-                        <value>98.1</value>
-                        <unit>meter per second^2</unit>
-                    </quantity>
-                </choice>
-                <choice>
-                    <quantity>
-                        <value>7.3</value>
-                        <unit>meter per second^2</unit>
-                    </quantity>
-                </choice>
-            </choices>
+                    </suffix>
+                </response_format>
+                <response_format type="choices">
+                    <choices>
+                        <choice is_correct_answer="true">
+                            <quantity>
+                                <value>9.1</value>
+                                <unit>meter per second^2</unit>
+                            </quantity>
+                        </choice>
+                        <choice>
+                            <quantity>
+                                <value>91.3</value>
+                                <unit>meter per second^2</unit>
+                            </quantity>
+                        </choice>
+                        <choice>
+                            <quantity>
+                                <value>9.8</value>
+                                <unit>meter per second^2</unit>
+                            </quantity>
+                        </choice>
+                        <choice>
+                            <quantity>
+                                <value>98.1</value>
+                                <unit>meter per second^2</unit>
+                            </quantity>
+                        </choice>
+                        <choice>
+                            <quantity>
+                                <value>7.3</value>
+                                <unit>meter per second^2</unit>
+                            </quantity>
+                        </choice>
+                    </choices>
+                </response_format>
+            </response_formats>
             <solutions>
                 <solution>
                 </solution>

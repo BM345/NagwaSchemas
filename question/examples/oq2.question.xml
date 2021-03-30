@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<question id="000000000000" version="1">
+    <upload_date></upload_date>
+    <last_modification_date></last_modification_date>
+    <attribution>
+        <source_id></source_id>
+    </attribution>
+    <developers>
+        <developer role="writer">
+            <name>Benjamin Milnes</name>
+            <email_address>benjamin.milnes@nagwa.com</email_address>
+        </developer>
+    </developers>
+    <language>en</language>
+    <dialect>american</dialect>
+    <calendar>none</calendar>
+    <currency>none</currency>
+    <unit_system></unit_system>
+    <type>lesson</type>
+    <title>An Ordering Question</title>
+    <parts>
+        <part type="oq">
+            <main_text>
+                <p>
+                    <s>Put the following lengths in order from smallest to largest.</s>
+                </p>
+            </main_text>
+            <response_formats>
+                <response_format type="order_items">
+                    <orderable_items>
+                        <orderable_item correct_order_index="1">
+                            <quantity>
+                                <value>2</value>
+                                <unit>centimeters</unit>
+                            </quantity>
+                        </orderable_item>
+                        <orderable_item correct_order_index="2">
+                            <quantity>
+                                <value>1</value>
+                                <unit>inches</unit>
+                            </quantity>
+                        </orderable_item>
+                        <orderable_item correct_order_index="3">
+                            <quantity>
+                                <value>2</value>
+                                <unit>decimeters</unit>
+                            </quantity>
+                        </orderable_item>
+                        <orderable_item correct_order_index="4">
+                            <quantity>
+                                <value>1</value>
+                                <unit>foot</unit>
+                            </quantity>
+                        </orderable_item>
+                        <orderable_item correct_order_index="5">
+                            <quantity>
+                                <value>4</value>
+                                <unit>meters</unit>
+                            </quantity>
+                        </orderable_item>
+                    </orderable_items>            
+                </response_format>
+            </response_formats>
+            <solutions> 
+                <solution>
+                </solution>
+            </solutions>
+            <marks>1</marks>
+        </part>
+    </parts>
+</question>

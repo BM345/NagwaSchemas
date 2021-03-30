@@ -34,10 +34,10 @@
             <response_formats>
                 <response_format type="select_text">
                     <correct_answers>
-                        <selectable_text n="2" />
-                        <selectable_text n="4" />
-                        <selectable_text n="6" />
-                        <selectable_text n="7" />
+                        <selected_text n="2" />
+                        <selected_text n="4" />
+                        <selected_text n="6" />
+                        <selected_text n="7" />
                     </correct_answers>              
                 </response_format>
             </response_formats>

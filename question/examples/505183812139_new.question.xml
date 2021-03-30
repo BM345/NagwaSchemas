@@ -25,19 +25,19 @@
                     <s>Complete the following sentence: A galaxy is a collection of billions of <fillable_space n="1" />.</s>
                 </p>
             </main_text>
-            <answer_formats>
-                <answer_format type="draganddrop">
+            <response_formats>
+                <response_format type="draganddrop">
                     <phrases for_space="1">
                         <phrase>stars</phrase>
                         <phrase>planets</phrase>
                     </phrases>
-                </answer_format>
-                <answer_format type="textboxes">
+                </response_format>
+                <response_format type="textboxes">
                     <values for_space="1">
                         <value>stars</values>
                     </values>
-                </answer_format>
-            </answer_formats>
+                </response_format>
+            </response_formats>
             <solutions> 
                 <solution>
                 </solution>

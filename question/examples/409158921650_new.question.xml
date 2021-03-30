@@ -68,23 +68,27 @@
                     <unit><parameter n="1" /></unit>?</s>
                 </p>
             </main_text>
-            <choices>
-                <choice is_correct_answer="true">
-                    <m><parameter n="2" /></m>
-                </choice>
-                <choice>
-                    <m><parameter n="3" /></m>
-                </choice>
-                <choice>
-                    <m><parameter n="4" /></m>
-                </choice>
-                <choice>
-                    <m><parameter n="5" /></m>
-                </choice>
-                <choice>
-                    <m><parameter n="6" /></m>
-                </choice>
-            </choices>
+            <response_formats>
+                <response_format type="choices">
+                    <choices>
+                        <choice is_correct_answer="true">
+                            <m><parameter n="2" /></m>
+                        </choice>
+                        <choice>
+                            <m><parameter n="3" /></m>
+                        </choice>
+                        <choice>
+                            <m><parameter n="4" /></m>
+                        </choice>
+                        <choice>
+                            <m><parameter n="5" /></m>
+                        </choice>
+                        <choice>
+                            <m><parameter n="6" /></m>
+                        </choice>
+                    </choices>
+                </response_format>
+            </response_formats>
             <solutions>
                 <solution for_instances="1">
                     <p>

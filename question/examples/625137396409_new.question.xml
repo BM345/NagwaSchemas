@@ -25,14 +25,18 @@
                     <s>Which of the following are types of optical telescopes?</s>
                 </p>
             </main_text>
-            <choices>
-                <choice is_correct_answer="true">A reflecting telescope</choice>
-                <choice is_correct_answer="true">A refracting telescope</choice>
-                <choice>A dispersing telescope</choice>
-                <choice>A diffracting telescope</choice>
-                <choice>A polarizing telescope</choice>
-            </choices>
-            <solutions> 
+            <response_formats>
+                <response_format type="choices">
+                    <choices>
+                        <choice is_correct_answer="true">A reflecting telescope</choice>
+                        <choice is_correct_answer="true">A refracting telescope</choice>
+                        <choice>A dispersing telescope</choice>
+                        <choice>A diffracting telescope</choice>
+                        <choice>A polarizing telescope</choice>
+                    </choices>
+                </response_format>
+            </response_formats>
+            <solutions>
                 <solution>
                 </solution>
             </solutions>
