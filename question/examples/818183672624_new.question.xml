@@ -74,13 +74,17 @@
                     <s>Which star is closest to the Sun?</s>
                 </p>
             </main_text>
-            <choices>
-                <choice is_correct_answer="true">Alpha Centauri</choice>
-                <choice>Sirius</choice>
-                <choice>Tau Ceti</choice>
-                <choice>Barnard’s Star</choice>
-            </choices>
-            <solutions> 
+            <response_formats>
+                <response_format type="choices">
+                    <choices>
+                        <choice is_correct_answer="true">Alpha Centauri</choice>
+                        <choice>Sirius</choice>
+                        <choice>Tau Ceti</choice>
+                        <choice>Barnard’s Star</choice>
+                    </choices>
+                </response_format>
+            </response_formats>
+            <solutions>
                 <solution>
                 </solution>
             </solutions>
@@ -92,13 +96,17 @@
                     <s>Which star is furthest away from the Sun?</s>
                 </p>
             </main_text>
-            <choices>
-                <choice>Alpha Centauri</choice>
-                <choice>Sirius</choice>
-                <choice is_correct_answer="true">Tau Ceti</choice>
-                <choice>Barnard’s Star</choice>
-            </choices>
-            <solutions> 
+            <response_formats>
+                <response_format type="choices">
+                    <choices>
+                        <choice>Alpha Centauri</choice>
+                        <choice>Sirius</choice>
+                        <choice is_correct_answer="true">Tau Ceti</choice>
+                        <choice>Barnard’s Star</choice>
+                    </choices>
+                </response_format>
+            </response_formats>
+            <solutions>
                 <solution>
                 </solution>
             </solutions>

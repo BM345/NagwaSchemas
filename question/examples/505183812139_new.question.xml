@@ -19,7 +19,7 @@
     <type>lesson</type>
     <title>Understanding the Structure of the Universe</title>
     <parts>
-        <part type="fitbq" must_not_have_multiple_instances="true">
+        <part type="ctsq" must_not_have_multiple_instances="true">
             <main_text>
                 <p>
                     <s>Complete the following sentence: A galaxy is a collection of billions of <fillable_space n="1" />.</s>
@@ -32,7 +32,7 @@
                         <phrase>planets</phrase>
                     </phrases>
                 </response_format>
-                <response_format type="textboxes">
+                <response_format type="input_text">
                     <values for_space="1">
                         <value>stars</values>
                     </values>
