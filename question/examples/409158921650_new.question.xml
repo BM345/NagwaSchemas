@@ -70,7 +70,7 @@
             </main_text>
             <response_formats>
                 <response_format type="choices">
-                    <choices>
+                    <choices maximum_number_that_can_be_selected="1">
                         <choice is_correct_answer="true">
                             <m><parameter n="2" /></m>
                         </choice>

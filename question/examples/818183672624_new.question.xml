@@ -76,7 +76,7 @@
             </main_text>
             <response_formats>
                 <response_format type="choices">
-                    <choices>
+                    <choices maximum_number_that_can_be_selected="1">
                         <choice is_correct_answer="true">Alpha Centauri</choice>
                         <choice>Sirius</choice>
                         <choice>Tau Ceti</choice>
@@ -98,7 +98,7 @@
             </main_text>
             <response_formats>
                 <response_format type="choices">
-                    <choices>
+                    <choices maximum_number_that_can_be_selected="1">
                         <choice>Alpha Centauri</choice>
                         <choice>Sirius</choice>
                         <choice is_correct_answer="true">Tau Ceti</choice>

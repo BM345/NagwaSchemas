@@ -27,7 +27,7 @@
             </main_text>
             <response_formats>
                 <response_format type="choices">
-                    <choices>
+                    <choices maximum_number_that_can_be_selected="5">
                         <choice is_correct_answer="true">A reflecting telescope</choice>
                         <choice is_correct_answer="true">A refracting telescope</choice>
                         <choice>A dispersing telescope</choice>

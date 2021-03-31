@@ -1,0 +1,19 @@
+{
+    "question_id": "682162714504",
+    "question_version": 1,
+    "instance": "1",
+    "part_number": 1,
+    "response_format": "freeresponse",
+    "student_response": {
+        "text": "<p>A galaxy is billions of stars and planets in a spiral in space.</p>"
+    },
+    "correct_answer": {
+        "text": "<p><s>A galaxy is a collection of billions of stars.</s></p>"
+    },
+    "evaluation":{
+        "response_can_be_evaluated_automatically": false,
+        "maximum_number_of_marks_available": 3,
+        "number_of_marks_given": 0
+    },
+    "submitted_at": "2021-03-30T10:00:00"
+}

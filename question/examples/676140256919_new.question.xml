@@ -52,7 +52,7 @@
                     </values>
                 </response_format>
                 <response_format type="choices">
-                    <choices>
+                    <choices maximum_number_that_can_be_selected="1">
                         <choice order_index="1">
                             Region A 
                         </choice>

@@ -37,7 +37,7 @@
             </main_text>
             <response_formats>
                 <response_format type="choices">
-                    <choices>
+                    <choices maximum_number_that_can_be_selected="1">
                         <choice is_correct_answer="true">A smaller orbital radius</choice>
                         <choice>A larger orbital radius</choice>
                     </choices>
@@ -79,7 +79,7 @@
                     </suffix>
                 </response_format>
                 <response_format type="choices">
-                    <choices>
+                    <choices maximum_number_that_can_be_selected="1">
                         <choice is_correct_answer="true">
                             <quantity>
                                 <value>6.02</value>
@@ -139,7 +139,7 @@
                     </suffix>
                 </response_format>
                 <response_format type="choices">
-                    <choices>
+                    <choices maximum_number_that_can_be_selected="1">
                         <choice is_correct_answer="true">
                             <quantity>
                                 <value>9.1</value>
