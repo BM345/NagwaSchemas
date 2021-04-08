@@ -1,0 +1,21 @@
+{
+    "question_id": "000000000000",
+    "question_version": 1,
+    "instance": "default",
+    "part": "part1",
+    "response_format": "select_text",
+    "submitted_at": "2021-03-30T10:00:00",
+    "student_response": {
+        "selections": ["a", "b", "c", "d"]
+    },
+    "correct_answer": {
+        "selections": ["b", "d", "f", "g"]
+    },
+    "evaluation":{
+        "response_has_been_evaluated": true,
+        "evaluated_at": "2021-03-30T10:00:03",
+        "method": "default",
+        "maximum_number_of_marks_available": 4,
+        "number_of_marks_given": 2
+    }
+}

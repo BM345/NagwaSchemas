@@ -25,19 +25,19 @@
                     <s>Select the nouns in the following sentence.</s>
                 </p>
                 <p>
-                    <s>James <selectable_text n="1">went</selectable_text> to the <selectable_text n="2">supermarket</selectable_text> 
-                    and <selectable_text n="3">bought</selectable_text> a <selectable_text n="4">pineapple</selectable_text> and 
-                    <selectable_text n="5">two</selectable_text> <selectable_text n="6">bunches</selectable_text> of 
-                    <selectable_text n="7">bananas</selectable_text>.</s>
+                    <s>James <selectable_text reference="a">went</selectable_text> to the <selectable_text reference="b">supermarket</selectable_text> 
+                    and <selectable_text reference="c">bought</selectable_text> a <selectable_text reference="d">pineapple</selectable_text> and 
+                    <selectable_text reference="e">two</selectable_text> <selectable_text reference="f">bunches</selectable_text> of 
+                    <selectable_text reference="g">bananas</selectable_text>.</s>
                 </p>
             </main_text>
             <response_formats>
                 <response_format type="select_text">
                     <correct_answers>
-                        <selected_text n="2" />
-                        <selected_text n="4" />
-                        <selected_text n="6" />
-                        <selected_text n="7" />
+                        <selected_text reference="b" />
+                        <selected_text reference="d" />
+                        <selected_text reference="f" />
+                        <selected_text reference="g" />
                     </correct_answers>              
                 </response_format>
             </response_formats>

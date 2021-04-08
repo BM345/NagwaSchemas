@@ -19,7 +19,7 @@
     <type>lesson</type>
     <title>An Ordering Question</title>
     <parts>
-        <part type="oq">
+        <part type="oq" reference="part1">
             <main_text>
                 <p>
                     <s>Put the following numbers in order from smallest to largest.</s>
@@ -28,11 +28,11 @@
             <response_formats>
                 <response_format type="order_items">
                     <orderable_items>
-                        <orderable_item correct_order_index="1">23</orderable_item>
-                        <orderable_item correct_order_index="2">65</orderable_item>
-                        <orderable_item correct_order_index="3">99</orderable_item>
-                        <orderable_item correct_order_index="4">148</orderable_item>
-                        <orderable_item correct_order_index="5">289</orderable_item>
+                        <orderable_item reference="a" correct_order_index="1">23</orderable_item>
+                        <orderable_item reference="b" correct_order_index="2">65</orderable_item>
+                        <orderable_item reference="c" correct_order_index="3">99</orderable_item>
+                        <orderable_item reference="d" correct_order_index="4">148</orderable_item>
+                        <orderable_item reference="e" correct_order_index="5">289</orderable_item>
                     </orderable_items>            
                 </response_format>
             </response_formats>
