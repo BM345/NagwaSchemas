@@ -4,13 +4,17 @@
     "instance": "1",
     "part_number": 3,
     "response_format": "input_text",
+    "submitted_at": "2021-03-30T10:00:00",
     "student_response": {
         "text": "9.1"
     },
     "correct_answer": {
         "value": "9.1"
     },
-    "student_response_is_correct": true,
-    "submitted_at": "2021-03-30T10:00:00",
-    "marks_given": 1
+    "evaluation":{
+        "response_has_been_evaluated": true,
+        "evaluated_at": "2021-03-30T10:00:03",
+        "maximum_number_of_marks_available": 1,
+        "number_of_marks_given": 1
+    }
 }
