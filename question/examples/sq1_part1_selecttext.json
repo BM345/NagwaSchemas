@@ -1,6 +1,6 @@
 {
     "question_id": "000000000000",
-    "question_version": 1,
+    "question_version": "1",
     "instance": "default",
     "part": "part1",
     "response_format": "select_text",
