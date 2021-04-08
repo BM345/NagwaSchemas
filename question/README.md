@@ -5,7 +5,7 @@ This document gives the specification for the new question XML format (version 2
 ## Table of Contents
 
 + [Question Part Types](#question-part-types)
-+ [Examples of the New Format](#examples-of-the-new-format)
++ [Examples of the New Question XML Format](#examples-of-the-new-format)
 + [Overview of Important Changes](#overview-of-important-changes)
 
 ## Question Part Types
@@ -27,7 +27,7 @@ The table below briefly describes the different question part types - including 
 | TFQ* | True-False Question | A question where the answer is either true or false. (No other answer options are permitted. If an option such as 'It is not possible to determine.' is desired, the question must be an MCQ instead.) |
 | YNQ* | Yes-No Question | A question where the answer is either yes or no. (No other answer options are permitted. If an option such as 'It is not possible to determine.' is desired, the question must be an MCQ instead.) |
 
-## Examples of the New Format
+## Examples of the New Question XML Format
 
 Below are listed links to examples of the new question XML format that are based on existing questions.
 
@@ -51,6 +51,20 @@ Below are listed links to examples of new question XML documents for new questio
 | [mq1](examples/mq1.question.xml) | MQ | 
 | [tfq1](examples/tfq1.question.xml) | TFQ | 
 | [ynq1](examples/ynq1.question.xml) | YNQ | 
+
+## Examples of the New Response JSON Format
+
+In addition to creating a new XML format for questions, we are creating a new JSON format for student responses. The aim is to create a format that can work for any question part type.
+
+Below are listed links to examples of the new response JSON format. This is the JSON sent back to the server each time a student answers a __question part__.
+
+| JSON | Key Features |
+|---|---|
+| [578143060713_part3_choices](examples/578143060713_part3_choices.json) | MCQ |
+| [578143060713_part3_inputtext](examples/578143060713_part3_inputtext.json) | MCQ; text input |
+| [409158921650_part1_choices](examples/409158921650_part1_choices.json) | MCQ; multiple-instance question |
+| [682162714504_part1_freeresponse](examples/682162714504_part1_freeresponse.json) | FRQ |
+| [625137396409_part1_choices](examples/625137396409_part1_choices.json) | MRQ |
 
 ## Overview of Important Changes
 
