@@ -63,7 +63,8 @@ Below are listed links to examples of the new response JSON format. This is the 
 | [578143060713_part3_choices](examples/578143060713_part3_choices.json) | MCQ |
 | [578143060713_part3_inputtext](examples/578143060713_part3_inputtext.json) | MCQ; text input |
 | [409158921650_part1_choices](examples/409158921650_part1_choices.json) | MCQ; multiple-instance question |
-| [682162714504_part1_freeresponse](examples/682162714504_part1_freeresponse.json) | FRQ |
+| [682162714504_part1_freeresponse](examples/682162714504_part1_freeresponse.json) | FRQ; before evaluation |
+| [682162714504_part1_freeresponse_evaluated](examples/682162714504_part1_freeresponse_evaluated.json) | FRQ; after evaluation by teacher |
 | [625137396409_part1_choices](examples/625137396409_part1_choices.json) | MRQ |
 
 ## Overview of Important Changes

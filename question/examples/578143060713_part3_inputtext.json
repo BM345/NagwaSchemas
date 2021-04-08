@@ -14,6 +14,7 @@
     "evaluation":{
         "response_has_been_evaluated": true,
         "evaluated_at": "2021-03-30T10:00:03",
+        "method": "parser",
         "maximum_number_of_marks_available": 1,
         "number_of_marks_given": 1
     }

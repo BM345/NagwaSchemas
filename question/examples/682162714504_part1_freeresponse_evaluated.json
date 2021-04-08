@@ -12,7 +12,10 @@
         "text": "<p><s>A galaxy is a collection of billions of stars.</s></p>"
     },
     "evaluation":{
-        "response_has_been_evaluated": false,
-        "maximum_number_of_marks_available": 3
+        "response_has_been_evaluated": true,
+        "evaluated_at": "2021-03-31T17:00:03",
+        "method": "user",
+        "maximum_number_of_marks_available": 3,
+        "number_of_marks_given": 3
     }
 }
