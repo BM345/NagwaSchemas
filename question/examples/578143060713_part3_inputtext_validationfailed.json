@@ -5,13 +5,13 @@
     "part": "part3",
     "submitted_at": "2021-03-30T10:00:00",
     "response_format": "input_text",
+    "student_answer": {
+        "text": "asd"
+    },
     "validation": {
         "applied": true,
         "passed": false,
         "message_to_student": "Only use the characters 0 to 9 and the plus and minus signs in your answer. Your answer must be a single, whole number."
-    },
-    "student_answer": {
-        "text": "asd"
     },
     "correct_answer": {
         "value": "9.1"

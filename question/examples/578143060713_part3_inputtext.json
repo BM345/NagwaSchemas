@@ -5,12 +5,12 @@
     "part": "part3",
     "submitted_at": "2021-03-30T10:00:00",
     "response_format": "input_text",
+    "student_answer": {
+        "text": "9.1"
+    },
     "validation": {
         "applied": true,
         "passed": true
-    },
-    "student_answer": {
-        "text": "9.1"
     },
     "correct_answer": {
         "value": "9.1"

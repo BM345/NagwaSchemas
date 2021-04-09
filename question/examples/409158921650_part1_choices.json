@@ -5,11 +5,11 @@
     "part": "part1",
     "submitted_at": "2021-03-30T10:00:00",
     "response_format": "choices",
-    "validation": {
-        "applied": false
-    },
     "student_answer": {
         "choices": ["a"]
+    },
+    "validation": {
+        "applied": false
     },
     "correct_answer": {
         "choices": ["a"]
