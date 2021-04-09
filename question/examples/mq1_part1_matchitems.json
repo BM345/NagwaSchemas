@@ -3,8 +3,8 @@
     "question_version": 1,
     "instance": "1",
     "part_number": 1,
-    "response_format": "match_items",
     "submitted_at": "2021-03-30T10:00:00",
+    "response_format": "match_items",
     "student_response": {
         "matches": [
             {"from": "list 1, item 1", "to": "list 2, item 1"},

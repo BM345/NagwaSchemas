@@ -89,6 +89,10 @@
                     </choices>
                 </response_format>
             </response_formats>
+            <workings>
+                <working for_instances="1">
+                </working>
+            </workings>
             <solutions>
                 <solution for_instances="1">
                     <p>

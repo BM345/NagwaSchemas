@@ -3,8 +3,8 @@
     "question_version": 1,
     "instance": "3",
     "part_number": 1,
-    "response_format": "choices",
     "submitted_at": "2021-03-30T10:00:00",
+    "response_format": "choices",
     "student_response": {
         "choices": ["1"]
     },

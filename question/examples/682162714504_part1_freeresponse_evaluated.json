@@ -3,8 +3,8 @@
     "question_version": 1,
     "instance": "1",
     "part_number": 1,
-    "response_format": "free_response",
     "submitted_at": "2021-03-30T10:00:00",
+    "response_format": "free_response",
     "student_response": {
         "text": "<p>A galaxy is billions of stars and planets in a spiral in space.</p>"
     },
