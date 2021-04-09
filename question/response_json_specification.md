@@ -13,6 +13,7 @@ Each response given by a student to a question part should be stored as a JSON o
 The response JSON format should be fairly easy to understand just from looking at examples of it. The table below gives links to examples for different question part types.
 
 | Part Type | Link |
+|---|---|
 | MCQ, answered as multiple-choice | [Link](examples/578143060713_part3_choices.json) |
 
 ## Structure
