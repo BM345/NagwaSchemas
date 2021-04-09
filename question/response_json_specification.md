@@ -15,6 +15,13 @@ The response JSON format should be fairly easy to understand just from looking a
 | Part Type | Link |
 |---|---|
 | MCQ, answered as multiple-choice | [Link](examples/578143060713_part3_choices.json) |
+| MCQ, answered as text-input | [Link](examples/578143060713_part3_inputtext.json) |
+| MRQ (MRQs are merged with MCQs in new question XML specification), answered as multiple-choice | [Link](examples/625137396409_part1_choices.json) |
+| FRQ, before the teacher has marked the student's answer | [Link](examples/682162714504_part1_freeresponse.json) |
+| FRQ, after the teacher has marked the student's answer | [Link](examples/682162714504_part1_freeresponse_evaluated.json) |
+| OQ | [Link](examples/oq1_part1_orderitems.json) |
+| SQ | [Link](examples/sq1_part1_selecttext.json) |
+| MQ | [Link](examples/mq1_part1_matchitems.json) |
 
 ## Structure
 
