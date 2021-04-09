@@ -24,6 +24,24 @@ The top-level entity of a Response JSON file must be an object. The table below 
 | `correct_answer` | Required | object | an object that captures the correct answer; it's important to include this as a question may be later updated and the answer changed (perhaps because the answer was completely wrong, or because it was just slightly wrong - perhaps it was written to 3 d.p. when it should only have been to 2 d.p.); by storing the correct answer alongside the answer the student gave, it's always easy to see _why_ the student's answer would have been marked correct or incorrect |
 | `evaluation` | Required | object | an object that captures the evaluation of the student's answer |
 
+#### Example
+
+Below is shown an empty response object.
+
+```json
+{
+    "question_id": "",
+    "question_version": "",
+    "instance": "",
+    "part": "",
+    "submitted_at": "",
+    "response_format": "",
+    "student_answer": {},
+    "correct_answer": {},
+    "evaluation": {}
+}
+```
+
 ### Evaluation Object
 
 The evaluation object captures the evaluation of a student's answer.
