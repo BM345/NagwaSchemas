@@ -8,6 +8,13 @@ This document gives the specification for the JSON format we use for students' r
 
 Each response given by a student to a question part should be stored as a JSON object. Note that a response object corresponds to a __question part__, and not simply the entire __question__. This is because students must be able to submit responses to the different parts of a question (if there is more than one) separately. Students may also submit multiple responses to a question part that do not pass validation, thus they are required to alter and then resubmit their answer.
 
+## Examples
+
+The response JSON format should be fairly easy to understand just from looking at examples of it. The table below gives links to examples for different question part types.
+
+| Part Type | Link |
+| MCQ, answered as multiple-choice | [Link](examples/578143060713_part3_choices.json) |
+
 ## Structure
 
 The top-level entity of a Response JSON file must be an object. The table below lists the possible properties of this object.
@@ -48,7 +55,7 @@ The student answer object and correct answer object are dependent on the value o
 
 #### response_format = "choices"
 
-If `response_format` is set to `choices` both the student answer object and the correct answer object have one property, `choices`, the value of which is an array of references. For the student answer object, these references are for the choices that the student has chosen. For the correct answer object, these references are for the correct choices. An example of these objects is shown below.
+The response format can be `choices` if the question part type is `mcq`. In this case both the student answer object and the correct answer object have one property, `choices`, the value of which is an array of references. For the student answer object, these references are for the choices that the student has chosen. For the correct answer object, these references are for the correct choices. An example of these objects is shown below.
 
 ```json
 "student_answer": {
