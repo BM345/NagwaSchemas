@@ -23,3 +23,17 @@ The top-level entity of a Response JSON file must be an object. The table below 
 | `student_answer` | Required | object | an object that captures the answer the student gave |
 | `correct_answer` | Required | object | an object that captures the correct answer; it's important to include this as a question may be later updated and the answer changed (perhaps because the answer was completely wrong, or because it was just slightly wrong - perhaps it was written to 3 d.p. when it should only have been to 2 d.p.); by storing the correct answer alongside the answer the student gave, it's always easy to see _why_ the student's answer would have been marked correct or incorrect |
 | `evaluation` | Required | object | an object that captures the evaluation of the student's answer |
+
+### Evaluation Object
+
+The evaluation object captures the evaluation of a student's answer.
+
+Answers can be evaluated in different ways. Most of the time, answers are evaluated programmatically by comparing the student's answer to the correct answer. For multiple choice questions, this means simply comparing the list of the student's choices to the list of correct choices. Sometimes, however, the answer must be assessed by a teacher. This is the case with free response questions.
+
+The evaluation object captures _whether_ a given response has yet been evaluated (and hence whether a teacher needs to evaluate it), and, once it has been evaluated, the evaluation method. It also captures the number of marks that a student has been given for their answer.
+
+The table below lists the possible properties of this object.
+
+| Property | Required | Allowed Values | Description | 
+| --- | --- | --- | --- |
+| `response_has_been_evaluated` | Required | boolean | denotes whether this response has yet been evaluated; for questions such as MCQs, MQs, OQs, SQs, et cetera - which can be evaluated automatically - this property will be set to `true` straight away; for questions such as FRQs - which require teacher input - this value will need to be set to `false` when the student first submits their answer, and then changed to true once the teacher has marked it |
