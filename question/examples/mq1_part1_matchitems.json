@@ -5,6 +5,9 @@
     "part": "part1",
     "submitted_at": "2021-03-30T10:00:00",
     "response_format": "match_items",
+    "validation": {
+        "applied": false
+    },
     "student_answer": {
         "matches": [
             {"from": "list 1, item 1", "to": "list 2, item 1"},

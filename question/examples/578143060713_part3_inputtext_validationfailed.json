@@ -7,19 +7,17 @@
     "response_format": "input_text",
     "validation": {
         "applied": true,
-        "passed": true
+        "passed": false,
+        "message_to_student": "Only use the characters 0 to 9 and the plus and minus signs in your answer. Your answer must be a single, whole number."
     },
     "student_answer": {
-        "text": "9.1"
+        "text": "asd"
     },
     "correct_answer": {
         "value": "9.1"
     },
     "evaluation":{
-        "response_has_been_evaluated": true,
-        "evaluated_at": "2021-03-30T10:00:03",
-        "method": "parser",
-        "maximum_number_of_marks_available": 1,
-        "number_of_marks_given": 1
+        "response_has_been_evaluated": false,
+        "maximum_number_of_marks_available": 1
     }
 }

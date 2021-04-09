@@ -35,6 +35,7 @@ The top-level entity of a Response JSON file must be an object. The table below 
 | `part` | Required | string | the reference for the part of the question that this response has been given for |
 | `submitted_at` | Required | string / timestamp | the date and time at which the response was submitted |
 | `response_format` | Required | string / one of a set of values | the response format that the student gave their answer in; many of our questions can be answered in different ways - MCQs can often be answered either by a student choosing one option out of a set of options, or by typing in their answer into an answer box; the different ways that a student can answer a given question are defined in the question XML; this property can have one of the following values: `choices`, `input_text`, `match_items`, `order_items`, `select_text`, `free_response`, `yes_or_no`, `true_or_false` |
+| `validation` | Required | object | an object that gives information about whether validation was applied to this response, and whether validation was passed; this includes the message that was sent to the student if the response did not pass validation, which is useful to know for identifying issues |
 | `student_answer` | Required | object | an object that captures the answer the student gave |
 | `correct_answer` | Required | object | an object that captures the correct answer; it's important to include this as a question may be later updated and the answer changed (perhaps because the answer was completely wrong, or because it was just slightly wrong - perhaps it was written to 3 d.p. when it should only have been to 2 d.p.); by storing the correct answer alongside the answer the student gave, it's always easy to see _why_ the student's answer would have been marked correct or incorrect |
 | `evaluation` | Required | object | an object that captures the evaluation of the student's answer |
@@ -73,6 +74,45 @@ The response format can be `choices` if the question part type is `mcq`. In this
     "choices": ["a"]
 }
 ```
+
+Below is shown an example of these objects for where the students must choose multiple options (an MRQ).
+
+```json
+"student_answer": {
+    "choices": ["p", "r"]
+},
+"correct_answer": {
+    "choices": ["p", "q"]
+}
+```
+
+#### response_format = "input_text"
+
+#### response_format = "order_items"
+
+#### response_format = "select_text"
+
+#### response_format = "match_items"
+
+#### response_format = "free_response"
+
+#### response_format = "yes_or_no"
+
+#### response_format = "true_or_false"
+
+### Validation Object
+
+The validation object gives information about whether validation was applied to this response, and whether validation was passed.
+
+For most response formats, there is no validation process. So, for most response formats, this object will simply be:
+
+```json
+"validation": {
+    "applied": false
+}
+```
+
+The only response format that we apply validation for is the `input_text` format.
 
 ### Evaluation Object
 
