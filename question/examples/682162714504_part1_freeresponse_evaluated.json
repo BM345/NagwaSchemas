@@ -1,11 +1,11 @@
 {
     "question_id": "682162714504",
-    "question_version": 1,
+    "question_version": "1",
     "instance": "1",
-    "part_number": 1,
+    "part": "part1",
     "submitted_at": "2021-03-30T10:00:00",
     "response_format": "free_response",
-    "student_response": {
+    "student_answer": {
         "text": "<p>A galaxy is billions of stars and planets in a spiral in space.</p>"
     },
     "correct_answer": {

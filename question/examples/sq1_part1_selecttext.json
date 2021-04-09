@@ -5,7 +5,7 @@
     "part": "part1",
     "submitted_at": "2021-03-30T10:00:00",
     "response_format": "select_text",
-    "student_response": {
+    "student_answer": {
         "selections": ["a", "b", "c", "d"]
     },
     "correct_answer": {

@@ -1,11 +1,11 @@
 {
     "question_id": "000000000000",
-    "question_version": 1,
+    "question_version": "1",
     "instance": "default",
     "part": "part1",
     "submitted_at": "2021-03-30T10:00:00",
     "response_format": "order_items",
-    "student_response": {
+    "student_answer": {
         "items": ["a", "b", "d", "c", "e"]
     },
     "correct_answer": {
