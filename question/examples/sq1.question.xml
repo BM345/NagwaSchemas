@@ -19,7 +19,7 @@
     <type>lesson</type>
     <title>A Select Question</title>
     <parts>
-        <part type="sq">
+        <part type="sq" reference="part1">
             <main_text>
                 <p>
                     <s>Select the nouns in the following sentence.</s>

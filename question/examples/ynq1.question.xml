@@ -19,7 +19,7 @@
     <type>lesson</type>
     <title>A Yes-No Question</title>
     <parts>
-        <part type="ynq">
+        <part type="ynq" reference="part1">
             <main_text>
                 <p>
                     <s>Yes or no?</s>

@@ -2,7 +2,7 @@
     "question_id": "578143060713",
     "question_version": 1,
     "instance": "1",
-    "part_number": 3,
+    "part": "part3",
     "submitted_at": "2021-03-30T10:00:00",
     "response_format": "input_text",
     "student_response": {

@@ -19,7 +19,7 @@
     <type>lesson</type>
     <title>Recalling Types of Telescope</title>
     <parts>
-        <part type="mcq" must_show_choices="true">
+        <part type="mcq" must_show_choices="true" reference="part1">
             <main_text>
                 <p>
                     <s>Which of the following are types of optical telescopes?</s>
@@ -28,11 +28,11 @@
             <response_formats>
                 <response_format type="choices">
                     <choices maximum_number_that_can_be_selected="5">
-                        <choice is_correct_answer="true">A reflecting telescope</choice>
-                        <choice is_correct_answer="true">A refracting telescope</choice>
-                        <choice>A dispersing telescope</choice>
-                        <choice>A diffracting telescope</choice>
-                        <choice>A polarizing telescope</choice>
+                        <choice reference="p" is_correct_answer="true">A reflecting telescope</choice>
+                        <choice reference="q" is_correct_answer="true">A refracting telescope</choice>
+                        <choice reference="r">A dispersing telescope</choice>
+                        <choice reference="s">A diffracting telescope</choice>
+                        <choice reference="t">A polarizing telescope</choice>
                     </choices>
                 </response_format>
             </response_formats>

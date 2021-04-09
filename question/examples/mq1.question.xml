@@ -19,7 +19,7 @@
     <type>lesson</type>
     <title>A Matching Question</title>
     <parts>
-        <part type="mq">
+        <part type="mq" reference="part1">
             <main_text>
                 <p>
                     <s>Match each of the words given in hangeul below to its romanisation and its meaning in English.</s>

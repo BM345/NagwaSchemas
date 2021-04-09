@@ -19,7 +19,7 @@
     <type>lesson</type>
     <title>A True-False Question</title>
     <parts>
-        <part type="tfq">
+        <part type="tfq" reference="part1">
             <main_text>
                 <p>
                     <s>True or false?</s>

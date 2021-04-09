@@ -2,14 +2,14 @@
     "question_id": "409158921650",
     "question_version": 1,
     "instance": "3",
-    "part_number": 1,
+    "part": "part1",
     "submitted_at": "2021-03-30T10:00:00",
     "response_format": "choices",
     "student_response": {
-        "choices": ["1"]
+        "choices": ["a"]
     },
     "correct_answer": {
-        "choices": ["1"]
+        "choices": ["a"]
     },
     "evaluation":{
         "response_has_been_evaluated": true,

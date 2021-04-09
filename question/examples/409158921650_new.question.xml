@@ -61,7 +61,7 @@
         </instance>
     </parameters>
     <parts>
-        <part type="mcq" must_show_choices="false">
+        <part type="mcq" must_show_choices="false" reference="part1">
             <main_text>
                 <p>
                     <s>What are the dimensions of a quantity that can be measured in units of 
@@ -71,19 +71,19 @@
             <response_formats>
                 <response_format type="choices">
                     <choices maximum_number_that_can_be_selected="1">
-                        <choice is_correct_answer="true">
+                        <choice reference="a" is_correct_answer="true">
                             <m><parameter n="2" /></m>
                         </choice>
-                        <choice>
+                        <choice reference="b">
                             <m><parameter n="3" /></m>
                         </choice>
-                        <choice>
+                        <choice reference="c">
                             <m><parameter n="4" /></m>
                         </choice>
-                        <choice>
+                        <choice reference="d">
                             <m><parameter n="5" /></m>
                         </choice>
-                        <choice>
+                        <choice reference="e">
                             <m><parameter n="6" /></m>
                         </choice>
                     </choices>

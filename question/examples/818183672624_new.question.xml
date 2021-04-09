@@ -19,7 +19,7 @@
     <type>lesson</type>
     <title>Describing Distances using Light-years</title>
     <parts>
-        <part type="statement">
+        <part type="information" reference="part1">
             <main_text>
                 <p>
                     <s>The table below lists four stars and how far away they are from the Sun.</s>
@@ -68,7 +68,7 @@
                 </table>
             </main_text>
         </part>
-        <part type="mcq" must_show_choices="false">
+        <part type="mcq" must_show_choices="false" reference="part2">
             <main_text>
                 <p>
                     <s>Which star is closest to the Sun?</s>
@@ -77,10 +77,10 @@
             <response_formats>
                 <response_format type="choices">
                     <choices maximum_number_that_can_be_selected="1">
-                        <choice is_correct_answer="true">Alpha Centauri</choice>
-                        <choice>Sirius</choice>
-                        <choice>Tau Ceti</choice>
-                        <choice>Barnard’s Star</choice>
+                        <choice reference="p" is_correct_answer="true">Alpha Centauri</choice>
+                        <choice reference="q">Sirius</choice>
+                        <choice reference="r">Tau Ceti</choice>
+                        <choice reference="s">Barnard’s Star</choice>
                     </choices>
                 </response_format>
             </response_formats>
@@ -90,7 +90,7 @@
             </solutions>
             <marks>1</marks>
         </part>
-        <part type="mcq" must_show_choices="false">
+        <part type="mcq" must_show_choices="false" reference="part3">
             <main_text>
                 <p>
                     <s>Which star is furthest away from the Sun?</s>
@@ -99,10 +99,10 @@
             <response_formats>
                 <response_format type="choices">
                     <choices maximum_number_that_can_be_selected="1">
-                        <choice>Alpha Centauri</choice>
-                        <choice>Sirius</choice>
-                        <choice is_correct_answer="true">Tau Ceti</choice>
-                        <choice>Barnard’s Star</choice>
+                        <choice reference="g">Alpha Centauri</choice>
+                        <choice reference="h">Sirius</choice>
+                        <choice reference="i" is_correct_answer="true">Tau Ceti</choice>
+                        <choice reference="j">Barnard’s Star</choice>
                     </choices>
                 </response_format>
             </response_formats>

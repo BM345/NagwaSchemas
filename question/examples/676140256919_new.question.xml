@@ -19,7 +19,7 @@
     <type>lesson</type>
     <title>Understanding Different Types of Exoplanet</title>
     <parts>
-        <part type="mcq" must_show_choices="false" must_not_have_multiple_instances="true">
+        <part type="mcq" must_show_choices="false" reference="part1" must_not_have_multiple_instances="true">
             <main_text>
                 <p>
                     <s>The graph shows the orbital period and planet radius of more than three thousand real exoplanets.</s> 
@@ -53,16 +53,16 @@
                 </response_format>
                 <response_format type="choices">
                     <choices maximum_number_that_can_be_selected="1">
-                        <choice order_index="1">
+                        <choice reference="p" order_index="1">
                             Region A 
                         </choice>
-                        <choice is_correct_answer="true" order_index="2">
+                        <choice reference="q" is_correct_answer="true" order_index="2">
                             Region B
                         </choice>
-                        <choice order_index="3">
+                        <choice reference="r" order_index="3">
                             Region C
                         </choice>
-                        <choice order_index="4">
+                        <choice reference="s" order_index="4">
                             Region D
                         </choice>
                     </choices>
