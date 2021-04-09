@@ -12,6 +12,9 @@
         "applied": true,
         "passed": true
     },
+    "normalised_student_answer": {
+        "text": "9.1"
+    },
     "correct_answer": {
         "value": "9.1"
     },
