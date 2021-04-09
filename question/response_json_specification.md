@@ -55,3 +55,29 @@ The table below lists the possible properties of this object.
 | Property | Required | Allowed Values | Description | 
 | --- | --- | --- | --- |
 | `response_has_been_evaluated` | Required | boolean | denotes whether this response has yet been evaluated; for questions such as MCQs, MQs, OQs, SQs, et cetera - which can be evaluated automatically - this property will be set to `true` straight away; for questions such as FRQs - which require teacher input - this value will need to be set to `false` when the student first submits their answer, and then changed to true once the teacher has marked it |
+| `evaluated_at` | Required once `response_has_been_evaluated` has been set to `true`; otherwise leave out | string / timestamp | the date and time at which the response was evaluated; if the answer was evaluated automatically, the value would be the server time when the response was received from the student; if the answer was evaluated by a teacher / user, it would be the server time when the teacher / user did so |
+| `method` | Required once `response_has_been_evaluated` has been set to `true`; otherwise leave out | string / one of a set of values | denotes how this response was evaluated |
+| `number_of_marks_available` | Required | integer | the maximum number of marks that can be given for this question part |
+| `number_of_marks_given` | Required once `response_has_been_evaluated` has been set to `true`; otherwise leave out | integer | the number of marks that have been given to the student for their answer; equal to `number_of_marks_available` if the answer is completely correct; equal to 0 of the answer is completely incorrect; teachers may award some marks for FRQ answers that are partially correct; MQs may also allow partial marks |
+
+The table below lists the possible values of the `method` property.
+
+| Value | Meaning |
+|---|---|
+| `default` | the student's answer was evaluated automatically by direct comparison to the key; does not include if the validation code was used to parse the student's answer and provide a normalised form |
+| `parser` | denotes that the student's answer was parsed using the validation code, and converted into a normalised form before being checked (or was checked for equality by the validation code itself); this will be useful in case there are issues with the parser code |
+| `user` | denotes that a user had to manually check the answer and mark it; usually a teacher |
+
+#### Example
+
+Below is shown an example evaluation object.
+
+```json
+{
+    "response_has_been_evaluated": true,
+    "evaluated_at": "2021-03-30T10:00:03",
+    "method": "default",
+    "maximum_number_of_marks_available": 1,
+    "number_of_marks_given": 1
+}
+```
