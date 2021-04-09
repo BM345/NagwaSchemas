@@ -42,6 +42,23 @@ Below is shown an empty response object.
 }
 ```
 
+### Student Answer Object and Correct Answer Object
+
+The student answer object and correct answer object are dependent on the value of the `response_format` property.
+
+#### response_format = "choices"
+
+If `response_format` is set to `choices` both the student answer object and the correct answer object have one property, `choices`, the value of which is an array of references. For the student answer object, these references are for the choices that the student has chosen. For the correct answer object, these references are for the correct choices. An example of these objects is shown below.
+
+```json
+"student_answer": {
+    "choices": ["a"]
+},
+"correct_answer": {
+    "choices": ["a"]
+}
+```
+
 ### Evaluation Object
 
 The evaluation object captures the evaluation of a student's answer.
