@@ -141,8 +141,8 @@ The table below defines the different properties of the validation object.
 | Property | Required | Allowed Values | Description | 
 | --- | --- | --- | --- |
 | `applied` | Required | boolean | whether or not validation has been applied to the student's answer; this will only be `true` if `response_format` is equal to `input_text`, as this is the only response format we apply validation to; for all other response formats, this will be `false` |
-| `passed` | Required only if `applied` is `true` | whether or not the student's answer passed validation |
-| `message_to_student` | Required only if `applied` is `true` and `passed` is `false` | the message that the student received when their answer did not pass validation; this is useful for identifying issues |
+| `passed` | Required only if `applied` is `true` | boolean | whether or not the student's answer passed validation |
+| `message_to_student` | Required only if `applied` is `true` and `passed` is `false` | string | the message that the student received when their answer did not pass validation; this is useful for identifying issues |
 
 
 
