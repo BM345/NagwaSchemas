@@ -1,6 +1,6 @@
 # Response JSON Specification
 
-This document gives the specification for the JSON format we use for students' responses to questions.
+This document gives the specification for the JSON format we use for storing students' responses to questions.
 
 ## Table of Contents
 
@@ -8,35 +8,36 @@ This document gives the specification for the JSON format we use for students' r
 + [Examples](#examples)
 + [Structure](#structure)
     + [Answer Objects](#answer-objects)
-        + [response_format = "choices"]()
-        + [response_format = "input_text"]()
-        + [response_format = "order_items"]()
-        + [response_format = "select_text"]()
-        + [response_format = "match_items"]()
-        + [response_format = "free_response"]()
-        + [response_format = "yes_or_no"]()
-        + [response_format = "true_or_false"]()
+        + [response_format = "choices"](#response_format--choices)
+        + [response_format = "input_text"](#response_format--input_text)
+        + [response_format = "select_text"](#response_format--select_text)
+        + [response_format = "order_items"](#response_format--order_items)
+        + [response_format = "match_items"](#response_format--match_items)
+        + [response_format = "free_response"](#response_format--free_response)
+        + [response_format = "yes_or_no"](#response_format--yes_or_no)
+        + [response_format = "true_or_false"](#response_format--true_or_false)
     + [Validation Object](#validation-object)
     + [Evaluation Object](#evaluation-object)
 
 ## Overview
 
-Each response given by a student to a question part should be stored as a JSON object. Note that a response object corresponds to a __question part__, and not simply the entire __question__. This is because students must be able to submit responses to the different parts of a question (if there is more than one) separately. Students may also submit multiple responses to a question part that do not pass validation, thus they are required to alter and then resubmit their answer.
+Information about a student's response to a question part is stored as a JSON object. Note that each JSON object represents a student's response to a __question part__, not to an entire __question__. This is because students must be able to submit responses to the different parts of a question (if there is more than one part) separately. Students must also be able to resubmit their answer to a given question part if their answer does not pass validation - a separate response object will be required for each attempt.
 
 ## Examples
 
-The response JSON format should be fairly easy to understand just from looking at examples of it. The table below gives links to examples for different question part types.
+The Response JSON format should be fairly easy to understand just from looking at examples of it. The table below gives links to examples for different question part types.
 
 | Part Type | Link |
 |---|---|
 | MCQ, answered as multiple-choice | [Link](examples/578143060713_part3_choices.json) |
-| MCQ, answered as text-input | [Link](examples/578143060713_part3_inputtext.json) |
-| MRQ (MRQs are merged with MCQs in new question XML specification), answered as multiple-choice | [Link](examples/625137396409_part1_choices.json) |
+| MCQ, answered as text-input where the answer passed validation | [Link](examples/578143060713_part3_inputtext.json) |
+| MCQ, answered as text-input where the answer did not pass validation | [Link](examples/578143060713_part3_inputtext_validationfailed.json) |
+| MRQ (MRQs are merged with MCQs in the new question XML specification), answered as multiple-choice | [Link](examples/625137396409_part1_choices.json) |
+| SQ | [Link](examples/sq1_part1_selecttext.json) |
+| OQ | [Link](examples/oq1_part1_orderitems.json) |
+| MQ | [Link](examples/mq1_part1_matchitems.json) |
 | FRQ, before the teacher has marked the student's answer | [Link](examples/682162714504_part1_freeresponse.json) |
 | FRQ, after the teacher has marked the student's answer | [Link](examples/682162714504_part1_freeresponse_evaluated.json) |
-| OQ | [Link](examples/oq1_part1_orderitems.json) |
-| SQ | [Link](examples/sq1_part1_selecttext.json) |
-| MQ | [Link](examples/mq1_part1_matchitems.json) |
 
 ## Structure
 
@@ -45,16 +46,16 @@ The top-level entity of a Response JSON file must be an object. The table below 
 | Property | Required | Allowed Values | Description | 
 | --- | --- | --- | --- |
 | `question_id` | Required | string / a 12-digit entity id | the id of the question that this response has been given for |
-| `question_version` | Required | string | the version of the question that this response has been given for; the version is usually an integer |
+| `question_version` | Required | string | the version of the question that this response has been given for; the version is usually an integer; stored here as a string just in case non-numeric versions are used |
 | `instance` | Required | string | the reference for the instance of the question that this response has been given for |
 | `part` | Required | string | the reference for the part of the question that this response has been given for |
 | `submitted_at` | Required | string / timestamp | the date and time at which the response was submitted |
-| `response_format` | Required | string / one of a set of values | the response format that the student gave their answer in; many of our questions can be answered in different ways - MCQs can often be answered either by a student choosing one option out of a set of options, or by typing in their answer into an answer box; the different ways that a student can answer a given question are defined in the question XML; this property can have one of the following values: `choices`, `input_text`, `match_items`, `order_items`, `select_text`, `free_response`, `yes_or_no`, `true_or_false` |
-| `student_answer` | Required | object | an object that captures the answer the student gave |
-| `validation` | Required | object | an object that gives information about whether validation was applied to this response, and whether validation was passed; this includes the message that was sent to the student if the response did not pass validation, which is useful to know for identifying issues |
-| `normalised_student_answer` | | object | an object that gives the normalised version of the student's answer |
-| `correct_answer` | Required | object | an object that captures the correct answer; it's important to include this as a question may be later updated and the answer changed (perhaps because the answer was completely wrong, or because it was just slightly wrong - perhaps it was written to 3 d.p. when it should only have been to 2 d.p.); by storing the correct answer alongside the answer the student gave, it's always easy to see _why_ the student's answer would have been marked correct or incorrect |
-| `evaluation` | Required | object | an object that captures the evaluation of the student's answer |
+| `response_format` | Required | string / one of a set of values | the response format that the student gave their answer in; many of our questions can be answered in different ways - MCQs can often be answered either by a student choosing one option out of a set of options, or by typing in their answer into an answer box; the different ways that a student can answer a given question are defined in the Question XML; this property can have one of the following values: `choices`, `input_text`, `select_text`, `order_items`, `match_items`, `free_response`, `yes_or_no`, `true_or_false` |
+| `student_answer` | Required | object | an object that captures the answer the student gave; [see below](#answer-objects) |
+| `validation` | Required | object | an object that gives information about whether validation was applied to this response, and whether validation was passed; this includes the message that was sent to the student if the response did not pass validation, which is useful to know for identifying issues; [see below](#validation-object) |
+| `normalised_student_answer` | | object | an object that gives the normalised version of the student's answer; this object only needs to be present if the student's answer was validated and it passed (in which case the validation code produces a normalised version of the student's answer); [see below](#answer-objects) |
+| `correct_answer` | Required | object | an object that captures the correct answer; it's important to include this as a question may be later updated and the answer changed (perhaps because the answer was completely wrong, or because it was just slightly wrong - perhaps it was written to 3 d.p. when it should only have been to 2 d.p.); by storing the correct answer alongside the answer the student gave, it's always easy to see _why_ the student's answer would have been marked correct or incorrect; [see below](#answer-objects) |
+| `evaluation` | Required | object | an object that captures the evaluation of the student's answer; [see below](#evaluation-object) |
 
 #### Example
 
@@ -121,19 +122,6 @@ The response format can be `input_text` if the question part type is `mcq` (a mu
 }
 ```
 
-#### response_format = "order_items"
-
-The response format can be `order_items` if the question part type is `oq` (an ordering question). In this case the answer objects have one property, `items`, the value of which is an array of references. For the student answer object, this array shows the order that the student put the items in. For the correct answer object, this array shows the correct order of the items.
-
-```json
-"student_answer": {
-    "items": ["a", "b", "d", "c", "e"]
-},
-"correct_answer": {
-    "items": ["a", "b", "c", "d", "e"]
-}
-```
-
 #### response_format = "select_text"
 
 The response format can be `select_text` if the question part type is `sq` (a select question). In this case, the answer objects have one property, `selections`, the value of which is an array of references.
@@ -144,6 +132,19 @@ The response format can be `select_text` if the question part type is `sq` (a se
 },
 "correct_answer": {
     "selections": ["b", "d", "f", "g"]
+}
+```
+
+#### response_format = "order_items"
+
+The response format can be `order_items` if the question part type is `oq` (an ordering question). In this case the answer objects have one property, `items`, the value of which is an array of references. For the student answer object, this array shows the order that the student put the items in. For the correct answer object, this array shows the correct order of the items.
+
+```json
+"student_answer": {
+    "items": ["a", "b", "d", "c", "e"]
+},
+"correct_answer": {
+    "items": ["a", "b", "c", "d", "e"]
 }
 ```
 
