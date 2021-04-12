@@ -108,11 +108,66 @@ The response format can be `order_items` if the question part type is `oq` (an o
 
 #### response_format = "match_items"
 
+The response format can be `match_items` if the question part type is `mq` (a matching question). In this case the answer objects have one property, `matches`, the value of which is an array of match objects. Each match object has two properties: `from` and `to`, denoting a match between two list items, as defined by the question XML.
+
+```json
+"student_answer": {
+    "matches": [
+        {"from": "list 1, item 1", "to": "list 2, item 1"},
+        {"from": "list 1, item 2", "to": "list 2, item 2"}
+    ]
+},
+"correct_answer": {
+    "matches": [
+        {"from": "list 1, item 1", "to": "list 2, item 1"},
+        {"from": "list 1, item 2", "to": "list 2, item 2"},
+        {"from": "list 1, item 3", "to": "list 2, item 3"},
+        {"from": "list 1, item 4", "to": "list 2, item 4"},
+        {"from": "list 1, item 5", "to": "list 2, item 5"}
+    ]
+}
+```
+
 #### response_format = "free_response"
+
+The response format can be `free_response` if the question part type is `frq` (a free response question). In this case, the answer objects have one property, `text`, the value of which is a string. 
+
+```json
+"student_answer": {
+    "text": "<p>A galaxy is billions of stars and planets in a spiral in space.</p>"
+},
+"correct_answer": {
+    "text": "<p><s>A galaxy is a collection of billions of stars.</s></p>"
+},
+```
+
+Note that, because we are able to apply more semantic markup (sentence tags, quantity tags, et cetera) to the correct answer as given in the question XML, even if the wording of the student's answer is exactly the same as that in the model answer, the two strings will likely never be identical.
 
 #### response_format = "yes_or_no"
 
+The response format can be `yes_or_no` if the question part type is `ynq` (a yes-no question). In this case, the answer objects have one property, `value`, the value of which is either `"yes"` or `"no"`.
+
+```json
+"student_answer": {
+    "value": "no"
+},
+"correct_answer": {
+    "value": "yes"
+}
+```
+
 #### response_format = "true_or_false"
+
+The response format can be `true_or_false` if the question part type is `tfq` (a true-false question). In this case, the answer objects have one property, `value`, the value of which is either `true` or `false`.
+
+```json
+"student_answer": {
+    "value": false
+},
+"correct_answer": {
+    "value": true
+}
+```
 
 ### Validation Object
 
