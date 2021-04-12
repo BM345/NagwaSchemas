@@ -54,18 +54,20 @@ Below is shown an empty response object.
     "submitted_at": "",
     "response_format": "",
     "student_answer": {},
+    "validation": {},
+    "normalised_student_answer": {},
     "correct_answer": {},
     "evaluation": {}
 }
 ```
 
-### Student Answer Object and Correct Answer Object
+### Answer Objects
 
-The student answer object and correct answer object are dependent on the value of the `response_format` property.
+The student answer object, the normalised student answer object, and the correct answer object all always have the same structure as each other. What that structure is, however, is dependent on the value of the `response_format` property.
 
 #### response_format = "choices"
 
-The response format can be `choices` if the question part type is `mcq`. In this case both the student answer object and the correct answer object have one property, `choices`, the value of which is an array of references. For the student answer object, these references are for the choices that the student has chosen. For the correct answer object, these references are for the correct choices. An example of these objects is shown below.
+The response format can be `choices` if the question part type is `mcq`. In this case the answer objects have one property, `choices`, the value of which is an array of references. For the student answer object, these references are for the choices that the student has chosen. For the correct answer object, these references are for the correct choices. An example of these objects is shown below.
 
 ```json
 "student_answer": {
@@ -90,6 +92,17 @@ Below is shown an example of these objects for where the students must choose mu
 #### response_format = "input_text"
 
 #### response_format = "order_items"
+
+The response format can be `order_items` if the question part type is `oq` (an ordering question). In this case the answer objects have one property, `items`, the value of which is an array of references. For the student answer object, this array shows the order that the student put the items in. For the correct answer object, this array shows the correct order of the items.
+
+```json
+"student_answer": {
+    "items": ["a", "b", "d", "c", "e"]
+},
+"correct_answer": {
+    "items": ["a", "b", "c", "d", "e"]
+}
+```
 
 #### response_format = "select_text"
 
@@ -142,7 +155,7 @@ The table below defines the different properties of the validation object.
 | --- | --- | --- | --- |
 | `applied` | Required | boolean | whether or not validation has been applied to the student's answer; this will only be `true` if `response_format` is equal to `input_text`, as this is the only response format we apply validation to; for all other response formats, this will be `false` |
 | `passed` | Required only if `applied` is `true` | boolean | whether or not the student's answer passed validation |
-| `message_to_student` | Required only if `applied` is `true` and `passed` is `false` | string | the message that the student received when their answer did not pass validation; this is useful for identifying issues |
+| `message_to_student` | Required only if `applied` is `true` and `passed` is `false` | string | the message that the student received if their answer did not pass validation; this is useful for identifying issues |
 
 
 
