@@ -4,6 +4,21 @@ This document gives the specification for the JSON format we use for students' r
 
 ## Table of Contents
 
++ [Overview](#overview)
++ [Examples](#examples)
++ [Structure](#structure)
+    + [Answer Objects](#answer-objects)
+        + [response_format = "choices"]()
+        + [response_format = "input_text"]()
+        + [response_format = "order_items"]()
+        + [response_format = "select_text"]()
+        + [response_format = "match_items"]()
+        + [response_format = "free_response"]()
+        + [response_format = "yes_or_no"]()
+        + [response_format = "true_or_false"]()
+    + [Validation Object](#validation-object)
+    + [Evaluation Object](#evaluation-object)
+
 ## Overview
 
 Each response given by a student to a question part should be stored as a JSON object. Note that a response object corresponds to a __question part__, and not simply the entire __question__. This is because students must be able to submit responses to the different parts of a question (if there is more than one) separately. Students may also submit multiple responses to a question part that do not pass validation, thus they are required to alter and then resubmit their answer.
@@ -91,6 +106,21 @@ Below is shown an example of these objects for where the students must choose mu
 
 #### response_format = "input_text"
 
+The response format can be `input_text` if the question part type is `mcq` (a multiple choice question), `ctsq` (a complete-the-sentence question), `cttq` (a complete-the-table question), or `cteq` (a complete-the-equation question).
+
+```json
+"student_answer": {
+    "input_boxes": [
+        {"reference": "k", "value": "9.22"}
+    ]
+},
+"correct_answer": {
+    "input_boxes": [
+        {"reference": "k", "value": "3.45"}
+    ]
+}
+```
+
 #### response_format = "order_items"
 
 The response format can be `order_items` if the question part type is `oq` (an ordering question). In this case the answer objects have one property, `items`, the value of which is an array of references. For the student answer object, this array shows the order that the student put the items in. For the correct answer object, this array shows the correct order of the items.
@@ -105,6 +135,17 @@ The response format can be `order_items` if the question part type is `oq` (an o
 ```
 
 #### response_format = "select_text"
+
+The response format can be `select_text` if the question part type is `sq` (a select question). In this case, the answer objects have one property, `selections`, the value of which is an array of references.
+
+```json
+"student_answer": {
+    "selections": ["a", "b", "c", "d"]
+},
+"correct_answer": {
+    "selections": ["b", "d", "f", "g"]
+}
+```
 
 #### response_format = "match_items"
 
