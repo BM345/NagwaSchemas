@@ -115,6 +115,37 @@ For most response formats, there is no validation process. So, for most response
 
 The only response format that we apply validation for is the `input_text` format.
 
+In the case of the `input_text` format where validation is applied and the student's answer passes, this object will simply be:
+
+```json
+"validation": {
+    "applied": true,
+    "passed": true,
+}
+```
+
+In the case where validation is applied and the student's answer doesn't pass, this object will be of the form:
+
+```json
+"validation": {
+    "applied": true,
+    "passed": false,
+    "message_to_student": "Only use the characters 0 to 9 and the plus and minus signs in your answer. Your answer must be a single, whole number."
+}
+```
+
+The message that the student is given if their answer does not pass validation should be included in the object. This is to make it easier to resolve issues with the platform. For example, perhaps a student attempts to answer a question several times, each time entering an answer that should pass validation, but doesn't. By recording the message, we will be able to see where the problem lies more easily.
+
+The table below defines the different properties of the validation object.
+
+| Property | Required | Allowed Values | Description | 
+| --- | --- | --- | --- |
+| `applied` | Required | boolean | whether or not validation has been applied to the student's answer; this will only be `true` if `response_format` is equal to `input_text`, as this is the only response format we apply validation to; for all other response formats, this will be `false` |
+| `passed` | Required only if `applied` is `true` | whether or not the student's answer passed validation |
+| `message_to_student` | Required only if `applied` is `true` and `passed` is `false` | the message that the student received when their answer did not pass validation; this is useful for identifying issues |
+
+
+
 ### Evaluation Object
 
 The evaluation object captures the evaluation of a student's answer.
