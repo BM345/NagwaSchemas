@@ -79,11 +79,13 @@ Below is shown an empty response object.
 
 ### Answer Objects
 
-The student answer object, the normalised student answer object, and the correct answer object all always have the same structure as each other. What that structure is, however, is dependent on the value of the `response_format` property.
+The student answer object captures the answer that the student submitted for the question part. The normalised student answer object captures the normalised version of the answer that the student submitted. We only validate and normalise certain types of answers - answers where the student has had to type something into an answer box - so the normalised student answer object does not appear in all response objects. The correct answer object captures the correct answer to the question part.
+
+The student answer object, the normalised student answer object, and the correct answer object always have the same structure as each other. What that structure is, however, is dependent on the value of the `response_format` property.
 
 #### response_format = "choices"
 
-The response format can be `choices` if the question part type is `mcq`. In this case the answer objects have one property, `choices`, the value of which is an array of references. For the student answer object, these references are for the choices that the student has chosen. For the correct answer object, these references are for the correct choices. An example of these objects is shown below.
+The response format can be `choices` if the question part type is `mcq`. In this case, the answer objects have one property, `choices`, the value of which is an array of references. The references are defined in the question XML.
 
 ```json
 "student_answer": {
@@ -94,7 +96,7 @@ The response format can be `choices` if the question part type is `mcq`. In this
 }
 ```
 
-Below is shown an example of these objects for where the students must choose multiple options (an MRQ).
+Below is shown an example of these objects for where the student must choose multiple options (an MRQ).
 
 ```json
 "student_answer": {
@@ -268,7 +270,7 @@ The table below lists the possible properties of this object.
 
 | Property | Required | Allowed Values | Description | 
 | --- | --- | --- | --- |
-| `response_has_been_evaluated` | Required | boolean | denotes whether this response has yet been evaluated; for questions such as MCQs, MQs, OQs, SQs, et cetera - which can be evaluated automatically - this property will be set to `true` straight away; for questions such as FRQs - which require teacher input - this value will need to be set to `false` when the student first submits their answer, and then changed to true once the teacher has marked it |
+| `response_has_been_evaluated` | Required | boolean | denotes whether this response has yet been evaluated; for questions such as MCQs, SQs, OQs, MQs, et cetera - which can be evaluated automatically - this property will be set to `true` straight away; for questions such as FRQs - which require teacher input - this value will need to be set to `false` when the student first submits their answer, and then changed to true once the teacher has marked it |
 | `evaluated_at` | Required once `response_has_been_evaluated` has been set to `true`; otherwise leave out | string / timestamp | the date and time at which the response was evaluated; if the answer was evaluated automatically, the value would be the server time when the response was received from the student; if the answer was evaluated by a teacher / user, it would be the server time when the teacher / user did so |
 | `method` | Required once `response_has_been_evaluated` has been set to `true`; otherwise leave out | string / one of a set of values | denotes how this response was evaluated |
 | `number_of_marks_available` | Required | integer | the maximum number of marks that can be given for this question part |
