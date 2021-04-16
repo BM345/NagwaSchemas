@@ -227,7 +227,7 @@ For most response formats, there is no validation process. So, for most response
 
 The only response format that we apply validation for is the `input_text` format.
 
-In the case of the `input_text` format where validation is applied and the student's answer passes, this object will simply be:
+In the case where validation is applied and the student's answer passes, this object will simply be:
 
 ```json
 "validation": {
@@ -246,7 +246,7 @@ In the case where validation is applied and the student's answer doesn't pass, t
 }
 ```
 
-The message that the student is given if their answer does not pass validation should be included in the object. This is to make it easier to resolve issues with the platform. For example, perhaps a student attempts to answer a question several times, each time entering an answer that should pass validation, but doesn't. By recording the message, we will be able to see where the problem lies more easily.
+The message that the student is given if their answer does not pass validation should be included in the object. This is to make it easier to resolve issues with the platform. For example, perhaps a student attempts to answer a question several times, and each time they are shown a message, but that message simply doesn't make sense in the context of the question they are answering, so the message tells them to do the wrong thing. By recording the message, we can easily see what they were told to do, and what they did.
 
 The table below defines the different properties of the validation object.
 
@@ -270,7 +270,7 @@ The table below lists the possible properties of this object.
 
 | Property | Required | Allowed Values | Description | 
 | --- | --- | --- | --- |
-| `response_has_been_evaluated` | Required | boolean | denotes whether this response has yet been evaluated; for questions such as MCQs, SQs, OQs, MQs, et cetera - which can be evaluated automatically - this property will be set to `true` straight away; for questions such as FRQs - which require teacher input - this value will need to be set to `false` when the student first submits their answer, and then changed to true once the teacher has marked it |
+| `response_has_been_evaluated` | Required | boolean | denotes whether this response has yet been evaluated; for questions such as MCQs, SQs, OQs, MQs, et cetera - which can be evaluated automatically - this property will be set to `true` straight away; for questions such as FRQs - which require teacher input - this value will need to be set to `false` when the student first submits their answer, and then changed to `true` once the teacher has marked it |
 | `evaluated_at` | Required once `response_has_been_evaluated` has been set to `true`; otherwise leave out | string / timestamp | the date and time at which the response was evaluated; if the answer was evaluated automatically, the value would be the server time when the response was received from the student; if the answer was evaluated by a teacher / user, it would be the server time when the teacher / user did so |
 | `method` | Required once `response_has_been_evaluated` has been set to `true`; otherwise leave out | string / one of a set of values | denotes how this response was evaluated |
 | `number_of_marks_available` | Required | integer | the maximum number of marks that can be given for this question part |
@@ -284,12 +284,14 @@ The table below lists the possible values of the `method` property.
 | `parser` | denotes that the student's answer was parsed using the validation code, and converted into a normalised form before being checked (or was checked for equality by the validation code itself); this will be useful in case there are issues with the parser code |
 | `user` | denotes that a user had to manually check the answer and mark it; usually a teacher |
 
+In the distant future, we may also be able to mark FRQs using neural networks. In this case, we will be able to set the `method` property to `neural_network`.
+
 #### Example
 
 Below is shown an example evaluation object.
 
 ```json
-{
+"evaluation": {
     "response_has_been_evaluated": true,
     "evaluated_at": "2021-03-30T10:00:03",
     "method": "default",

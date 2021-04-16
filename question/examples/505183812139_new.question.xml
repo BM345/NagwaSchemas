@@ -22,18 +22,18 @@
         <part type="ctsq" reference="part1" must_not_have_multiple_instances="true">
             <main_text>
                 <p>
-                    <s>Complete the following sentence: A galaxy is a collection of billions of <fillable_space n="1" />.</s>
+                    <s>Complete the following sentence: A galaxy is a collection of billions of <fillable_space reference="q" />.</s>
                 </p>
             </main_text>
             <response_formats>
                 <response_format type="draganddrop">
-                    <phrases for_space="1">
+                    <phrases for_space="q">
                         <phrase>stars</phrase>
                         <phrase>planets</phrase>
                     </phrases>
                 </response_format>
                 <response_format type="input_text">
-                    <values for_space="1">
+                    <values for_space="q">
                         <value>stars</values>
                     </values>
                 </response_format>
