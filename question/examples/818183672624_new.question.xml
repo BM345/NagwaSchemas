@@ -11,11 +11,15 @@
             <email_address>benjamin.milnes@nagwa.com</email_address>
         </developer>
     </developers>
-    <language>en</language>
-    <dialect>american</dialect>
-    <calendar>none</calendar>
-    <currency>none</currency>
-    <unit_system>si</unit_system>
+    <language name="English" />
+    <dialects>
+        <dialect name="British" />
+    </dialects>
+    <calendars></calendars>
+    <currencies></currencies>
+    <unit_systems>
+        <unit_system name="Astronomical" />
+    </unit_systems>
     <type>lesson</type>
     <title>Describing Distances using Light-years</title>
     <parts>

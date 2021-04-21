@@ -11,11 +11,18 @@
             <email_address>benjamin.milnes@nagwa.com</email_address>
         </developer>
     </developers>
-    <language>en</language>
-    <dialect>american</dialect>
-    <calendar>none</calendar>
-    <currency>none</currency>
-    <unit_system>si</unit_system>
+    <language name="English" />
+    <dialects>
+        <dialect name="British" />
+        <dialect name="American" />
+        <dialect name="Canadian" />
+        <dialect name="Australian" />
+    </dialects>
+    <calendars></calendars>
+    <currencies></currencies>
+    <unit_systems>
+        <unit_system name="SI" />
+    </unit_systems>
     <type>lesson</type>
     <title>Understanding Different Types of Exoplanet</title>
     <parts>
@@ -38,14 +45,23 @@
                 </figure>
             </main_text>
             <response_formats>
-                <response_format type="letter" ranges="A-D" case_must_match="false">          
+                <response_format type="input_text"> 
+                    <constraints>
+                        <constraint name="type" value="single_letter" />
+                        <constraint name="ranges" value="A-D" />
+                        <constraint name="case_must_match" value="false" />
+                    </constraints>       
                     <prefix>Region</prefix>
                     <values>
                         <value>B</value>
                     </values>
                     <suffix></suffix>
                 </response_format>
-                <response_format type="full" case_must_match="false">
+                <response_format type="input_text">
+                    <constraints>
+                        <constraint name="type" value="any_text" />
+                        <constraint name="case_must_match" value="false" />
+                    </constraints>  
                     <values>
                         <value>Region B</value>
                         <value>B</value>

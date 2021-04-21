@@ -11,11 +11,16 @@
             <email_address>benjamin.milnes@nagwa.com</email_address>
         </developer>
     </developers>
-    <language>en</language>
-    <dialect>american british</dialect>
-    <calendar>none</calendar>
-    <currency>none</currency>
-    <unit_system>none</unit_system>
+    <language name="English" />
+    <dialects>
+        <dialect name="British" />
+        <dialect name="American" />
+        <dialect name="Canadian" />
+        <dialect name="Australian" />
+    </dialects>
+    <calendars></calendars>
+    <currencies></currencies>
+    <unit_systems></unit_systems>
     <type>lesson</type>
     <title>Understanding the Structure of the Universe</title>
     <parts>

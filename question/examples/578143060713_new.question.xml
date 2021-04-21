@@ -11,11 +11,19 @@
             <email_address>benjamin.milnes@nagwa.com</email_address>
         </developer>
     </developers>
-    <language>en</language>
-    <dialect>american</dialect>
-    <calendar>none</calendar>
-    <currency>none</currency>
-    <unit_system>si</unit_system>
+    <language name="English" />
+    <dialects>
+        <dialect name="British" />
+        <dialect name="American" />
+        <dialect name="Canadian" />
+        <dialect name="Australian" />
+    </dialects>
+    <calendars></calendars>
+    <currencies></currencies>
+    <unit_systems>
+        <unit_system name="SI" />
+        <unit_system name="Astronomical" />
+    </unit_systems>
     <type>lesson</type>
     <title>Calculating the Physical Properties of an Exoplanet</title>
     <parts>
@@ -37,7 +45,7 @@
             </main_text>
             <response_formats>
                 <response_format type="choices">
-                    <choices maximum_number_that_can_be_selected="1">
+                    <choices minimum_number_that_must_be_selected="1" maximum_number_that_can_be_selected="1">
                         <choice reference="p" is_correct_answer="true">A smaller orbital radius</choice>
                         <choice reference="q">A larger orbital radius</choice>
                     </choices>
@@ -70,16 +78,20 @@
             </main_text>
             <response_formats>
                 <response_format type="input_text">
+                    <constraints>
+                        <constraint name="type" value="decimal" />
+                        <constraint name="must_have_exactly_ndp" value="2" />
+                    </constraints>
                     <prefix></prefix>
                     <values>
-                        <value type="decimal" must_have_exactly_ndp="2">6.02</value>
+                        <value>6.02</value>
                     </values>
                     <suffix>
                         <unit form="word/plural">day</unit>
                     </suffix>
                 </response_format>
                 <response_format type="choices">
-                    <choices maximum_number_that_can_be_selected="1">
+                    <choices minimum_number_that_must_be_selected="1" maximum_number_that_can_be_selected="1">
                         <choice reference="p" is_correct_answer="true">
                             <quantity>
                                 <value>6.02</value>
@@ -130,16 +142,20 @@
             </main_text>
             <response_formats>
                 <response_format type="input_text">
+                    <constraints>
+                        <constraint name="type" value="decimal" />
+                        <constraint name="must_have_exactly_ndp" value="1" />
+                    </constraints>
                     <prefix></prefix>
                     <values>
-                        <value type="decimal" must_have_exactly_ndp="1">9.1</value>
+                        <value>9.1</value>
                     </values>
                     <suffix>
                         <unit>meter per second^2</unit>
                     </suffix>
                 </response_format>
                 <response_format type="choices">
-                    <choices maximum_number_that_can_be_selected="1">
+                    <choices minimum_number_that_must_be_selected="1" maximum_number_that_can_be_selected="1">
                         <choice reference="p" is_correct_answer="true">
                             <quantity>
                                 <value>9.1</value>

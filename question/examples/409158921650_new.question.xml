@@ -11,11 +11,19 @@
             <email_address>benjamin.milnes@nagwa.com</email_address>
         </developer>
     </developers>
-    <language>en</language>
-    <dialect>american</dialect>
-    <calendar>none</calendar>
-    <currency>none</currency>
-    <unit_system>si</unit_system>
+    <language name="English" />
+    <dialects>
+        <dialect name="British" />
+        <dialect name="American" />
+        <dialect name="Canadian" />
+        <dialect name="Australian" />
+    </dialects>
+    <calendars></calendars>
+    <currencies></currencies>
+    <unit_systems>
+        <unit_system name="SI" />
+        <unit_system name="Astronomical" />
+    </unit_systems>
     <type>lesson</type>
     <title>Relating the Units of a Quantity to its Dimensions</title>
     <parameters>
@@ -70,7 +78,7 @@
             </main_text>
             <response_formats>
                 <response_format type="choices">
-                    <choices maximum_number_that_can_be_selected="1">
+                    <choices minimum_number_that_must_be_selected="1" maximum_number_that_can_be_selected="1">
                         <choice reference="a" is_correct_answer="true">
                             <m><parameter n="2" /></m>
                         </choice>

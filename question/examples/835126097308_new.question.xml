@@ -11,54 +11,59 @@
             <email_address>benjamin.milnes@nagwa.com</email_address>
         </developer>
     </developers>
-    <language>en</language>
-    <dialect>american</dialect>
-    <calendar>none</calendar>
-    <currency>none</currency>
-    <unit_system>none</unit_system>
+    <language name="English" />
+    <dialects>
+        <dialect name="British" />
+        <dialect name="American" />
+        <dialect name="Canadian" />
+        <dialect name="Australian" />
+    </dialects>
+    <calendars></calendars>
+    <currencies></currencies>
+    <unit_systems></unit_systems>
     <type>lesson</type>
     <title>Evaluating the Output of an AND Gate Using a Truth Table</title>
     <parts>
         <part type="cttq" reference="part1" all_numbers_are_exact="true">
             <main_text>
-        <p>
-            <s>The table below is a truth table showing the output of an AND gate for various combinations of inputs.</s>
-            <s>Complete the table.</s>
-        </p>
-                 <table>
-            <tr>
-                <th colspan="3">AND Gate</th>
-            </tr>
-            <tr>
-                <td>Input A</td>
-                <td>Input B</td>
-                <td>Output</td>
-            </tr>
-            <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>0</td>
-                <td>1</td>
-                <td>
-                    <input_box reference="q" />
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>
-                    <input_box reference="r" />
-                </td>
-            </tr>
-        </table>
+                <p>
+                    <s>The table below is a truth table showing the output of an AND gate for various combinations of inputs.</s>
+                    <s>Complete the table.</s>
+                </p>
+                <table>
+                    <tr>
+                        <th colspan="3">AND Gate</th>
+                    </tr>
+                    <tr>
+                        <td>Input A</td>
+                        <td>Input B</td>
+                        <td>Output</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>
+                            <input_box reference="q" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>
+                            <input_box reference="r" />
+                        </td>
+                    </tr>
+                </table>
             </main_text>
             <response_formats>
                 <response_format type="input_text">
