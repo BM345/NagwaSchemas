@@ -1,4 +1,6 @@
 .DS_Store
+*.pyc
 migration_code/headers.py
 migration_code/question_ids_data/*
 migration_code/questions_data/*
+migration_code/migrated_questions_data/*
