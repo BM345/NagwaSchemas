@@ -119,7 +119,7 @@
                 <rule allow_if="role in ['markup_editor']" />
             </rules>
         </transition>
-        <transition reference="send_to_content_graphics_design" from="markup" to="content_graphics_design">
+        <transition reference="send_to_content_graphics_design_1" from="markup" to="content_graphics_design">
             <name>Send to Content Graphics Design</name>
             <button_text>Send to Content Graphics Design</button_text>
             <description></description>
@@ -133,6 +133,94 @@
             <description></description>
             <rules>
                 <rule allow_if="role in ['markup_editor']" />
+            </rules>
+        </transition>
+        <transition reference="submit_to_creative_design_review" from="creative_design" to="creative_design_review">
+            <name>Submit to Creative Design Review</name>
+            <button_text>Submit</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['creative_designer']" />
+            </rules>
+        </transition>
+        <transition reference="send_to_content_graphics_design_2" from="creative_design_review" to="content_graphics_design">
+            <name>Send to Content Graphics Design</name>
+            <button_text>Approve</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['creative_design_reviewer']" />
+            </rules>
+        </transition>
+        <transition reference="send_back_to_creative_design_1" from="creative_design_review" to="creative_design">
+            <name>Send back to Creative Design</name>
+            <button_text>Reject</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['creative_design_reviewer']" />
+            </rules>
+        </transition>
+        <transition reference="submit_to_content_graphics_design_review" from="content_graphics_design" to="content_graphics_design_review">
+            <name>Submit to Content Graphics Design Review</name>
+            <button_text>Submit</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['content_graphics_designer']" />
+            </rules>
+        </transition>
+        <transition reference="send_back_to_content_graphics_design" from="content_graphics_design_review" to="content_graphics_design">
+            <name>Send back to Content Graphics Design</name>
+            <button_text>Send back to Content Graphics Design</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['content_graphics_design_reviewer']" />
+            </rules>
+        </transition>
+        <transition reference="send_back_to_creative_design_2" from="content_graphics_design_review" to="creative_design">
+            <name>Send back to Creative Design</name>
+            <button_text>Send back to Creative Design</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['content_graphics_design_reviewer']" />
+            </rules>
+        </transition>
+        <transition reference="send_to_markup_review" from="content_graphics_design_review" to="markup_review">
+            <name>Send to Markup Review</name>
+            <button_text>Send to Markup Review</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['content_graphics_design_reviewer']" />
+            </rules>
+        </transition>
+        <transition reference="send_back_to_markup_1" from="markup_review" to="markup">
+            <name>Send back to Markup</name>
+            <button_text>Reject</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['markup_reviewer']" />
+            </rules>
+        </transition>
+        <transition reference="send_to_final_approval" from="markup_review" to="final_review">
+            <name>Send to Final Approval</name>
+            <button_text>Approve</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['markup_reviewer']" />
+            </rules>
+        </transition>
+        <transition reference="send_back_to_markup_2" from="final_review" to="markup">
+            <name>Send back to Markup</name>
+            <button_text>Reject</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['content_writer']" />
+            </rules>
+        </transition>
+        <transition reference="publish" from="final_review" to="published">
+            <name>Publish</name>
+            <button_text>Approve and Publish</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['content_writer']" />
             </rules>
         </transition>
     </transitions>
