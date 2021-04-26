@@ -19,15 +19,15 @@ Using these three concepts - statuses, transitions, and rules - we can easily de
     <name></name>
     <description></description>
     <statuses>
-        <status>
+        <status reference="...">
             <name></name>
             <description></description>
         </status>
-        <status>
+        <status reference="...">
             <name></name>
             <description></description>
         </status>
-        <status>
+        <status reference="...">
             <name></name>
             <description></description>
         </status>
@@ -55,5 +55,5 @@ Using these three concepts - statuses, transitions, and rules - we can easily de
 </workflow>
 ```
 
-The root element of the workflow XML is a `<workflow>` element. The `<statuses>` subelement contains the set of statuses for the workflow, and the `<transitions>` subelement contains the set of transitions. Each `<transition>` element contains a `<rules>` subelement, which contains the set of rules that apply to this transition.
+The root element of the workflow XML is a `<workflow>` element. The `<statuses>` subelement contains the set of statuses for the workflow, and the `<transitions>` subelement contains the set of transitions. Each `<status>` element has a `reference` attribute, and these references are used in the `from` and `to` attributes on each `<transition>` element to denote which statuses the transition links. Each `<transition>` element contains a `<rules>` subelement, which contains the set of rules that apply to this transition.
 
