@@ -57,7 +57,7 @@ Using these three concepts - statuses, transitions, and rules - we can easily de
 
 The root element of the workflow XML is a `<workflow>` element. The `<statuses>` subelement contains the set of statuses for the workflow, and the `<transitions>` subelement contains the set of transitions. Each `<status>` element has a `reference` attribute, and these references are used in the `from` and `to` attributes on each `<transition>` element to denote which statuses the transition links. Each `<transition>` element contains a `<rules>` subelement, which contains the set of rules that apply to this transition.
 
-Below is shown part of the workflow XML for the workflow shown in the diagram above. (The full XML for the above workflow can be viewed [here](workflows/examples/new_explainer.workflow.xml).)
+Below is shown part of the workflow XML for the workflow shown in the diagram above. (The full XML for the above workflow can be viewed [here](workflow/examples/new_explainer.workflow.xml).)
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
