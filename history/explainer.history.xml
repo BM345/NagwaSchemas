@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<history for_content_entity="explainer/000000000000">
+    <state>
+        <workflow_reference>new_explainer</workflow_reference>
+        <workflow_status>subject_review</workflow_status>
+        <assignee>example.user.3@nagwa.com</assignee>
+        <priority>high</priority>
+        <watchers>
+            <watcher>example.user.1@nagwa.com</watcher>
+        </watchers>
+    </state>
+    <actions>
+        <action taken_at="2021-04-26T10:00:00" taken_by="example.user.1@nagwa.com" type="created_entity">
+        </action>
+        <action taken_at="2021-04-26T10:00:00" taken_by="system" type="changed_workflow">
+            <new_workflow_reference>new_explainer</new_workflow_reference>
+        </action>
+        <action taken_at="2021-04-26T10:00:00" taken_by="system" type="changed_workflow_status">
+            <new_workflow_status>drafting</new_workflow_status>
+        </action>
+        <action taken_at="2021-04-26T10:00:10" taken_by="example.user.1@nagwa.com" type="changed_assignee">
+            <new_assignee>example.user.1@nagwa.com</new_assignee>
+        </action>
+        <action taken_at="2021-04-26T10:00:20" taken_by="example.user.1@nagwa.com" type="changed_priority">
+            <new_priority>high</new_priority>
+        </action>
+        <action taken_at="2021-04-26T10:30:00" taken_by="example.user.1@nagwa.com" type="added_comment">
+            <comment_reference>c1</comment_reference>
+            <comment_text>This is my comment.</comment_text>
+        </action>
+        <action taken_at="2021-04-26T11:00:00" taken_by="example.user.1@nagwa.com" type="changed_workflow_status">
+            <new_workflow_status>course_review</new_workflow_status>
+        </action>
+        <action taken_at="2021-04-26T11:00:00" taken_by="system" type="changed_assignee">
+            <new_assignee>none</new_assignee>
+        </action>
+        <action taken_at="2021-04-27T15:00:00" taken_by="example.user.2@nagwa.com" type="changed_assignee">
+            <new_assignee>example.user.2@nagwa.com</new_assignee>
+        </action>
+        <action taken_at="2021-04-27T16:00:00" taken_by="example.user.2@nagwa.com" type="changed_workflow_status">
+            <new_workflow_status>subject_review</new_workflow_status>
+        </action>
+        <action taken_at="2021-04-27T16:00:00" taken_by="system" type="changed_assignee">
+            <new_assignee>none</new_assignee>
+        </action>
+        <action taken_at="2021-04-28T12:00:00" taken_by="example.user.3@nagwa.com" type="changed_assignee">
+            <new_assignee>example.user.3@nagwa.com</new_assignee>
+        </action>
+        <action taken_at="2021-04-28T12:30:00" taken_by="example.user.3@nagwa.com" type="added_comment">
+            <comment_reference>c2</comment_reference>
+            <comment_text>This is another comment.</comment_text>
+        </action>
+        <action taken_at="2021-04-28T13:30:00" taken_by="example.user.1@nagwa.com" type="added_comment">
+            <comment_reference>c3</comment_reference>
+            <comment_text>This is another comment, responding to the previous comment.</comment_text>
+        </action>
+        <action taken_at="2021-04-28T14:00:00" taken_by="example.user.1@nagwa.com" type="added_watcher">
+            <watcher>example.user.1@nagwa.com</watcher>
+        </action>
+    </actions>
+</history>
