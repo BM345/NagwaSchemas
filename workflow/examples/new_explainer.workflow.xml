@@ -87,8 +87,8 @@
                 <rule allow_if="role in ['course_designer']" />
             </rules>
         </transition>
-        <transition reference="submit_to_copyediting" from="subject_review" to="copyediting" type="approve">
-            <name>Submit to Copyediting</name>
+        <transition reference="send_to_copyediting" from="subject_review" to="copyediting" type="approve">
+            <name>Send to Copyediting</name>
             <button_text>Approve</button_text>
             <description></description>
             <rules>
