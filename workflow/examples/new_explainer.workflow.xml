@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<workflow reference="new_explainer">
+    <name>New Explainer Workflow</name>
+    <description>This workflow is used for creating new explainers.</description>
+    <statuses>
+        <status reference="drafting">
+            <name>Drafting</name>
+            <description>The explainer is being drafted.</description>
+        </status>
+        <status reference="course_review">
+            <name>Course Review</name>
+            <description>The explainer is being reviewed for course suitability.</description>
+        </status>
+        <status reference="subject_review">
+            <name>Subject Review</name>
+            <description>The explainer is being reviewed for its subject-specific content.</description>
+        </status>
+        <status reference="copyediting">
+            <name>Copyediting</name>
+            <description>The explainer is being copyedited.</description>
+        </status>
+        <status reference="markup">
+            <name>Markup</name>
+            <description>The explainer is being marked-up.</description>
+        </status>
+        <status reference="creative_design">
+            <name>Creative Design</name>
+            <description>Non-technical, creative images are being composed.</description>
+        </status>
+        <status reference="creative_design_review">
+            <name>Creative Design Review</name>
+            <description>Non-technical, creative images are being reviewed.</description>
+        </status>
+        <status reference="content_graphics_design">
+            <name>Content Graphics Design</name>
+            <description>Technical, content-specific images are being composed.</description>
+        </status>
+        <status reference="content_graphics_design_review">
+            <name>Content Graphics Design Review</name>
+            <description>Technical, content-specific images are being reviewed.</description>
+        </status>
+        <status reference="markup_review">
+            <name>Markup Review</name>
+            <description>The markup is being reviewed.</description>
+        </status>
+        <status reference="final_review">
+            <name>Final Review</name>
+            <description>This is the final review before the explainer goes live.</description>
+        </status>
+        <status reference="published">
+            <name>Published</name>
+            <description>The explainer has been published.</description>
+        </status>
+    </statuses>
+    <transitions>
+        <transition reference="submit_to_course_review" from="drafting" to="course_review">
+            <name>Submit to Course Review</name>
+            <button_text>Submit</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['content_writer']" />
+                <rule allow_if="'submit_to_course_review' not in pastTransitions" />
+            </rules>
+        </transition>
+        <transition reference="submit_to_subject_review_1" from="drafting" to="subject_review">
+            <name>Submit to Subject Review</name>
+            <button_text>Submit</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['content_writer']" />
+                <rule allow_if="'submit_to_course_review' in pastTransitions" />
+            </rules>
+        </transition>
+        <transition reference="submit_to_subject_review_2" from="course_review" to="subject_review">
+            <name>Submit to Subject Review</name>
+            <button_text>Approve</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['course_designer']" />
+            </rules>
+        </transition>
+        <transition reference="send_back_to_drafting_1" from="course_review" to="drafting">
+            <name>Send back to Drafting</name>
+            <button_text>Reject</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['course_designer']" />
+            </rules>
+        </transition>
+        <transition reference="submit_to_copyediting" from="subject_review" to="copyediting">
+            <name>Submit to Copyediting</name>
+            <button_text>Approve</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['subject_reviewer']" />
+            </rules>
+        </transition>
+        <transition reference="send_back_to_drafting_2" from="subject_review" to="drafting">
+            <name>Send back to Drafting</name>
+            <button_text>Reject</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['subject_reviewer']" />
+            </rules>
+        </transition>
+        <transition reference="submit_to_markup" from="copyediting" to="markup">
+            <name>Submit to Markup</name>
+            <button_text>Submit</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['copyeditor']" />
+            </rules>
+        </transition>
+        <transition reference="send_to_creative_design" from="markup" to="creative_design">
+            <name>Send to Creative Design</name>
+            <button_text>Send to Creative Design</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['markup_editor']" />
+            </rules>
+        </transition>
+        <transition reference="send_to_content_graphics_design" from="markup" to="content_graphics_design">
+            <name>Send to Content Graphics Design</name>
+            <button_text>Send to Content Graphics Design</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['markup_editor']" />
+            </rules>
+        </transition>
+        <transition reference="send_to_markup_review" from="markup" to="markup_review">
+            <name>Send to Markup Review</name>
+            <button_text>Send to Markup Review</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['markup_editor']" />
+            </rules>
+        </transition>
+    </transitions>
+</workflow>
