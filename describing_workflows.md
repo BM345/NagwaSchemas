@@ -17,6 +17,8 @@ The coloured boxes are **statuses**. When a content entity has a particular stat
 
 The black arrows are **transitions**. The transitions denote what the status of a given content entity may be updated to when it is at a given point in the workflow. Transitions can have **rules**. For example, in the diagram above, each of the two transitions away from the 'Drafting' status have rules to them - the transition to 'Course Review' is only permitted if the content entity *hasn't* been at 'Course Review' before, and the transition directly to 'Subject Review' (skipping 'Course Review') is only permitted if the content entity *has* been at 'Course Review' once before already.
 
+### Workflow XML
+
 Using these three concepts - statuses, transitions, and rules - we can easily describe a workflow with a simple XML structure. Below is shown this structure without any data in it.
 
 ```xml
@@ -248,4 +250,6 @@ In addition to this, using this system of a workflow XML and a history XML, choo
 
 This system also introduces priority flags in the history XML. Very often some content items are considered to be of higher priority than others - at the moment we don't really have a good way of communicating this through the CDS.
 
+## Specification
 
+To be written later if necessary.
