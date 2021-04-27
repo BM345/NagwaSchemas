@@ -13,15 +13,17 @@ The diagram below shows a workflow that we might use for developing an explainer
 
 ![](diagram_1.png)
 
-There are different ways of describing a workflow like this. Here we will describe it in terms of **statuses** and **transitions**.
+There are different ways of describing a workflow like this. Here we will describe it in terms of **statuses**, **transitions**, and **rules**.
 
-The coloured boxes are **statuses**. When a content entity (such as an explainer, question, lesson scope, lesson video, et cetera) has a particular status, it usually means that someone in a particular team must do a particular task for the content entity. For example, if the status is 'Copyediting', then someone from the copyediting team must copyedit the content entity, or if the status is 'Final Review', then someone from the relevant subject team must review the content entity.
+The coloured boxes are **statuses**. When a content entity (such as an explainer, question, lesson scope, lesson video, et cetera) has a particular status, it usually means that someone in a particular team must do a particular task for the content entity. For example, if the status is 'Copyediting', then someone from the copyediting team must copyedit the content item, or if the status is 'Final Review', then someone from the relevant subject team must review the content item.
 
-The black arrows are **transitions**. The transitions denote what the status of a given content entity may be updated to when it is at a given point in the workflow. Transitions can have **rules**. For example, in the diagram above, each of the two transitions away from the 'Drafting' status have rules to them - the transition to 'Course Review' is only permitted if the content entity *hasn't* been at 'Course Review' before, and the transition directly to 'Subject Review' (skipping 'Course Review') is only permitted if the content entity *has* been at 'Course Review' once before already.
+The black arrows are **transitions**. The transitions define what the status of a given content entity may be updated to when it is at a given point in the workflow. Transitions can have **rules**. For example, in the diagram above, each of the two transitions away from the 'Drafting' status have rules to them - the transition to 'Course Review' is only permitted if the content entity *hasn't* been at 'Course Review' before, and the transition directly to 'Subject Review' (skipping 'Course Review') is only permitted if the content entity *has* been at 'Course Review' once before already.
+
+These three concepts - statuses, transitions, and rules - are sufficient to describe the workflows we tend to use at Nagwa.
 
 ### Workflow XML
 
-Using these three concepts - statuses, transitions, and rules - we can easily describe a workflow with a simple XML structure. Below is shown this structure without any data in it.
+These three concepts allow us to define a workflow using a simple XML structure. Below is shown this structure without any data in it.
 
 ```xml
 <workflow>
