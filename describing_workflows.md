@@ -150,6 +150,8 @@ Below is shown part of the workflow XML for the workflow shown in the diagram ab
 
 The `<workflow>` element has `<name>` and `<description>` subelements. Each `<status>` and `<transition>` element has `<name>` and `<description>` subelements too. Putting anything as the description for a workflow, status, or transition is optional, but it's a good idea to put them, as this can help clarify to developers and designers what must be done when a content entity has a given status.
 
+The `<statuses>` element has attributes `initial` and `final`, which denote the initial and final statuses that content entities in the workflow must have. This tells the system what status to set a content entity to when it first enters the workflow, and at what point the system can take the content entity out of the workflow.
+
 Each `<transition>` element has a `<button_text>` element, which gives the text that the button that triggers the transition should have. This allows us to present developers and designers with very easy-to-understand interfaces even if the workflow itself is quite complex. In many cases, developers and designers only have the option to send an entity further through the workflow (to 'submit' it or to 'approve' it) or to send it back (to 'reject' it). The `<button_text>` element can be used to present the available transitions as 'Submit' or 'Approve' and 'Reject'.
 
 Each `<status>` element can have a `category` attribute. This can be used to identify groups of related statuses. For example, the statuses 'Creative Design' and 'Creative Design Review' are both part of the creative design process, so might both have `category="creative_design"`. This can allow for a more intuitive, automatic colour-coding of statuses in the user-interface.
