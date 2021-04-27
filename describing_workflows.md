@@ -2,6 +2,11 @@
 
 This document describes how the workflows that we use in the development of Nagwa content can be generically described using a simple XML structure.
 
+- [Principles of Design](#principles-of-design)
+  - [Workflow XML](#workflow-xml)
+  - [History XML](#history-xml)
+- [Specification](#specification)
+
 ## Principles of Design
 
 The diagram below shows a workflow that we might use for developing an explainer.
