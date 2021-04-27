@@ -223,6 +223,7 @@ Below is shown part of a hypothetical history XML document for an explainer in t
 
 This XML describes the history of the content entity for a short while after it was created. Looking through the list of actions, we can see what has happened and when. This is also summarised in the table below.
 
+| | |
 |---|---|
 | 10:00:00 | The explainer was created by a user with the email address example.user.1@nagwa.com. As this entity is an explainer, the system automatically put it into the new explainer workflow, and gave it the initial status, which is `drafting`. |
 | 10:00:10 | Ten seconds after the explainer is created, the user assigns it to themself to work on it. Ten seconds after that they also set the priority to `high`. |
