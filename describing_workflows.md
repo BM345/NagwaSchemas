@@ -143,3 +143,33 @@ Similarly, each `<transition>` element has a `type` attribute. This can be set t
 
 Each `<rule>` element can have either an `allow_if` attribute or a `disallow_if` attribute. The value of this attribute is a predicate describing the condition under which the transition is allowed or disallowed. The predicate requires a special syntax - this is done in order to keep the structure of the XML simple and readable. However, since we only expect a relatively small number of different kinds of rules in workflows, it will be possible to interpret these predicates just with regular expressions. Rules combine with logical AND rather than logical OR - in other words, all rules must be followed for a transition to be possible.
 
+### History XML
+
+Certain rules described in the workflow XML require us to know *which* statuses an entity has had in the past, or *which* transitions it has made in the past. An example of this is the rule `<rule allow_if="'course_review' in pastStatuses">`, which allows a given transition only if the entity has had the 'Course Review' status before. Thus, we need a way of keeping track of the statuses that an entity has had, and the transitions it has made.
+
+We also need to keep track of *who* a given content entity is assigned to.
+
+We can keep track of this information, as well as solve several other problems with the CDS at the same time, but introducing a history XML file. For each content entity in the system, there would be a corresponding history XML file. This file would keep track of the statuses that each entity has had, who it is assigned to, and any comments that have been made on the entity.
+
+The basic structure of a history XML file would have two main parts: a list of 'actions', which describe all historical actions on the entity, when they were taken, and who they were taken by, and a 'state', which would describe the current state of the entity, in order to provide an easy way of looking up the current state.
+
+This structure is shown below, without any data in it.
+
+```xml
+<history for_content_entity="explainer/000000000000">
+    <state>
+        <workflow_reference>...</workflow_reference>
+        <workflow_status>...</workflow_status>
+        <assignee>...</assignee>
+    </state>
+    <actions>
+        <action taken_at="..." taken_by="..." type="...">
+        </action>
+        <action taken_at="..." taken_by="..." type="...">
+        </action>
+        <action taken_at="..." taken_by="..." type="...">
+        </action>
+    </actions>
+</history>
+```
+
