@@ -179,5 +179,45 @@ The `<state>` element has subelements that define the current state of the entit
 
 The `<actions>` element contains a list of `<action>` elements. Each `<action>` element has an attribute `taken_at`, which is the timestamp of when the action was taken, an attribute `taken_by`, which is the email address of the person who took the action, and an attribute `type`, which denotes the type of action, and which can have values such as `changed_status`, `changed_assignee`, or `added_comment`. An `<action>` element can also contain other elements that give additional information about the action taken.
 
+Below is shown part of a hypothetical history XML document for an explainer in the new explainer workflow. You can see the example in full [here](history/examples/000000000000.history.xml).
 
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<history for_content_entity="explainer/000000000000">
+    <state>
+        <workflow_reference>new_explainer</workflow_reference>
+        <workflow_status>course_review</workflow_status>
+        <assignee>none</assignee>
+        <priority>high</priority>
+        <watchers>
+        </watchers>
+    </state>
+    <actions>
+        <action taken_at="2021-04-26T10:00:00" taken_by="example.user.1@nagwa.com" type="created_entity">
+        </action>
+        <action taken_at="2021-04-26T10:00:00" taken_by="system" type="changed_workflow">
+            <new_workflow_reference>new_explainer</new_workflow_reference>
+        </action>
+        <action taken_at="2021-04-26T10:00:00" taken_by="system" type="changed_workflow_status">
+            <new_workflow_status>drafting</new_workflow_status>
+        </action>
+        <action taken_at="2021-04-26T10:00:10" taken_by="example.user.1@nagwa.com" type="changed_assignee">
+            <new_assignee>example.user.1@nagwa.com</new_assignee>
+        </action>
+        <action taken_at="2021-04-26T10:00:20" taken_by="example.user.1@nagwa.com" type="changed_priority">
+            <new_priority>high</new_priority>
+        </action>
+        <action taken_at="2021-04-26T10:30:00" taken_by="example.user.1@nagwa.com" type="added_comment">
+            <comment_reference>c1</comment_reference>
+            <comment_text>This is my comment.</comment_text>
+        </action>
+        <action taken_at="2021-04-26T11:00:00" taken_by="example.user.1@nagwa.com" type="changed_workflow_status">
+            <new_workflow_status>course_review</new_workflow_status>
+        </action>
+        <action taken_at="2021-04-26T11:00:00" taken_by="system" type="changed_assignee">
+            <new_assignee>none</new_assignee>
+        </action>
+    </actions>
+</history>
+```
 
