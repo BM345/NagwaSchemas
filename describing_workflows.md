@@ -79,7 +79,7 @@ Below is shown part of the workflow XML for the workflow shown in the diagram ab
 <workflow reference="new_explainer">
     <name>New Explainer Workflow</name>
     <description>This workflow is used for creating new explainers.</description>
-    <statuses>
+    <statuses initial="drafting" final="published">
         <status reference="drafting" category="writing">
             <name>Drafting</name>
             <description>The explainer is being drafted.</description>
