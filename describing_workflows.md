@@ -173,3 +173,11 @@ This structure is shown below, without any data in it.
 </history>
 ```
 
+The root element is a `<history>` element, and has an attribute `for_content_entity` to denote which content entity this history applies to. The `<history>` element has two subelements: `<state>` and `<actions>`.
+
+The `<state>` element has subelements that define the current state of the entity. This includes `<workflow_reference>`, which identifies which workflow the content entity is currently in (or `none` if it is not in any workflow, making `none` a reserved word), `<workflow_status>`, which identifies the current status of the content entity, for easy look-up, and `<assignee>`, which is the email address of the current assignee, as well as other subelements.
+
+The `<actions>` element contains a list of `<action>` elements. Each `<action>` element has an attribute `taken_at`, which is the timestamp of when the action was taken, an attribute `taken_by`, which is the email address of the person who took the action, and an attribute `type`, which denotes the type of action, and which can have values such as `changed_status`, `changed_assignee`, or `added_comment`. An `<action>` element can also contain other elements that give additional information about the action taken.
+
+
+
