@@ -133,3 +133,13 @@ Below is shown part of the workflow XML for the workflow shown in the diagram ab
 </workflow>
 ```
 
+The `<workflow>` element has `<name>` and `<description>` subelements. Each `<status>` and `<transition>` element has `<name>` and `<description>` subelements too. Putting anything as the description for a workflow, status, or transition is optional, but it's a good idea to put them, as this can help clarify to developers and designers what must be done when a content entity has a given status.
+
+Each `<transition>` element has a `<button_text>` element, which gives the text that the button that triggers the transition should have. This allows us to present developers and designers with very easy-to-understand interfaces even if the workflow itself is quite complex. In many cases, developers and designers only have the option to send an entity further through the workflow (to 'submit' it or to 'approve' it) or to send it back (to 'reject' it). The `<button_text>` element can be used to present the available transitions as 'Submit' or 'Approve' and 'Reject'.
+
+Each `<status>` element can have a `category` attribute. This can be used to identify groups of related statuses. For example, the statuses 'Creative Design' and 'Creative Design Review' are both part of the creative design process, so might both have `category="creative_design"`. This can allow for a more intuitive, automatic colour-coding of statuses in the user-interface.
+
+Similarly, each `<transition>` element has a `type` attribute. This can be set to one of three values: `submit`, `approve`, and `reject`. This attribute is useful for automatically setting the colour of the buttons that developers and designers will see. If a developer or designer has the option to 'approve' an entity in some way, then we would probably want that button to appear green, whereas if they have the option to 'reject' an entity, then we would probably want that button to appear red or orange.
+
+Each `<rule>` element can have either an `allow_if` attribute or a `disallow_if` attribute. The value of this attribute is a predicate describing the condition under which the transition is allowed or disallowed. The predicate requires a special syntax - this is done in order to keep the structure of the XML simple and readable. However, since we only expect a relatively small number of different kinds of rules in workflows, it will be possible to interpret these predicates just with regular expressions. Rules combine with logical AND rather than logical OR - in other words, all rules must be followed for a transition to be possible.
+
