@@ -223,12 +223,12 @@ Below is shown part of a hypothetical history XML document for an explainer in t
 
 This XML describes the history of the content entity for a short while after it was created. Looking through the list of actions, we can see what has happened and when. This is also summarised in the table below.
 
-| | |
+| Time | What happened? |
 |---|---|
 | 10:00:00 | The explainer was created by a user with the email address example.user.1@nagwa.com. As this entity is an explainer, the system automatically put it into the new explainer workflow, and gave it the initial status, which is `drafting`. |
-| 10:00:10 | Ten seconds after the explainer is created, the user assigns it to themself to work on it. Ten seconds after that they also set the priority to `high`. |
-| 10:30:00 | The same user adds a comment to the content entity. |
-| 11:00:00 | The same user moves the entity to 'Course Review'. The system automatically unassigns it from them, as they are not able to transition it away from 'Course Review' once they've put it there. |
+| 10:00:10 | Ten seconds after the explainer was created, the user assigned it to themself to work on it. Ten seconds after that, they set the priority to `high`. |
+| 10:30:00 | The same user added a comment to the content entity. |
+| 11:00:00 | The same user moved the entity to 'Course Review'. The system automatically unassigned it from them, as they are not able to transition it away from 'Course Review' once they'd put it there. |
 
 In addition to keeping track of what statuses a content entity has and hasn't had, there are several very useful features that the history XML offers, which are described below.
 
