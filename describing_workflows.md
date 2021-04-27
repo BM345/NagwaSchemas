@@ -230,4 +230,17 @@ This XML describes the history of the content entity for a short while after it 
 | 10:30:00 | The same user adds a comment to the content entity. |
 | 11:00:00 | The same user moves the entity to 'Course Review'. The system automatically unassigns it from them, as they are not able to transition it away from 'Course Review' once they've put it there. |
 
+In addition to keeping track of what statuses a content entity has and hasn't had, there are several very useful features that the history XML offers, which are described below.
+
+- **It makes it possible to add comments to an entity at any time.**
+  This would be an extremely useful feature in content development. Very often, we know that something needs to happen with a particular question or explainer, or any other item, but this isn't something we need or are able to do straight away. It would be extremely convenient to be able to just attach this information as a comment to an item whenever we need to, so that we make sure that the right information stays with a given item, and that everyone who works on the item can see it.
+- **It allows us to look back through the history of an item very easily.**
+  As part of content development, we often want to know what's happened to a content item over time - who has worked on it, when they worked on it, and any comments that they left. Storing the history of the item in this way allows us to very easily build a picture of what's happened with an item.
+- **It allows us to 'watch' content items.**
+  It would be very convenient to have the option for users to 'watch' certain content items. This would mean that when certain actions are added to the history of the item, any users who are watching that item are notified. This would make it much easier to respond to comments and queries quickly.
+
+In addition to this, using this system of a workflow XML and a history XML, choosing *who* should work on a given content entity once it has reached a given status should be decided manually, and can be decided or changed at any time. The structure of the history XML file allows for this. This makes it a lot easier to organise who is going to do what, and to reassign a task to someone else should the original assignee become very busy with a separate task or project.
+
+This system also introduces priority flags in the history XML. Very often some content items are considered to be of higher priority than others - at the moment we don't really have a good way of communicating this through the CDS.
+
 
