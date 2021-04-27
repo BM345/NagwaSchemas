@@ -59,7 +59,7 @@
             <description></description>
             <rules>
                 <rule allow_if="role in ['content_writer']" />
-                <rule allow_if="'submit_to_course_review' not in pastTransitions" />
+                <rule allow_if="'course_review' not in pastStatuses" />
             </rules>
         </transition>
         <transition reference="submit_to_subject_review_1" from="drafting" to="subject_review" type="submit">
@@ -68,7 +68,7 @@
             <description></description>
             <rules>
                 <rule allow_if="role in ['content_writer']" />
-                <rule allow_if="'submit_to_course_review' in pastTransitions" />
+                <rule allow_if="'course_review' in pastStatuses" />
             </rules>
         </transition>
         <transition reference="submit_to_subject_review_2" from="course_review" to="subject_review" type="approve">

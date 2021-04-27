@@ -72,7 +72,7 @@ Each `<status>` element has a `reference` attribute, and these references are us
 
 Each `<transition>` element contains a `<rules>` subelement, which contains the set of rules that apply to this transition.
 
-Below is shown part of the workflow XML for the workflow shown in the diagram above. (The full XML for the above workflow can be viewed [here](workflow/examples/new_explainer.workflow.xml).)
+Below is shown part of the workflow XML for the workflow shown in the diagram above. The full XML for the above workflow can be viewed [here](workflow/examples/new_explainer.workflow.xml).
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -100,7 +100,7 @@ Below is shown part of the workflow XML for the workflow shown in the diagram ab
             <description></description>
             <rules>
                 <rule allow_if="role in ['content_writer']" />
-                <rule allow_if="'submit_to_course_review' not in pastTransitions" />
+                <rule allow_if="'course_review' not in pastStatuses" />
             </rules>
         </transition>
         <transition reference="submit_to_subject_review_1" from="drafting" to="subject_review" type="submit">
@@ -109,7 +109,7 @@ Below is shown part of the workflow XML for the workflow shown in the diagram ab
             <description></description>
             <rules>
                 <rule allow_if="role in ['content_writer']" />
-                <rule allow_if="'submit_to_course_review' in pastTransitions" />
+                <rule allow_if="'course_review' in pastStatuses" />
             </rules>
         </transition>
         <transition reference="submit_to_subject_review_2" from="course_review" to="subject_review" type="approve">
@@ -150,15 +150,15 @@ Below is shown part of the workflow XML for the workflow shown in the diagram ab
 
 The `<workflow>` element has `<name>` and `<description>` subelements. Each `<status>` and `<transition>` element has `<name>` and `<description>` subelements too. Putting anything as the description for a workflow, status, or transition is optional, but it's a good idea to put them, as this can help clarify to developers and designers what must be done when a content entity has a given status.
 
-The `<statuses>` element has attributes `initial` and `final`, which denote the initial and final statuses that content entities in the workflow must have. This tells the system what status to set a content entity to when it first enters the workflow, and at what point the system can take the content entity out of the workflow.
+The `<statuses>` element has attributes `initial` and `final`, which denote the initial and final statuses of the workflow. This tells the system what status to set a content entity to when it first enters the workflow, and at what point the system can take the content entity out of the workflow.
 
-Each `<transition>` element has a `<button_text>` element, which gives the text that the button that triggers the transition should have. This allows us to present developers and designers with very easy-to-understand interfaces even if the workflow itself is quite complex. In many cases, developers and designers only have the option to send an entity further through the workflow (to 'submit' it or to 'approve' it) or to send it back (to 'reject' it). The `<button_text>` element can be used to present the available transitions as 'Submit' or 'Approve' and 'Reject'.
+Each `<transition>` element has a `<button_text>` subelement, which gives the text for the button that triggers the transition. This allows us to present developers and designers with very easy-to-understand interfaces, even if the workflow itself is quite complex. In many cases, developers and designers only have the option to send an entity further through the workflow (to 'submit' it or to 'approve' it) or to send it back (to 'reject' it). The `<button_text>` element can be used to present the available transitions as 'Submit' or 'Approve' and 'Reject'.
 
 Each `<status>` element can have a `category` attribute. This can be used to identify groups of related statuses. For example, the statuses 'Creative Design' and 'Creative Design Review' are both part of the creative design process, so might both have `category="creative_design"`. This can allow for a more intuitive, automatic colour-coding of statuses in the user-interface.
 
-Similarly, each `<transition>` element has a `type` attribute. This can be set to one of three values: `submit`, `approve`, and `reject`. This attribute is useful for automatically setting the colour of the buttons that developers and designers will see. If a developer or designer has the option to 'approve' an entity in some way, then we would probably want that button to appear green, whereas if they have the option to 'reject' an entity, then we would probably want that button to appear red or orange.
+Similarly, each `<transition>` element has a `type` attribute. This can be set to one of three values: `submit`, `approve`, or `reject`. This attribute is useful for automatically setting the colour of the buttons that developers and designers will see. If a developer or designer has the option to 'approve' an entity in some way, then we would probably want that button to appear green, whereas if they have the option to 'reject' an entity, then we would probably want that button to appear red or orange.
 
-Each `<rule>` element can have either an `allow_if` attribute or a `disallow_if` attribute. The value of this attribute is a predicate describing the condition under which the transition is allowed or disallowed. The predicate requires a special syntax - this is done in order to keep the structure of the XML simple and readable. However, since we only expect a relatively small number of different kinds of rules in workflows, it will be possible to interpret these predicates just with regular expressions. Rules combine with logical AND rather than logical OR - in other words, all rules must be followed for a transition to be possible.
+Each `<rule>` element can have either an `allow_if` attribute or a `disallow_if` attribute. The value of this attribute is a predicate describing a condition under which the transition is allowed or disallowed. The predicate requires a special syntax - this is done in order to keep the structure of the XML simple and readable. However, since we only expect a relatively small number of different kinds of rules in workflows, it will be possible to interpret these predicates just with regular expressions. Rules combine with logical AND rather than logical OR - in other words, all rules must be followed for a transition to be possible.
 
 ### History XML
 
@@ -166,9 +166,9 @@ Certain rules described in the workflow XML require us to know *which* statuses 
 
 We also need to keep track of *who* a given content entity is assigned to.
 
-We can keep track of this information, as well as solve several other problems with the CDS at the same time, but introducing a history XML file. For each content entity in the system, there would be a corresponding history XML file. This file would keep track of the statuses that each entity has had, who it is assigned to, and any comments that have been made on the entity.
+We can keep track of this information, as well as solve a few other problems with the CDS at the same time, by introducing a history XML file. For each content entity in the system, there would be a corresponding history XML file. This file would keep track of the statuses that each entity has had, who it is assigned to, and any comments that have been made on the entity.
 
-The basic structure of a history XML file would have two main parts: a list of 'actions', which describe all historical actions on the entity, when they were taken, and who they were taken by, and a 'state', which would describe the current state of the entity, in order to provide an easy way of looking up the current state.
+The basic structure of a history XML file would have two main parts: a list of 'actions', which describe all historical actions on the entity, when they were taken, and who they were taken by, and a 'state', which would describe the current state of the entity, in order to provide an easy and quick way of looking up the current state.
 
 This structure is shown below, without any data in it.
 
@@ -192,9 +192,9 @@ This structure is shown below, without any data in it.
 
 The root element is a `<history>` element, and has an attribute `for_content_entity` to denote which content entity this history applies to. The `<history>` element has two subelements: `<state>` and `<actions>`.
 
-The `<state>` element has subelements that define the current state of the entity. This includes `<workflow_reference>`, which identifies which workflow the content entity is currently in (or `none` if it is not in any workflow, making `none` a reserved word), `<workflow_status>`, which identifies the current status of the content entity, for easy look-up, and `<assignee>`, which is the email address of the current assignee, as well as other subelements.
+The `<state>` element has subelements that define the current state of the entity. This includes `<workflow_reference>`, which identifies which workflow the content entity is currently in (or `none` if it is not in any workflow, making `none` a reserved word), `<workflow_status>`, which identifies the current status of the content entity, and `<assignee>`, which is the email address of the current assignee, as well as other subelements.
 
-The `<actions>` element contains a list of `<action>` elements. Each `<action>` element has an attribute `taken_at`, which is the timestamp of when the action was taken, an attribute `taken_by`, which is the email address of the person who took the action, and an attribute `type`, which denotes the type of action, and which can have values such as `changed_status`, `changed_assignee`, or `added_comment`. An `<action>` element can also contain other elements that give additional information about the action taken.
+The `<actions>` element contains a list of `<action>` elements. Each `<action>` element has an attribute `taken_at`, which is the timestamp of when the action was taken, an attribute `taken_by`, which is the email address of the person who took the action, and an attribute `type`, which denotes the type of action, and which can have values such as `changed_status`, `changed_assignee`, `added_comment`, et cetera. An `<action>` element can also contain other elements that give additional information about the action taken.
 
 Below is shown part of a hypothetical history XML document for an explainer in the new explainer workflow. You can see the example in full [here](history/examples/000000000000.history.xml).
 
@@ -243,9 +243,9 @@ This XML describes the history of the content entity for a short while after it 
 | Time | What happened? |
 |---|---|
 | 10:00:00 | The explainer was created by a user with the email address example.user.1@nagwa.com. As this entity is an explainer, the system automatically put it into the new explainer workflow, and gave it the initial status, which is `drafting`. |
-| 10:00:10 | Ten seconds after the explainer was created, the user assigned it to themself to work on it. Ten seconds after that, they set the priority to `high`. |
+| 10:00:10 | Ten seconds after the explainer was created, the same user assigned it to themself to work on it. Ten seconds after that, they set the priority to `high`. |
 | 10:30:00 | The same user added a comment to the content entity. |
-| 11:00:00 | The same user moved the entity to 'Course Review'. The system automatically unassigned it from them, as they are not able to transition it away from 'Course Review' once they'd put it there. |
+| 11:00:00 | The same user moved the entity to 'Course Review'. The system automatically unassigned it from them, as they are not able to transition it away from 'Course Review' once they've put it there. |
 
 In addition to keeping track of what statuses a content entity has and hasn't had, there are several very useful features that the history XML offers, which are described below.
 
@@ -256,9 +256,11 @@ In addition to keeping track of what statuses a content entity has and hasn't ha
 - **It allows us to 'watch' content items.**
   It would be very convenient to have the option for users to 'watch' certain content items. This would mean that when certain actions are added to the history of the item, any users who are watching that item are notified. This would make it much easier to respond to comments and queries quickly.
 
-In addition to this, using this system of a workflow XML and a history XML, choosing *who* should work on a given content entity once it has reached a given status should be decided manually, and can be decided or changed at any time. The structure of the history XML file allows for this. This makes it a lot easier to organise who is going to do what, and to reassign a task to someone else should the original assignee become very busy with a separate task or project.
+In addition to this, using this system of a workflow XML and a history XML, choosing *who* should work on a given content item once it has reached a given status should be decided manually, and can be decided or changed at any time. The structure of the history XML file allows for this. This makes it a lot easier to organise who is going to do what, and to reassign a task to someone else should the original assignee become very busy with a separate task or project.
 
 This system also introduces priority flags in the history XML. Very often some content items are considered to be of higher priority than others - at the moment we don't really have a good way of communicating this through the CDS.
+
+Together, the workflow XML and the history XML are a simple way of describing workflows and the work done on different pieces of content, and add a lot of useful features.
 
 ## Specification
 
