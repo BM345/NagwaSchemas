@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lesson id="000000000000" version="1">
+    <title></title>
+    <description></description>
+    <subject>Physics</subject>
+    <g_value>9</g_value>
+    <scope id="000000000000" />
+    <activities>
+        <activity type="worksheet" id="000000000000" />
+        <activity type="reading_activity" id="000000000000" />
+        <activity type="listening_activity" id="000000000000" />
+        <activity type="writing_activity" id="000000000000" />
+        <activity type="speaking_activity" id="000000000000" />
+        <activity type="experiment_script" id="000000000000" />
+        <activity type="flashcards" id="000000000000" />
+        <activity type="visualisation" id="000000000000" />
+        <activity type="visualisation" id="000000000000" />
+        <activity type="visualisation" id="000000000000" />
+        <activity type="explainer" id="000000000000" />
+        <activity type="video" id="000000000000" />
+        <activity type="presentation" id="000000000000" />
+        <activity type="wordsearch" id="000000000000" />
+        <activity type="crossword" id="000000000000" />
+    </activities>
+</lesson>
