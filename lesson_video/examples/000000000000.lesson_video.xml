@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lesson_video id="000000000000">
+    <title></title>
+    <duration></duration>
+    <markers>
+        <marker type="opening_screen" starts_at="0" ends_at="5" />
+        <marker type="key_points" starts_at="1235" ends_at="1260" />
+    </markers>
+    <example_questions_used>
+        <question id="000000000000" starts_at="560" ends_at="792" />
+        <question id="000000000000" starts_at="800" ends_at="900" />
+        <question id="000000000000" starts_at="910" ends_at="1000" />
+        <question id="000000000000" starts_at="1010" ends_at="1100" />
+        <question id="000000000000" starts_at="1110" ends_at="1230" />
+    </example_questions_used>
+    <transcript>
+        <p starts_at="1" ends_at="35">
+            <s starts_at="1" ends_at="35"></s>
+            <s starts_at="35" ends_at="66"></s>
+            <s starts_at="67" ends_at="92"></s>
+            <s starts_at="92" ends_at="137"></s>
+            <s starts_at="139" ends_at="151"></s>
+        </p>
+    </transcript>
+    <resources>
+        <resource format="MP4" resolution="HD 720p" file_name="000000000000_720p.mp4" />
+        <resource format="MP4" resolution="HD 1080p" file_name="000000000000_1080p.mp4" />
+        <resource format="MP4" resolution="QHD 1440p" file_name="000000000000_1440p.mp4" />
+        <resource format="MP4" resolution="4K 2160p" file_name="000000000000_2160p.mp4" />
+    </resources>
+</lesson_video>
