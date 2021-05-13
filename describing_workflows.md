@@ -330,3 +330,36 @@ Below is shown an example of the `<workflow>` element.
     </transitions>
 </workflow>
 ```
+
+#### The &lt;statuses&gt; element
+
+The `<statuses>` element contains the set of statuses that exist in this workflow. It also defines the initial and final statuses for the workflow.
+
+##### Attributes
+
+| Name | Required | Allowed Values | Description |
+|---|---|---|---|
+| `initial` | Required | any | The reference of the status that marks the entry point of the workflow. Content entities should be set to this status by the system when they first go into the workflow. |
+| `final` | Required | any | The reference of the status that marks the exit point of the workflow. Content entities with this status should be taken out of the workflow by the system. |
+
+##### Possible Subelements
+
+- `<status>`
+
+##### Examples
+
+Below is shown an example of the `<statuses>` element.
+
+```xml
+<statuses initial="status1" final="status10">
+    <status>
+        ...
+    </status>
+    <status>
+        ...
+    </status>
+    <status>
+        ...
+    </status>    
+</statuses>
+```
