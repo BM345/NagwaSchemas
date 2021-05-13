@@ -296,11 +296,10 @@ It is expected that the references for all statuses and transitions within the w
 
 ## Specification
 
-To be written later if necessary.
 
 #### The &lt;workflow&gt; element
 
-The `<workflow>` element is the root element of a Workflow XML file. It contains two subelements: a `<statuses>` element and a `<transitions>` element.
+The `<workflow>` element is the root element of a Workflow XML file.
 
 ##### Attributes
 
@@ -308,12 +307,21 @@ The `<workflow>` element is the root element of a Workflow XML file. It contains
 |---|---|---|---|
 | `reference` | Required | any | A string that's used by the system to identify this workflow. |
 
+##### Possible Subelements
+
+- `<name>`
+- `<description>`
+- `<statuses>`
+- `<transitions>`
+
 ##### Examples
 
-Below is shown an example of the `<workflow>`, `<statuses>`, and `<transitions>` elements.
+Below is shown an example of the `<workflow>` element.
 
 ```xml
 <workflow reference="workflow1">
+    <name>...</name>
+    <description>...</description>
     <statuses>
         ...
     </statuses>
