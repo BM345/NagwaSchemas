@@ -120,7 +120,7 @@ Below is shown part of the workflow XML for the workflow shown in the diagram ab
                 <rule allow_if="role in ['course_designer']" />
             </rules>
         </transition>
-        <transition reference="send_back_to_drafting_1" from="course_review" to="drafting" type="reject">
+        <transition reference="send_back_to_drafting_1" from="course_review" to="drafting" type="reject" comment_required="true">
             <name>Send back to Drafting</name>
             <button_text>Reject</button_text>
             <description></description>
@@ -136,7 +136,7 @@ Below is shown part of the workflow XML for the workflow shown in the diagram ab
                 <rule allow_if="role in ['subject_reviewer']" />
             </rules>
         </transition>
-        <transition reference="send_back_to_drafting_2" from="subject_review" to="drafting" type="reject">
+        <transition reference="send_back_to_drafting_2" from="subject_review" to="drafting" type="reject" comment_required="true">
             <name>Send back to Drafting</name>
             <button_text>Reject</button_text>
             <description></description>
@@ -157,6 +157,8 @@ Each `<transition>` element has a `<button_text>` subelement, which gives the te
 Each `<status>` element can have a `category` attribute. This can be used to identify groups of related statuses. For example, the statuses 'Creative Design' and 'Creative Design Review' are both part of the creative design process, so might both have `category="creative_design"`. This can allow for a more intuitive, automatic colour-coding of statuses in the user-interface.
 
 Similarly, each `<transition>` element has a `type` attribute. This can be set to one of three values: `submit`, `approve`, or `reject`. This attribute is useful for automatically setting the colour of the buttons that developers and designers will see. If a developer or designer has the option to 'approve' an entity in some way, then we would probably want that button to appear green, whereas if they have the option to 'reject' an entity, then we would probably want that button to appear red or orange.
+
+Each `<transition>` element can also have a `comment_required` attribute, which can be set to `true` or `false`. This indicates whether a developer must add a comment in order to execute a transition. This is generally the case for transitions that represent rejections. If this attribute is left out, it is assumed to have a value of `false`.
 
 Each `<rule>` element has an `allow_if` attribute. The value of this attribute is a predicate describing a condition under which the transition is allowed. The predicate requires a special syntax - this is done in order to keep the structure of the XML simple and readable. However, since we only expect a relatively small number of different kinds of rules in workflows, it will be possible to interpret these predicates just with regular expressions. Rules combine with logical AND rather than logical OR - in other words, all rules must be followed for a transition to be possible. If a transition has no rules to it, then it is always allowed.
 
@@ -261,6 +263,36 @@ In addition to this, using this system of a workflow XML and a history XML, choo
 This system also introduces priority flags in the history XML. Very often some content items are considered to be of higher priority than others - at the moment we don't really have a good way of communicating this through the CDS.
 
 Together, the workflow XML and the history XML are a simple way of describing workflows and the work done on different pieces of content, and add a lot of useful features.
+
+## Questions and Answers
+
+### Why not place a role limitation on the statuses rather than the transitions?
+
+At the moment, the limitations on how users in different roles can interact with the content entities is placed on the transitions, as one of the set of rules, rather than on the statuses. Why is this? Would it not be simpler to place role limitations on statuses, to say that only users with certain roles can act on certain statuses? Below is shown what this might look like in the XML.
+
+```xml 
+<status reference="drafting" role="content_writer">
+```
+
+There are several reasons for placing the role limitations on the transitions, rather than the statuses.
+
+1. Placing a role limitation on a status carries the implication that only users in that role can interact with a content entity of that status. However, we would like to move to a way of working where users can view or add comments to any content item easily, regardless of their role or its status - users would be able to *interact* with a content item in some ways, but they wouldn't be able to transition it. So the role limitation applies to the ability to transition the item, rather than the ability to interact with it at all.
+2. We may want to have multiple transitions away from a given status that are accessible to people in different roles. For example, we may want to allow someone in an administrator or project manager role to transition a content item back from final review to drafting. (We have, in the past, had situations where the requirements of a piece of content have changed after it has gone through most of the workflow.) Attaching the role limitation to the transitions allows for this.
+3. Placing the roles limitations on the transitions allows us to keep all rules associated with an action together in the `<rules>` tag. This makes it easier to see all the conditions that must be met for a transition to be allowed when looking through the XML, as they are all in one place, rather than in different places. 
+
+### What is the purpose of the `category` attribute?
+
+The purpose of the `category` attribute on the `<status>` elements is to group together similar statuses. This is to make it easy to colour-code statuses in the user interface and in automatically-drawn diagrams of the workflow. For example, statuses such as 'Creative Design' and 'Creative Design Review' are very similar, and we would probably want them to have the same colour in the user interface and in a diagram.
+
+### Why do `<transition>` elements have `reference` attributes?
+
+There are several reasons for this.
+
+1. It allows the transitions that a given content item has made to be referenced in the history XML, and for those transitions to be searched, and for rules to be applied to them. For example, we might want to apply a rule to a transition of the kind `<rule allow_if="'drafting_to_course_review' in pastTransitions">`. Such rules are likely to be rare, but including transition references allows for maximum flexibility of the workflow rules. Such rules could not be defined using status references alone (for example, with something like `<rule allow_if="('drafting' to 'course_review') in pastTransitions">`) as there may be multiple transitions between two statuses with different conditions applied on, say, user role, and using status references alone does not distinguish between them.
+2. It simplifies the workflow XML - all statuses and transitions must have a reference attribute - it is never optional.
+3. It makes it easier to write code to interact with the workflow XML. When interacting with the workflow XML through code, it's useful to have a unique way of referring to each transition (and status). This makes it easier to manipulate and search through the transitions when they are in dictionaries or lists, and it also makes it easier to query the XML using something like XPath.
+
+It is expected that the references for all statuses and transitions within the workflow XML would be generated automatically, so even though these references are sometimes quite long, they would not have to be typed out manually.
 
 ## Specification
 

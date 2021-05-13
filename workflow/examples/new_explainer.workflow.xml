@@ -79,7 +79,7 @@
                 <rule allow_if="role in ['course_designer']" />
             </rules>
         </transition>
-        <transition reference="send_back_to_drafting_1" from="course_review" to="drafting" type="reject">
+        <transition reference="send_back_to_drafting_1" from="course_review" to="drafting" type="reject" comment_required="true" auto_assign_to="content_writer">
             <name>Send back to Drafting</name>
             <button_text>Reject</button_text>
             <description></description>
@@ -95,7 +95,7 @@
                 <rule allow_if="role in ['subject_reviewer']" />
             </rules>
         </transition>
-        <transition reference="send_back_to_drafting_2" from="subject_review" to="drafting" type="reject">
+        <transition reference="send_back_to_drafting_2" from="subject_review" to="drafting" type="reject" comment_required="true" auto_assign_to="content_writer">
             <name>Send back to Drafting</name>
             <button_text>Reject</button_text>
             <description></description>
@@ -151,7 +151,7 @@
                 <rule allow_if="role in ['creative_design_reviewer']" />
             </rules>
         </transition>
-        <transition reference="send_back_to_creative_design_1" from="creative_design_review" to="creative_design" type="reject">
+        <transition reference="send_back_to_creative_design_1" from="creative_design_review" to="creative_design" type="reject" comment_required="true" auto_assign_to="creative_designer">
             <name>Send back to Creative Design</name>
             <button_text>Reject</button_text>
             <description></description>
@@ -167,7 +167,7 @@
                 <rule allow_if="role in ['content_graphics_designer']" />
             </rules>
         </transition>
-        <transition reference="send_back_to_content_graphics_design" from="content_graphics_design_review" to="content_graphics_design" type="reject">
+        <transition reference="send_back_to_content_graphics_design" from="content_graphics_design_review" to="content_graphics_design" type="reject" comment_required="true" auto_assign_to="content_graphics_designer">
             <name>Send back to Content Graphics Design</name>
             <button_text>Send back to Content Graphics Design</button_text>
             <description></description>
@@ -175,7 +175,7 @@
                 <rule allow_if="role in ['content_graphics_design_reviewer']" />
             </rules>
         </transition>
-        <transition reference="send_back_to_creative_design_2" from="content_graphics_design_review" to="creative_design" type="reject">
+        <transition reference="send_back_to_creative_design_2" from="content_graphics_design_review" to="creative_design" type="reject" comment_required="true" auto_assign_to="creative_designer">
             <name>Send back to Creative Design</name>
             <button_text>Send back to Creative Design</button_text>
             <description></description>
@@ -191,7 +191,7 @@
                 <rule allow_if="role in ['content_graphics_design_reviewer']" />
             </rules>
         </transition>
-        <transition reference="send_back_to_markup_1" from="markup_review" to="markup" type="reject">
+        <transition reference="send_back_to_markup_1" from="markup_review" to="markup" type="reject" comment_required="true" auto_assign_to="markup_editor">
             <name>Send back to Markup</name>
             <button_text>Reject</button_text>
             <description></description>
@@ -207,7 +207,7 @@
                 <rule allow_if="role in ['markup_reviewer']" />
             </rules>
         </transition>
-        <transition reference="send_back_to_markup_2" from="final_review" to="markup" type="reject">
+        <transition reference="send_back_to_markup_2" from="final_review" to="markup" type="reject" comment_required="true" auto_assign_to="markup_editor">
             <name>Send back to Markup</name>
             <button_text>Reject</button_text>
             <description></description>
