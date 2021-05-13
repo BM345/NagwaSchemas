@@ -379,6 +379,7 @@ A `<status>` element defines a possible status within a workflow.
 |---|---|---|---|
 | `reference` | Required | any | A string that uniquely identifies this status within this workflow. |
 | `category` | | any | A string that identifies what category or group of statuses this status is part of. This is used to automatic colour-coding of similar statuses. |
+| `type` | | `automated_processing` | If a `<status>` element has `type="automated_processing"`, then content items with this status must be processed by a script, rather than by a user. |
 
 ##### Possible Subelements
 
@@ -394,4 +395,48 @@ Below is shown an example of a `<status>` element.
     <name>...</name>
     <description>...</description>
 </status>
+```
+
+
+
+#### The &lt;name&gt; element
+
+A `<name>` element defines the name of a workflow, status, or transition. It can be a direct subelement of a `<workflow>`, `<status>`, or `<transition>` element.
+
+##### Attributes
+
+None
+
+##### Possible Subelements
+
+None
+
+##### Examples
+
+Below is shown an example of a `<name>` element.
+
+```xml
+<name>New Explainer Workflow</name>
+```
+
+
+
+#### The &lt;description&gt; element
+
+A `<description>` element defines the description of a workflow, status, or transition. It can be a direct subelement of a `<workflow>`, `<status>`, or `<transition>` element. It is always optional, but it is a good idea to include it, as it can clarify to users what must be done with a content item that has a given status.
+
+##### Attributes
+
+None
+
+##### Possible Subelements
+
+None
+
+##### Examples
+
+Below is shown an example of a `<description>` element.
+
+```xml
+<description>This workflow is used for creating new explainers.</description>
 ```
