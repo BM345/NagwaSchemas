@@ -297,6 +297,7 @@ It is expected that the references for all statuses and transitions within the w
 ## Specification
 
 
+
 #### The &lt;workflow&gt; element
 
 The `<workflow>` element is the root element of a Workflow XML file.
@@ -331,6 +332,8 @@ Below is shown an example of the `<workflow>` element.
 </workflow>
 ```
 
+
+
 #### The &lt;statuses&gt; element
 
 The `<statuses>` element contains the set of statuses that exist in this workflow. It also defines the initial and final statuses for the workflow.
@@ -362,4 +365,33 @@ Below is shown an example of the `<statuses>` element.
         ...
     </status>    
 </statuses>
+```
+
+
+
+#### The &lt;status&gt; element
+
+A `<status>` element defines a possible status within a workflow.
+
+##### Attributes
+
+| Name | Required | Allowed Values | Description |
+|---|---|---|---|
+| `reference` | Required | any | A string that uniquely identifies this status within this workflow. |
+| `category` | | any | A string that identifies what category or group of statuses this status is part of. This is used to automatic colour-coding of similar statuses. |
+
+##### Possible Subelements
+
+- `<name>`
+- `<description>`
+
+##### Examples
+
+Below is shown an example of a `<status>` element.
+
+```xml
+<status reference="status1" category="copyediting">
+    <name>...</name>
+    <description>...</description>
+</status>
 ```
