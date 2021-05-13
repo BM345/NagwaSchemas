@@ -440,3 +440,74 @@ Below is shown an example of a `<description>` element.
 ```xml
 <description>This workflow is used for creating new explainers.</description>
 ```
+
+
+
+#### The &lt;transitions&gt; element
+
+The `<transitions>` element contains the set of transitions that exist in this workflow.
+
+##### Attributes
+
+None
+
+##### Possible Subelements
+
+- `<transition>`
+
+##### Examples
+
+Below is shown an example of the `<transitions>` element.
+
+```xml
+<transitions>
+    <transition>
+        ...
+    </transition>
+    <transition>
+        ...
+    </transition>
+    <transition>
+        ...
+    </transition>
+</transitions>
+```
+
+
+
+#### The &lt;transition&gt; element
+
+A `<transition>` element defines a possible transition within a workflow.
+
+##### Attributes
+
+| Name | Required | Allowed Values | Description |
+|---|---|---|---|
+| `reference` | Required | any | A string that uniquely identifies this transition within this workflow. |
+| `from` | Required | any | The reference of one of the two statuses that this transition links. This is the status that content entities are coming _from_. |
+| `to` | Required | any | The reference of one of the two statuses that this transition links. This is the status that content entities are coming _to_. |
+| `type` | | one of: `submit`, `approve`, `reject`, `pass`, `fail`, `error` | This attribute gives information on what _kind_ of transition this is. This affects both how buttons on the user interface are coloured, and how automated processes interact with the workflow. |
+| `comment_required` | | boolean | Denotes whether or not the user must add a comment to this content entity before executing this transition. For transitions that represent rejections, generally a comment must be added. |
+| `auto_assign_to` | | predicate | Denotes who the content entity should be assigned to once it undergoes this transition. If this attribute is omitted, the content entity will not be automatically assigned to anyone. |
+
+##### Possible Subelements
+
+- `<name>`
+- `<button_text>`
+- `<description>`
+- `<rules>`
+
+##### Examples
+
+Below is shown an example of a `<transition>` element.
+
+```xml
+<transition reference="transition1" from="status1" to="status2" type="..." comment_required="..." auto_assign_to="...">
+    <name>...</name>
+    <button_text>...</button_text>
+    <description>...</description>
+    <rules>
+        ...
+    </rules>
+</transition>
+```
