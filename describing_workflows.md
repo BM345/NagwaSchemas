@@ -297,6 +297,15 @@ It is expected that the references for all statuses and transitions within the w
 ## Specification
 
 - [The &lt;workflow&gt; element](#the-workflow-element)
+- [The &lt;statuses&gt; element](#the-statuses-element)
+- [The &lt;status&gt; element](#the-status-element)
+- [The &lt;name&gt; element](#the-name-element)
+- [The &lt;description&gt; element](#the-description-element)
+- [The &lt;transitions&gt; element](#the-transitions-element)
+- [The &lt;transition&gt; element](#the-transition-element)
+- [The &lt;button_text&gt; element](#the-button_text-element)
+- [The &lt;rules&gt; element](#the-rules-element)
+- [The &lt;rule&gt; element](#the-rule-element)
 
 
 #### The &lt;workflow&gt; element
