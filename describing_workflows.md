@@ -511,3 +511,80 @@ Below is shown an example of a `<transition>` element.
     </rules>
 </transition>
 ```
+
+
+
+#### The &lt;button_text&gt; element
+
+The `<button_text>` element can be a direct subelement of a `<transition>` element. It defines the text that should appear on the button that activates this transition in the front-end.
+
+This is useful because generally the name of a transition will be something longer, such as 'Submit to Course Review', so that the transition can be easily identified when the Workflow XML is being edited (either directly or via a graphical interface). But generally we want to show something shorter and simpler on the actual button that the user presses to activate the transition, such as 'Submit'.
+
+##### Attributes
+
+None
+
+##### Possible Subelements
+
+None
+
+##### Examples
+
+Below is shown an example of a `<button_text>` element.
+
+```xml
+<button_text>Submit</button_text>
+```
+
+
+#### The &lt;rules&gt; element
+
+The `<rules>` element can be a direct subelement of a `<transition>` element. It contains the set of rules that apply to the transition.
+
+The rules within a `<rules>` element combine with a logical AND. This means that all conditions specified by the rules must be met in order for a transition to be allowed.
+
+If there are no rules associated with a transition, then the transition is always allowed.
+
+##### Attributes
+
+None
+
+##### Possible Subelements
+
+- `<rule>`
+
+##### Examples
+
+Below is shown an example of a `<rules>` element.
+
+```xml
+<rules>
+    <rule />
+    <rule />
+    <rule />
+</rules>
+```
+
+
+
+#### The &lt;rule&gt; element
+
+A `<rule>` element defines a rule that applies to a transition.
+
+##### Attributes
+
+| Name | Required | Allowed Values | Description |
+|---|---|---|---|
+| `allow_if` | Required | predicate | A predicate that describes a condition that must be met for the transition to be allowed. See below for the syntax of this predicate. |
+
+##### Possible Subelements
+
+None
+
+##### Examples
+
+Below is shown an example of a `<rule>` element.
+
+```xml
+<rule allow_if="role in ['content_writer']" />
+```
