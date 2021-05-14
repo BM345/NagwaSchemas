@@ -605,6 +605,20 @@ A `<rule>` element defines a rule that applies to a transition.
 
 None
 
+##### Predicate Syntax
+
+The predicate syntax closely follows the syntax of Python, defining lists in the same way, and using keywords such as `in`.
+
+Parsing Python syntax is complicated for a general programming language. However, because there are, to begin with at least, relatively few distinct rules that we want to make possible in our workflows, it will be easy to parse the predicates using Regular Expressions.
+
+There are, to begin with, 3 distinct rules that we want to make possible. The first is a rule that places a limitation on the role that a user must have in order to activate a transition. An example of this rule is shown below.
+
+```xml
+<rule allow_if="role in ['content_writer']" />
+```
+
+What this rule says is 'Allow this transition if the **role** of the current user is **in** the list **['content_writer']**'.
+
 ##### Examples
 
 Below is shown an example of a `<rule>` element.
