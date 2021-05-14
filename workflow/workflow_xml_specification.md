@@ -235,7 +235,19 @@ A `<transition>` element defines a possible transition within a workflow.
 | `send` | blue | This is a neutral type. This type indicates that a content item is being moved, but there is no particular meaning associated with it. |
 | `pass` | none | Used by automated processes. Used to indicate that a content item has **passed** a validation or processing step. |
 | `fail` | none | Used by automated processes. Used to indicate that a content item has **failed** a validation step. |
-| `error` | none | Used by automated processes. Used to indicate that the code of an automated process has experienced an error, and cannot complete. |
+| `error` | none | Used by automated processes. Used to indicate that the code of an automated process has experienced an **error**, and cannot complete. |
+
+### The Predicate Syntax for Auto-Assignment
+
+The value of the `auto_assign_to` attribute should be a role. When a content entity undergoes a transition with this attribute set, the system should look in the History XML file for the content item, for the first developer listed in the `<state>` that has a role attribute matching this attribute.
+
+An example of this attribute is shown below.
+
+```xml
+auto_assign_to="subject_reviewer"
+```
+
+If no user with such a role is found in the history state, then the content entity should not be assigned to anyone.
 
 ### Examples
 
@@ -253,11 +265,12 @@ Below is shown an example of a `<transition>` element.
 ```
 
 
+
 <br /><br />
 
 ## The &lt;button_text&gt; element
 
-The `<button_text>` element can be a direct subelement of a `<transition>` element. It defines the text that should appear on the button that activates this transition in the front-end.
+The `<button_text>` element is a direct subelement of a `<transition>` element. It is a required subelement. It defines the text that should appear on the button that activates this transition in the front-end.
 
 This is useful because generally the name of a transition will be something longer, such as 'Submit to Course Review', so that the transition can be easily identified when the Workflow XML is being edited (either directly or via a graphical interface). But generally we want to show something shorter and simpler on the actual button that the user presses to activate the transition, such as 'Submit'.
 
@@ -327,9 +340,9 @@ None
 
 ### Predicate Syntax
 
-The predicate syntax closely follows the syntax of Python, defining lists in the same way, and using keywords such as `in`.
+The predicate syntax for the `allow_if` attribute closely follows the syntax of Python, defining lists in the same way, and using keywords such as `in`.
 
-Parsing Python syntax is complicated for a general programming language. However, because there are, to begin with at least, relatively few distinct rules that we want to make possible in our workflows, it will be easy to parse the predicates using Regular Expressions.
+Parsing Python syntax is complicated for a general programming language. However, because there are, to begin with at least, relatively few distinct types of rule that we want to make possible in our workflows, it will be easy to parse the predicates using Regular Expressions.
 
 There are, to begin with, 3 distinct types of rule that we want to make possible. The first is one that places a limitation on the role that a user must have in order to activate a transition. An example of this rule is shown below.
 
@@ -350,7 +363,7 @@ In this case, if the current user has any of the roles given in the list, then t
 The predicate could also be negated, as shown below.
 
 ```xml
-<rule allow_if="role not ['content_writer']" />
+<rule allow_if="role not in ['content_writer']" />
 ```
 
 This would allow anyone who **does not** have the role of `content_writer` to activate the transition.
@@ -372,6 +385,8 @@ The third type of rule is one that allows or disallows a transition based on whe
 What this rule says is 'Allow this transition if the transition with the reference **'drafting_to_course_review'** is **not in** the list of **past transitions**.
 
 It should be possible to parse these three types of rule using RegEx.
+
+As you can see, three pieces of data are needed to apply the rules: the role of the current user, the list of past statuses, and the list of past transactions. The second and third of these can be retrieved from the History XML for the content item.
 
 ### Examples
 
