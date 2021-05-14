@@ -307,7 +307,9 @@ It is expected that the references for all statuses and transitions within the w
 - [The &lt;rules&gt; element](#the-rules-element)
 - [The &lt;rule&gt; element](#the-rule-element)
 
-<br />
+
+
+<br /><br />
 
 #### The &lt;workflow&gt; element
 
@@ -343,7 +345,9 @@ Below is shown an example of the `<workflow>` element.
 </workflow>
 ```
 
-<br />
+
+
+<br /><br />
 
 #### The &lt;statuses&gt; element
 
@@ -379,6 +383,7 @@ Below is shown an example of the `<statuses>` element.
 ```
 
 
+<br /><br />
 
 #### The &lt;status&gt; element
 
@@ -409,6 +414,7 @@ Below is shown an example of a `<status>` element.
 ```
 
 
+<br /><br />
 
 #### The &lt;name&gt; element
 
@@ -431,6 +437,7 @@ Below is shown an example of a `<name>` element.
 ```
 
 
+<br /><br />
 
 #### The &lt;description&gt; element
 
@@ -453,6 +460,7 @@ Below is shown an example of a `<description>` element.
 ```
 
 
+<br /><br />
 
 #### The &lt;transitions&gt; element
 
@@ -485,6 +493,7 @@ Below is shown an example of the `<transitions>` element.
 ```
 
 
+<br /><br />
 
 #### The &lt;transition&gt; element
 
@@ -524,6 +533,7 @@ Below is shown an example of a `<transition>` element.
 ```
 
 
+<br /><br />
 
 #### The &lt;button_text&gt; element
 
@@ -547,6 +557,8 @@ Below is shown an example of a `<button_text>` element.
 <button_text>Submit</button_text>
 ```
 
+
+<br /><br />
 
 #### The &lt;rules&gt; element
 
@@ -577,6 +589,7 @@ Below is shown an example of a `<rules>` element.
 ```
 
 
+<br /><br />
 
 #### The &lt;rule&gt; element
 
