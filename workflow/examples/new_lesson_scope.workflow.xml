@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow reference="new_lesson_scope_workflow">
+    <name>New Lesson Scope Workflow</name>
+    <statuses>
+        <status reference="course_design">
+            <name>Course Design</name>
+        </status>
+        <status reference="subject_review">
+            <name>Subject Review</name>
+        </status>
+    </statuses>
+    <transitions>
+        <transition reference="course_design_to_subject_review" from="course_design" to="subject_review" type="submit">
+            <name>Submit to Subject Review</name>
+            <button_text>Submit</button_text>
+        </transition>
+    </transitions>
+</workflow>
