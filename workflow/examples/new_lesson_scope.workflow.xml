@@ -1,18 +1,107 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <workflow reference="new_lesson_scope_workflow">
     <name>New Lesson Scope Workflow</name>
+    <description>This workflow is used for creating new lesson scopes.</description>
     <statuses>
         <status reference="course_design">
             <name>Course Design</name>
+            <description>The lesson scope is being written according to the requirements of different courses.</description>
         </status>
         <status reference="subject_review">
             <name>Subject Review</name>
+            <description>The lesson scope is being checked for clarity and ambiguity.</description>
+        </status>
+        <status reference="copyediting">
+            <name>Copyediting</name>
+            <description>The lesson scope is being copyedited.</description>
+        </status>
+        <status reference="markup">
+            <name>Markup</name>
+            <description>The lesson scope is being marked-up.</description>
+        </status>
+        <status reference="markup_review">
+            <name>Markup Review</name>
+            <description>The markup of the lesson scope is being reviewed.</description>
+        </status>
+        <status reference="final_review">
+            <name>Final Review</name>
+            <description>This is the final review before the lesson scope goes live.</description>
+        </status>
+        <status reference="published">
+            <name>Published</name>
+            <description>The lesson scope has been published.</description>
         </status>
     </statuses>
     <transitions>
-        <transition reference="course_design_to_subject_review" from="course_design" to="subject_review" type="submit">
+        <transition reference="submit_to_subject_review" from="course_design" to="subject_review" type="submit">
             <name>Submit to Subject Review</name>
             <button_text>Submit</button_text>
+            <rules>
+                <rule allow_if="role in ['course_designer']"/>
+            </rules>
+        </transition>
+        <transition reference="send_back_to_course_design" from="subject_review" to="course_design" type="reject" comment_required="true">
+            <name>Send back to Course Design</name>
+            <button_text>Reject</button_text>
+            <rules>
+                <rule allow_if="role in ['subject_reviewer']"/>
+            </rules>
+        </transition>
+        <transition reference="send_to_copyediting" from="subject_review" to="copyediting" type="approve">
+            <name>Send to Copyediting</name>
+            <button_text>Approve</button_text>
+            <rules>
+                <rule allow_if="role in ['subject_reviewer']"/>
+            </rules>
+        </transition>
+        <transition reference="send_to_markup" from="copyediting" to="markup" type="send">
+            <name>Send to Markup</name>
+            <button_text>Send to Markup</button_text>
+            <rules>
+                <rule allow_if="role in ['copyeditor']"/>
+            </rules>
+        </transition>
+        <transition reference="submit_to_markup_review" from="markup" to="markup_review" type="submit">
+            <name>Submit to Markup Review</name>
+            <button_text>Submit</button_text>
+            <rules>
+                <rule allow_if="role in ['markup_editor']"/>
+            </rules>
+        </transition>
+        <transition reference="send_back_to_markup" from="markup_review" to="markup" type="reject" comment_required="true">
+            <name>Send back to Markup</name>
+            <button_text>Reject</button_text>
+            <rules>
+                <rule allow_if="role in ['markup_reviewer']"/>
+            </rules>
+        </transition>
+        <transition reference="send_to_final_review" from="markup_review" to="final_review" type="approve">
+            <name>Send to Final Review</name>
+            <button_text>Approve</button_text>
+            <rules>
+                <rule allow_if="role in ['markup_reviewer']"/>
+            </rules>
+        </transition>
+        <transition reference="send_back_to_markup_2" from="final_review" to="markup" type="reject" comment_required="true">
+            <name>Send back to Markup</name>
+            <button_text>Send back to Markup</button_text>
+            <rules>
+                <rule allow_if="role in ['course_designer']"/>
+            </rules>
+        </transition>
+        <transition reference="send_back_to_course_design_2" from="final_review" to="course_design" type="reject" comment_required="true">
+            <name>Send back to Course Design</name>
+            <button_text>Send back to Course Design</button_text>
+            <rules>
+                <rule allow_if="role in ['course_designer']"/>
+            </rules>
+        </transition>
+        <transition reference="publish" from="final_review" to="published" type="approve">
+            <name>Publish</name>
+            <button_text>Approve and Publish</button_text>
+            <rules>
+                <rule allow_if="role in ['course_designer']"/>
+            </rules>
         </transition>
     </transitions>
 </workflow>

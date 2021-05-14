@@ -66,12 +66,12 @@ class Workflow(object):
         trs = [] 
 
         for transition in self.transitions:
-            tr = makeReference(transition._from.reference + "_to_" + transition._to.reference)
+            tr = makeReference(transition.name)
             n = 1
 
             while tr in trs:
                 n += 1
-                tr = "{}_{}".format(makeReference(transition._from.reference + "_to_" + transition._to.reference), n)
+                tr = "{}_{}".format(makeReference(transition.name), n)
 
             trs.append(tr)
 
@@ -204,5 +204,17 @@ class Rule(object):
         e1.set("allow_if", "")
 
         return e1 
+
+class RolesRule(Rule):
+    def __init__(self, roles = []):
+        self.roles = roles 
+
+    def toXML(self):
+        e1 = XMLElement("rule")
+        e1.set("allow_if", "role in {}".format(self.roles))
+
+        return e1 
+
+
 
 
