@@ -611,13 +611,47 @@ The predicate syntax closely follows the syntax of Python, defining lists in the
 
 Parsing Python syntax is complicated for a general programming language. However, because there are, to begin with at least, relatively few distinct rules that we want to make possible in our workflows, it will be easy to parse the predicates using Regular Expressions.
 
-There are, to begin with, 3 distinct rules that we want to make possible. The first is a rule that places a limitation on the role that a user must have in order to activate a transition. An example of this rule is shown below.
+There are, to begin with, 3 distinct types of rule that we want to make possible. The first is one that places a limitation on the role that a user must have in order to activate a transition. An example of this rule is shown below.
 
 ```xml
 <rule allow_if="role in ['content_writer']" />
 ```
 
 What this rule says is 'Allow this transition if the **role** of the current user is **in** the list **['content_writer']**'.
+
+The list could have multiple roles in it, as shown below.
+
+```xml
+<rule allow_if="role in ['content_writer', 'course_designer', 'subject_reviewer']" />
+```
+
+In this case, if the current user has any of the roles given in the list, then the transition would be allowed (assuming all other conditions are also met).
+
+The predicate could also be negated, as shown below.
+
+```xml
+<rule allow_if="role not ['content_writer']" />
+```
+
+This would allow anyone who **does not** have the role of `content_writer` to activate the transition.
+
+The second type of rule is one that allows or disallows a transition based on whether the content entity has had a given status before. An example of this rule is shown below.
+
+```xml
+<rule allow_if="'course_review' not in pastStatuses" />
+```
+
+What this rule says is 'Allow this transition if the status with the reference **'course_review'** is **not in** the list of **past statuses**'.
+
+The third type of rule is one that allows or disallows a transition based on whether the content entity has undergone a given transition before. An example of this is shown below.
+
+```xml
+<rule allow_if="'drafting_to_course_review' not in pastTransitions" />
+```
+
+What this rule says is 'Allow this transition if the transition with the reference **'drafting_to_course_review'** is **not in** the list of **past transitions**.
+
+It should be possible to parse these three types of rule using RegEx.
 
 ##### Examples
 
