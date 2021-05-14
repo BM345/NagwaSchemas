@@ -75,7 +75,7 @@ The `<statuses>` element contains the set of statuses that exist in this workflo
 Below is shown an example of the `<statuses>` element.
 
 ```xml
-<statuses initial="status1" final="status10">
+<statuses initial="status1" final="status15">
     <status>
         ...
     </status>
@@ -100,8 +100,8 @@ A `<status>` element defines a possible status within a workflow.
 | Name | Required | Allowed Values | Description |
 |---|---|---|---|
 | `reference` | Required | any | A string that uniquely identifies this status within this workflow. |
-| `category` | | any | A string that identifies what category or group of statuses this status is part of. This is used to automatic colour-coding of similar statuses. |
-| `type` | | `automated_processing` | If a `<status>` element has `type="automated_processing"`, then content items with this status must be processed by a script, rather than by a user. |
+| `category` | Optional | any | A string that identifies what category or group of statuses this status is part of. This is used for automatic colour-coding of similar statuses. It does **not** have an effect on who can interact with content entities that have this status. |
+| `type` | Optional | `manual_processing` or `automated_processing` | If this attribute is set to `automated_processing`, then content items with this status must be processed by a script, rather than by a user. If this attribute is set to `manual_processing`, then this is an ordinary status, requiring action by a user. If this attribute is omitted, then it is assumed to have the value of `manual_processing`. |
 
 ### Possible Subelements
 
@@ -124,7 +124,9 @@ Below is shown an example of a `<status>` element.
 
 ## The &lt;name&gt; element
 
-A `<name>` element defines the name of a workflow, status, or transition. It can be a direct subelement of a `<workflow>`, `<status>`, or `<transition>` element.
+A `<name>` element defines the name of a workflow, status, or transition. 
+
+`<workflow>`, `<status>`, and `<transition>` elements **must** have a `<name>` subelement.
 
 ### Attributes
 
@@ -211,10 +213,10 @@ A `<transition>` element defines a possible transition within a workflow.
 |---|---|---|---|
 | `reference` | Required | any | A string that uniquely identifies this transition within this workflow. |
 | `from` | Required | any | The reference of one of the two statuses that this transition links. This is the status that content entities are coming _from_. |
-| `to` | Required | any | The reference of one of the two statuses that this transition links. This is the status that content entities are coming _to_. |
-| `type` | | one of: `submit`, `approve`, `reject`, `pass`, `fail`, `error` | This attribute gives information on what _kind_ of transition this is. This affects both how buttons on the user interface are coloured, and how automated processes interact with the workflow. |
-| `comment_required` | | boolean | Denotes whether or not the user must add a comment to this content entity before executing this transition. For transitions that represent rejections, generally a comment must be added. |
-| `auto_assign_to` | | predicate | Denotes who the content entity should be assigned to once it undergoes this transition. If this attribute is omitted, the content entity will not be automatically assigned to anyone. |
+| `to` | Required | any | The reference of one of the two statuses that this transition links. This is the status that content entities are going _to_. |
+| `type` | Optional | one of: `submit`, `approve`, `reject`, `send`, `pass`, `fail`, `error` | This attribute gives information on what _kind_ of transition this is. This affects both how buttons on the user interface are coloured, and how automated processes interact with the workflow. See below for the meanings of these different types. |
+| `comment_required` | Optional | boolean | Denotes whether or not the user must add a comment to this content entity before executing this transition. For transitions that represent rejections, generally a comment must be added. |
+| `auto_assign_to` | Optional | predicate | Denotes who the content entity should be assigned to once it undergoes this transition. If this attribute is omitted, the content entity will not be automatically assigned to anyone. See below for the syntax of this predicate. |
 
 ### Possible Subelements
 
@@ -222,6 +224,18 @@ A `<transition>` element defines a possible transition within a workflow.
 - `<button_text>`
 - `<description>`
 - `<rules>`
+
+### The Meaning of Type Attribute Values
+
+| Value | Button Colour | Meaning |
+|---|---|---|
+| `submit` | blue | Used to indicate that a content item is being **submitted** for review, validation, or processing. |
+| `approve` | green | Used to indicate that a content item is being **approved** after a review. |
+| `reject` | red / orange | Used to indicate that a content item is being **rejected** after a review. |
+| `send` | blue | This is a neutral type. This type indicates that a content item is being moved, but there is no particular meaning associated with it. |
+| `pass` | none | Used by automated processes. Used to indicate that a content item has **passed** a validation or processing step. |
+| `fail` | none | Used by automated processes. Used to indicate that a content item has **failed** a validation step. |
+| `error` | none | Used by automated processes. Used to indicate that the code of an automated process has experienced an error, and cannot complete. |
 
 ### Examples
 

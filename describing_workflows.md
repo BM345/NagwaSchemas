@@ -5,7 +5,6 @@ This document describes how the workflows that we use in the development of Nagw
 - [Principles of Design](#principles-of-design)
   - [Workflow XML](#workflow-xml)
   - [History XML](#history-xml)
-- [Specification](#specification)
 
 ## Principles of Design
 
