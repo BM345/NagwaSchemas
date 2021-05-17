@@ -214,6 +214,8 @@ Below is shown an example of a `<developer>` element.
 
 The `<assignee>` element denotes who, if anyone, the content entity is currently assigned to. The text of this element should be the email address of the assignee.
 
+When a content entity is taken out of a workflow, it should be unassigned from anyone.
+
 ### Attributes
 
 None
@@ -240,6 +242,8 @@ The `<priority>` element denotes what, if anything, the current priority of the 
 
 The text of the `<priority>` element should be one of a set of values indicating the priority: `high`, `very_high`, `low`, `very_low`, or nothing if the priority has not been set. 
 
+When a content entity is taken out of a workflow (because it has reached the final status of the workflow), its priority should be set back to nothing (because if the entity goes into another workflow later, it may not need the same priority).
+
 ### Attributes
 
 None
@@ -263,6 +267,8 @@ Below is shown an example of a `<priority>` element.
 ## The &lt;labels&gt; element
 
 The `<labels>` element contains the list of labels that have been added to this content entity.
+
+The list of labels should not be changed in any way upon a change of workflow or workflow status.
 
 ### Attributes
 
@@ -315,6 +321,8 @@ Below is shown an example of a `<label>` element.
 ## The &lt;watchers&gt; element
 
 The `<watchers>` element contains the list of people who are watching this content entity. When a content entity is updated in certain ways, everyone who is watching the content entity should be notified.
+
+The list of watchers should not be changed in any way upon a change in workflow or workflow status.
 
 ### Attributes
 
@@ -421,7 +429,7 @@ Note that comments can never be edited or deleted. (In the case where a comment 
 | Value | Notify Watchers | Meaning |
 |---|---|---|
 | `created_entity` | No | An action of this type should be added when the entity is first created. |
-| `changed_workflow` | No | An action of this type should be added when the entity is put into a new workflow or taken out of a workflow. |
+| `changed_workflow` | Yes | An action of this type should be added when the entity is put into a new workflow or taken out of a workflow. |
 | `changed_workflow_status` | Yes | An action of this type should be added when the status of the entity is changed (except when it is changed to none). |
 | `changed_assignee` | Yes | An action of this type should be added when the assignee for an entity is changed (except when it is changed to none). |
 | `changed_priority` | Yes | An action of this type should be added when the priority for an entity is changed (except when it is changed to none). |
