@@ -3,13 +3,19 @@
 ## Table of Contents
 
 - [The &lt;history&gt; element](#the-history-element)
-- []()
-- []()
-- []()
-- []()
-- []()
-- []()
-- []()
+- [The &lt;state&gt; element](#the-state-element)
+- [The &lt;workflow&gt; element](#the-workflow-element)
+- [The &lt;workflow_status&gt; element](#the-workflow_status-element)
+- [The &lt;developers&gt; element](#the-developers-element)
+- [The &lt;developer&gt; element](#the-developer-element)
+- [The &lt;assignee&gt; element](#the-assignee-element)
+- [The &lt;priority&gt; element](#the-priority-element)
+- [The &lt;labels&gt; element](#the-labels-element)
+- [The &lt;label&gt; element](#the-label-element)
+- [The &lt;watchers&gt; element](#the-watchers-element)
+- [The &lt;watcher&gt; element](#the-watcher-element)
+- [The &lt;actions&gt; element](#the-actions-element)
+- [The &lt;action&gt; element](#the-action-element)
 
 
 
