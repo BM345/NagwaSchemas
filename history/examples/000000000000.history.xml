@@ -4,9 +4,9 @@
         <workflow>new_explainer</workflow>
         <workflow_status>subject_review</workflow_status>
         <developers>
-            <developer role="content_writer">example.user.1@nagwa.com</developer>
-            <developer role="course_reviewer">example.user.2@nagwa.com</developer>
-            <developer role="subject_reviewer">example.user.3@nagwa.com</developer>
+            <developer workflow="new_explainer" role="content_writer">example.user.1@nagwa.com</developer>
+            <developer workflow="new_explainer" role="course_reviewer">example.user.2@nagwa.com</developer>
+            <developer workflow="new_explainer" role="subject_reviewer">example.user.3@nagwa.com</developer>
         </developers>
         <assignee>example.user.3@nagwa.com</assignee>
         <priority>high</priority>

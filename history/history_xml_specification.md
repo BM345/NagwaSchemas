@@ -169,9 +169,9 @@ Below is shown an example of the `<developers>` element.
 
 ```xml
 <developers>
-    <developer role="content_writer">example.user.1@nagwa.com</developer>
-    <developer role="course_reviewer">example.user.2@nagwa.com</developer>
-    <developer role="subject_reviewer">example.user.3@nagwa.com</developer>
+    <developer workflow="new_explainer" role="content_writer">example.user.1@nagwa.com</developer>
+    <developer workflow="new_explainer" role="course_reviewer">example.user.2@nagwa.com</developer>
+    <developer workflow="new_explainer" role="subject_reviewer">example.user.3@nagwa.com</developer>
 </developers>
 ```
 
@@ -183,10 +183,15 @@ Below is shown an example of the `<developers>` element.
 
 A `<developer>` element records that a certain developer in a certain role has worked on a content entity. The text of a `<developer>` element should be the email address of the user.
 
+A new `<developer>` element should be added to the `<developers>` tag every time a content entity is assigned to a new user, as long as that user in that role hasn't been added before for that workflow (i.e., there must be no duplicates in the list).
+
+`<developer>` elements should never be removed from the `<developers>` element.
+
 ### Attributes
 
 | Name | Required | Allowed Values | Description |
 |---|---|---|---|
+| `workflow` | Required | a reference | The reference to the workflow that this developer worked on this content entity in with the given role. This is needed because, for example, different copyeditors may work on an explainer when it is in an explainer update workflow to when it is in the new explainer workflow. This attribute is needed to be able to work out which copyeditor to auto-assign it to. |
 | `role` | Required | a user role | The role that the user acted in when they worked on this item. |
 
 ### Possible Subelements
@@ -198,7 +203,7 @@ None
 Below is shown an example of a `<developer>` element.
 
 ```xml
-<developer role="content_writer">example.user.1@nagwa.com</developer>
+<developer workflow="new_explainer" role="content_writer">example.user.1@nagwa.com</developer>
 ```
 
 
