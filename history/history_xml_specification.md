@@ -344,3 +344,94 @@ Below is shown an example of a `<watcher>` element.
 ```xml
 <watcher>example.user.1@nagwa.com</watcher>
 ```
+
+
+
+<br /><br />
+
+## The &lt;actions&gt; element
+
+The `<actions>` element contains the list of actions that have been taken on this content entity. The list of actions should provide a complete picture of the history of this content entity.
+
+### Attributes
+
+None
+
+### Possible Subelements
+
+- `<action>`
+
+### Examples
+
+Below is shown an example of the `<actions>` element.
+
+```xml
+<actions>
+    <action taken_at="..." taken_by="..." type="...">
+        ...
+    </action>
+    <action taken_at="..." taken_by="..." type="...">
+        ...
+    </action>
+    <action taken_at="..." taken_by="..." type="...">
+        ...
+    </action>
+</actions>
+```
+
+
+
+<br /><br />
+
+## The &lt;action&gt; element
+
+An `<action>` element is a record of an action taken on a content entity. An `<action>` element records when an action was taken, who it was taken by, what kind of action it was, and any other necessary data about the action. Actions cover all types of interaction with the content entity: adding a comment or a label is an action, as is changing the status, priority, or assignee.
+
+### Attributes
+
+| Name | Required | Allowed Values | Description |
+|---|---|---|---|
+| `taken_at` | Required | timestamp | The date and time of when this action was taken. |
+| `taken_by` | Required | email address / `system` | The email address of the user who took this action. Some actions are not taken by a user, but by the system - in such cases, this attribute should just have the value `system`. |
+| `type` | Required | one of a set of values; see below | The type of action this was - i.e., whether it was a status change, or a new comment, et cetera. |
+
+### Type Values
+
+The table below gives the set of possible values for the `type` attribute, and what they mean. This list will likely be expanded in future versions of this specification, to allow for an even more detailed history of a content entity.
+
+The 'Notify Watchers' column denotes whether a notification should be sent to each of the watchers when an action of that type is added to the history file.
+
+Note that comments can never be edited or deleted. (In the case where a comment must be deleted because it accidentally includes some GDPR-restricted data, then this must be done manually by developers.)
+
+| Value | Notify Watchers | Meaning |
+|---|---|---|
+| `created_entity` | No | An action of this type should be added when the entity is first created. |
+| `changed_workflow` | No | An action of this type should be added when the entity is put into a new workflow or taken out of a workflow. |
+| `changed_workflow_status` | Yes | An action of this type should be added when the status of the entity is changed (except when it is changed to none). |
+| `changed_assignee` | Yes | An action of this type should be added when the assignee for an entity is changed (except when it is changed to none). |
+| `changed_priority` | Yes | An action of this type should be added when the priority for an entity is changed (except when it is changed to none). |
+| `added_comment` | Yes | An action of this type should be added when a user adds a comment to the entity. |
+| `added_label` | Yes | An action of this type should be added when a user adds a label to the entity. |
+| `removed_label` | Yes | An action of this type should be added when a user removes a label from the entity. |
+| `added_watcher` | No | An action of this type should be added when a user adds a watcher (either themselves or someone else) to the entity. |
+| `removed_watcher` | No | An action of this type should be added when a user removes a watcher (either themselves or someone else) to the entity. |
+
+### Possible Subelements
+
+
+### Examples
+
+Below are shown some examples of the `<action>` element.
+
+```xml
+<action taken_at="2021-04-26T10:00:00" taken_by="system" type="changed_workflow">
+    <new_workflow>new_explainer</new_workflow>
+</action>
+```
+
+```xml
+<action taken_at="2021-04-26T10:30:00" taken_by="example.user.1@nagwa.com" type="added_comment">
+    <comment_reference>c1</comment_reference>
+    <comment_text>This is my comment.</comment_text>
+</action>
+```
