@@ -6,6 +6,7 @@ A full example History XML document can be viewed [here](examples/000000000000.h
 
 ## Table of Contents
 
+- [Overview](#overview)
 - [The &lt;history&gt; element](#the-history-element)
 - [The &lt;state&gt; element](#the-state-element)
 - [The &lt;workflow&gt; element](#the-workflow-element)
@@ -18,8 +19,24 @@ A full example History XML document can be viewed [here](examples/000000000000.h
 - [The &lt;label&gt; element](#the-label-element)
 - [The &lt;watchers&gt; element](#the-watchers-element)
 - [The &lt;watcher&gt; element](#the-watcher-element)
+- [The &lt;versions&gt; element](#the-versions-element)
+- [The &lt;version&gt; element](#the-version-element)
 - [The &lt;actions&gt; element](#the-actions-element)
 - [The &lt;action&gt; element](#the-action-element)
+
+
+
+<br /><br />
+
+## Overview
+
+A History XML file consists of two parts: a state, and a list of actions.
+
+The list of actions provides a full history of the content entity. What workflows the entity has been in, who has worked on it, what comments have been added to it, and more, can all be traced by looking through the list of actions.
+
+The state provides data for the current state of the content item. It exists to provide an easy way of looking-up the current state - i.e., you don't have to process the entire list of actions to work out the current state - you can just look in the 'cached' values in the state. This also makes the XML very human-readable.
+
+As actions are taken on the content entity, they should be added to the list of actions, and the state should be updated accordingly.
 
 
 
@@ -76,6 +93,7 @@ None
 - `<priority>`
 - `<labels>`
 - `<watchers>`
+- `<versions>`
 
 ### Examples
 
@@ -96,6 +114,9 @@ Below is shown an example of the `<state>` element.
     <watchers>
         ...
     </watchers>
+    <versions>
+        ...
+    </versions>
 </state>
 ```
 
@@ -372,6 +393,62 @@ Below is shown an example of a `<watcher>` element.
 
 <br /><br />
 
+## The &lt;versions&gt; element
+
+The `<versions>` element contains the list of all of the different versions of the content item.
+
+### Attributes
+
+None
+
+### Possible Subelements
+
+- `<version>`
+
+### Examples
+
+Below is shown an example of the `<versions>` element.
+
+```xml
+<versions>
+    <version file_name="000000000000.1.xml">1</version>
+    <version file_name="000000000000.2.xml">2</version>
+    <version file_name="000000000000.3.xml">3</version>
+</versions>
+```
+
+
+
+<br /><br />
+
+## The &lt;version&gt; element
+
+A `<version>` element records that a particular version of the content entity exists.
+
+The text of this element should just be the reference of the version (which is usually just a number).
+
+### Attributes
+
+| Name | Required | Allowed Values | Description |
+|---|---|---|---|
+| `file_name` | Required | file name | The name of the file that contains this version of the content entity. |
+
+### Possible Subelements
+
+None
+
+### Examples
+
+Below is shown an example of a `<version>` element.
+
+```xml
+<version file_name="000000000000.1.xml">1</version>
+```
+
+
+
+<br /><br />
+
 ## The &lt;actions&gt; element
 
 The `<actions>` element contains the list of actions that have been taken on this content entity. The list of actions should provide a complete picture of the history of this content entity.
@@ -429,6 +506,7 @@ Note that comments can never be edited or deleted. (In the case where a comment 
 | Value | Notify Watchers | Meaning |
 |---|---|---|
 | `created_entity` | No | An action of this type should be added when the entity is first created. |
+| `created_new_version` | No | An action of this type should be added when a new version of the content entity is created. |
 | `changed_workflow` | Yes | An action of this type should be added when the entity is put into a new workflow or taken out of a workflow. |
 | `changed_workflow_status` | Yes | An action of this type should be added when the status of the entity is changed (except when it is changed to none). |
 | `changed_assignee` | Yes | An action of this type should be added when the assignee for an entity is changed (except when it is changed to none). |
@@ -446,6 +524,7 @@ The possible subelements for an `<action>` element are different depending on th
 | Value | Possible Subelements |
 |---|---|
 | `created_entity` | None |
+| `created_new_version` | A `<version>` element, containing the reference of the new version (which is usually just a number), and a `<file_name>` element, containing the file name. |
 | `changed_workflow` | A `<new_workflow>` element, the text of which is the reference for the workflow that this entity has been put into. |
 | `changed_workflow_status` | A `<new_workflow_status>` element, the text of which is the reference for the workflow status that this entity has been given. |
 | `changed_assignee` | A `<new_assignee>` element, the text of which is the email address of the user that this entity has been assigned to. |
@@ -455,7 +534,6 @@ The possible subelements for an `<action>` element are different depending on th
 | `removed_label` | A `<label>` element, the text of which is the text of the label. |
 | `added_watcher` | A `<watcher>` element, the text of which is the email address of the watcher. |
 | `removed_watcher` | A `<watcher>` element, the text of which is the email address of the watcher. |
-
 
 ### Examples
 

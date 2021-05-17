@@ -18,9 +18,16 @@
         <watchers>
             <watcher>example.user.1@nagwa.com</watcher>
         </watchers>
+        <versions>
+            <version file_name="000000000000.1.xml">1</version>
+        </versions>
     </state>
     <actions>
         <action taken_at="2021-04-26T10:00:00" taken_by="example.user.1@nagwa.com" type="created_entity">
+        </action>
+        <action taken_at="2021-04-26T10:00:00" taken_by="example.user.1@nagwa.com" type="created_new_version">
+            <version>1</version>
+            <file_name>000000000000.1.xml</file_name>
         </action>
         <action taken_at="2021-04-26T10:00:00" taken_by="system" type="changed_workflow">
             <new_workflow>new_explainer</new_workflow>
