@@ -1,5 +1,9 @@
 # History XML Specification
 
+This document gives the specification for History XML.
+
+A full example History XML document can be viewed [here](examples/000000000000.history.xml).
+
 ## Table of Contents
 
 - [The &lt;history&gt; element](#the-history-element)
