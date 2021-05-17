@@ -418,6 +418,21 @@ Note that comments can never be edited or deleted. (In the case where a comment 
 
 ### Possible Subelements
 
+The possible subelements for an `<action>` element are different depending on the value of the `type` attribute. The table below gives the possible subelements for each different `type` value.
+
+| Value | Possible Subelements |
+|---|---|
+| `created_entity` | None |
+| `changed_workflow` | A `<new_workflow>` element, the text of which is the reference for the workflow that this entity has been put into. |
+| `changed_workflow_status` | A `<new_workflow_status>` element, the text of which is the reference for the workflow status that this entity has been given. |
+| `changed_assignee` | A `<new_assignee>` element, the text of which is the email address of the user that this entity has been assigned to. |
+| `changed_priority` | A `<new_priority>` element, the text of which is the priority that this entity has been given. |
+| `added_comment` | A `<comment_reference>` element, the text of which is a unique reference for this comment. This can be anything, as long as it is unique for this content entity. Also a `<comment_text>` element for the text of the comment. |
+| `added_label` | A `<label>` element, the text of which is the text of the label. |
+| `removed_label` | A `<label>` element, the text of which is the text of the label. |
+| `added_watcher` | A `<watcher>` element, the text of which is the email address of the watcher. |
+| `removed_watcher` | A `<watcher>` element, the text of which is the email address of the watcher. |
+
 
 ### Examples
 
