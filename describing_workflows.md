@@ -6,6 +6,10 @@ This document describes how the workflows that we use in the development of Nagw
   - [Workflow XML](#workflow-xml)
   - [History XML](#history-xml)
 
+The full specification for Workflow XML can be viewed [here](workflow/workflow_xml_specification.md).
+
+The full specification for History XML can be viewed [here](history/000000000000.history.md).
+
 ## Principles of Design
 
 The diagram below shows a workflow that we might use for developing an explainer.
