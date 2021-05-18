@@ -33,6 +33,7 @@
             <new_workflow>new_explainer</new_workflow>
         </action>
         <action taken_at="2021-04-26T10:00:00" taken_by="system" type="changed_workflow_status">
+            <transition></transition>
             <new_workflow_status>drafting</new_workflow_status>
         </action>
         <action taken_at="2021-04-26T10:00:10" taken_by="example.user.1@nagwa.com" type="changed_assignee">
@@ -46,6 +47,7 @@
             <comment_text>This is my comment.</comment_text>
         </action>
         <action taken_at="2021-04-26T11:00:00" taken_by="example.user.1@nagwa.com" type="changed_workflow_status">
+            <transition>submit_to_course_review</transition>
             <new_workflow_status>course_review</new_workflow_status>
         </action>
         <action taken_at="2021-04-26T11:00:00" taken_by="system" type="changed_assignee">
@@ -55,6 +57,7 @@
             <new_assignee>example.user.2@nagwa.com</new_assignee>
         </action>
         <action taken_at="2021-04-27T16:00:00" taken_by="example.user.2@nagwa.com" type="changed_workflow_status">
+            <transition>submit_to_subject_review_2</transition>
             <new_workflow_status>subject_review</new_workflow_status>
         </action>
         <action taken_at="2021-04-27T16:00:00" taken_by="system" type="changed_assignee">

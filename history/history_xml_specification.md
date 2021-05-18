@@ -526,7 +526,7 @@ The possible subelements for an `<action>` element are different depending on th
 | `created_entity` | None |
 | `created_new_version` | A `<version>` element, containing the reference of the new version (which is usually just a number), and a `<file_name>` element, containing the file name. |
 | `changed_workflow` | A `<new_workflow>` element, the text of which is the reference for the workflow that this entity has been put into. |
-| `changed_workflow_status` | A `<new_workflow_status>` element, the text of which is the reference for the workflow status that this entity has been given. |
+| `changed_workflow_status` | A `<transition>` element, the text of which is the reference for the transition that was used for this status change (which should be nothing for when the entity is moved into or out of the workflow by the system), and a `<new_workflow_status>` element, the text of which is the reference for the workflow status that this entity has been given. |
 | `changed_assignee` | A `<new_assignee>` element, the text of which is the email address of the user that this entity has been assigned to. |
 | `changed_priority` | A `<new_priority>` element, the text of which is the priority that this entity has been given. |
 | `added_comment` | A `<comment_reference>` element, the text of which is a unique reference for this comment. This can be anything, as long as it is unique for this content entity. Also a `<comment_text>` element for the text of the comment. |
