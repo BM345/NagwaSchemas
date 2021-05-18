@@ -1,5 +1,9 @@
 # Workflow XML Specification
 
+This document gives the specification for Workflow XML.
+
+A full example Workflow XML document can be viewed [here](examples/new_explainer.workflow.xml).
+
 ## Table of Contents
 
 - [The &lt;workflow&gt; element](#the-workflow-element)
