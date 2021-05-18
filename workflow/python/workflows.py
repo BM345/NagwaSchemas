@@ -175,9 +175,10 @@ class Transition(object):
         e2.text = self.name 
         e1.append(e2)
 
-        e3 = XMLElement("button_text")
-        e3.text = self.buttonText 
-        e1.append(e3)
+        if self.buttonText != "":
+            e3 = XMLElement("button_text")
+            e3.text = self.buttonText 
+            e1.append(e3)
 
         if self.description != "":
             e4 = XMLElement("description")

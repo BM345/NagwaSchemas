@@ -3,6 +3,7 @@ from workflows import *
 workflow1 = Workflow("New Lesson Scope Workflow", "This workflow is used for creating new lesson scopes.")
 
 courseDesign = workflow1.addStatus("Course Design", "The lesson scope is being written according to the requirements of different courses.")
+courseDesignValidation = workflow1.addStatus("Course Design Validation", "", "", "validation", "automated_processing")
 subjectReview = workflow1.addStatus("Subject Review", "The lesson scope is being checked for clarity and ambiguity.")
 copyediting = workflow1.addStatus("Copyediting", "The lesson scope is being copyedited.")
 markup = workflow1.addStatus("Markup", "The lesson scope is being marked-up.")
@@ -10,8 +11,15 @@ markupReview = workflow1.addStatus("Markup Review", "The markup of the lesson sc
 finalReview = workflow1.addStatus("Final Review", "This is the final review before the lesson scope goes live.")
 published = workflow1.addStatus("Published", "The lesson scope has been published.")
 
-t1 = workflow1.addTransition(courseDesign, subjectReview, "Submit to Subject Review", "Submit", "", "", "submit")
+t1 = workflow1.addTransition(courseDesign, courseDesignValidation, "Submit to Subject Review", "Submit", "", "", "submit")
 t1.rules.append(RolesRule(["course_designer"]))
+
+t1a = workflow1.addTransition(courseDesignValidation, subjectReview, "Pass", "", "", "", "pass")
+t1a.rules.append(RolesRule(["system"]))
+t1b = workflow1.addTransition(courseDesignValidation, courseDesign, "Fail", "", "", "", "fail")
+t1b.rules.append(RolesRule(["system"]))
+t1c = workflow1.addTransition(courseDesignValidation, courseDesign, "Error", "", "", "", "error")
+t1c.rules.append(RolesRule(["system"]))
 
 t2 = workflow1.addTransition(subjectReview, courseDesign, "Send back to Course Design", "Reject", "", "", "reject", True)
 t2.rules.append(RolesRule(["subject_reviewer"]))

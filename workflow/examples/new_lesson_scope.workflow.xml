@@ -7,6 +7,9 @@
             <name>Course Design</name>
             <description>The lesson scope is being written according to the requirements of different courses.</description>
         </status>
+        <status reference="course_design_validation" category="validation" type="automated_processing">
+            <name>Course Design Validation</name>
+        </status>
         <status reference="subject_review">
             <name>Subject Review</name>
             <description>The lesson scope is being checked for clarity and ambiguity.</description>
@@ -33,11 +36,29 @@
         </status>
     </statuses>
     <transitions>
-        <transition reference="submit_to_subject_review" from="course_design" to="subject_review" type="submit">
+        <transition reference="submit_to_subject_review" from="course_design" to="course_design_validation" type="submit">
             <name>Submit to Subject Review</name>
             <button_text>Submit</button_text>
             <rules>
                 <rule allow_if="role in ['course_designer']"/>
+            </rules>
+        </transition>
+        <transition reference="pass" from="course_design_validation" to="subject_review" type="pass">
+            <name>Pass</name>
+            <rules>
+                <rule allow_if="role in ['system']"/>
+            </rules>
+        </transition>
+        <transition reference="fail" from="course_design_validation" to="course_design" type="fail">
+            <name>Fail</name>
+            <rules>
+                <rule allow_if="role in ['system']"/>
+            </rules>
+        </transition>
+        <transition reference="error" from="course_design_validation" to="course_design" type="error">
+            <name>Error</name>
+            <rules>
+                <rule allow_if="role in ['system']"/>
             </rules>
         </transition>
         <transition reference="send_back_to_course_design" from="subject_review" to="course_design" type="reject" comment_required="true">
