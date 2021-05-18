@@ -159,7 +159,9 @@ Each `<transition>` element has a `<button_text>` subelement, which gives the te
 
 Each `<status>` element can have a `category` attribute. This can be used to identify groups of related statuses. For example, the statuses 'Creative Design' and 'Creative Design Review' are both part of the creative design process, so might both have `category="creative_design"`. This can allow for a more intuitive, automatic colour-coding of statuses in the user-interface.
 
-Similarly, each `<transition>` element has a `type` attribute. This can be set to one of three values: `submit`, `approve`, or `reject`. This attribute is useful for automatically setting the colour of the buttons that developers and designers will see. If a developer or designer has the option to 'approve' an entity in some way, then we would probably want that button to appear green, whereas if they have the option to 'reject' an entity, then we would probably want that button to appear red or orange.
+Each `<status>` element can also have a `type` attribute. This can be set to either `manual_processing` or `automated_processing`. This attribute is used to identify statuses that should be handled by automated processes. Such automated processes may carry out different kinds of work on content entities with such statuses - they might validate the content in some way, or do some audio or video processing on the content.
+
+Each `<transition>` element can have a `type` attribute. This can be set to one of seven values: `submit`, `approve`, `reject`, `send`, `pass`, `fail`, `error`. This attribute is useful for automatically setting the colour of the buttons that developers and designers will see. If a developer or designer has the option to 'approve' an entity in some way, then we would probably want that button to appear green, whereas if they have the option to 'reject' an entity, then we would probably want that button to appear red or orange. This attribute is also used by automated processes to know which transition it should activate on different outcomes. If the automated processes validates the content in some way, if the validation is passed, then the system should activate the `pass` transition. If the validation is failed, however, the system should activate the `fail` transition.
 
 Each `<transition>` element can also have a `comment_required` attribute, which can be set to `true` or `false`. This indicates whether a developer must add a comment in order to execute a transition. This is generally the case for transitions that represent rejections. If this attribute is left out, it is assumed to have a value of `false`.
 
@@ -171,16 +173,16 @@ Certain rules described in the workflow XML require us to know *which* statuses 
 
 We also need to keep track of *who* a given content entity is assigned to.
 
-We can keep track of this information, as well as solve a few other problems with the CDS at the same time, by introducing a history XML file. For each content entity in the system, there would be a corresponding history XML file. This file would keep track of the statuses that each entity has had, who it is assigned to, and any comments that have been made on the entity.
+We can keep track of this information by introducing a History XML file. For each content entity in the system, there would be a corresponding History XML file. This file would keep track of the statuses that each entity has had, who it is assigned to, and any comments that have been made on the entity.
 
-The basic structure of a history XML file would have two main parts: a list of 'actions', which describe all historical actions on the entity, when they were taken, and who they were taken by, and a 'state', which would describe the current state of the entity, in order to provide an easy and quick way of looking up the current state.
+The basic structure of a History XML file would have two main parts: a list of 'actions', which describe all historical actions on the entity, when they were taken, and who they were taken by, and a 'state', which would describe the current state of the entity, in order to provide an easy and quick way of looking up the current state.
 
 This structure is shown below, without any data in it.
 
 ```xml
 <history for_content_entity="explainer/000000000000">
     <state>
-        <workflow_reference>...</workflow_reference>
+        <workflow>...</workflow>
         <workflow_status>...</workflow_status>
         <assignee>...</assignee>
     </state>
@@ -197,25 +199,37 @@ This structure is shown below, without any data in it.
 
 The root element is a `<history>` element, and has an attribute `for_content_entity` to denote which content entity this history applies to. The `<history>` element has two subelements: `<state>` and `<actions>`.
 
-The `<state>` element has subelements that define the current state of the entity. This includes `<workflow_reference>`, which identifies which workflow the content entity is currently in (or `none` if it is not in any workflow, making `none` a reserved word), `<workflow_status>`, which identifies the current status of the content entity, and `<assignee>`, which is the email address of the current assignee, as well as other subelements.
+The `<state>` element has subelements that define the current state of the entity. This includes `<workflow>`, which identifies which workflow the content entity is currently in, `<workflow_status>`, which identifies the current status of the content entity, and `<assignee>`, which is the email address of the current assignee, as well as other subelements.
 
 The `<actions>` element contains a list of `<action>` elements. Each `<action>` element has an attribute `taken_at`, which is the timestamp of when the action was taken, an attribute `taken_by`, which is the email address of the person who took the action, and an attribute `type`, which denotes the type of action, and which can have values such as `changed_status`, `changed_assignee`, `added_comment`, et cetera. An `<action>` element can also contain other elements that give additional information about the action taken.
 
-Below is shown part of a hypothetical history XML document for an explainer in the new explainer workflow. You can see the example in full [here](history/examples/000000000000.history.xml).
+Below is shown part of a hypothetical History XML document for an explainer in the new explainer workflow. You can see the example in full [here](history/examples/000000000000.history.xml).
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <history for_content_entity="explainer/000000000000">
     <state>
-        <workflow_reference>new_explainer</workflow_reference>
+        <workflow>new_explainer</workflow>
         <workflow_status>course_review</workflow_status>
+        <developers>
+            <developer workflow="new_explainer" role="content_writer">example.user.1@nagwa.com</developer>
+        </developers>
         <assignee>none</assignee>
         <priority>high</priority>
+        <labels>
+        </labels>
         <watchers>
         </watchers>
+        <versions>
+            <version file_name="000000000000.1.xml">1</version>
+        </versions>
     </state>
     <actions>
         <action taken_at="2021-04-26T10:00:00" taken_by="example.user.1@nagwa.com" type="created_entity">
+        </action>
+        <action taken_at="2021-04-26T10:00:00" taken_by="example.user.1@nagwa.com" type="created_new_version">
+            <version>1</version>
+            <file_name>000000000000.1.xml</file_name>
         </action>
         <action taken_at="2021-04-26T10:00:00" taken_by="system" type="changed_workflow">
             <new_workflow_reference>new_explainer</new_workflow_reference>
@@ -252,7 +266,7 @@ This XML describes the history of the content entity for a short while after it 
 | 10:30:00 | The same user added a comment to the content entity. |
 | 11:00:00 | The same user moved the entity to 'Course Review'. The system automatically unassigned it from them, as they are not able to transition it away from 'Course Review' once they've put it there. |
 
-In addition to keeping track of what statuses a content entity has and hasn't had, there are several very useful features that the history XML offers, which are described below.
+In addition to keeping track of what statuses a content entity has and hasn't had, there are several very useful features that the History XML offers, which are described below.
 
 - **It makes it possible to add comments to an entity at any time.**
   This would be an extremely useful feature in content development. Very often, we know that something needs to happen with a particular question or explainer, or any other item, but this isn't something we need or are able to do straight away. It would be extremely convenient to be able to just attach this information as a comment to an item whenever we need to, so that we make sure that the right information stays with a given item, and that everyone who works on the item can see it.
@@ -261,11 +275,11 @@ In addition to keeping track of what statuses a content entity has and hasn't ha
 - **It allows us to 'watch' content items.**
   It would be very convenient to have the option for users to 'watch' certain content items. This would mean that when certain actions are added to the history of the item, any users who are watching that item are notified. This would make it much easier to respond to comments and queries quickly.
 
-In addition to this, using this system of a workflow XML and a history XML, choosing *who* should work on a given content item once it has reached a given status should be decided manually, and can be decided or changed at any time. The structure of the history XML file allows for this. This makes it a lot easier to organise who is going to do what, and to reassign a task to someone else should the original assignee become very busy with a separate task or project.
+In addition to this, using this system of a Workflow XML and a History XML, choosing *who* should work on a given content item once it has reached a given status should be decided manually, and can be decided or changed at any time. The structure of the History XML file allows for this. This makes it a lot easier to organise who is going to do what, and to reassign a task to someone else should the original assignee become very busy with a separate task or project.
 
-This system also introduces priority flags in the history XML. Very often some content items are considered to be of higher priority than others - at the moment we don't really have a good way of communicating this through the CDS.
+This system also introduces priority flags in the History XML. Very often some content items are considered to be of higher priority than others - at the moment we don't really have a good way of communicating this through the CDS.
 
-Together, the workflow XML and the history XML are a simple way of describing workflows and the work done on different pieces of content, and add a lot of useful features.
+Together, the Workflow XML and the History XML are a simple way of describing workflows and the work done on different pieces of content, and add a lot of useful features.
 
 ## Questions and Answers
 
@@ -291,9 +305,9 @@ The purpose of the `category` attribute on the `<status>` elements is to group t
 
 There are several reasons for this.
 
-1. It allows the transitions that a given content item has made to be referenced in the history XML, and for those transitions to be searched, and for rules to be applied to them. For example, we might want to apply a rule to a transition of the kind `<rule allow_if="'drafting_to_course_review' in pastTransitions">`. Such rules are likely to be rare, but including transition references allows for maximum flexibility of the workflow rules. Such rules could not be defined using status references alone (for example, with something like `<rule allow_if="('drafting' to 'course_review') in pastTransitions">`) as there may be multiple transitions between two statuses with different conditions applied on, say, user role, and using status references alone does not distinguish between them.
-2. It simplifies the workflow XML - all statuses and transitions must have a reference attribute - it is never optional.
-3. It makes it easier to write code to interact with the workflow XML. When interacting with the workflow XML through code, it's useful to have a unique way of referring to each transition (and status). This makes it easier to manipulate and search through the transitions when they are in dictionaries or lists, and it also makes it easier to query the XML using something like XPath.
+1. It allows the transitions that a given content item has made to be referenced in the History XML, and for those transitions to be searched, and for rules to be applied to them. For example, we might want to apply a rule to a transition of the kind `<rule allow_if="'drafting_to_course_review' in pastTransitions">`. Such rules are likely to be rare, but including transition references allows for maximum flexibility of the workflow rules. Such rules could not be defined using status references alone (for example, with something like `<rule allow_if="('drafting' to 'course_review') in pastTransitions">`) as there may be multiple transitions between two statuses with different conditions applied on, say, user role, and using status references alone does not distinguish between them.
+2. It simplifies the Workflow XML - all statuses and transitions must have a reference attribute - it is never optional.
+3. It makes it easier to write code to interact with the Workflow XML. When interacting with the Workflow XML through code, it's useful to have a unique way of referring to each transition (and status). This makes it easier to manipulate and search through the transitions when they are in dictionaries or lists, and it also makes it easier to query the XML using something like XPath.
 
-It is expected that the references for all statuses and transitions within the workflow XML would be generated automatically, so even though these references are sometimes quite long, they would not have to be typed out manually.
+It is expected that the references for all statuses and transitions within the Workflow XML would be generated automatically, so even though these references are sometimes quite long, they would not have to be typed out manually.
 
