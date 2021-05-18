@@ -8,7 +8,7 @@ This document describes how the workflows that we use in the development of Nagw
 
 The full specification for Workflow XML can be viewed [here](workflow/workflow_xml_specification.md).
 
-The full specification for History XML can be viewed [here](history/000000000000.history.md).
+The full specification for History XML can be viewed [here](history/history_xml_specification.md).
 
 ## Principles of Design
 
