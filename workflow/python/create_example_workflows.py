@@ -2,14 +2,17 @@ from workflows import *
 
 workflow1 = Workflow("New Lesson Scope Workflow", "This workflow is used for creating new lesson scopes.")
 
-courseDesign = workflow1.addStatus("Course Design", "The lesson scope is being written according to the requirements of different courses.")
+courseDesign = workflow1.addStatus("Course Design", "The lesson scope is being written according to the requirements of different courses.", "", "course_design")
 courseDesignValidation = workflow1.addStatus("Course Design Validation", "", "", "validation", "automated_processing")
-subjectReview = workflow1.addStatus("Subject Review", "The lesson scope is being checked for clarity and ambiguity.")
-copyediting = workflow1.addStatus("Copyediting", "The lesson scope is being copyedited.")
-markup = workflow1.addStatus("Markup", "The lesson scope is being marked-up.")
-markupReview = workflow1.addStatus("Markup Review", "The markup of the lesson scope is being reviewed.")
-finalReview = workflow1.addStatus("Final Review", "This is the final review before the lesson scope goes live.")
-published = workflow1.addStatus("Published", "The lesson scope has been published.")
+subjectReview = workflow1.addStatus("Subject Review", "The lesson scope is being checked for clarity and ambiguity.", "", "subject_review")
+copyediting = workflow1.addStatus("Copyediting", "The lesson scope is being copyedited.", "", "copyediting")
+markup = workflow1.addStatus("Markup", "The lesson scope is being marked-up.", "", "markup")
+markupReview = workflow1.addStatus("Markup Review", "The markup of the lesson scope is being reviewed.", "", "markup")
+finalReview = workflow1.addStatus("Final Review", "This is the final review before the lesson scope goes live.", "", "final_review")
+published = workflow1.addStatus("Published", "The lesson scope has been published.", "", "published")
+
+workflow1.initialStatus = courseDesign 
+workflow1.finalStatus = published 
 
 t1 = workflow1.addTransition(courseDesign, courseDesignValidation, "Submit to Subject Review", "Submit", "", "", "submit")
 t1.rules.append(RolesRule(["course_designer"]))
