@@ -69,13 +69,13 @@ These three concepts allow us to define a workflow using a simple XML structure.
 </workflow>
 ```
 
-The root element of the workflow XML is a `<workflow>` element. The `<statuses>` subelement contains the set of statuses for the workflow, and the `<transitions>` subelement contains the set of transitions. 
+The root element of the Workflow XML is a `<workflow>` element. The `<statuses>` subelement contains the set of statuses for the workflow, and the `<transitions>` subelement contains the set of transitions. 
 
 Each `<status>` element has a `reference` attribute, and these references are used in the `from` and `to` attributes on each `<transition>` element to denote which statuses the transition links. 
 
 Each `<transition>` element contains a `<rules>` subelement, which contains the set of rules that apply to this transition.
 
-Below is shown part of the workflow XML for the workflow shown in the diagram above. The full XML for the above workflow can be viewed [here](workflow/examples/new_explainer.workflow.xml).
+Below is shown part of the Workflow XML for the workflow shown in the diagram above. The full XML for the above workflow can be viewed [here](workflow/examples/new_explainer.workflow.xml).
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -169,7 +169,7 @@ Each `<rule>` element has an `allow_if` attribute. The value of this attribute i
 
 ### History XML
 
-Certain rules described in the workflow XML require us to know *which* statuses an entity has had in the past, or *which* transitions it has made in the past. An example of this is the rule `<rule allow_if="'course_review' in pastStatuses">`, which allows a given transition only if the entity has had the 'Course Review' status before. Thus, we need a way of keeping track of the statuses that an entity has had, and the transitions it has made.
+Certain rules described in the Workflow XML require us to know *which* statuses an entity has had in the past, or *which* transitions it has made in the past. An example of this is the rule `<rule allow_if="'course_review' in pastStatuses">`, which allows a given transition only if the entity has had the 'Course Review' status before. Thus, we need a way of keeping track of the statuses that an entity has had, and the transitions it has made.
 
 We also need to keep track of *who* a given content entity is assigned to.
 
@@ -235,6 +235,7 @@ Below is shown part of a hypothetical History XML document for an explainer in t
             <new_workflow_reference>new_explainer</new_workflow_reference>
         </action>
         <action taken_at="2021-04-26T10:00:00" taken_by="system" type="changed_workflow_status">
+            <transition></transition>
             <new_workflow_status>drafting</new_workflow_status>
         </action>
         <action taken_at="2021-04-26T10:00:10" taken_by="example.user.1@nagwa.com" type="changed_assignee">
@@ -248,6 +249,7 @@ Below is shown part of a hypothetical History XML document for an explainer in t
             <comment_text>This is my comment.</comment_text>
         </action>
         <action taken_at="2021-04-26T11:00:00" taken_by="example.user.1@nagwa.com" type="changed_workflow_status">
+            <transition>submit_to_course_review</transition>
             <new_workflow_status>course_review</new_workflow_status>
         </action>
         <action taken_at="2021-04-26T11:00:00" taken_by="system" type="changed_assignee">
