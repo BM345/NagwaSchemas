@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history for_content_entity="explainer/000000000001">
+    <state>
+        <workflow>new_explainer_workflow</workflow>
+        <workflow_status>drafting</workflow_status>
+        <developers/>
+        <assignee>example.user.1@nagwa.com</assignee>
+        <priority>high</priority>
+        <labels/>
+        <watchers/>
+        <versions>
+            <version file_name="000000000001.1.xml">1</version>
+        </versions>
+    </state>
+    <actions>
+        <action taken_at="2021-05-21T14:54:23" taken_by="example.user.1@nagwa.com" type="created_entity"/>
+        <action taken_at="2021-05-21T14:54:23" taken_by="example.user.1@nagwa.com" type="created_new_version">
+            <version>1</version>
+            <file_name>000000000001.1.xml</file_name>
+        </action>
+        <action taken_at="2021-05-21T14:54:23" taken_by="example.user.1@nagwa.com" type="changed_workflow">
+            <new_workflow>new_explainer_workflow</new_workflow>
+        </action>
+        <action taken_at="2021-05-21T14:54:23" taken_by="example.user.1@nagwa.com" type="changed_workflow_status">
+            <transition></transition>
+            <new_workflow_status>drafting</new_workflow_status>
+        </action>
+        <action taken_at="2021-05-21T14:54:23" taken_by="example.user.1@nagwa.com" type="changed_assignee">
+            <new_assignee>example.user.1@nagwa.com</new_assignee>
+        </action>
+        <action taken_at="2021-05-21T14:54:23" taken_by="example.user.1@nagwa.com" type="changed_priority">
+            <new_priority>high</new_priority>
+        </action>
+    </actions>
+</history>

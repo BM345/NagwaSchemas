@@ -5,9 +5,9 @@ import datetime
 DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
 
 class History(object):
-    def __init__(self):
-        self.contentEntityType = ""
-        self.contentEntityId = ""
+    def __init__(self, contentEntityType = "", contentEntityId = ""):
+        self.contentEntityType = contentEntityType
+        self.contentEntityId = contentEntityId
         self.state = State() 
         self.actions = []
 
