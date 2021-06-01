@@ -10,12 +10,14 @@ root element roles {
 
 element role {
     tagName: 'role';
+    allowedContent: elements;
+    attributes: reference;
+    subelements: name, description (optional);
+}
 
-    attribute reference {
-        type: reference;
-    }
-
-    subelements: name (n = 1), description (0 <= n <= 1);
+attribute reference {
+    tagName: 'reference';
+    valueType: reference;
 }
 
 element name {
