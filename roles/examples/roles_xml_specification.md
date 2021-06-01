@@ -86,7 +86,7 @@ Below is shown an example of a `<role>` element.
 
 ## The &lt;name&gt; element
 
-A `<name>` element defines the name of a role. All `<role>` elements must have a `<name>` subelement.
+A `<name>` element gives the name of a role. All `<role>` elements must have a `<name>` subelement.
 
 ### Attributes
 
