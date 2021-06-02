@@ -1,10 +1,12 @@
 
 dataType reference {
+    baseType: string;
     pattern: '[A-Za-z0-9_\-]+';
 }
 
 root element roles {
     tagName: 'roles';
+    allowedContent: elements;
     subelements: role (n >= 0);
 }
 
