@@ -10,14 +10,16 @@ from headers import headers
 import questions 
 from lxml import etree 
 
+logger = logging.getLogger(__name__)
+
 CDS_BASE_URL = "https://cds.nagwa.com"
 
 def downloadQuestionFiles(numberOfQuestions = 100):
 
-    files = glob.glob("questions_data/*")
+    #files = glob.glob("questions_data/*")
 
-    for f in files:
-        os.remove(f)
+    #for f in files:
+    #    os.remove(f)
 
     questionIds = []
 
@@ -31,7 +33,7 @@ def downloadQuestionFiles(numberOfQuestions = 100):
 
     session = requests.Session()
 
-    for questionId in questionIds[1:numberOfQuestions]:
+    for questionId in questionIds[4090:numberOfQuestions]:
 
         logger.info("Finding the latest version of {}.".format(questionId))
 
@@ -143,7 +145,6 @@ def migrate():
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.INFO)
-    logger = logging.getLogger(__name__)
 
     parser = argparse.ArgumentParser()
     parser.add_argument("action")
