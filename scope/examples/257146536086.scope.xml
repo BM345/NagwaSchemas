@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scope id="257146536086" version="1">
+    <language name_in_english="English" code="en" />
+    <dialects>
+        <dialect name_in_english="British" code="GB" />
+        <dialect name_in_english="American" code="US" />
+        <dialect name_in_english="Canadian" code="CA" />
+        <dialect name_in_english="Australian" code="AU" />
+    </dialects>
+    <objectives>
+        <skill>use ij notation to represent the components of a vector</skill>
+        <skill>work out what the <m>x</m> and <m>y</m> components of a vector are from a graphical representation of the vector on a grid</skill>
+        <skill>use trigonometry to work out an unknown component of a vector or the length of a vector</skill>
+    </objectives>
+    <prerequisites>
+        <item>what a vector is: that it represents a distance and a direction</item>
+        <item>the idea that vectors can be used to represent physical quantities such as displacement and velocity</item>
+        <item>how to use trigonometry to find unknown sides of triangles</item>
+    </prerequisites>
+    <exclusions>
+        <item>vector addition</item>
+        <item>vector subtraction</item>
+        <item>vectors in three dimensions</item>
+        <item>the scalar product of two vectors</item>
+        <item>the vector product of two vectors</item>
+    </exclusions>
+    <key_terms>
+        <key_term>vector magnitude</key_term>
+        <key_term>vector argument</key_term>
+        <key_term>components of a vector</key_term>
+        <key_term>horizontal component</key_term>
+        <key_term>vertical component</key_term>
+    </key_terms>
+</scope>

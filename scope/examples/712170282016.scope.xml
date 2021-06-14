@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scope id="712170282016" version="1">
+    <language name_in_english="English" code="en" />
+    <dialects>
+        <dialect name_in_english="American" code="US" />
+    </dialects>
+    <objectives>
+        <skill>review the past simple to talk about completed actions in the past</skill>
+        <skill>use past continuous to talk about an action that occured in the past for a certain period of time</skill>
+        <skill>use past simple with past continuous to show a shorter action being interrupted by a longer action</skill>
+        <skill>use conjunctions (<listed_word>while</listed_word>, <listed_word>as</listed_word>, <listed_word>when</listed_word>), prepositions (<listed_word>during</listed_word>) and adverbs (<listed_word>just</listed_word>) with the past simple and past continuous</skill>
+        <skill>understand that stative verbs are not used in the continuous tense</skill>
+    </objectives>
+    <prerequisites>
+        <item>irregular verbs</item>
+        <item>past simple</item>
+        <item>present continuous</item>
+    </prerequisites>
+    <exclusions>
+        <item>passive forms</item>
+    </exclusions>
+    <key_terms>
+    </key_terms>
+</scope>

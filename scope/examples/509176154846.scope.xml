@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scope id="509176154846" version="1">
+    <language name_in_english="English" code="en" />
+    <dialects>
+        <dialect name_in_english="American" code="US" />
+    </dialects>
+    <objectives>
+        <skill>practise using the past simple to talk about completed actions in the past</skill>
+        <skill>practise using the present simple to talk about routines, habits and facts</skill>
+        <skill>practise using irregular verbs in the past simple</skill>
+        <skill>practise using <listed_suffix>s</listed_suffix> form of verbs in the present simple</skill>
+        <skill>practise using the verb <listed_phrase>to be</listed_phrase> in the present and past simple</skill>
+        <skill>practise using <listed_word>yes</listed_word>/<listed_word>no</listed_word> and open questions in the present simple and past simple</skill>
+        <skill>use the present and past simple with time clauses</skill>
+        <skill>use the past simple to talk about successive past actions and repeated actions in the past</skill>
+    </objectives>
+    <prerequisites>
+        <item>irregular verbs</item>
+    </prerequisites>
+    <exclusions>
+        <item>passive form of the Past and Present tense</item>
+        <item><listed_phrase>am used to</listed_phrase> and <listed_phrase>used to</listed_phrase></item>
+    </exclusions>
+    <key_terms>
+    </key_terms>
+</scope>
