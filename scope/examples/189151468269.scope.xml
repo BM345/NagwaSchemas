@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<scope id="189151468269" version="1">
+    <language name_in_english="English" code="en" />
+    <dialects>
+        <dialect name_in_english="British" code="GB" />
+        <dialect name_in_english="American" code="US" />
+        <dialect name_in_english="Canadian" code="CA" />
+        <dialect name_in_english="Australian" code="AU" />
+    </dialects>
+    <objectives>
+        <skill>recall that some forces can act between objects without the objects being in contact</skill>
+        <skill>recall that gravity acts between all objects that have mass</skill>
+        <skill>recall that the force of gravity between two objects depends on the masses of the objects and the distance between them</skill>
+        <skill>recall that the force of gravity between two objects increases if their masses are greater and decreases if the distance between them increases</skill>
+        <skill>recall that gravity acts between the Sun and the planets</skill>
+        <skill>recall that gravity is the force that causes planets to orbit stars, and moons to orbit planets</skill>
+        <skill>recall that wherever an object experiences the force of gravity of a planet, it is said to be in that planet's gravitational field</skill>
+    </objectives>
+    <prerequisites>
+        <item>what a force is</item>
+        <item>the idea that gravity is a force</item>
+        <item>the difference between mass and weight</item>
+        <item>the idea that mass can be measured in grams and kilograms</item>
+        <item>the idea that planets orbit stars</item>
+        <item>the idea that moons orbit planets</item>
+    </prerequisites>
+    <exclusions>
+        <item>calculations of the gravitational force between two objects using Newton’s Law of Gravitation</item>
+        <item>calculations of an object’s weight on Earth using <m>W = mg</m></item>
+        <item>calculations of orbital properties such as orbital speed or period</item>
+        <item>centripetal force</item>
+        <item>non-circular orbits</item>
+        <item>drawing field lines</item>
+        <item>interpreting or recognising diagrams of the gravitational field</item>
+        <item>calculations of the gravitational field</item>
+        <item>any non-Newtonian ideas about gravity</item>
+    </exclusions>
+    <key_terms>
+        <key_term>gravitational field</key_term>
+    </key_terms>
+</scope>
