@@ -80,6 +80,8 @@ class Parser(object):
         pass 
 
     def parseSchema(self, inputText):
+        logging.debug("Attempting to parse schema.")
+
         marker = Marker()
 
         schema = Schema()
@@ -92,17 +94,22 @@ class Parser(object):
         return schema 
 
     def parseStructure(self, inputText, marker):
+        logging.debug("Attempting to parse structure.")
 
         self.parseWhiteSpace(inputText, marker)
 
         if cut(inputText, marker.position, 8) == "dataType":
             marker.position += 8
 
+            logging.debug("Found data structure.")
+
             dataStructure = DataStructure()
 
             self.parseWhiteSpace(inputText, marker)
             reference = self.parseReference(inputText, marker)
             self.parseWhiteSpace(inputText, marker)
+
+            logging.debug("Found reference '{}'.".format(reference))
 
             dataStructure.reference = reference 
 
@@ -132,6 +139,7 @@ class Parser(object):
             return dataStructure 
 
     def parseProperty(self, inputText, marker):
+        logging.debug("Attempting to parse structure property.")
 
         self.parseWhiteSpace(inputText, marker)
         propertyName = self.parsePropertyName(inputText, marker)
@@ -140,6 +148,8 @@ class Parser(object):
             return None 
 
         self.parseWhiteSpace(inputText, marker)
+
+        logging.debug("Found property name '{}'.".format(propertyName))
 
         if cut(inputText, marker.position) == ":":
             marker.position += 1
@@ -154,12 +164,14 @@ class Parser(object):
             propertyValue = self.parseString(inputText, marker)
         
         if propertyName == "values":
-            propertyValue == self.parseList(inputText, marker)
+            propertyValue = self.parseList(inputText, marker)
 
         if propertyValue == None:
             return None 
 
         self.parseWhiteSpace(inputText, marker)
+
+        logging.debug("Found property value '{}'.".format(propertyValue))
 
         if cut(inputText, marker.position) == ";":
             marker.position += 1
@@ -169,6 +181,8 @@ class Parser(object):
         return (propertyName, propertyValue)       
 
     def parsePropertyName(self, inputText, marker):
+        logging.debug("Attempting to parse property name.")
+
         t = ""
 
         while marker.position < len(inputText):
@@ -186,6 +200,8 @@ class Parser(object):
         return t 
 
     def parseString(self, inputText, marker):
+        logging.debug("Attempting to parse string.")
+
         t = ""
         quoteMarkType = ""
 
@@ -211,6 +227,8 @@ class Parser(object):
         return t 
 
     def parseList(self, inputText, marker):
+        logging.debug("Attempting to parse list.")
+
         items = []
         n = 0
 
@@ -218,7 +236,9 @@ class Parser(object):
             self.parseWhiteSpace(inputText, marker)
 
             if n > 0:
-                if cut(inputText, marker.position) != ",":
+                if cut(inputText, marker.position) == ",":
+                    marker.position += 1
+                else:
                     break
             
             self.parseWhiteSpace(inputText, marker)
@@ -238,6 +258,8 @@ class Parser(object):
         return items 
 
     def parseReference(self, inputText, marker):
+        logging.debug("Attempting to parse reference.")
+
         t = ""
 
         while marker.position < len(inputText):
