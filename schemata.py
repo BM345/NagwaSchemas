@@ -14,8 +14,9 @@ class DataStructure(Structure):
     def __init__(self, reference = ""):
         super().__init__(reference)
 
-        self.pattern = ""
-        self.values = []
+        self.baseStructure = None 
+        self.allowedPattern = ""
+        self.allowedValues = []
 
 class ElementStructure(Structure):
     def __init__(self, reference = ""):
@@ -24,19 +25,32 @@ class ElementStructure(Structure):
         self.elementName = ""
         self.canBeRootElement = False 
         self.attributes = []
+        self.contentType = ""
+        self.subelements = []
+        self.elementCloseType = ""
+
+class TextElement(object):
+    def __init__(self):
+        pass
+
+class UnorderedSubelementList(object):
+    def __init__(self):
+        self.elements = []
+
+class OrderedSubelementList(object):
+    def __init__(self):
+        self.elements = []
 
 class AttributeStructure(Structure):
     def __init__(self, reference = ""):
         super().__init__(reference)
 
         self.attributeName = ""
-        self.dataType = None 
-
+        self.dataStructure = None 
 
 
 class Marker(object):
     def __init__(self):
-
         self.position = 0
 
     def copy(self):
@@ -47,17 +61,21 @@ class Marker(object):
         return marker
 
 
-
 def cut(text, startIndex, length=1):
     a = startIndex
     b = startIndex + length
     return text[a:b]
 
+
 class SchemataParsingError(Exception):
     def __init__(self, message):
         super().__init__(message)
 
+
 class Parser(object):
+    _propertyNameCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-"
+    _referenceCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-"
+
     def __init__(self):
         pass 
 
@@ -91,7 +109,7 @@ class Parser(object):
             if cut(inputText, marker.position, 1) == "{":
                 marker.position += 1
             else:
-                raise SchemataParsingError("Expected '{{' at {}.".format(marker.position))
+                raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
 
             while marker.position < len(inputText):
                 p = self.parseProperty(inputText, marker)
@@ -100,16 +118,16 @@ class Parser(object):
                     break
                 else:
                     if p[0] == "pattern":
-                        dataStructure.pattern = p[1]
+                        dataStructure.allowedPattern = p[1]
                     if p[0] == "values":
-                        dataStructure.values = p[1] 
+                        dataStructure.allowedValues = p[1] 
 
             self.parseWhiteSpace(inputText, marker)
 
             if cut(inputText, marker.position, 1) == "}":
                 marker.position += 1
             else:
-                raise SchemataParsingError("Expected '}}' at {}.".format(marker.position))
+                raise SchemataParsingError("Expected '}}' at position {}.".format(marker.position))
 
             return dataStructure 
 
@@ -121,7 +139,6 @@ class Parser(object):
         if propertyName == None:
             return None 
 
-
         self.parseWhiteSpace(inputText, marker)
 
         if cut(inputText, marker.position) == ":":
@@ -130,16 +147,16 @@ class Parser(object):
             return None 
 
         self.parseWhiteSpace(inputText, marker)
-
-        value = None 
+        
+        propertyValue = None 
 
         if propertyName == "pattern":
-            value = self.parseString(inputText, marker)
+            propertyValue = self.parseString(inputText, marker)
         
         if propertyName == "values":
-            value == self.parseList(inputText, marker)
+            propertyValue == self.parseList(inputText, marker)
 
-        if value == None:
+        if propertyValue == None:
             return None 
 
         self.parseWhiteSpace(inputText, marker)
@@ -149,7 +166,7 @@ class Parser(object):
         else:
             return None 
 
-        return (propertyName, value)       
+        return (propertyName, propertyValue)       
 
     def parsePropertyName(self, inputText, marker):
         t = ""
@@ -157,7 +174,7 @@ class Parser(object):
         while marker.position < len(inputText):
             c = cut(inputText, marker.position)
 
-            if c in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-":
+            if c in Parser._propertyNameCharacters:
                 t += c
                 marker.position += 1
             else:
@@ -226,7 +243,7 @@ class Parser(object):
         while marker.position < len(inputText):
             c = cut(inputText, marker.position)
 
-            if c in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-":
+            if c in Parser._referenceCharacters:
                 t += c
                 marker.position += 1
             else:
