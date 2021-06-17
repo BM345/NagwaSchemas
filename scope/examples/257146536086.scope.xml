@@ -24,11 +24,4 @@
         <item>the scalar product of two vectors</item>
         <item>the vector product of two vectors</item>
     </exclusions>
-    <key_terms>
-        <key_term>vector magnitude</key_term>
-        <key_term>vector argument</key_term>
-        <key_term>components of a vector</key_term>
-        <key_term>horizontal component</key_term>
-        <key_term>vertical component</key_term>
-    </key_terms>
 </scope>

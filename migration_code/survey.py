@@ -25,7 +25,7 @@ def survey():
         with open(f, "r") as fileObject:
             text = fileObject.read()
 
-        if text.find("categories of energy") >= 0:
+        if text.find("strength of the magnetic field") >= 0:
             issues.append(question_id)
             print(question_id)
 
