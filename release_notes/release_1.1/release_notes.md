@@ -12,3 +12,4 @@ This release includes:
 - model code for reading and writing Roles XML
 - example Scope XML files
 - a specification for Scope XML
+- two new attributes on <workflow> elements in Workflow XML - `type` and `limit_to_entity_types`
