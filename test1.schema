@@ -1,0 +1,12 @@
+
+dataType reference {
+    pattern: '[A-Za-z0-9_\-]+';
+}
+
+dataType statusCategory {
+    pattern: '[A-Za-z0-9_\-]+';
+}
+
+dataType transitionType {
+    values: 'submit', 'approve', 'reject', 'send', 'pass', 'fail', 'error';
+}
