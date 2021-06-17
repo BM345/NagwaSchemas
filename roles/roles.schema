@@ -1,0 +1,33 @@
+
+dataType reference {
+    baseType: string;
+    pattern: '[A-Za-z0-9_\-]+';
+}
+
+root element roles {
+    tagName: 'roles';
+    allowedContent: elements;
+    subelements: role (n >= 0);
+}
+
+element role {
+    tagName: 'role';
+    allowedContent: elements;
+    attributes: reference;
+    subelements: name, description (optional);
+}
+
+attribute reference {
+    tagName: 'reference';
+    valueType: reference;
+}
+
+element name {
+    tagName: 'name';
+    allowedContent: text;
+}
+
+element description {
+    tagName: 'description';
+    allowedContent: text;
+}
