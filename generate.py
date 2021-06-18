@@ -3,26 +3,27 @@ import schemata
 import glob 
 from lxml.etree import parse, XMLSchema 
 
-SCHEMA_FILE_PATHS = [
-    ("roles/roles.schema", "roles/roles.xsd", "roles/examples/*"),
+SCHEMAS = [
+    "roles"
 ]
 
 def generate():
     parser = schemata.Parser()
 
-    for filePath in SCHEMA_FILE_PATHS:
-        with open(filePath[0], "r") as fileObject:
+    for s in SCHEMAS:
+        with open("{}/{}.schema".format(s, s), "r") as fileObject:
             text = fileObject.read()
             schema = parser.parseSchema(text)
 
-            schemata.exportSchemaAsXSD(schema, filePath[1])
+            schemata.exportSchemaAsXSD(schema, "{}/{}.xsd".format(s, s))
+            schemata.exportSchemaAsXSD(schema, "generated_schema_files/{}.xsd".format(s))
 
 def validate():
-    for filePath in SCHEMA_FILE_PATHS:
-        xsdDocument = parse(filePath[1])
+    for s in SCHEMAS:
+        xsdDocument = parse("{}/{}.xsd".format(s, s))
         schema = XMLSchema(xsdDocument)
 
-        fps = glob.glob(filePath[2])
+        fps = glob.glob("{}/examples/*".format(s))
 
         for fp in fps:
             xmlDocument = parse(fp)
