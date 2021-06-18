@@ -13,10 +13,10 @@ class Schema(object):
     def getDataStructureByReference(self, reference):
         return [s for s in self.getDataStructures() if s.reference == reference][0]
 
-    def getPossibleRootElements(self):
+    def getPossibleRootElementStructures(self):
         return [s for s in self.structures if isinstance(s, ElementStructure) and s.canBeRootElement]
 
-    def getNonRootElements(self):
+    def getNonRootElementStructures(self):
         return [s for s in self.structures if isinstance(s, ElementStructure) and not s.canBeRootElement]
 
     def getElementStructures(self):
@@ -653,14 +653,12 @@ class XSDExporter(object):
         xs = self._xs
 
         e1 = XMLElement(QName(xs, "schema"))
-        e1.set("targetNamespace", "https://github.com/BM345/NagwaSchemas")
-        e1.set("xmlns", "https://github.com/BM345/NagwaSchemas")
         e1.set("elementFormDefault", "qualified")
 
         self.exportDataStructures(schema, e1)
         self.exportElementStructures(schema, e1)
 
-        roots = schema.getPossibleRootElements()
+        roots = schema.getPossibleRootElementStructures()
 
         for root in roots:
             e2 = XMLElement(QName(xs, "element"))

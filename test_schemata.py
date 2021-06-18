@@ -20,7 +20,7 @@ with open("roles/roles.schema", "r") as fileObject:
 
     schema = parser.parseSchema(text)
 
-    exportSchemaAsXSD(schema, "roles.xsd")
+    #exportSchemaAsXSD(schema, "roles.xsd")
 
     xsd = parse("roles.xsd")
     xsd2 = XMLSchema(xsd)
@@ -28,4 +28,5 @@ with open("roles/roles.schema", "r") as fileObject:
     d = parse("roles/examples/cds.roles.xml")
 
     print(xsd2.validate(d))
+    xsd2.assertValid(d)
 

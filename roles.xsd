@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://github.com/BM345/NagwaSchemas" xmlns="https://github.com/BM345/NagwaSchemas" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     <xs:simpleType name="__type__reference">
         <xs:restriction base="xs:string">
             <xs:pattern value="[A-Za-z0-9_\-]+"/>
@@ -7,7 +7,7 @@
     </xs:simpleType>
     <xs:complexType name="__type__roles" mixed="false">
         <xs:sequence>
-            <xs:element name="role" type="__type__role"/>
+            <xs:element name="role" type="__type__role" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="__type__role" mixed="false">
