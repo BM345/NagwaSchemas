@@ -7,6 +7,9 @@ class Schema(object):
     def __init__(self):
         self.structures = []
 
+    def getDataStructures(self):
+        return [s for s in self.structures if isinstance(s, DataStructure)]
+
     def getPossibleRootElements(self):
         return [s for s in self.structures if isinstance(s, ElementStructure) and s.canBeRootElement]
 
@@ -208,6 +211,8 @@ class Parser(object):
             else:
                 if p[0] == "tagName":
                     elementStructure.elementName = p[1]
+                if p[0] == "attributes":
+                    elementStructure.attributes = p[1]
                 if p[0] == "allowedContent":
                     elementStructure.allowedContent = p[1]
                 if p[0] == "subelements":
@@ -536,16 +541,18 @@ class Parser(object):
 
 class XSDExporter(object):
     def __init__(self):
+        self._xs = "http://www.w3.org/2001/XMLSchema"
         pass 
 
     def exportSchema(self, schema, filePath):
-
-        xs = "http://www.w3.org/2001/XMLSchema"
+        xs = self._xs
 
         e1 = XMLElement(QName(xs, "schema"))
         e1.set("targetNamespace", "https://github.com/BM345/NagwaSchemas")
         e1.set("xmlns", "https://github.com/BM345/NagwaSchemas")
         e1.set("elementFormDefault", "qualified")
+
+        self.exportDataStructures(schema, e1)
 
         roots = schema.getPossibleRootElements()
 
@@ -576,6 +583,28 @@ class XSDExporter(object):
         tree = XMLElementTree(e1)
         indent(tree, space="    ")
         tree.write(filePath, xml_declaration=True, encoding="utf-8", pretty_print=True)
+
+    def exportDataStructures(self, schema, xsdElement):
+        xs = self._xs 
+
+        dataStructures = schema.getDataStructures()
+
+        for dataStructure in dataStructures:
+            e1 = XMLElement(QName(xs, "simpleType"))
+            e1.set("name", dataStructure.reference)
+
+            if dataStructure.allowedPattern != "":
+                e2 = XMLElement(QName(xs, "restriction"))
+                e2.set("base", "xs:string")
+
+                e3 = XMLElement(QName(xs, "pattern"))
+                e3.set("value", dataStructure.allowedPattern)
+
+                e2.append(e3)
+                e1.append(e2)
+
+            xsdElement.append(e1)
+
 
 xsdExporter = XSDExporter()
 
