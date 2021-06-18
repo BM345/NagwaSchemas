@@ -5,19 +5,19 @@
             <xs:pattern value="[A-Za-z0-9_\-]+"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:complexType name="roles" mixed="false">
+    <xs:complexType name="__type__roles" mixed="false">
         <xs:sequence>
-            <xs:element name="role" maxOccurs="unbounded"/>
+            <xs:element name="role" type="__type__role"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="role" mixed="false">
-        <xs:attribute name="reference" use="required"/>
+    <xs:complexType name="__type__role" mixed="false">
+        <xs:attribute name="reference" type="__type__reference" use="required"/>
         <xs:sequence>
-            <xs:element name="name" maxOccurs="unbounded"/>
-            <xs:element name="description" maxOccurs="unbounded"/>
+            <xs:element name="name" type="__type__name"/>
+            <xs:element name="description" type="__type__description"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:simpleType name="name" type="xs:string"/>
-    <xs:simpleType name="description" type="xs:string"/>
-    <xs:element name="roles" type="roles"/>
+    <xs:simpleType name="__type__name" type="xs:string"/>
+    <xs:simpleType name="__type__description" type="xs:string"/>
+    <xs:element name="roles" type="__type__roles"/>
 </xs:schema>

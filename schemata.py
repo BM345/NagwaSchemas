@@ -63,6 +63,8 @@ class ElementUsageReference(object):
     def __init__(self):
         self.elementReference = ""
         self.numberExpression = ""
+        self.minimumNumberOfOccurrences = 1
+        self.maximumNumberOfOccurrences = 1
 
 class TextElement(object):
     def __init__(self):
@@ -112,6 +114,7 @@ class Parser(object):
     _referenceCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-"
     _keywordCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
     _operators = ["=", ">", ">=", "<", "<=", "/="]
+    _negatedOperators = ["=", "<", "<=", ">", ">=", "/="]
 
     def __init__(self):
         pass 
@@ -267,6 +270,8 @@ class Parser(object):
             else:
                 if p[0] == "tagName":
                     attributeStructure.attributeName = p[1]
+                if p[0] == "valueType":
+                    attributeStructure.dataStructure = p[1]
 
         self.parseWhiteSpace(inputText, marker)
 
@@ -485,7 +490,17 @@ class Parser(object):
 
             self.parseWhiteSpace(inputText, marker)
 
-            if cut(inputText, marker.position, 8) == "optional":
+            numericExpression = self.parseNumericExpression(inputText, marker)
+
+            if numericExpression != None:
+                elementUsageReference.numberExpression = numericExpression 
+
+                if cut(inputText, marker.position) == ")":
+                    marker.position += 1
+
+                else:
+                    raise SchemataParsingError("Expected ')' at position {}.".format(marker.position))
+            elif cut(inputText, marker.position, 8) == "optional":
                 marker.position += 8
 
                 self.parseWhiteSpace(inputText, marker)
@@ -540,6 +555,78 @@ class Parser(object):
 
         return t 
 
+    def parseNumericExpression(self, inputText, marker):
+
+        self.parseWhiteSpace(inputText, marker)
+        n1 = self.parseInteger(inputText, marker)
+        o1 = None 
+        self.parseWhiteSpace(inputText, marker)
+
+        if n1 != None:
+            o1 = self.parseOperator(inputText, marker)
+
+            if o1 == None:
+                raise SchemataParsingError("Expected an operator at position {}.".format(marker.position))
+
+        self.parseWhiteSpace(inputText, marker)
+
+        if cut(inputText, marker.position) == "n":
+            marker.position += 1
+        else:
+            if n1 == None and o1 == None:
+                return None 
+            else:
+                raise SchemataParsingError("Expected 'n' at position {}.".format(marker.position))
+
+        self.parseWhiteSpace(inputText, marker)
+
+        o2 = self.parseOperator(inputText, marker)
+
+        if o2 == None:
+            raise SchemataParsingError("Expected an operator at position {}.".format(marker.position))
+
+        self.parseWhiteSpace(inputText, marker)
+        n2 = self.parseInteger(inputText, marker)
+
+        e = []
+
+        if o1 != None and n1 != None:
+            i = self._operators.find(o1)
+            o1b = self._negatedOperators[i]
+            e += [(o1b, n1)]
+
+        e += [(o2, n2)]
+
+        return e       
+
+    def parseOperator(self, inputText, marker):
+        operators = sorted(self._operators, key= lambda o: len(o), reverse=True)
+
+        for operator in operators:
+            if cut(inputText, marker.position, len(operator)) == operator:
+                marker.position += len(operator)
+
+                return operator
+
+        return None 
+
+    def parseInteger(self, inputText, marker):
+        t = ""
+
+        while marker.position < len(inputText):
+            c = cut(inputText, marker.position)
+
+            if c in "0123456789":
+                t += c 
+                marker.position += 1
+            else:
+                break 
+
+        if len(t) == 0:
+            return None 
+
+        return int(t)
+
     def parseWhiteSpace(self, inputText, marker):
         t = ""
 
@@ -578,7 +665,7 @@ class XSDExporter(object):
         for root in roots:
             e2 = XMLElement(QName(xs, "element"))
             e2.set("name", root.elementName)
-            e2.set("type", root.reference)
+            e2.set("type", "__type__" + root.reference)
 
             e1.append(e2)
 
@@ -615,7 +702,7 @@ class XSDExporter(object):
         for elementStructure in elementStructures:
             if elementStructure.allowedContent == "elements and text" or elementStructure.allowedContent == "elements only":
                 e1 = XMLElement(QName(xs, "complexType"))
-                e1.set("name", elementStructure.reference)
+                e1.set("name", "__type__" + elementStructure.reference)
 
                 if elementStructure.allowedContent == "elements and text":
                     e1.set("mixed", "true")
@@ -627,6 +714,7 @@ class XSDExporter(object):
 
                     e4 = XMLElement(QName(xs, "attribute"))
                     e4.set("name", a.attributeName)
+                    e4.set("type", "__type__" + a.dataStructure)
                     e4.set("use", "optional" if attribute.isOptional else "required")
 
                     e1.append(e4)
@@ -636,7 +724,15 @@ class XSDExporter(object):
                 for subelement in elementStructure.subelements:
                     e3 = XMLElement(QName(xs, "element"))
                     e3.set("name", subelement.elementReference)
-                    e3.set("maxOccurs", "unbounded")
+                    e3.set("type", "__type__" + subelement.elementReference)
+                    p =  subelement.minimumNumberOfOccurrences
+                    q = subelement.maximumNumberOfOccurrences 
+
+                    if p != 1:
+                        e3.set("minOccurs", str( p))
+
+                    if q != 1:
+                        e3.set("maxOccurs", "unbounded" if q == -1 else str( q) )
 
                     e2.append(e3)
 
@@ -645,7 +741,7 @@ class XSDExporter(object):
 
             elif elementStructure.attributes == [] and elementStructure.allowedContent == "text only":
                 e1 = XMLElement(QName(xs, "simpleType"))
-                e1.set("name", elementStructure.reference)
+                e1.set("name", "__type__" + elementStructure.reference)
                 e1.set("type", "xs:string")
 
                 xsdElement.append(e1)
