@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:complexType name="__type__history" mixed="false">
+        <xs:sequence>
+            <xs:element name="state" type="__type__state"/>
+            <xs:element name="actions" type="__type__actions"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="__type__state">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:complexType name="__type__actions" mixed="false">
+        <xs:sequence>
+            <xs:element name="action" type="__type__action"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="history" type="__type__history"/>
+</xs:schema>

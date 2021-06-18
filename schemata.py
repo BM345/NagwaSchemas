@@ -50,7 +50,7 @@ class ElementStructure(Structure):
         self.elementName = ""
         self.canBeRootElement = False 
         self.attributes = []
-        self.allowedContent = ""
+        self.allowedContent = "text only"
         self.subelements = []
         self.elementCloseType = ""
 
@@ -246,6 +246,9 @@ class Parser(object):
         else:
             raise SchemataParsingError("Expected '}}' at position {}.".format(marker.position))
 
+        if elementStructure.elementName == "":
+            elementStructure.elementName = elementStructure.reference 
+
         return elementStructure 
 
     def parseAttributeStructure(self, inputText, marker):
@@ -279,6 +282,9 @@ class Parser(object):
             marker.position += 1
         else:
             raise SchemataParsingError("Expected '}}' at position {}.".format(marker.position))
+
+        if attributeStructure.attributeName == "":
+            attributeStructure.attributeName = attributeStructure.reference 
 
         return attributeStructure 
 

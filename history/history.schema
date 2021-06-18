@@ -1,0 +1,18 @@
+
+root element history {
+    allowedContent: elements only;
+    subelements: state, actions;
+}
+
+element state {}
+
+element actions {
+    allowedContent: elements only;
+    subelements: action (n >= 0);
+}
+
+element action {
+    attributes: taken_at;
+}
+
+attribute taken_at {}
