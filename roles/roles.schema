@@ -6,13 +6,13 @@ dataType reference {
 
 root element roles {
     tagName: 'roles';
-    allowedContent: elements;
+    allowedContent: elements only;
     subelements: role (n >= 0);
 }
 
 element role {
     tagName: 'role';
-    allowedContent: elements;
+    allowedContent: elements only;
     attributes: reference;
     subelements: name, description (optional);
 }
@@ -24,10 +24,10 @@ attribute reference {
 
 element name {
     tagName: 'name';
-    allowedContent: text;
+    allowedContent: text only;
 }
 
 element description {
     tagName: 'description';
-    allowedContent: text;
+    allowedContent: text only;
 }

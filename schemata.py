@@ -680,7 +680,7 @@ class XSDExporter(object):
 
         for dataStructure in dataStructures:
             e1 = XMLElement(QName(xs, "simpleType"))
-            e1.set("name", dataStructure.reference)
+            e1.set("name", "__type__" + dataStructure.reference)
 
             if dataStructure.allowedPattern != "":
                 e2 = XMLElement(QName(xs, "restriction"))
@@ -709,16 +709,6 @@ class XSDExporter(object):
                 else:
                     e1.set("mixed", "false")
 
-                for attribute in elementStructure.attributes:
-                    a = schema.getAttributeStructureByReference(attribute.attributeReference)
-
-                    e4 = XMLElement(QName(xs, "attribute"))
-                    e4.set("name", a.attributeName)
-                    e4.set("type", "__type__" + a.dataStructure)
-                    e4.set("use", "optional" if attribute.isOptional else "required")
-
-                    e1.append(e4)
-
                 e2 = XMLElement(QName(xs, "sequence"))
 
                 for subelement in elementStructure.subelements:
@@ -737,13 +727,27 @@ class XSDExporter(object):
                     e2.append(e3)
 
                 e1.append(e2)
+
+                for attribute in elementStructure.attributes:
+                    a = schema.getAttributeStructureByReference(attribute.attributeReference)
+
+                    e4 = XMLElement(QName(xs, "attribute"))
+                    e4.set("name", a.attributeName)
+                    e4.set("type", "__type__" + a.dataStructure)
+                    e4.set("use", "optional" if attribute.isOptional else "required")
+
+                    e1.append(e4)
+
                 xsdElement.append(e1)
 
             elif elementStructure.attributes == [] and elementStructure.allowedContent == "text only":
                 e1 = XMLElement(QName(xs, "simpleType"))
                 e1.set("name", "__type__" + elementStructure.reference)
-                e1.set("type", "xs:string")
 
+                e2 = XMLElement(QName(xs, "restriction"))
+                e2.set("base", "xs:string")
+
+                e1.append(e2)
                 xsdElement.append(e1)
 
 
