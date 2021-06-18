@@ -10,8 +10,26 @@ class Schema(object):
     def getDataStructures(self):
         return [s for s in self.structures if isinstance(s, DataStructure)]
 
+    def getDataStructureByReference(self, reference):
+        return [s for s in self.getDataStructures() if s.reference == reference][0]
+
     def getPossibleRootElements(self):
         return [s for s in self.structures if isinstance(s, ElementStructure) and s.canBeRootElement]
+
+    def getNonRootElements(self):
+        return [s for s in self.structures if isinstance(s, ElementStructure) and not s.canBeRootElement]
+
+    def getElementStructures(self):
+        return [s for s in self.structures if isinstance(s, ElementStructure)]
+
+    def getElementStructureByReference(self, reference):
+        return [s for s in self.getElementStructures() if s.reference == reference][0]
+
+    def getAttributeStructures(self):
+        return [s for s in self.structures if isinstance(s, AttributeStructure)]
+
+    def getAttributeStructureByReference(self, reference):
+        return [s for s in self.getAttributeStructures() if s.reference == reference][0]
 
 class Structure(object):
     def __init__(self, reference = ""):
@@ -553,30 +571,14 @@ class XSDExporter(object):
         e1.set("elementFormDefault", "qualified")
 
         self.exportDataStructures(schema, e1)
+        self.exportElementStructures(schema, e1)
 
         roots = schema.getPossibleRootElements()
 
         for root in roots:
             e2 = XMLElement(QName(xs, "element"))
             e2.set("name", root.elementName)
-
-            if root.allowedContent == "elements and text" or root.allowedContent == "elements only":
-                e3 = XMLElement(QName(xs, "complexType"))
-
-                if root.allowedContent == "elements and text":
-                    e3.set("mixed", True)
-
-                e4 = XMLElement(QName(xs, "sequence"))
-
-                for subelement in root.subelements:
-                    e5 = XMLElement(QName(xs, "element"))
-                    e5.set("name", subelement.elementReference)
-                    e5.set("maxOccurs", "unbounded")
-
-                    e4.append(e5)
-
-                e3.append(e4)
-                e2.append(e3)
+            e2.set("type", root.reference)
 
             e1.append(e2)
 
@@ -604,6 +606,49 @@ class XSDExporter(object):
                 e1.append(e2)
 
             xsdElement.append(e1)
+    
+    def exportElementStructures(self, schema, xsdElement):
+        xs = self._xs 
+
+        elementStructures = schema.getElementStructures()
+
+        for elementStructure in elementStructures:
+            if elementStructure.allowedContent == "elements and text" or elementStructure.allowedContent == "elements only":
+                e1 = XMLElement(QName(xs, "complexType"))
+                e1.set("name", elementStructure.reference)
+
+                if elementStructure.allowedContent == "elements and text":
+                    e1.set("mixed", "true")
+                else:
+                    e1.set("mixed", "false")
+
+                for attribute in elementStructure.attributes:
+                    a = schema.getAttributeStructureByReference(attribute.attributeReference)
+
+                    e4 = XMLElement(QName(xs, "attribute"))
+                    e4.set("name", a.attributeName)
+                    e4.set("use", "optional" if attribute.isOptional else "required")
+
+                    e1.append(e4)
+
+                e2 = XMLElement(QName(xs, "sequence"))
+
+                for subelement in elementStructure.subelements:
+                    e3 = XMLElement(QName(xs, "element"))
+                    e3.set("name", subelement.elementReference)
+                    e3.set("maxOccurs", "unbounded")
+
+                    e2.append(e3)
+
+                e1.append(e2)
+                xsdElement.append(e1)
+
+            elif elementStructure.attributes == [] and elementStructure.allowedContent == "text only":
+                e1 = XMLElement(QName(xs, "simpleType"))
+                e1.set("name", elementStructure.reference)
+                e1.set("type", "xs:string")
+
+                xsdElement.append(e1)
 
 
 xsdExporter = XSDExporter()
