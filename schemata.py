@@ -1,10 +1,14 @@
 import logging 
+from lxml.etree import ElementTree as XMLElementTree, Element as XMLElement, SubElement as XMLSubelement, QName, indent 
 
 logger = logging.getLogger(__name__)
 
 class Schema(object):
     def __init__(self):
         self.structures = []
+
+    def getPossibleRootElements(self):
+        return [s for s in self.structures if isinstance(s, ElementStructure) and s.canBeRootElement]
 
 class Structure(object):
     def __init__(self, reference = ""):
@@ -486,3 +490,34 @@ class Parser(object):
             return None
 
         return t 
+
+class XSDExporter(object):
+    def __init__(self):
+        pass 
+
+    def exportSchema(self, schema, filePath):
+
+        xs = "http://www.w3.org/2001/XMLSchema"
+
+        e1 = XMLElement(QName(xs, "schema"))
+        e1.set("targetNamespace", "https://github.com/BM345/NagwaSchemas")
+        e1.set("xmlns", "https://github.com/BM345/NagwaSchemas")
+        e1.set("elementFormDefault", "qualified")
+
+        roots = schema.getPossibleRootElements()
+
+        for root in roots:
+            e2 = XMLElement(QName(xs, "element"))
+            e2.set("name", root.elementName)
+
+            e1.append(e2)
+
+        tree = XMLElementTree(e1)
+        indent(tree, space="    ")
+        tree.write(filePath, xml_declaration=True, encoding="utf-8", pretty_print=True)
+
+xsdExporter = XSDExporter()
+
+def exportSchemaAsXSD(schema, filePath):
+    xsdExporter.exportSchema(schema, filePath)
+

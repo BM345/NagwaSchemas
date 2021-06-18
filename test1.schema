@@ -13,6 +13,7 @@ dataType transitionType {
 
 root element roles {
     tagName: 'roles';
+    allowedContent: elements only;
 }
 
 element role {

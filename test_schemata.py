@@ -15,3 +15,5 @@ with open("test1.schema", "r") as fileObject:
     print(schema.structures[0].allowedPattern)
     print(schema.structures[2].reference)
     print(schema.structures[2].allowedValues)
+
+    exportSchemaAsXSD(schema, "test1.xsd")
