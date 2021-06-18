@@ -1,24 +1,33 @@
 
 dataType reference {
+    baseType: string;
     pattern: '[A-Za-z0-9_\-]+';
-}
-
-dataType statusCategory {
-    pattern: '[A-Za-z0-9_\-]+';
-}
-
-dataType transitionType {
-    values: 'submit', 'approve', 'reject', 'send', 'pass', 'fail', 'error';
 }
 
 root element roles {
     tagName: 'roles';
     allowedContent: elements only;
+    subelements: role;
 }
 
 element role {
     tagName: 'role';
     allowedContent: elements only;
-    attributes: reference (optional), id, colour (optional);
+    attributes: reference;
     subelements: name, description (optional);
+}
+
+attribute reference {
+    tagName: 'reference';
+    valueType: reference;
+}
+
+element name {
+    tagName: 'name';
+    allowedContent: text only;
+}
+
+element description {
+    tagName: 'description';
+    allowedContent: text only;
 }

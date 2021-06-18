@@ -90,6 +90,7 @@ class Parser(object):
     _propertyNameCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-"
     _referenceCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-"
     _keywordCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+    _operators = ["=", ">", ">=", "<", "<=", "/="]
 
     def __init__(self):
         pass 
@@ -207,6 +208,10 @@ class Parser(object):
             else:
                 if p[0] == "tagName":
                     elementStructure.elementName = p[1]
+                if p[0] == "allowedContent":
+                    elementStructure.allowedContent = p[1]
+                if p[0] == "subelements":
+                    elementStructure.subelements = p[1]
 
         self.parseWhiteSpace(inputText, marker)
 
@@ -216,6 +221,38 @@ class Parser(object):
             raise SchemataParsingError("Expected '}}' at position {}.".format(marker.position))
 
         return elementStructure 
+
+    def parseAttributeStructure(self, inputText, marker):
+        attributeStructure = AttributeStructure()
+
+        self.parseWhiteSpace(inputText, marker)
+        reference = self.parseReference(inputText, marker)
+        self.parseWhiteSpace(inputText, marker)
+
+        attributeStructure.reference = reference 
+
+        if cut(inputText, marker.position, 1) == "{":
+            marker.position += 1
+        else:
+            raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
+
+        while marker.position < len(inputText):
+            p = self.parseProperty(inputText, marker)
+
+            if p == None:
+                break
+            else:
+                if p[0] == "tagName":
+                    attributeStructure.attributeName = p[1]
+
+        self.parseWhiteSpace(inputText, marker)
+
+        if cut(inputText, marker.position, 1) == "}":
+            marker.position += 1
+        else:
+            raise SchemataParsingError("Expected '}}' at position {}.".format(marker.position))
+
+        return attributeStructure 
 
     def parseProperty(self, inputText, marker):
         logging.debug("Attempting to parse structure property.")
@@ -238,6 +275,9 @@ class Parser(object):
         self.parseWhiteSpace(inputText, marker)
         
         propertyValue = None 
+
+        if propertyName == "baseType":
+            propertyValue = self.parseReference(inputText, marker)
 
         if propertyName == "tagName":
             propertyValue = self.parseString(inputText, marker)
@@ -264,6 +304,9 @@ class Parser(object):
         
         if propertyName == "values":
             propertyValue = self.parseList(inputText, marker)
+        
+        if propertyName == "valueType":
+            propertyValue = self.parseReference(inputText, marker)
 
         if propertyValue == None:
             return None 
@@ -509,6 +552,24 @@ class XSDExporter(object):
         for root in roots:
             e2 = XMLElement(QName(xs, "element"))
             e2.set("name", root.elementName)
+
+            if root.allowedContent == "elements and text" or root.allowedContent == "elements only":
+                e3 = XMLElement(QName(xs, "complexType"))
+
+                if root.allowedContent == "elements and text":
+                    e3.set("mixed", True)
+
+                e4 = XMLElement(QName(xs, "sequence"))
+
+                for subelement in root.subelements:
+                    e5 = XMLElement(QName(xs, "element"))
+                    e5.set("name", subelement.elementReference)
+                    e5.set("maxOccurs", "unbounded")
+
+                    e4.append(e5)
+
+                e3.append(e4)
+                e2.append(e3)
 
             e1.append(e2)
 

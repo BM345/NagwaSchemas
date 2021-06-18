@@ -1,4 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://github.com/BM345/NagwaSchemas" xmlns="https://github.com/BM345/NagwaSchemas" elementFormDefault="qualified">
-    <xs:element name="roles"/>
+    <xs:element name="roles">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="role" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
