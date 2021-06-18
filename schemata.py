@@ -29,6 +29,16 @@ class ElementStructure(Structure):
         self.subelements = []
         self.elementCloseType = ""
 
+class AttributeUsageReference(object):
+    def __init__(self):
+        self.attributeReference = ""
+        self.isOptional = False 
+
+class ElementUsageReference(object):
+    def __init__(self):
+        self.elementReference = ""
+        self.numberExpression = ""
+
 class TextElement(object):
     def __init__(self):
         pass
@@ -144,8 +154,6 @@ class Parser(object):
         reference = self.parseReference(inputText, marker)
         self.parseWhiteSpace(inputText, marker)
 
-        logging.debug("Found reference '{}'.".format(reference))
-
         dataStructure.reference = reference 
 
         if cut(inputText, marker.position, 1) == "{":
@@ -179,8 +187,6 @@ class Parser(object):
         self.parseWhiteSpace(inputText, marker)
         reference = self.parseReference(inputText, marker)
         self.parseWhiteSpace(inputText, marker)
-
-        logging.debug("Found reference '{}'.".format(reference))
 
         elementStructure.reference = reference 
 
@@ -242,6 +248,12 @@ class Parser(object):
                 raise SchemataParsingError("Expected one of {} at position {}.".format(", ".join(allowedKeywords), marker.position))
 
             propertyValue = keyword 
+
+        if propertyName == "attributes":
+            propertyValue = self.parseList(inputText, marker, "attributeUsageReference")
+
+        if propertyName == "subelements":
+            propertyValue = self.parseList(inputText, marker, "elementUsageReference")
 
         if propertyName == "pattern":
             propertyValue = self.parseString(inputText, marker)
@@ -309,7 +321,7 @@ class Parser(object):
 
         return t 
 
-    def parseList(self, inputText, marker):
+    def parseList(self, inputText, marker, objectType = "string"):
         logging.debug("Attempting to parse list.")
 
         items = []
@@ -326,7 +338,14 @@ class Parser(object):
             
             self.parseWhiteSpace(inputText, marker)
 
-            item = self.parseString(inputText, marker)
+            item = None
+
+            if objectType == "string":
+                item = self.parseString(inputText, marker)
+            if objectType == "attributeUsageReference":
+                item = self.parseAttributeUsageReference(inputText, marker)
+            if objectType == "elementUsageReference":
+                item = self.parseElementUsageReference(inputText, marker)
 
             if item == None:
                 break 
@@ -339,6 +358,77 @@ class Parser(object):
             return None 
 
         return items 
+
+    def parseAttributeUsageReference(self, inputText, marker):
+        logging.debug("Attempting to parse attribute usage reference.")
+
+        self.parseWhiteSpace(inputText, marker)
+
+        attributeReference = self.parseReference(inputText, marker)
+
+        if attributeReference == None:
+            return None 
+
+        self.parseWhiteSpace(inputText, marker)
+
+        attributeUsageReference = AttributeUsageReference()
+        attributeUsageReference.attributeReference = attributeReference 
+
+        if cut(inputText, marker.position) == "(":
+            marker.position += 1
+
+            self.parseWhiteSpace(inputText, marker)
+
+            if cut(inputText, marker.position, 8) == "optional":
+                marker.position += 8
+
+                self.parseWhiteSpace(inputText, marker)
+
+                if cut(inputText, marker.position) == ")":
+                    marker.position += 1
+
+                    attributeUsageReference.isOptional = True 
+                else:
+                    raise SchemataParsingError("Expected ')' at position {}.".format(marker.position))
+            else:
+                raise SchemataParsingError("Expected keyword at position {}.".format(marker.position))
+
+        return attributeUsageReference 
+
+    def parseElementUsageReference(self, inputText, marker):
+        logging.debug("Attempting to parse element usage reference.")
+
+        self.parseWhiteSpace(inputText, marker)
+
+        elementReference = self.parseReference(inputText, marker)
+
+        if elementReference == None:
+            return None 
+
+        self.parseWhiteSpace(inputText, marker)
+
+        elementUsageReference = ElementUsageReference()
+        elementUsageReference.elementReference = elementReference 
+
+        if cut(inputText, marker.position) == "(":
+            marker.position += 1
+
+            self.parseWhiteSpace(inputText, marker)
+
+            if cut(inputText, marker.position, 8) == "optional":
+                marker.position += 8
+
+                self.parseWhiteSpace(inputText, marker)
+
+                if cut(inputText, marker.position) == ")":
+                    marker.position += 1
+
+                else:
+                    raise SchemataParsingError("Expected ')' at position {}.".format(marker.position))
+            else:
+                raise SchemataParsingError("Expected keyword at position {}.".format(marker.position))
+
+        return elementUsageReference 
 
     def parseReference(self, inputText, marker):
         logging.debug("Attempting to parse reference.")
@@ -356,6 +446,8 @@ class Parser(object):
 
         if len(t) == 0:
             return None
+
+        logging.debug("Found reference '{}'.".format(t))
 
         return t 
 

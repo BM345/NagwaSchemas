@@ -18,6 +18,6 @@ root element roles {
 element role {
     tagName: 'role';
     allowedContent: elements only;
-    attributes: reference;
+    attributes: reference (optional), id, colour (optional);
     subelements: name, description (optional);
 }
