@@ -10,3 +10,14 @@ dataType statusCategory {
 dataType transitionType {
     values: 'submit', 'approve', 'reject', 'send', 'pass', 'fail', 'error';
 }
+
+root element roles {
+    tagName: 'roles';
+}
+
+element role {
+    tagName: 'role';
+    allowedContent: elements only;
+    attributes: reference;
+    subelements: name, description (optional);
+}

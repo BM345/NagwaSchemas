@@ -25,7 +25,7 @@ class ElementStructure(Structure):
         self.elementName = ""
         self.canBeRootElement = False 
         self.attributes = []
-        self.contentType = ""
+        self.allowedContent = ""
         self.subelements = []
         self.elementCloseType = ""
 
@@ -75,6 +75,7 @@ class SchemataParsingError(Exception):
 class Parser(object):
     _propertyNameCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-"
     _referenceCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-"
+    _keywordCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
 
     def __init__(self):
         pass 
@@ -103,40 +104,108 @@ class Parser(object):
 
             logging.debug("Found data structure.")
 
-            dataStructure = DataStructure()
-
-            self.parseWhiteSpace(inputText, marker)
-            reference = self.parseReference(inputText, marker)
-            self.parseWhiteSpace(inputText, marker)
-
-            logging.debug("Found reference '{}'.".format(reference))
-
-            dataStructure.reference = reference 
-
-            if cut(inputText, marker.position, 1) == "{":
-                marker.position += 1
-            else:
-                raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
-
-            while marker.position < len(inputText):
-                p = self.parseProperty(inputText, marker)
-
-                if p == None:
-                    break
-                else:
-                    if p[0] == "pattern":
-                        dataStructure.allowedPattern = p[1]
-                    if p[0] == "values":
-                        dataStructure.allowedValues = p[1] 
-
-            self.parseWhiteSpace(inputText, marker)
-
-            if cut(inputText, marker.position, 1) == "}":
-                marker.position += 1
-            else:
-                raise SchemataParsingError("Expected '}}' at position {}.".format(marker.position))
+            dataStructure = self.parseDataStructure(inputText, marker)
 
             return dataStructure 
+
+        if cut(inputText, marker.position, 4) == "root":
+            marker.position += 4 
+
+            self.parseWhiteSpace(inputText, marker)
+
+            if cut(inputText, marker.position, 7) == "element":
+                marker.position += 7
+
+                elementStructure = self.parseElementStructure(inputText, marker)
+                elementStructure.canBeRootElement = True 
+
+                return elementStructure 
+            else:
+                raise SchemataParsingError("Expected 'element' keyword at position {}.".format(marker.position))
+
+        if cut(inputText, marker.position, 7) == "element":
+            marker.position += 7
+
+            elementStructure = self.parseElementStructure(inputText, marker)
+
+            return elementStructure 
+
+        if cut(inputText, marker.position, 9) == "attribute":
+            marker.position += 9
+
+            attributeStructure = self.parseAttributeStructure(inputText, marker)
+
+            return attributeStructure 
+
+    def parseDataStructure(self, inputText, marker):
+        dataStructure = DataStructure()
+
+        self.parseWhiteSpace(inputText, marker)
+        reference = self.parseReference(inputText, marker)
+        self.parseWhiteSpace(inputText, marker)
+
+        logging.debug("Found reference '{}'.".format(reference))
+
+        dataStructure.reference = reference 
+
+        if cut(inputText, marker.position, 1) == "{":
+            marker.position += 1
+        else:
+            raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
+
+        while marker.position < len(inputText):
+            p = self.parseProperty(inputText, marker)
+
+            if p == None:
+                break
+            else:
+                if p[0] == "pattern":
+                    dataStructure.allowedPattern = p[1]
+                if p[0] == "values":
+                    dataStructure.allowedValues = p[1] 
+
+        self.parseWhiteSpace(inputText, marker)
+
+        if cut(inputText, marker.position, 1) == "}":
+            marker.position += 1
+        else:
+            raise SchemataParsingError("Expected '}}' at position {}.".format(marker.position))
+
+        return dataStructure
+
+    def parseElementStructure(self, inputText, marker):
+        elementStructure = ElementStructure()
+
+        self.parseWhiteSpace(inputText, marker)
+        reference = self.parseReference(inputText, marker)
+        self.parseWhiteSpace(inputText, marker)
+
+        logging.debug("Found reference '{}'.".format(reference))
+
+        elementStructure.reference = reference 
+
+        if cut(inputText, marker.position, 1) == "{":
+            marker.position += 1
+        else:
+            raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
+
+        while marker.position < len(inputText):
+            p = self.parseProperty(inputText, marker)
+
+            if p == None:
+                break
+            else:
+                if p[0] == "tagName":
+                    elementStructure.elementName = p[1]
+
+        self.parseWhiteSpace(inputText, marker)
+
+        if cut(inputText, marker.position, 1) == "}":
+            marker.position += 1
+        else:
+            raise SchemataParsingError("Expected '}}' at position {}.".format(marker.position))
+
+        return elementStructure 
 
     def parseProperty(self, inputText, marker):
         logging.debug("Attempting to parse structure property.")
@@ -159,6 +228,20 @@ class Parser(object):
         self.parseWhiteSpace(inputText, marker)
         
         propertyValue = None 
+
+        if propertyName == "tagName":
+            propertyValue = self.parseString(inputText, marker)
+
+        if propertyName == "allowedContent":
+            self.parseWhiteSpace(inputText, marker)
+
+            keyword = self.parseKeyword(inputText, marker)
+            allowedKeywords = ["elements only", "text only", "elements and text"]
+
+            if keyword not in allowedKeywords:
+                raise SchemataParsingError("Expected one of {} at position {}.".format(", ".join(allowedKeywords), marker.position))
+
+            propertyValue = keyword 
 
         if propertyName == "pattern":
             propertyValue = self.parseString(inputText, marker)
@@ -266,6 +349,25 @@ class Parser(object):
             c = cut(inputText, marker.position)
 
             if c in Parser._referenceCharacters:
+                t += c
+                marker.position += 1
+            else:
+                break
+
+        if len(t) == 0:
+            return None
+
+        return t 
+
+    def parseKeyword(self, inputText, marker):
+        logging.debug("Attempting to parse keyword.")
+
+        t = ""
+
+        while marker.position < len(inputText):
+            c = cut(inputText, marker.position)
+
+            if c in Parser._keywordCharacters:
                 t += c
                 marker.position += 1
             else:
