@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:simpleType name="__type__reference">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9_\-]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__statusCategory">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__statusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="manual_processing"/>
+            <xs:enumeration value="automated_processing"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__transitionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="submit"/>
+            <xs:enumeration value="approve"/>
+            <xs:enumeration value="reject"/>
+            <xs:enumeration value="send"/>
+            <xs:enumeration value="pass"/>
+            <xs:enumeration value="fail"/>
+            <xs:enumeration value="error"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__boolean">
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__autoAssignmentPredicate">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__rulePredicate">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:complexType name="__type__workflow" mixed="false">
+        <xs:sequence>
+            <xs:element name="name" type="__type__name"/>
+            <xs:element name="description" type="__type__description" minOccurs="0"/>
+            <xs:element name="statuses" type="__type__statuses"/>
+            <xs:element name="transitions" type="__type__transitions"/>
+        </xs:sequence>
+        <xs:attribute name="reference" type="__type__reference" use="required"/>
+    </xs:complexType>
+    <xs:simpleType name="__type__name">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__description">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:complexType name="__type__statuses" mixed="false">
+        <xs:sequence>
+            <xs:element name="status" type="__type__status" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="initial" type="__type__reference" use="required"/>
+        <xs:attribute name="final" type="__type__reference" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="__type__status" mixed="false">
+        <xs:sequence>
+            <xs:element name="name" type="__type__name"/>
+            <xs:element name="description" type="__type__description" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="reference" type="__type__reference" use="required"/>
+        <xs:attribute name="category" type="__type__statusCategory" use="optional"/>
+        <xs:attribute name="type" type="__type__statusType" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="__type__transitions" mixed="false">
+        <xs:sequence>
+            <xs:element name="transition" type="__type__transition" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__transition" mixed="false">
+        <xs:sequence>
+            <xs:element name="name" type="__type__name"/>
+            <xs:element name="button_text" type="__type__button_text" minOccurs="0"/>
+            <xs:element name="description" type="__type__description" minOccurs="0"/>
+            <xs:element name="rules" type="__type__rules"/>
+        </xs:sequence>
+        <xs:attribute name="reference" type="__type__reference" use="required"/>
+        <xs:attribute name="from" type="__type__reference" use="required"/>
+        <xs:attribute name="to" type="__type__reference" use="required"/>
+        <xs:attribute name="type" type="__type__transitionType" use="optional"/>
+        <xs:attribute name="comment_required" type="__type__boolean" use="optional"/>
+        <xs:attribute name="auto_assign_to" type="__type__autoAssignmentPredicate" use="optional"/>
+    </xs:complexType>
+    <xs:simpleType name="__type__button_text">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:complexType name="__type__rules" mixed="false">
+        <xs:sequence>
+            <xs:element name="rule" type="__type__rule" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__rule">
+        <xs:attribute name="allow_if" type="__type__rulePredicate" use="required"/>
+    </xs:complexType>
+    <xs:element name="workflow" type="__type__workflow"/>
+</xs:schema>

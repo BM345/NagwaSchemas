@@ -29,7 +29,12 @@ class Schema(object):
         return [s for s in self.structures if isinstance(s, AttributeStructure)]
 
     def getAttributeStructureByReference(self, reference):
-        return [s for s in self.getAttributeStructures() if s.reference == reference][0]
+        ss = [s for s in self.getAttributeStructures() if s.reference == reference]
+
+        if len(ss) == 0:
+            raise Exception("Could not find attribute structure with the reference '{}'.".format(reference))
+
+        return ss[0]
 
 class Structure(object):
     def __init__(self, reference = ""):
@@ -202,9 +207,11 @@ class Parser(object):
             if p == None:
                 break
             else:
+                if p[0] == "baseType":
+                    dataStructure.baseStructure = p[1]
                 if p[0] == "pattern":
                     dataStructure.allowedPattern = p[1]
-                if p[0] == "values":
+                if p[0] == "allowedValues":
                     dataStructure.allowedValues = p[1] 
 
         self._parseWhiteSpace(inputText, marker)
@@ -326,7 +333,7 @@ class Parser(object):
             self._parseWhiteSpace(inputText, marker)
 
             keyword = self._parseKeyword(inputText, marker)
-            allowedKeywords = ["elements only", "text only", "elements and text"]
+            allowedKeywords = ["elements only", "text only", "elements and text", "none"]
 
             if keyword not in allowedKeywords:
                 raise SchemataParsingError("Expected one of {} at position {}.".format(", ".join(allowedKeywords), marker.position))
@@ -342,7 +349,7 @@ class Parser(object):
         if propertyName == "pattern":
             propertyValue = self._parseString(inputText, marker)
         
-        if propertyName == "values":
+        if propertyName == "allowedValues":
             propertyValue = self._parseList(inputText, marker)
         
         if propertyName == "valueType":
@@ -714,6 +721,25 @@ class XSDExporter(object):
 
                 e2.append(e3)
                 e1.append(e2)
+            elif dataStructure.allowedValues:
+                e2 = XMLElement(QName(xs, "restriction"))
+                e2.set("base", "xs:string")
+
+                for value in dataStructure.allowedValues:
+                    e3 = XMLElement(QName(xs, "enumeration"))
+                    e3.set("value", value)
+
+                    e2.append(e3)
+
+                e1.append(e2)
+            else:
+                e2 = XMLElement(QName(xs, "restriction"))
+                if dataStructure.baseStructure == "string":
+                    e2.set("base", "xs:string")
+                elif dataStructure.baseStructure == "boolean":
+                    e2.set("base", "xs:boolean")
+
+                e1.append(e2)
 
             xsdElement.append(e1)
     
@@ -771,6 +797,22 @@ class XSDExporter(object):
                 e2.set("base", "xs:string")
 
                 e1.append(e2)
+                xsdElement.append(e1)
+
+            elif elementStructure.allowedContent == "none":
+                e1 = XMLElement(QName(xs, "complexType"))
+                e1.set("name", self._typePrefix + elementStructure.reference)
+
+                for attribute in elementStructure.attributes:
+                    a = schema.getAttributeStructureByReference(attribute.attributeReference)
+
+                    e4 = XMLElement(QName(xs, "attribute"))
+                    e4.set("name", a.attributeName)
+                    e4.set("type", self._typePrefix + a.dataStructure)
+                    e4.set("use", "optional" if attribute.isOptional else "required")
+
+                    e1.append(e4)
+
                 xsdElement.append(e1)
 
 

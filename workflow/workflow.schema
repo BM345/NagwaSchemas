@@ -1,49 +1,129 @@
 
 dataType reference {
+    baseType: string;
     pattern: '[A-Za-z0-9_\-]+';
 }
 
 dataType statusCategory {
-    pattern: '[A-Za-z0-9_\-]+';
+    baseType: string;
+}
+
+dataType statusType {
+    baseType: string;
+    allowedValues: 'manual_processing', 'automated_processing';
 }
 
 dataType transitionType {
-    values: 'submit', 'approve', 'reject', 'send', 'pass', 'fail', 'error';
+    baseType: string;
+    allowedValues: 'submit', 'approve', 'reject', 'send', 'pass', 'fail', 'error';
+}
+
+dataType boolean {
+    baseType: boolean;
+}
+
+dataType autoAssignmentPredicate {
+    baseType: string;
+}
+
+dataType rulePredicate {
+    baseType: string;
+}
+
+attribute reference {
+    valueType: reference;
 }
 
 root element workflow {
-    attribute reference {
-        type: reference;
-    }
-    subelements [
-        ordered set [
-            name (n = 1),
-            description (n = 1),
-            statuses (n = 1),
-            transitions (n = 1)
-        ]
-    ]
+    attributes: reference;
+    allowedContent: elements only;
+    subelements: name, description (optional), statuses, transitions;
 }
 
 element name {
-    content-type: text only;
+    allowedContent: text only;
 }
 
 element description {
-    content-type: text only;
+    allowedContent: text only;
+}
+
+attribute initial {
+    valueType: reference;
+}
+
+attribute final {
+    valueType: reference;
 }
 
 element statuses {
-    attribute initial {
-        type: reference;
-    }
-    attribute final {
-        type: reference;
-    }
-    content-type: elements only;
-    subelements [
-        set [
-            status (n >= 0)
-        ]
-    ]
+    attributes: initial, final;
+    allowedContent: elements only;
+    subelements: status (n >= 0);
 }
+
+attribute category {
+    valueType: statusCategory;
+}
+
+attribute type1 {
+    tagName: 'type';
+    valueType: statusType;
+}
+
+element status {
+    attributes: reference, category (optional), type1 (optional);
+    allowedContent: elements only;
+    subelements: name, description (optional);
+}
+
+element transitions {
+    allowedContent: elements only;
+    subelements: transition (n >= 0);
+}
+
+attribute from {
+    valueType: reference;
+}
+
+attribute to {
+    valueType: reference;
+}
+
+attribute type2 {
+    tagName: 'type';
+    valueType: transitionType;
+}
+
+attribute comment_required {
+    valueType: boolean;
+}
+
+attribute auto_assign_to {
+    valueType: autoAssignmentPredicate;
+}
+
+element transition {
+    attributes: reference, from, to, type2 (optional), comment_required (optional), auto_assign_to (optional);
+    allowedContent: elements only;
+    subelements: name, button_text (optional), description (optional), rules;
+}
+
+element button_text {
+    allowedContent: text only;
+}
+
+element rules {
+    allowedContent: elements only;
+    subelements: rule (n >= 0);
+}
+
+attribute allow_if {
+    valueType: rulePredicate;
+}
+
+element rule {
+    attributes: allow_if;
+    allowedContent: none;
+}
+

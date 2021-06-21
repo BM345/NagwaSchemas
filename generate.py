@@ -5,6 +5,7 @@ from lxml.etree import parse, XMLSchema
 
 SCHEMAS = [
     "roles",
+    "workflow",
     "history"
 ]
 
