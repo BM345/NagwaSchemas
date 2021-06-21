@@ -62,7 +62,7 @@ class AttributeUsageReference(object):
 class ElementUsageReference(object):
     def __init__(self):
         self.elementReference = ""
-        self.numberExpression = ""
+        self.nExpression = ""
         self.minimumNumberOfOccurrences = 1
         self.maximumNumberOfOccurrences = 1
 
@@ -127,35 +127,37 @@ class Parser(object):
         schema = Schema()
 
         while marker.position < len(inputText):
-            structure = self.parseStructure(inputText, marker)
+            structure = self._parseStructure(inputText, marker)
 
             schema.structures.append(structure)
 
         return schema 
 
-    def parseStructure(self, inputText, marker):
+    def _parseStructure(self, inputText, marker):
         logging.debug("Attempting to parse structure.")
 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         if cut(inputText, marker.position, 8) == "dataType":
             marker.position += 8
 
             logging.debug("Found data structure.")
 
-            dataStructure = self.parseDataStructure(inputText, marker)
+            dataStructure = self._parseDataStructure(inputText, marker)
 
             return dataStructure 
 
         if cut(inputText, marker.position, 4) == "root":
             marker.position += 4 
 
-            self.parseWhiteSpace(inputText, marker)
+            self._parseWhiteSpace(inputText, marker)
 
             if cut(inputText, marker.position, 7) == "element":
                 marker.position += 7
 
-                elementStructure = self.parseElementStructure(inputText, marker)
+                logging.debug("Found root element structure.")
+
+                elementStructure = self._parseElementStructure(inputText, marker)
                 elementStructure.canBeRootElement = True 
 
                 return elementStructure 
@@ -165,23 +167,27 @@ class Parser(object):
         if cut(inputText, marker.position, 7) == "element":
             marker.position += 7
 
-            elementStructure = self.parseElementStructure(inputText, marker)
+            logging.debug("Found element structure.")
+
+            elementStructure = self._parseElementStructure(inputText, marker)
 
             return elementStructure 
 
         if cut(inputText, marker.position, 9) == "attribute":
             marker.position += 9
 
-            attributeStructure = self.parseAttributeStructure(inputText, marker)
+            logging.debug("Found attribute structure.")
+
+            attributeStructure = self._parseAttributeStructure(inputText, marker)
 
             return attributeStructure 
 
-    def parseDataStructure(self, inputText, marker):
+    def _parseDataStructure(self, inputText, marker):
         dataStructure = DataStructure()
 
-        self.parseWhiteSpace(inputText, marker)
-        reference = self.parseReference(inputText, marker)
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)        
+        reference = self._parseReference(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         dataStructure.reference = reference 
 
@@ -191,7 +197,7 @@ class Parser(object):
             raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
 
         while marker.position < len(inputText):
-            p = self.parseProperty(inputText, marker)
+            p = self._parseProperty(inputText, marker)
 
             if p == None:
                 break
@@ -201,7 +207,7 @@ class Parser(object):
                 if p[0] == "values":
                     dataStructure.allowedValues = p[1] 
 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         if cut(inputText, marker.position, 1) == "}":
             marker.position += 1
@@ -210,12 +216,12 @@ class Parser(object):
 
         return dataStructure
 
-    def parseElementStructure(self, inputText, marker):
+    def _parseElementStructure(self, inputText, marker):
         elementStructure = ElementStructure()
 
-        self.parseWhiteSpace(inputText, marker)
-        reference = self.parseReference(inputText, marker)
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
+        reference = self._parseReference(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         elementStructure.reference = reference 
 
@@ -225,7 +231,7 @@ class Parser(object):
             raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
 
         while marker.position < len(inputText):
-            p = self.parseProperty(inputText, marker)
+            p = self._parseProperty(inputText, marker)
 
             if p == None:
                 break
@@ -239,7 +245,7 @@ class Parser(object):
                 if p[0] == "subelements":
                     elementStructure.subelements = p[1]
 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         if cut(inputText, marker.position, 1) == "}":
             marker.position += 1
@@ -251,12 +257,12 @@ class Parser(object):
 
         return elementStructure 
 
-    def parseAttributeStructure(self, inputText, marker):
+    def _parseAttributeStructure(self, inputText, marker):
         attributeStructure = AttributeStructure()
 
-        self.parseWhiteSpace(inputText, marker)
-        reference = self.parseReference(inputText, marker)
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
+        reference = self._parseReference(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         attributeStructure.reference = reference 
 
@@ -266,7 +272,7 @@ class Parser(object):
             raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
 
         while marker.position < len(inputText):
-            p = self.parseProperty(inputText, marker)
+            p = self._parseProperty(inputText, marker)
 
             if p == None:
                 break
@@ -276,7 +282,7 @@ class Parser(object):
                 if p[0] == "valueType":
                     attributeStructure.dataStructure = p[1]
 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         if cut(inputText, marker.position, 1) == "}":
             marker.position += 1
@@ -288,16 +294,16 @@ class Parser(object):
 
         return attributeStructure 
 
-    def parseProperty(self, inputText, marker):
+    def _parseProperty(self, inputText, marker):
         logging.debug("Attempting to parse structure property.")
 
-        self.parseWhiteSpace(inputText, marker)
-        propertyName = self.parsePropertyName(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
+        propertyName = self._parsePropertyName(inputText, marker)
 
         if propertyName == None:
             return None 
 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         logging.debug("Found property name '{}'.".format(propertyName))
 
@@ -306,20 +312,20 @@ class Parser(object):
         else:
             return None 
 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
         
         propertyValue = None 
 
         if propertyName == "baseType":
-            propertyValue = self.parseReference(inputText, marker)
+            propertyValue = self._parseReference(inputText, marker)
 
         if propertyName == "tagName":
-            propertyValue = self.parseString(inputText, marker)
+            propertyValue = self._parseString(inputText, marker)
 
         if propertyName == "allowedContent":
-            self.parseWhiteSpace(inputText, marker)
+            self._parseWhiteSpace(inputText, marker)
 
-            keyword = self.parseKeyword(inputText, marker)
+            keyword = self._parseKeyword(inputText, marker)
             allowedKeywords = ["elements only", "text only", "elements and text"]
 
             if keyword not in allowedKeywords:
@@ -328,24 +334,24 @@ class Parser(object):
             propertyValue = keyword 
 
         if propertyName == "attributes":
-            propertyValue = self.parseList(inputText, marker, "attributeUsageReference")
+            propertyValue = self._parseList(inputText, marker, "attributeUsageReference")
 
         if propertyName == "subelements":
-            propertyValue = self.parseList(inputText, marker, "elementUsageReference")
+            propertyValue = self._parseList(inputText, marker, "elementUsageReference")
 
         if propertyName == "pattern":
-            propertyValue = self.parseString(inputText, marker)
+            propertyValue = self._parseString(inputText, marker)
         
         if propertyName == "values":
-            propertyValue = self.parseList(inputText, marker)
+            propertyValue = self._parseList(inputText, marker)
         
         if propertyName == "valueType":
-            propertyValue = self.parseReference(inputText, marker)
+            propertyValue = self._parseReference(inputText, marker)
 
         if propertyValue == None:
             return None 
 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         logging.debug("Found property value '{}'.".format(propertyValue))
 
@@ -356,7 +362,7 @@ class Parser(object):
 
         return (propertyName, propertyValue)       
 
-    def parsePropertyName(self, inputText, marker):
+    def _parsePropertyName(self, inputText, marker):
         logging.debug("Attempting to parse property name.")
 
         t = ""
@@ -375,7 +381,7 @@ class Parser(object):
 
         return t 
 
-    def parseString(self, inputText, marker):
+    def _parseString(self, inputText, marker):
         logging.debug("Attempting to parse string.")
 
         t = ""
@@ -402,14 +408,14 @@ class Parser(object):
 
         return t 
 
-    def parseList(self, inputText, marker, objectType = "string"):
+    def _parseList(self, inputText, marker, objectType = "string"):
         logging.debug("Attempting to parse list.")
 
         items = []
         n = 0
 
         while marker.position < len(inputText):
-            self.parseWhiteSpace(inputText, marker)
+            self._parseWhiteSpace(inputText, marker)
 
             if n > 0:
                 if cut(inputText, marker.position) == ",":
@@ -417,16 +423,16 @@ class Parser(object):
                 else:
                     break
             
-            self.parseWhiteSpace(inputText, marker)
+            self._parseWhiteSpace(inputText, marker)
 
             item = None
 
             if objectType == "string":
-                item = self.parseString(inputText, marker)
+                item = self._parseString(inputText, marker)
             if objectType == "attributeUsageReference":
-                item = self.parseAttributeUsageReference(inputText, marker)
+                item = self._parseAttributeUsageReference(inputText, marker)
             if objectType == "elementUsageReference":
-                item = self.parseElementUsageReference(inputText, marker)
+                item = self._parseElementUsageReference(inputText, marker)
 
             if item == None:
                 break 
@@ -440,17 +446,16 @@ class Parser(object):
 
         return items 
 
-    def parseAttributeUsageReference(self, inputText, marker):
+    def _parseAttributeUsageReference(self, inputText, marker):
         logging.debug("Attempting to parse attribute usage reference.")
 
-        self.parseWhiteSpace(inputText, marker)
-
-        attributeReference = self.parseReference(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
+        attributeReference = self._parseReference(inputText, marker)
 
         if attributeReference == None:
             return None 
 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         attributeUsageReference = AttributeUsageReference()
         attributeUsageReference.attributeReference = attributeReference 
@@ -458,17 +463,17 @@ class Parser(object):
         if cut(inputText, marker.position) == "(":
             marker.position += 1
 
-            self.parseWhiteSpace(inputText, marker)
+            self._parseWhiteSpace(inputText, marker)
 
             if cut(inputText, marker.position, 8) == "optional":
                 marker.position += 8
 
-                self.parseWhiteSpace(inputText, marker)
+                attributeUsageReference.isOptional = True 
+
+                self._parseWhiteSpace(inputText, marker)
 
                 if cut(inputText, marker.position) == ")":
                     marker.position += 1
-
-                    attributeUsageReference.isOptional = True 
                 else:
                     raise SchemataParsingError("Expected ')' at position {}.".format(marker.position))
             else:
@@ -476,17 +481,16 @@ class Parser(object):
 
         return attributeUsageReference 
 
-    def parseElementUsageReference(self, inputText, marker):
+    def _parseElementUsageReference(self, inputText, marker):
         logging.debug("Attempting to parse element usage reference.")
 
-        self.parseWhiteSpace(inputText, marker)
-
-        elementReference = self.parseReference(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
+        elementReference = self._parseReference(inputText, marker)
 
         if elementReference == None:
             return None 
 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         elementUsageReference = ElementUsageReference()
         elementUsageReference.elementReference = elementReference 
@@ -494,34 +498,50 @@ class Parser(object):
         if cut(inputText, marker.position) == "(":
             marker.position += 1
 
-            self.parseWhiteSpace(inputText, marker)
+            self._parseWhiteSpace(inputText, marker)
 
-            numericExpression = self.parseNumericExpression(inputText, marker)
+            elementUsageReference.minimumNumberOfOccurrences = 0
+            elementUsageReference.maximumNumberOfOccurrences = -1
 
-            if numericExpression != None:
-                elementUsageReference.numberExpression = numericExpression 
+            nExpression = self._parseNExpression(inputText, marker)
+
+            if nExpression != None:
+                elementUsageReference.nExpression = nExpression 
 
                 if cut(inputText, marker.position) == ")":
                     marker.position += 1
-
                 else:
                     raise SchemataParsingError("Expected ')' at position {}.".format(marker.position))
             elif cut(inputText, marker.position, 8) == "optional":
                 marker.position += 8
 
-                self.parseWhiteSpace(inputText, marker)
+                elementUsageReference.nExpression = [(">=", 0), ("<=", 1)]
+
+                self._parseWhiteSpace(inputText, marker)
 
                 if cut(inputText, marker.position) == ")":
                     marker.position += 1
-
                 else:
                     raise SchemataParsingError("Expected ')' at position {}.".format(marker.position))
             else:
-                raise SchemataParsingError("Expected keyword at position {}.".format(marker.position))
+                raise SchemataParsingError("Expected expression or keyword at position {}.".format(marker.position))
+
+        for comparison in elementUsageReference.nExpression:
+            if comparison[0] == ">=":
+                elementUsageReference.minimumNumberOfOccurrences = comparison[1]
+            if comparison[0] == ">":
+                elementUsageReference.minimumNumberOfOccurrences = comparison[1] + 1
+            if comparison[0] == "<=":
+                elementUsageReference.maximumNumberOfOccurrences = comparison[1]
+            if comparison[0] == "<":
+                elementUsageReference.maximumNumberOfOccurrences = comparison[1] - 1
+            if comparison[0] == "=":
+                elementUsageReference.minimumNumberOfOccurrences = comparison[1]
+                elementUsageReference.maximumNumberOfOccurrences = comparison[1]
 
         return elementUsageReference 
 
-    def parseReference(self, inputText, marker):
+    def _parseReference(self, inputText, marker):
         logging.debug("Attempting to parse reference.")
 
         t = ""
@@ -542,7 +562,7 @@ class Parser(object):
 
         return t 
 
-    def parseKeyword(self, inputText, marker):
+    def _parseKeyword(self, inputText, marker):
         logging.debug("Attempting to parse keyword.")
 
         t = ""
@@ -561,20 +581,20 @@ class Parser(object):
 
         return t 
 
-    def parseNumericExpression(self, inputText, marker):
+    def _parseNExpression(self, inputText, marker):
 
-        self.parseWhiteSpace(inputText, marker)
-        n1 = self.parseInteger(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
+        n1 = self._parseInteger(inputText, marker)
         o1 = None 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         if n1 != None:
-            o1 = self.parseOperator(inputText, marker)
+            o1 = self._parseOperator(inputText, marker)
 
             if o1 == None:
                 raise SchemataParsingError("Expected an operator at position {}.".format(marker.position))
 
-        self.parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
 
         if cut(inputText, marker.position) == "n":
             marker.position += 1
@@ -584,19 +604,18 @@ class Parser(object):
             else:
                 raise SchemataParsingError("Expected 'n' at position {}.".format(marker.position))
 
-        self.parseWhiteSpace(inputText, marker)
-
-        o2 = self.parseOperator(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
+        o2 = self._parseOperator(inputText, marker)
 
         if o2 == None:
             raise SchemataParsingError("Expected an operator at position {}.".format(marker.position))
 
-        self.parseWhiteSpace(inputText, marker)
-        n2 = self.parseInteger(inputText, marker)
+        self._parseWhiteSpace(inputText, marker)
+        n2 = self._parseInteger(inputText, marker)
 
         e = []
 
-        if o1 != None and n1 != None:
+        if n1 != None and o1 != None:
             i = self._operators.find(o1)
             o1b = self._negatedOperators[i]
             e += [(o1b, n1)]
@@ -605,7 +624,7 @@ class Parser(object):
 
         return e       
 
-    def parseOperator(self, inputText, marker):
+    def _parseOperator(self, inputText, marker):
         operators = sorted(self._operators, key= lambda o: len(o), reverse=True)
 
         for operator in operators:
@@ -616,7 +635,7 @@ class Parser(object):
 
         return None 
 
-    def parseInteger(self, inputText, marker):
+    def _parseInteger(self, inputText, marker):
         t = ""
 
         while marker.position < len(inputText):
@@ -633,7 +652,7 @@ class Parser(object):
 
         return int(t)
 
-    def parseWhiteSpace(self, inputText, marker):
+    def _parseWhiteSpace(self, inputText, marker):
         t = ""
 
         while marker.position < len(inputText):
@@ -653,7 +672,7 @@ class Parser(object):
 class XSDExporter(object):
     def __init__(self):
         self._xs = "http://www.w3.org/2001/XMLSchema"
-        pass 
+        self._typePrefix = "__type__"
 
     def exportSchema(self, schema, filePath):
         xs = self._xs
@@ -661,15 +680,15 @@ class XSDExporter(object):
         e1 = XMLElement(QName(xs, "schema"))
         e1.set("elementFormDefault", "qualified")
 
-        self.exportDataStructures(schema, e1)
-        self.exportElementStructures(schema, e1)
+        self._exportDataStructures(schema, e1)
+        self._exportElementStructures(schema, e1)
 
         roots = schema.getPossibleRootElementStructures()
 
         for root in roots:
             e2 = XMLElement(QName(xs, "element"))
             e2.set("name", root.elementName)
-            e2.set("type", "__type__" + root.reference)
+            e2.set("type", self._typePrefix + root.reference)
 
             e1.append(e2)
 
@@ -677,14 +696,14 @@ class XSDExporter(object):
         indent(tree, space="    ")
         tree.write(filePath, xml_declaration=True, encoding="utf-8", pretty_print=True)
 
-    def exportDataStructures(self, schema, xsdElement):
+    def _exportDataStructures(self, schema, xsdElement):
         xs = self._xs 
 
         dataStructures = schema.getDataStructures()
 
         for dataStructure in dataStructures:
             e1 = XMLElement(QName(xs, "simpleType"))
-            e1.set("name", "__type__" + dataStructure.reference)
+            e1.set("name", self._typePrefix + dataStructure.reference)
 
             if dataStructure.allowedPattern != "":
                 e2 = XMLElement(QName(xs, "restriction"))
@@ -698,7 +717,7 @@ class XSDExporter(object):
 
             xsdElement.append(e1)
     
-    def exportElementStructures(self, schema, xsdElement):
+    def _exportElementStructures(self, schema, xsdElement):
         xs = self._xs 
 
         elementStructures = schema.getElementStructures()
@@ -706,7 +725,7 @@ class XSDExporter(object):
         for elementStructure in elementStructures:
             if elementStructure.allowedContent == "elements and text" or elementStructure.allowedContent == "elements only":
                 e1 = XMLElement(QName(xs, "complexType"))
-                e1.set("name", "__type__" + elementStructure.reference)
+                e1.set("name", self._typePrefix + elementStructure.reference)
 
                 if elementStructure.allowedContent == "elements and text":
                     e1.set("mixed", "true")
@@ -718,7 +737,7 @@ class XSDExporter(object):
                 for subelement in elementStructure.subelements:
                     e3 = XMLElement(QName(xs, "element"))
                     e3.set("name", subelement.elementReference)
-                    e3.set("type", "__type__" + subelement.elementReference)
+                    e3.set("type", self._typePrefix + subelement.elementReference)
                     p =  subelement.minimumNumberOfOccurrences
                     q = subelement.maximumNumberOfOccurrences 
 
@@ -737,7 +756,7 @@ class XSDExporter(object):
 
                     e4 = XMLElement(QName(xs, "attribute"))
                     e4.set("name", a.attributeName)
-                    e4.set("type", "__type__" + a.dataStructure)
+                    e4.set("type", self._typePrefix + a.dataStructure)
                     e4.set("use", "optional" if attribute.isOptional else "required")
 
                     e1.append(e4)
@@ -746,7 +765,7 @@ class XSDExporter(object):
 
             elif elementStructure.attributes == [] and elementStructure.allowedContent == "text only":
                 e1 = XMLElement(QName(xs, "simpleType"))
-                e1.set("name", "__type__" + elementStructure.reference)
+                e1.set("name", self._typePrefix + elementStructure.reference)
 
                 e2 = XMLElement(QName(xs, "restriction"))
                 e2.set("base", "xs:string")

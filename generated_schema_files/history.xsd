@@ -11,7 +11,7 @@
     </xs:simpleType>
     <xs:complexType name="__type__actions" mixed="false">
         <xs:sequence>
-            <xs:element name="action" type="__type__action"/>
+            <xs:element name="action" type="__type__action" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="history" type="__type__history"/>

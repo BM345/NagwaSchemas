@@ -7,13 +7,13 @@
     </xs:simpleType>
     <xs:complexType name="__type__roles" mixed="false">
         <xs:sequence>
-            <xs:element name="role" type="__type__role"/>
+            <xs:element name="role" type="__type__role" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="__type__role" mixed="false">
         <xs:sequence>
             <xs:element name="name" type="__type__name"/>
-            <xs:element name="description" type="__type__description"/>
+            <xs:element name="description" type="__type__description" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="reference" type="__type__reference" use="required"/>
     </xs:complexType>
