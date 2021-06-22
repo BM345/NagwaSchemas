@@ -876,7 +876,7 @@ def generateSpecification(schema, filePath):
         elements = rootElements + nonRootElements 
 
         for element in elements:
-            fileObject.write("<br /><br />\n\n")
+            fileObject.write("\n\n<br /><br />\n\n")
             fileObject.write("## The &lt;{}&gt; element\n\n".format(element.elementName))
             fileObject.write("### Attributes\n\n")
 
@@ -885,8 +885,8 @@ def generateSpecification(schema, filePath):
                 fileObject.write("|---|---|---|---|\n")
 
                 for attribute in element.attributes:
-                    a = schema.getAttributeStructureByReference(attribute.attributeName)
-                    fileObject.write("| `{}` | {} | {} |  |\n".format(a.attributeName, "Required" if not a.isOptional else "Optional", ""))
+                    a = schema.getAttributeStructureByReference(attribute.attributeReference)
+                    fileObject.write("| `{}` | {} | {} |  |\n".format(a.attributeName, "Required" if not attribute.isOptional else "Optional", ""))
 
                 fileObject.write("\n")
 
@@ -897,9 +897,11 @@ def generateSpecification(schema, filePath):
 
             if element.subelements:
                 for subelement in element.subelements:
-                    e = schema.getElementStructureByReference(subelement.elementName)
+                    e = schema.getElementStructureByReference(subelement.elementReference)
 
                     fileObject.write("- <{}>\n".format(e.elementName))
+
+                fileObject.write("\n")
 
             else:
                 fileObject.write("None\n\n")
@@ -907,5 +909,5 @@ def generateSpecification(schema, filePath):
             fileObject.write("### Examples\n\n")
             fileObject.write("Below is shown an example of the `<{}>` element.\n\n".format(element.elementName))
             fileObject.write("```xml\n")
-            fileObject.write("```\n")
+            fileObject.write("```\n\n")
 
