@@ -7,6 +7,11 @@ dataType id {
     pattern: '\d{12}';
 }
 
+dataType derivative_type {
+    baseType: string;
+    allowedValues: 'translation', 'localization';
+}
+
 dataType versionNumber {
     baseType: integer;
 }
@@ -24,12 +29,20 @@ attribute id {
     valueType: id;
 }
 
+attribute derivative_of {
+    valueType: id;
+}
+
+attribute derivative_type {
+    valueType: derivative_type;
+}
+
 attribute version {
     valueType: versionNumber;
 }
 
 root element scope {
-    attributes: id, version;
+    attributes: id, derivative_of (optional), derivative_type (optional), version;
     allowedContent: elements only;
     subelements: language, dialects, objectives, prerequisites, exclusions;
 }

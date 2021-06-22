@@ -24,6 +24,8 @@ This document gives the specification for Scope XML.
 | Name | Required | Allowed Values | Description |
 |---|---|---|---|
 | `id` | Required |  |  |
+| `derivative_of` | Optional |  |  |
+| `derivative_type` | Optional |  |  |
 | `version` | Required |  |  |
 
 ### Possible Subelements
@@ -39,7 +41,7 @@ This document gives the specification for Scope XML.
 Below is shown an example of the `<scope>` element.
 
 ```xml
-<scope id="..." version="...">
+<scope id="..." derivative_of="..." derivative_type="..." version="...">
     <language></language>
     <dialects></dialects>
     <objectives></objectives>
