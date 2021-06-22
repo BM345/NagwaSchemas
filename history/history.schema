@@ -1,18 +1,87 @@
 
+dataType reference {
+    baseType: string;
+    pattern: '[A-Za-z0-9_\-]+';
+}
+
+dataType uei {
+    baseType: string;
+    pattern: '(question|explainer|lesson_video|question_video)/[A-Za-z0-9_\-]+';
+}
+
+dataType timestamp {
+    baseType: string;
+    pattern: '\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}';
+}
+
+dataType emailAddress {
+    baseType: string;
+}
+
+dataType priority {
+    baseType: string;
+    allowedValues: 'very_high', 'high', 'low', 'very_low';
+}
+
+attribute for_content_entity {
+    valueType: uei;
+}
+
 root element history {
+    attributes: for_content_entity;
     allowedContent: elements only;
     subelements: state, actions;
 }
 
-element state {}
+element state {
+    allowedContent: elements only;
+    subelements: workflow, workflow_status, developers;
+}
+
+element workflow {
+    allowedContent: text only;
+    valueType: reference;
+}
+
+element workflow_status {
+    allowedContent: text only;
+    valueType: reference;
+}
+
+element developers {
+    allowedContent: elements only;
+    subelements: developer (n >= 0);
+}
+
+attribute workflow2 {
+    tagName: 'workflow';
+    valueType: reference;
+}
+
+attribute role {
+    valueType: reference;
+}
+
+element developer {
+    attributes: workflow2, role;
+    allowedContent: text only;
+    valueType: emailAddress;
+}
 
 element actions {
     allowedContent: elements only;
     subelements: action (n >= 0);
 }
 
-element action {
-    attributes: taken_at;
+attribute taken_at {
+    valueType: timestamp;
 }
 
-attribute taken_at {}
+attribute taken_by {
+    valueType: emailAddress;
+}
+
+element action {
+    attributes: taken_at, taken_by;
+    allowedContent: elements only;
+}

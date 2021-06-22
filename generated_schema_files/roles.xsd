@@ -1,27 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:simpleType name="__type__reference">
+    <xs:simpleType name="__type__d__reference">
         <xs:restriction base="xs:string">
             <xs:pattern value="[A-Za-z0-9_\-]+"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:complexType name="__type__roles" mixed="false">
+    <xs:complexType name="__type__e__roles" mixed="false">
         <xs:sequence>
-            <xs:element name="role" type="__type__role" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="role" type="__type__e__role" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="__type__role" mixed="false">
+    <xs:complexType name="__type__e__role" mixed="false">
         <xs:sequence>
-            <xs:element name="name" type="__type__name"/>
-            <xs:element name="description" type="__type__description" minOccurs="0"/>
+            <xs:element name="name" type="__type__e__name"/>
+            <xs:element name="description" type="__type__e__description" minOccurs="0"/>
         </xs:sequence>
-        <xs:attribute name="reference" type="__type__reference" use="required"/>
+        <xs:attribute name="reference" type="__type__d__reference" use="required"/>
     </xs:complexType>
-    <xs:simpleType name="__type__name">
+    <xs:simpleType name="__type__e__name">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
-    <xs:simpleType name="__type__description">
+    <xs:simpleType name="__type__e__description">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
-    <xs:element name="roles" type="__type__roles"/>
+    <xs:element name="roles" type="__type__e__roles"/>
 </xs:schema>

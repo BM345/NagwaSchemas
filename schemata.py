@@ -681,6 +681,16 @@ class XSDExporter(object):
         self._xs = "http://www.w3.org/2001/XMLSchema"
         self._typePrefix = "__type__"
 
+    def _getXSDTypeName(self, structure):
+        if isinstance(structure, DataStructure):
+            return self._typePrefix + "d__" + structure.reference 
+        if isinstance(structure, ElementStructure):
+            return self._typePrefix + "e__" + structure.reference 
+        if isinstance(structure, AttributeStructure):
+            return self._typePrefix + "a__" + structure.reference 
+
+        raise Exception("Cannot create XSD type name for {}.".format(structure.reference))
+
     def exportSchema(self, schema, filePath):
         xs = self._xs
 
@@ -695,7 +705,7 @@ class XSDExporter(object):
         for root in roots:
             e2 = XMLElement(QName(xs, "element"))
             e2.set("name", root.elementName)
-            e2.set("type", self._typePrefix + root.reference)
+            e2.set("type", self._getXSDTypeName(root))
 
             e1.append(e2)
 
@@ -710,7 +720,7 @@ class XSDExporter(object):
 
         for dataStructure in dataStructures:
             e1 = XMLElement(QName(xs, "simpleType"))
-            e1.set("name", self._typePrefix + dataStructure.reference)
+            e1.set("name", self._getXSDTypeName( dataStructure))
 
             if dataStructure.allowedPattern != "":
                 e2 = XMLElement(QName(xs, "restriction"))
@@ -751,7 +761,7 @@ class XSDExporter(object):
         for elementStructure in elementStructures:
             if elementStructure.allowedContent == "elements and text" or elementStructure.allowedContent == "elements only":
                 e1 = XMLElement(QName(xs, "complexType"))
-                e1.set("name", self._typePrefix + elementStructure.reference)
+                e1.set("name",  self._getXSDTypeName( elementStructure))
 
                 if elementStructure.allowedContent == "elements and text":
                     e1.set("mixed", "true")
@@ -761,9 +771,11 @@ class XSDExporter(object):
                 e2 = XMLElement(QName(xs, "sequence"))
 
                 for subelement in elementStructure.subelements:
+                    e = schema.getElementStructureByReference(subelement.elementReference)
+
                     e3 = XMLElement(QName(xs, "element"))
                     e3.set("name", subelement.elementReference)
-                    e3.set("type", self._typePrefix + subelement.elementReference)
+                    e3.set("type", self._getXSDTypeName(e))
                     p =  subelement.minimumNumberOfOccurrences
                     q = subelement.maximumNumberOfOccurrences 
 
@@ -779,10 +791,11 @@ class XSDExporter(object):
 
                 for attribute in elementStructure.attributes:
                     a = schema.getAttributeStructureByReference(attribute.attributeReference)
+                    d = schema.getDataStructureByReference(a.dataStructure)
 
                     e4 = XMLElement(QName(xs, "attribute"))
                     e4.set("name", a.attributeName)
-                    e4.set("type", self._typePrefix + a.dataStructure)
+                    e4.set("type",  self._getXSDTypeName(d))
                     e4.set("use", "optional" if attribute.isOptional else "required")
 
                     e1.append(e4)
@@ -791,7 +804,7 @@ class XSDExporter(object):
 
             elif elementStructure.attributes == [] and elementStructure.allowedContent == "text only":
                 e1 = XMLElement(QName(xs, "simpleType"))
-                e1.set("name", self._typePrefix + elementStructure.reference)
+                e1.set("name",  self._getXSDTypeName( elementStructure))
 
                 e2 = XMLElement(QName(xs, "restriction"))
                 e2.set("base", "xs:string")
@@ -799,16 +812,42 @@ class XSDExporter(object):
                 e1.append(e2)
                 xsdElement.append(e1)
 
-            elif elementStructure.allowedContent == "none":
+            elif elementStructure.allowedContent == "text only":
                 e1 = XMLElement(QName(xs, "complexType"))
-                e1.set("name", self._typePrefix + elementStructure.reference)
+                e1.set("name",  self._getXSDTypeName( elementStructure))
+
+                e2 = XMLElement(QName(xs, "simpleContent"))
+
+                e3 = XMLElement(QName(xs, "extension"))
+                e3.set("base", "xs:string")
+
+                e2.append(e3)
+                e1.append(e2)
 
                 for attribute in elementStructure.attributes:
                     a = schema.getAttributeStructureByReference(attribute.attributeReference)
+                    d = schema.getDataStructureByReference(a.dataStructure)
 
                     e4 = XMLElement(QName(xs, "attribute"))
                     e4.set("name", a.attributeName)
-                    e4.set("type", self._typePrefix + a.dataStructure)
+                    e4.set("type",  self._getXSDTypeName(d))
+                    e4.set("use", "optional" if attribute.isOptional else "required")
+
+                    e3.append(e4)
+
+                xsdElement.append(e1)
+
+            elif elementStructure.allowedContent == "none":
+                e1 = XMLElement(QName(xs, "complexType"))
+                e1.set("name",  self._getXSDTypeName( elementStructure))
+
+                for attribute in elementStructure.attributes:
+                    a = schema.getAttributeStructureByReference(attribute.attributeReference)
+                    d = schema.getDataStructureByReference(a.dataStructure)
+
+                    e4 = XMLElement(QName(xs, "attribute"))
+                    e4.set("name", a.attributeName)
+                    e4.set("type", self._getXSDTypeName(d))
                     e4.set("use", "optional" if attribute.isOptional else "required")
 
                     e1.append(e4)
