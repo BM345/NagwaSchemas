@@ -854,16 +854,7 @@ class XSDExporter(object):
                 e2.append(e3)
                 e1.append(e2)
 
-                for attribute in elementStructure.attributes:
-                    a = schema.getAttributeStructureByReference(attribute.attributeReference)
-                    d = schema.getDataStructureByReference(a.dataStructure)
-
-                    e4 = XMLElement(QName(xs, "attribute"))
-                    e4.set("name", a.attributeName)
-                    e4.set("type",  self._getXSDTypeName(d))
-                    e4.set("use", "optional" if attribute.isOptional else "required")
-
-                    e3.append(e4)
+                self._exportAttributes(schema, elementStructure.attributes, e3)
 
                 xsdElement.append(e1)
 
@@ -871,16 +862,7 @@ class XSDExporter(object):
                 e1 = XMLElement(QName(xs, "complexType"))
                 e1.set("name",  self._getXSDTypeName( elementStructure))
 
-                for attribute in elementStructure.attributes:
-                    a = schema.getAttributeStructureByReference(attribute.attributeReference)
-                    d = schema.getDataStructureByReference(a.dataStructure)
-
-                    e4 = XMLElement(QName(xs, "attribute"))
-                    e4.set("name", a.attributeName)
-                    e4.set("type", self._getXSDTypeName(d))
-                    e4.set("use", "optional" if attribute.isOptional else "required")
-
-                    e1.append(e4)
+                self._exportAttributes(schema, elementStructure.attributes, e1)
 
                 xsdElement.append(e1)
 
