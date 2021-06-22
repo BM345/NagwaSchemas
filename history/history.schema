@@ -142,7 +142,7 @@ attribute type {
 element action {
     attributes: taken_at, taken_by, type;
     allowedContent: elements only;
-    subelements: version2 (optional), file_name (optional), new_workflow (optional);
+    subelements: version2 (optional), file_name (optional), new_workflow (optional), transition (optional), new_workflow_status (optional), new_assignee (optional), new_priority (optional), comment_reference (optional), comment_text (optional), watcher (optional), label (optional);
 }
 
 element version2 {
@@ -159,4 +159,33 @@ element file_name {
 element new_workflow {
     allowedContent: text only;
     valueType: reference;
+}
+
+element new_workflow_status {
+    allowedContent: text only;
+    valueType: reference;
+}
+
+element transition {
+    allowedContent: text only;
+    valueType: reference;
+}
+
+element new_assignee {
+    allowedContent: text only;
+    valueType: emailAddress;
+}
+
+element new_priority {
+    allowedContent: text only;
+    valueType: priority;
+}
+
+element comment_reference {
+    allowedContent: text only;
+    valueType: reference;
+}
+
+element comment_text {
+    allowedContent: text only;
 }
