@@ -5,6 +5,21 @@
             <xs:pattern value="[A-Za-z0-9_\-]+"/>
         </xs:restriction>
     </xs:simpleType>
+    <xs:simpleType name="__type__d__workflowType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="creation"/>
+            <xs:enumeration value="update"/>
+            <xs:enumeration value="translation"/>
+            <xs:enumeration value="translation_update"/>
+            <xs:enumeration value="localization"/>
+            <xs:enumeration value="localization_update"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__entityTypeList">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(question|explainer|lesson_video|question_video|scope)(,\s*(question|explainer|lesson_video|question_video|scope))*"/>
+        </xs:restriction>
+    </xs:simpleType>
     <xs:simpleType name="__type__d__statusCategory">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
@@ -42,6 +57,8 @@
             <xs:element name="transitions" type="__type__e__transitions"/>
         </xs:sequence>
         <xs:attribute name="reference" type="__type__d__reference" use="required"/>
+        <xs:attribute name="type" type="__type__d__workflowType" use="optional"/>
+        <xs:attribute name="limit_to_entity_types" type="__type__d__entityTypeList" use="optional"/>
     </xs:complexType>
     <xs:simpleType name="__type__e__name">
         <xs:restriction base="xs:string"/>

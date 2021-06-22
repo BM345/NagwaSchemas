@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<workflow reference="new_lesson_scope_workflow">
+<workflow reference="new_lesson_scope_workflow" type="creation" limit_to_entity_types="scope">
     <name>New Lesson Scope Workflow</name>
     <description>This workflow is used for creating new lesson scopes.</description>
     <statuses initial="course_design" final="published">

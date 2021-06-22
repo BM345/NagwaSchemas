@@ -4,6 +4,21 @@ dataType reference {
     pattern: '[A-Za-z0-9_\-]+';
 }
 
+dataType workflowType {
+    baseType: string;
+    allowedValues: 'creation',
+                   'update',
+                   'translation',
+                   'translation_update',
+                   'localization',
+                   'localization_update';
+}
+
+dataType entityTypeList {
+    baseType: string;
+    pattern: '(question|explainer|lesson_video|question_video|scope)(,\s*(question|explainer|lesson_video|question_video|scope))*';
+}
+
 dataType statusCategory {
     baseType: string;
 }
@@ -34,8 +49,17 @@ attribute reference {
     valueType: reference;
 }
 
+attribute workflowType {
+    tagName: 'type';
+    valueType: workflowType;
+}
+
+attribute limit_to_entity_types {
+    valueType: entityTypeList;
+}
+
 root element workflow {
-    attributes: reference;
+    attributes: reference, workflowType (optional), limit_to_entity_types (optional);
     allowedContent: elements only;
     subelements: name, description (optional), statuses, transitions;
 }
@@ -66,13 +90,13 @@ attribute category {
     valueType: statusCategory;
 }
 
-attribute type1 {
+attribute statusType {
     tagName: 'type';
     valueType: statusType;
 }
 
 element status {
-    attributes: reference, category (optional), type1 (optional);
+    attributes: reference, category (optional), statusType (optional);
     allowedContent: elements only;
     subelements: name, description (optional);
 }
@@ -90,7 +114,7 @@ attribute to {
     valueType: reference;
 }
 
-attribute type2 {
+attribute transitionType {
     tagName: 'type';
     valueType: transitionType;
 }
@@ -104,7 +128,7 @@ attribute auto_assign_to {
 }
 
 element transition {
-    attributes: reference, from, to, type2 (optional), comment_required (optional), auto_assign_to (optional);
+    attributes: reference, from, to, transitionType (optional), comment_required (optional), auto_assign_to (optional);
     allowedContent: elements only;
     subelements: name, button_text (optional), description (optional), rules;
 }
