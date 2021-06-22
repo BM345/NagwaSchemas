@@ -1,3 +1,6 @@
+/*
+Format Name: Scope XML
+*/
 
 dataType id {
     baseType: string;

@@ -6,6 +6,7 @@ logger = logging.getLogger(__name__)
 
 class Schema(object):
     def __init__(self):
+        self.formatName = ""
         self.structures = []
 
     def getDataStructures(self):
@@ -139,6 +140,15 @@ class Parser(object):
         marker = Marker()
 
         schema = Schema()
+
+        self._parseWhiteSpace(inputText, marker)
+
+        metadata = self._parseComment(inputText, marker)
+
+        if metadata != None:
+            schema.formatName = re.search(r"Format Name:\s*(.+)\n", metadata).group(1)
+
+        self._parseWhiteSpace(inputText, marker)
 
         while marker.position < len(inputText):
             structure = self._parseStructure(inputText, marker)
@@ -668,6 +678,24 @@ class Parser(object):
 
         return int(t)
 
+    def _parseComment(self, inputText, marker):
+
+        if cut(inputText, marker.position, 2) == "/*":
+            marker.position += 2
+            t = ""
+
+            while marker.position < len(inputText):
+                if cut(inputText, marker.position, 2) == "*/":
+                    marker.position += 2
+                    break 
+                else:
+                    t += cut(inputText, marker.position)
+                    marker.position += 1
+
+            return t 
+        else:
+            return None 
+
     def _parseWhiteSpace(self, inputText, marker):
         t = ""
 
@@ -875,6 +903,9 @@ def generateSpecification(schema, filePath):
         rootElements = schema.getPossibleRootElementStructures()
         nonRootElements = schema.getNonRootElementStructures()
         elements = rootElements + nonRootElements 
+
+        fileObject.write("# {} Specification\n\n".format(schema.formatName))
+        fileObject.write("This document gives the specification for {}.\n\n".format(schema.formatName))
 
         fileObject.write("## Table of Contents\n\n")
 

@@ -1,3 +1,7 @@
+# Scope XML Specification
+
+This document gives the specification for Scope XML.
+
 ## Table of Contents
 
 - [The &lt;scope&gt; element](#the-scope-element)
