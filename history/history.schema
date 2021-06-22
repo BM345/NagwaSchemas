@@ -30,7 +30,17 @@ dataType xmlFileName {
 
 dataType actionType {
     baseType: string;
-    allowedValues: 'created_entity', 'created_new_version', 'changed_workflow', 'changed_workflow_status', 'changed_assignee', 'changed_priority', 'added_comment', 'added_label', 'removed_label', 'added_watcher', 'removed_watcher';
+    allowedValues:  'created_entity', 
+                    'created_new_version', 
+                    'changed_workflow', 
+                    'changed_workflow_status', 
+                    'changed_assignee', 
+                    'changed_priority', 
+                    'added_comment', 
+                    'added_label', 
+                    'removed_label', 
+                    'added_watcher', 
+                    'removed_watcher';
 }
 
 attribute for_content_entity {
@@ -142,7 +152,17 @@ attribute type {
 element action {
     attributes: taken_at, taken_by, type;
     allowedContent: elements only;
-    subelements: version2 (optional), file_name (optional), new_workflow (optional), transition (optional), new_workflow_status (optional), new_assignee (optional), new_priority (optional), comment_reference (optional), comment_text (optional), watcher (optional), label (optional);
+    subelements: version2 (optional), 
+                 file_name (optional), 
+                 new_workflow (optional), 
+                 transition (optional), 
+                 new_workflow_status (optional), 
+                 new_assignee (optional), 
+                 new_priority (optional), 
+                 comment_reference (optional), 
+                 comment_text (optional), watcher 
+                 (optional), 
+                 label (optional);
 }
 
 element version2 {
