@@ -1,14 +1,14 @@
 ## Table of Contents
 
-[The &lt;scope&gt; element](#the-scope-element)
-[The &lt;language&gt; element](#the-language-element)
-[The &lt;dialects&gt; element](#the-dialects-element)
-[The &lt;dialect&gt; element](#the-dialect-element)
-[The &lt;objectives&gt; element](#the-objectives-element)
-[The &lt;prerequisites&gt; element](#the-prerequisites-element)
-[The &lt;exclusions&gt; element](#the-exclusions-element)
-[The &lt;skill&gt; element](#the-skill-element)
-[The &lt;item&gt; element](#the-item-element)
+- [The &lt;scope&gt; element](#the-scope-element)
+- [The &lt;language&gt; element](#the-language-element)
+- [The &lt;dialects&gt; element](#the-dialects-element)
+- [The &lt;dialect&gt; element](#the-dialect-element)
+- [The &lt;objectives&gt; element](#the-objectives-element)
+- [The &lt;prerequisites&gt; element](#the-prerequisites-element)
+- [The &lt;exclusions&gt; element](#the-exclusions-element)
+- [The &lt;skill&gt; element](#the-skill-element)
+- [The &lt;item&gt; element](#the-item-element)
 
 
 <br /><br />
@@ -24,11 +24,11 @@
 
 ### Possible Subelements
 
-- <language>
-- <dialects>
-- <objectives>
-- <prerequisites>
-- <exclusions>
+- &lt;language&gt;
+- &lt;dialects&gt;
+- &lt;objectives&gt;
+- &lt;prerequisites&gt;
+- &lt;exclusions&gt;
 
 ### Examples
 
@@ -83,7 +83,7 @@ None
 
 ### Possible Subelements
 
-- <dialect>
+- &lt;dialect&gt;
 
 ### Examples
 
@@ -134,7 +134,7 @@ None
 
 ### Possible Subelements
 
-- <skill>
+- &lt;skill&gt;
 
 ### Examples
 
@@ -158,7 +158,7 @@ None
 
 ### Possible Subelements
 
-- <item>
+- &lt;item&gt;
 
 ### Examples
 
@@ -182,7 +182,7 @@ None
 
 ### Possible Subelements
 
-- <item>
+- &lt;item&gt;
 
 ### Examples
 

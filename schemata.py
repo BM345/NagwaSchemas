@@ -879,7 +879,7 @@ def generateSpecification(schema, filePath):
         fileObject.write("## Table of Contents\n\n")
 
         for element in elements:
-            fileObject.write("[The &lt;{}&gt; element](#the-{}-element)\n".format(element.elementName, re.sub("_", "-", element.elementName)))
+            fileObject.write("- [The &lt;{}&gt; element](#the-{}-element)\n".format(element.elementName, re.sub("_", "-", element.elementName)))
 
         for element in elements:
             fileObject.write("\n\n<br /><br />\n\n")
@@ -912,7 +912,7 @@ def generateSpecification(schema, filePath):
                     e = schema.getElementStructureByReference(subelement.elementReference)
                     ee.append(e)
 
-                    fileObject.write("- <{}>\n".format(e.elementName))
+                    fileObject.write("- &lt;{}&gt;\n".format(e.elementName))
 
                 fileObject.write("\n")
 
