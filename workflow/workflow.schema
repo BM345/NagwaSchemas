@@ -33,10 +33,6 @@ dataType transitionType {
     allowedValues: 'submit', 'approve', 'reject', 'send', 'pass', 'fail', 'error';
 }
 
-dataType boolean {
-    baseType: boolean;
-}
-
 dataType autoAssignmentPredicate {
     baseType: string;
 }

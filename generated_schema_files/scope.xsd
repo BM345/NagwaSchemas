@@ -207,9 +207,6 @@
     <xs:simpleType name="__type__d__dialectCode">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
-    <xs:simpleType name="__type__d__string">
-        <xs:restriction base="xs:string"/>
-    </xs:simpleType>
     <xs:complexType name="__type__e__scope" mixed="false">
         <xs:sequence>
             <xs:element name="language" type="__type__e__language"/>

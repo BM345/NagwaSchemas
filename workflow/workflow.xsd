@@ -40,9 +40,6 @@
             <xs:enumeration value="error"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:simpleType name="__type__d__boolean">
-        <xs:restriction base="xs:boolean"/>
-    </xs:simpleType>
     <xs:simpleType name="__type__d__autoAssignmentPredicate">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>

@@ -44,10 +44,6 @@ dataType dialectCode {
     baseType: string;
 }
 
-dataType string {
-    baseType: string;
-}
-
 attribute id {
     valueType: id;
 }
