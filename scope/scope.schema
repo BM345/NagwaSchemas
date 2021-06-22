@@ -28,7 +28,7 @@ attribute version {
 root element scope {
     attributes: id, version;
     allowedContent: elements only;
-    subelements: language;
+    subelements: language, dialects, objectives, prerequisites, exclusions;
 }
 
 attribute name {

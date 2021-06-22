@@ -1,4 +1,5 @@
 import logging 
+import re
 from lxml.etree import ElementTree as XMLElementTree, Element as XMLElement, SubElement as XMLSubelement, QName, indent 
 
 logger = logging.getLogger(__name__)
@@ -875,10 +876,17 @@ def generateSpecification(schema, filePath):
         nonRootElements = schema.getNonRootElementStructures()
         elements = rootElements + nonRootElements 
 
+        fileObject.write("## Table of Contents\n\n")
+
+        for element in elements:
+            fileObject.write("[The &lt;{}&gt; element](#the-{}-element)\n".format(element.elementName, re.sub("_", "-", element.elementName)))
+
         for element in elements:
             fileObject.write("\n\n<br /><br />\n\n")
             fileObject.write("## The &lt;{}&gt; element\n\n".format(element.elementName))
             fileObject.write("### Attributes\n\n")
+
+            aa = []
 
             if element.attributes:
                 fileObject.write("| Name | Required | Allowed Values | Description |\n")
@@ -886,6 +894,8 @@ def generateSpecification(schema, filePath):
 
                 for attribute in element.attributes:
                     a = schema.getAttributeStructureByReference(attribute.attributeReference)
+                    aa.append(a)
+
                     fileObject.write("| `{}` | {} | {} |  |\n".format(a.attributeName, "Required" if not attribute.isOptional else "Optional", ""))
 
                 fileObject.write("\n")
@@ -895,9 +905,12 @@ def generateSpecification(schema, filePath):
 
             fileObject.write("### Possible Subelements\n\n")
 
+            ee = []
+
             if element.subelements:
                 for subelement in element.subelements:
                     e = schema.getElementStructureByReference(subelement.elementReference)
+                    ee.append(e)
 
                     fileObject.write("- <{}>\n".format(e.elementName))
 
@@ -909,5 +922,14 @@ def generateSpecification(schema, filePath):
             fileObject.write("### Examples\n\n")
             fileObject.write("Below is shown an example of the `<{}>` element.\n\n".format(element.elementName))
             fileObject.write("```xml\n")
+
+            attributeString = " ".join(["{}=\"...\"".format(a.attributeName) for a in aa])
+
+            fileObject.write("<{} {}>\n".format(element.elementName, attributeString))
+
+            for e in ee:
+                fileObject.write("    <{}></{}>\n".format(e.elementName, e.elementName))
+
+            fileObject.write("</{}>\n".format(element.elementName))
             fileObject.write("```\n\n")
 

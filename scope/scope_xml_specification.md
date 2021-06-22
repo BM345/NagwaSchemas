@@ -1,3 +1,14 @@
+## Table of Contents
+
+[The &lt;scope&gt; element](#the-scope-element)
+[The &lt;language&gt; element](#the-language-element)
+[The &lt;dialects&gt; element](#the-dialects-element)
+[The &lt;dialect&gt; element](#the-dialect-element)
+[The &lt;objectives&gt; element](#the-objectives-element)
+[The &lt;prerequisites&gt; element](#the-prerequisites-element)
+[The &lt;exclusions&gt; element](#the-exclusions-element)
+[The &lt;skill&gt; element](#the-skill-element)
+[The &lt;item&gt; element](#the-item-element)
 
 
 <br /><br />
@@ -14,12 +25,23 @@
 ### Possible Subelements
 
 - <language>
+- <dialects>
+- <objectives>
+- <prerequisites>
+- <exclusions>
 
 ### Examples
 
 Below is shown an example of the `<scope>` element.
 
 ```xml
+<scope id="..." version="...">
+    <language></language>
+    <dialects></dialects>
+    <objectives></objectives>
+    <prerequisites></prerequisites>
+    <exclusions></exclusions>
+</scope>
 ```
 
 
@@ -45,6 +67,8 @@ None
 Below is shown an example of the `<language>` element.
 
 ```xml
+<language name="..." name_in_english="..." code="...">
+</language>
 ```
 
 
@@ -66,6 +90,9 @@ None
 Below is shown an example of the `<dialects>` element.
 
 ```xml
+<dialects >
+    <dialect></dialect>
+</dialects>
 ```
 
 
@@ -91,6 +118,8 @@ None
 Below is shown an example of the `<dialect>` element.
 
 ```xml
+<dialect name="..." name_in_english="..." code="...">
+</dialect>
 ```
 
 
@@ -112,6 +141,9 @@ None
 Below is shown an example of the `<objectives>` element.
 
 ```xml
+<objectives >
+    <skill></skill>
+</objectives>
 ```
 
 
@@ -133,6 +165,9 @@ None
 Below is shown an example of the `<prerequisites>` element.
 
 ```xml
+<prerequisites >
+    <item></item>
+</prerequisites>
 ```
 
 
@@ -154,6 +189,9 @@ None
 Below is shown an example of the `<exclusions>` element.
 
 ```xml
+<exclusions >
+    <item></item>
+</exclusions>
 ```
 
 
@@ -175,6 +213,8 @@ None
 Below is shown an example of the `<skill>` element.
 
 ```xml
+<skill >
+</skill>
 ```
 
 
@@ -196,5 +236,7 @@ None
 Below is shown an example of the `<item>` element.
 
 ```xml
+<item >
+</item>
 ```
 
