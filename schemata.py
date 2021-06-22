@@ -774,7 +774,7 @@ class XSDExporter(object):
                     e = schema.getElementStructureByReference(subelement.elementReference)
 
                     e3 = XMLElement(QName(xs, "element"))
-                    e3.set("name", subelement.elementReference)
+                    e3.set("name", e.elementName)
                     e3.set("type", self._getXSDTypeName(e))
                     p =  subelement.minimumNumberOfOccurrences
                     q = subelement.maximumNumberOfOccurrences 

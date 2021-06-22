@@ -26,6 +26,24 @@
             <xs:enumeration value="very_low"/>
         </xs:restriction>
     </xs:simpleType>
+    <xs:simpleType name="__type__d__xmlFileName">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__actionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="created_entity"/>
+            <xs:enumeration value="created_new_version"/>
+            <xs:enumeration value="changed_workflow"/>
+            <xs:enumeration value="changed_workflow_status"/>
+            <xs:enumeration value="changed_assignee"/>
+            <xs:enumeration value="changed_priority"/>
+            <xs:enumeration value="added_comment"/>
+            <xs:enumeration value="added_label"/>
+            <xs:enumeration value="removed_label"/>
+            <xs:enumeration value="added_watcher"/>
+            <xs:enumeration value="removed_watcher"/>
+        </xs:restriction>
+    </xs:simpleType>
     <xs:complexType name="__type__e__history" mixed="false">
         <xs:sequence>
             <xs:element name="state" type="__type__e__state"/>
@@ -38,6 +56,11 @@
             <xs:element name="workflow" type="__type__e__workflow"/>
             <xs:element name="workflow_status" type="__type__e__workflow_status"/>
             <xs:element name="developers" type="__type__e__developers"/>
+            <xs:element name="assignee" type="__type__e__assignee"/>
+            <xs:element name="priority" type="__type__e__priority"/>
+            <xs:element name="labels" type="__type__e__labels"/>
+            <xs:element name="watchers" type="__type__e__watchers"/>
+            <xs:element name="versions" type="__type__e__versions"/>
         </xs:sequence>
     </xs:complexType>
     <xs:simpleType name="__type__e__workflow">
@@ -59,15 +82,63 @@
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
+    <xs:simpleType name="__type__e__assignee">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__e__priority">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:complexType name="__type__e__labels" mixed="false">
+        <xs:sequence>
+            <xs:element name="label" type="__type__e__label" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="__type__e__label">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:complexType name="__type__e__watchers" mixed="false">
+        <xs:sequence>
+            <xs:element name="watcher" type="__type__e__watcher" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="__type__e__watcher">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:complexType name="__type__e__versions" mixed="false">
+        <xs:sequence>
+            <xs:element name="version" type="__type__e__version" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__e__version">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="file_name" type="__type__d__xmlFileName" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
     <xs:complexType name="__type__e__actions" mixed="false">
         <xs:sequence>
             <xs:element name="action" type="__type__e__action" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="__type__e__action" mixed="false">
-        <xs:sequence/>
+        <xs:sequence>
+            <xs:element name="version" type="__type__e__version2" minOccurs="0"/>
+            <xs:element name="file_name" type="__type__e__file_name" minOccurs="0"/>
+            <xs:element name="new_workflow" type="__type__e__new_workflow" minOccurs="0"/>
+        </xs:sequence>
         <xs:attribute name="taken_at" type="__type__d__timestamp" use="required"/>
         <xs:attribute name="taken_by" type="__type__d__emailAddress" use="required"/>
+        <xs:attribute name="type" type="__type__d__actionType" use="required"/>
     </xs:complexType>
+    <xs:simpleType name="__type__e__version2">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__e__file_name">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__e__new_workflow">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
     <xs:element name="history" type="__type__e__history"/>
 </xs:schema>

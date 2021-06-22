@@ -23,6 +23,16 @@ dataType priority {
     allowedValues: 'very_high', 'high', 'low', 'very_low';
 }
 
+dataType xmlFileName {
+    baseType: string;
+    pattern: '[A-Za-z0-9\._\-]+\.xml'
+}
+
+dataType actionType {
+    baseType: string;
+    allowedValues: 'created_entity', 'created_new_version', 'changed_workflow', 'changed_workflow_status', 'changed_assignee', 'changed_priority', 'added_comment', 'added_label', 'removed_label', 'added_watcher', 'removed_watcher';
+}
+
 attribute for_content_entity {
     valueType: uei;
 }
@@ -35,7 +45,7 @@ root element history {
 
 element state {
     allowedContent: elements only;
-    subelements: workflow, workflow_status, developers;
+    subelements: workflow, workflow_status, developers, assignee, priority, labels, watchers, versions;
 }
 
 element workflow {
@@ -68,6 +78,50 @@ element developer {
     valueType: emailAddress;
 }
 
+element assignee {
+    allowedContent: text only;
+    valueType: emailAddress;
+}
+
+element priority {
+    allowedContent: text only;
+    valueType: priority;
+}
+
+element labels {
+    allowedContent: elements only;
+    subelements: label (n >= 0);
+}
+
+element label {
+    allowedContent: text only;
+}
+
+element watchers {
+    allowedContent: elements only;
+    subelements: watcher (n >= 0);
+}
+
+element watcher {
+    allowedContent: text only;
+    valueType: emailAddress;
+}
+
+element versions {
+    allowedContent: elements only;
+    subelements: version (n >= 0);
+}
+
+attribute file_name {
+    valueType: xmlFileName;
+}
+
+element version {
+    attributes: file_name;
+    allowedContent: text only;
+    valueType: integer;
+}
+
 element actions {
     allowedContent: elements only;
     subelements: action (n >= 0);
@@ -81,7 +135,28 @@ attribute taken_by {
     valueType: emailAddress;
 }
 
+attribute type {
+    valueType: actionType;
+}
+
 element action {
-    attributes: taken_at, taken_by;
+    attributes: taken_at, taken_by, type;
     allowedContent: elements only;
+    subelements: version2 (optional), file_name (optional), new_workflow (optional);
+}
+
+element version2 {
+    tagName: 'version';
+    allowedContent: text only;
+    valueType: integer;
+}
+
+element file_name {
+    allowedContent: text only;
+    valueType: xmlFileName;
+}
+
+element new_workflow {
+    allowedContent: text only;
+    valueType: reference;
 }
