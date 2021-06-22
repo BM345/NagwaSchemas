@@ -1,0 +1,4 @@
+
+root element scope {
+    allowedContent: elements only;
+}

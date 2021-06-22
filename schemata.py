@@ -124,6 +124,14 @@ class Parser(object):
     def __init__(self):
         pass 
 
+    def parseSchemaFromFile(self, filePath):
+        with open(filePath, "r") as fileObject:
+            text = fileObject.read()
+
+            schema = self.parseSchema(text)
+
+            return schema 
+
     def parseSchema(self, inputText):
         logging.debug("Attempting to parse schema.")
 
@@ -858,5 +866,46 @@ class XSDExporter(object):
 xsdExporter = XSDExporter()
 
 def exportSchemaAsXSD(schema, filePath):
-    xsdExporter.exportSchema(schema, filePath)
+    xsdExporter.exportSchema(schema, filePath) 
+
+def generateSpecification(schema, filePath):
+    with open(filePath, "w") as fileObject:
+
+        rootElements = schema.getPossibleRootElementStructures()
+        nonRootElements = schema.getNonRootElementStructures()
+        elements = rootElements + nonRootElements 
+
+        for element in elements:
+            fileObject.write("<br /><br />\n\n")
+            fileObject.write("## The &lt;{}&gt; element\n\n".format(element.elementName))
+            fileObject.write("### Attributes\n\n")
+
+            if element.attributes:
+                fileObject.write("| Name | Required | Allowed Values | Description |\n")
+                fileObject.write("|---|---|---|---|\n")
+
+                for attribute in element.attributes:
+                    a = schema.getAttributeStructureByReference(attribute.attributeName)
+                    fileObject.write("| `{}` | {} | {} |  |\n".format(a.attributeName, "Required" if not a.isOptional else "Optional", ""))
+
+                fileObject.write("\n")
+
+            else:
+                fileObject.write("None\n\n")
+
+            fileObject.write("### Possible Subelements\n\n")
+
+            if element.subelements:
+                for subelement in element.subelements:
+                    e = schema.getElementStructureByReference(subelement.elementName)
+
+                    fileObject.write("- <{}>\n".format(e.elementName))
+
+            else:
+                fileObject.write("None\n\n")
+
+            fileObject.write("### Examples\n\n")
+            fileObject.write("Below is shown an example of the `<{}>` element.\n\n".format(element.elementName))
+            fileObject.write("```xml\n")
+            fileObject.write("```\n")
 

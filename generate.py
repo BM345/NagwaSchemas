@@ -1,6 +1,7 @@
 import logging 
 import schemata 
 import glob 
+import argparse 
 from lxml.etree import parse, XMLSchema 
 
 SCHEMAS = [
@@ -45,5 +46,15 @@ def validate():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
-    generate()
-    validate()
+    argumentParser = argparse.ArgumentParser()
+    argumentParser.add_argument("action", default="generate_xsd_files")
+    
+    arguments = argumentParser.parse_args()
+
+    if arguments.action == "generate_specification":
+        parser = schemata.Parser()
+        schema = parser.parseSchemaFromFile("scope/scope.schema")
+        schemata.generateSpecification(schema, "scope/scope_xml_specification.md")
+    else:
+        generate()
+        validate()
