@@ -828,16 +828,7 @@ class XSDExporter(object):
 
                 e1.append(e2)
 
-                for attribute in elementStructure.attributes:
-                    a = schema.getAttributeStructureByReference(attribute.attributeReference)
-                    d = schema.getDataStructureByReference(a.dataStructure)
-
-                    e4 = XMLElement(QName(xs, "attribute"))
-                    e4.set("name", a.attributeName)
-                    e4.set("type",  self._getXSDTypeName(d))
-                    e4.set("use", "optional" if attribute.isOptional else "required")
-
-                    e1.append(e4)
+                self._exportAttributes(schema, elementStructure.attributes, e1)
 
                 xsdElement.append(e1)
 
@@ -892,6 +883,21 @@ class XSDExporter(object):
                     e1.append(e4)
 
                 xsdElement.append(e1)
+
+    def _exportAttributes(self, schema, attributes, xsdElement):
+        xs = self._xs 
+
+        for attribute in attributes:
+            a = schema.getAttributeStructureByReference(attribute.attributeReference)
+            d = schema.getDataStructureByReference(a.dataStructure)
+
+            e1 = XMLElement(QName(xs, "attribute"))
+            e1.set("name", a.attributeName)
+            e1.set("type",  self._getXSDTypeName(d))
+            e1.set("use", "optional" if attribute.isOptional else "required")
+
+            xsdElement.append(e1)
+
 
 
 xsdExporter = XSDExporter()
