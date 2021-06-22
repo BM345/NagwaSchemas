@@ -50,7 +50,7 @@ attribute dialectCode {
 }
 
 element language {
-    attributes: name (optional), name_in_english (optional), languageCode;
+    attributes: languageCode, name (optional), name_in_english (optional);
     allowedContent: none;
 }
 
@@ -60,7 +60,7 @@ element dialects {
 }
 
 element dialect {
-    attributes: name (optional), name_in_english (optional), dialectCode;
+    attributes: dialectCode, name (optional), name_in_english (optional);
     allowedContent: none;
 }
 

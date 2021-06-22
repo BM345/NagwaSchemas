@@ -54,9 +54,9 @@ Below is shown an example of the `<scope>` element.
 
 | Name | Required | Allowed Values | Description |
 |---|---|---|---|
+| `code` | Required |  |  |
 | `name` | Optional |  |  |
 | `name_in_english` | Optional |  |  |
-| `code` | Required |  |  |
 
 ### Possible Subelements
 
@@ -67,7 +67,7 @@ None
 Below is shown an example of the `<language>` element.
 
 ```xml
-<language name="..." name_in_english="..." code="...">
+<language code="..." name="..." name_in_english="...">
 </language>
 ```
 
@@ -90,7 +90,7 @@ None
 Below is shown an example of the `<dialects>` element.
 
 ```xml
-<dialects >
+<dialects>
     <dialect></dialect>
 </dialects>
 ```
@@ -105,9 +105,9 @@ Below is shown an example of the `<dialects>` element.
 
 | Name | Required | Allowed Values | Description |
 |---|---|---|---|
+| `code` | Required |  |  |
 | `name` | Optional |  |  |
 | `name_in_english` | Optional |  |  |
-| `code` | Required |  |  |
 
 ### Possible Subelements
 
@@ -118,7 +118,7 @@ None
 Below is shown an example of the `<dialect>` element.
 
 ```xml
-<dialect name="..." name_in_english="..." code="...">
+<dialect code="..." name="..." name_in_english="...">
 </dialect>
 ```
 
@@ -141,7 +141,7 @@ None
 Below is shown an example of the `<objectives>` element.
 
 ```xml
-<objectives >
+<objectives>
     <skill></skill>
 </objectives>
 ```
@@ -165,7 +165,7 @@ None
 Below is shown an example of the `<prerequisites>` element.
 
 ```xml
-<prerequisites >
+<prerequisites>
     <item></item>
 </prerequisites>
 ```
@@ -189,7 +189,7 @@ None
 Below is shown an example of the `<exclusions>` element.
 
 ```xml
-<exclusions >
+<exclusions>
     <item></item>
 </exclusions>
 ```
@@ -213,7 +213,7 @@ None
 Below is shown an example of the `<skill>` element.
 
 ```xml
-<skill >
+<skill>
 </skill>
 ```
 
@@ -236,7 +236,7 @@ None
 Below is shown an example of the `<item>` element.
 
 ```xml
-<item >
+<item>
 </item>
 ```
 

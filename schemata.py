@@ -925,7 +925,10 @@ def generateSpecification(schema, filePath):
 
             attributeString = " ".join(["{}=\"...\"".format(a.attributeName) for a in aa])
 
-            fileObject.write("<{} {}>\n".format(element.elementName, attributeString))
+            if aa:
+                fileObject.write("<{} {}>\n".format(element.elementName, attributeString))
+            else:
+                fileObject.write("<{}>\n".format(element.elementName))
 
             for e in ee:
                 fileObject.write("    <{}></{}>\n".format(e.elementName, e.elementName))
