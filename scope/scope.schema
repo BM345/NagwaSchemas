@@ -16,12 +16,16 @@ dataType versionNumber {
     baseType: integer;
 }
 
-dataType iso_639_2 {
+dataType iso_639_1 {
     baseType: string;
     pattern: '[a-z]{2}';
 }
 
 dataType dialectCode {
+    baseType: string;
+}
+
+dataType string {
     baseType: string;
 }
 
@@ -57,7 +61,7 @@ attribute name_in_english {
 
 attribute languageCode {
     tagName: 'code';
-    valueType: iso_639_2;
+    valueType: iso_639_1;
 }
 
 attribute dialectCode {
@@ -96,9 +100,15 @@ element exclusions {
 }
 
 element skill {
-    allowedContent: text only;
+    allowedContent: elements and text;
+    subelements: m (n >= 0);
 }
 
 element item {
-    allowedContent: text only;
+    allowedContent: elements and text;
+    subelements: m (n >= 0);
+}
+
+element m {
+    allowedContent: elements and text;
 }

@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:simpleType name="__type__d__id">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{12}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__derivative_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="translation"/>
+            <xs:enumeration value="localization"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__versionNumber">
+        <xs:restriction base="xs:integer"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__iso_639_2">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__dialectCode">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__string">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:complexType name="__type__e__scope" mixed="false">
+        <xs:sequence>
+            <xs:element name="language" type="__type__e__language"/>
+            <xs:element name="dialects" type="__type__e__dialects"/>
+            <xs:element name="objectives" type="__type__e__objectives"/>
+            <xs:element name="prerequisites" type="__type__e__prerequisites"/>
+            <xs:element name="exclusions" type="__type__e__exclusions"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="__type__d__id" use="required"/>
+        <xs:attribute name="derivative_of" type="__type__d__id" use="optional"/>
+        <xs:attribute name="derivative_type" type="__type__d__derivative_type" use="optional"/>
+        <xs:attribute name="version" type="__type__d__versionNumber" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="__type__e__language">
+        <xs:attribute name="code" type="__type__d__iso_639_2" use="required"/>
+        <xs:attribute name="name" type="__type__d__string" use="optional"/>
+        <xs:attribute name="name_in_english" type="__type__d__string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="__type__e__dialects" mixed="false">
+        <xs:sequence>
+            <xs:element name="dialect" type="__type__e__dialect" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__e__dialect">
+        <xs:attribute name="code" type="__type__d__dialectCode" use="required"/>
+        <xs:attribute name="name" type="__type__d__string" use="optional"/>
+        <xs:attribute name="name_in_english" type="__type__d__string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="__type__e__objectives" mixed="false">
+        <xs:sequence>
+            <xs:element name="skill" type="__type__e__skill" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__e__prerequisites" mixed="false">
+        <xs:sequence>
+            <xs:element name="item" type="__type__e__item" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__e__exclusions" mixed="false">
+        <xs:sequence>
+            <xs:element name="item" type="__type__e__item" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__e__skill" mixed="true">
+        <xs:sequence>
+            <xs:element name="m" type="__type__e__m" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__e__item" mixed="true">
+        <xs:sequence>
+            <xs:element name="m" type="__type__e__m" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__e__m" mixed="true">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:element name="scope" type="__type__e__scope"/>
+</xs:schema>

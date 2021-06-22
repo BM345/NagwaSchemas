@@ -783,6 +783,8 @@ class XSDExporter(object):
                 e2 = XMLElement(QName(xs, "restriction"))
                 if dataStructure.baseStructure == "string":
                     e2.set("base", "xs:string")
+                elif dataStructure.baseStructure == "integer":
+                    e2.set("base", "xs:integer")
                 elif dataStructure.baseStructure == "boolean":
                     e2.set("base", "xs:boolean")
 
