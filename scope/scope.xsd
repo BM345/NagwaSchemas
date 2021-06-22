@@ -12,7 +12,9 @@
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="__type__d__versionNumber">
-        <xs:restriction base="xs:integer"/>
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+        </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="__type__d__iso_639_1">
         <xs:restriction base="xs:string">
@@ -223,8 +225,8 @@
     </xs:complexType>
     <xs:complexType name="__type__e__language">
         <xs:attribute name="code" type="__type__d__iso_639_1" use="required"/>
-        <xs:attribute name="name" type="__type__d__string" use="optional"/>
-        <xs:attribute name="name_in_english" type="__type__d__string" use="optional"/>
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+        <xs:attribute name="name_in_english" type="xs:string" use="optional"/>
     </xs:complexType>
     <xs:complexType name="__type__e__dialects" mixed="false">
         <xs:sequence>
@@ -233,8 +235,8 @@
     </xs:complexType>
     <xs:complexType name="__type__e__dialect">
         <xs:attribute name="code" type="__type__d__dialectCode" use="required"/>
-        <xs:attribute name="name" type="__type__d__string" use="optional"/>
-        <xs:attribute name="name_in_english" type="__type__d__string" use="optional"/>
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+        <xs:attribute name="name_in_english" type="xs:string" use="optional"/>
     </xs:complexType>
     <xs:complexType name="__type__e__objectives" mixed="false">
         <xs:sequence>

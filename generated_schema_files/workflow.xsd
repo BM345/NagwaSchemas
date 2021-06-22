@@ -98,7 +98,7 @@
         <xs:attribute name="from" type="__type__d__reference" use="required"/>
         <xs:attribute name="to" type="__type__d__reference" use="required"/>
         <xs:attribute name="type" type="__type__d__transitionType" use="optional"/>
-        <xs:attribute name="comment_required" type="__type__d__boolean" use="optional"/>
+        <xs:attribute name="comment_required" type="xs:boolean" use="optional"/>
         <xs:attribute name="auto_assign_to" type="__type__d__autoAssignmentPredicate" use="optional"/>
     </xs:complexType>
     <xs:simpleType name="__type__e__button_text">

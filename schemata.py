@@ -49,6 +49,8 @@ class DataStructure(Structure):
         self.baseStructure = None 
         self.allowedPattern = ""
         self.allowedValues = []
+        self.minimumValue = None
+        self.maximumValue = None 
 
 class ElementStructure(Structure):
     def __init__(self, reference = ""):
@@ -232,6 +234,10 @@ class Parser(object):
                     dataStructure.allowedPattern = p[1]
                 if p[0] == "allowedValues":
                     dataStructure.allowedValues = p[1] 
+                if p[0] == "minimumValue":
+                    dataStructure.minimumValue = p[1]
+                if p[0] == "maximumValue":
+                    dataStructure.maximumValue = p[1]
 
         self._parseWhiteSpace(inputText, marker)
 
@@ -370,6 +376,12 @@ class Parser(object):
         
         if propertyName == "allowedValues":
             propertyValue = self._parseList(inputText, marker)
+
+        if propertyName == "minimumValue":
+            propertyValue = self._parseInteger(inputText, marker)
+
+        if propertyName == "maximumValue":
+            propertyValue = self._parseInteger(inputText, marker)
         
         if propertyName == "valueType":
             propertyValue = self._parseReference(inputText, marker)
@@ -757,38 +769,51 @@ class XSDExporter(object):
 
         for dataStructure in dataStructures:
             e1 = XMLElement(QName(xs, "simpleType"))
-            e1.set("name", self._getXSDTypeName( dataStructure))
+            e1.set("name", self._getXSDTypeName(dataStructure))
 
-            if dataStructure.allowedPattern != "":
+            if dataStructure.baseStructure == "string":
                 e2 = XMLElement(QName(xs, "restriction"))
                 e2.set("base", "xs:string")
 
-                e3 = XMLElement(QName(xs, "pattern"))
-                e3.set("value", dataStructure.allowedPattern)
+                if dataStructure.allowedPattern != "":
+                    e3 = XMLElement(QName(xs, "pattern"))
+                    e3.set("value", dataStructure.allowedPattern)
 
-                e2.append(e3)
+                    e2.append(e3)
+
+                elif dataStructure.allowedValues:
+                    for value in dataStructure.allowedValues:
+                        e3 = XMLElement(QName(xs, "enumeration"))
+                        e3.set("value", value)
+
+                        e2.append(e3)
+
                 e1.append(e2)
-            elif dataStructure.allowedValues:
-                e2 = XMLElement(QName(xs, "restriction"))
-                e2.set("base", "xs:string")
 
-                for value in dataStructure.allowedValues:
-                    e3 = XMLElement(QName(xs, "enumeration"))
-                    e3.set("value", value)
+            elif dataStructure.baseStructure == "integer":
+                e2 = XMLElement(QName(xs, "restriction"))
+                e2.set("base", "xs:integer")
+
+                if dataStructure.minimumValue != None:
+                    e3 = XMLElement(QName(xs, "minInclusive"))
+                    e3.set("value", str(dataStructure.minimumValue))
+
+                    e2.append(e3)
+
+                if dataStructure.maximumValue != None:
+                    e3 = XMLElement(QName(xs, "maxInclusive"))
+                    e3.set("value", str(dataStructure.maximumValue))
 
                     e2.append(e3)
 
                 e1.append(e2)
-            else:
+
+            elif dataStructure.baseStructure == "boolean":
                 e2 = XMLElement(QName(xs, "restriction"))
-                if dataStructure.baseStructure == "string":
-                    e2.set("base", "xs:string")
-                elif dataStructure.baseStructure == "integer":
-                    e2.set("base", "xs:integer")
-                elif dataStructure.baseStructure == "boolean":
-                    e2.set("base", "xs:boolean")
+                e2.set("base", "xs:boolean")
 
                 e1.append(e2)
+
 
             xsdElement.append(e1)
     
@@ -798,9 +823,13 @@ class XSDExporter(object):
         elementStructures = schema.getElementStructures()
 
         for elementStructure in elementStructures:
+            hasAttributes = len(elementStructure.attributes) > 0
+            xsdType = "simpleType" if not hasAttributes and elementStructure.allowedContent == "text only" else "complexType"
+
+            e1 = XMLElement(QName(xs, xsdType))
+            e1.set("name", self._getXSDTypeName(elementStructure))
+
             if elementStructure.allowedContent == "elements and text" or elementStructure.allowedContent == "elements only":
-                e1 = XMLElement(QName(xs, "complexType"))
-                e1.set("name",  self._getXSDTypeName( elementStructure))
 
                 if elementStructure.allowedContent == "elements and text":
                     e1.set("mixed", "true")
@@ -830,22 +859,13 @@ class XSDExporter(object):
 
                 self._exportAttributes(schema, elementStructure.attributes, e1)
 
-                xsdElement.append(e1)
-
             elif elementStructure.attributes == [] and elementStructure.allowedContent == "text only":
-                e1 = XMLElement(QName(xs, "simpleType"))
-                e1.set("name",  self._getXSDTypeName( elementStructure))
-
                 e2 = XMLElement(QName(xs, "restriction"))
                 e2.set("base", "xs:string")
 
                 e1.append(e2)
-                xsdElement.append(e1)
 
             elif elementStructure.allowedContent == "text only":
-                e1 = XMLElement(QName(xs, "complexType"))
-                e1.set("name",  self._getXSDTypeName( elementStructure))
-
                 e2 = XMLElement(QName(xs, "simpleContent"))
 
                 e3 = XMLElement(QName(xs, "extension"))
@@ -856,26 +876,32 @@ class XSDExporter(object):
 
                 self._exportAttributes(schema, elementStructure.attributes, e3)
 
-                xsdElement.append(e1)
-
             elif elementStructure.allowedContent == "none":
-                e1 = XMLElement(QName(xs, "complexType"))
-                e1.set("name",  self._getXSDTypeName( elementStructure))
-
                 self._exportAttributes(schema, elementStructure.attributes, e1)
 
-                xsdElement.append(e1)
+            xsdElement.append(e1)
 
     def _exportAttributes(self, schema, attributes, xsdElement):
         xs = self._xs 
+        baseTypes = ["string", "integer", "boolean"]
 
         for attribute in attributes:
             a = schema.getAttributeStructureByReference(attribute.attributeReference)
-            d = schema.getDataStructureByReference(a.dataStructure)
 
             e1 = XMLElement(QName(xs, "attribute"))
             e1.set("name", a.attributeName)
-            e1.set("type",  self._getXSDTypeName(d))
+
+            if a.dataStructure in baseTypes:
+                if a.dataStructure == "string":
+                    e1.set("type", "xs:string")
+                if a.dataStructure == "integer":
+                    e1.set("type", "xs:integer")
+                if a.dataStructure == "boolean":
+                    e1.set("type", "xs:boolean")
+            else:
+                d = schema.getDataStructureByReference(a.dataStructure)
+                e1.set("type", self._getXSDTypeName(d))
+
             e1.set("use", "optional" if attribute.isOptional else "required")
 
             xsdElement.append(e1)

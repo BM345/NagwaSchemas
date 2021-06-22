@@ -14,6 +14,7 @@ dataType derivative_type {
 
 dataType versionNumber {
     baseType: integer;
+    minimumValue: 1;
 }
 
 dataType iso_639_1 {
