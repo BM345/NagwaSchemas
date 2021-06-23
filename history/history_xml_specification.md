@@ -50,7 +50,7 @@ The `<history>` element is the root element of a History XML file.
 
 | Name | Required | Allowed Values | Description |
 |---|---|---|---|
-| `for_content_entity` | Required | entity identifier | A combination of an entity type name and an entity id to uniquely identify the piece of content in the system that this history file pertains to, i.e. `explainer/000000000000` or `question/000000000000`. |
+| `for_entity` | Required | entity identifier | A combination of an entity type name and an entity id to uniquely identify the piece of content in the system that this history file pertains to, i.e. `explainer/000000000000` or `question/000000000000`. |
 
 ### Possible Subelements
 
@@ -62,7 +62,7 @@ The `<history>` element is the root element of a History XML file.
 Below is shown an example of the `<history>` element.
 
 ```xml
-<history for_content_entity="explainer/000000000000">
+<history for_entity="explainer/000000000000">
     <state>
         ...
     </state>
