@@ -227,7 +227,7 @@
     </xs:complexType>
     <xs:complexType name="__type__e__dialects" mixed="false">
         <xs:sequence>
-            <xs:element name="dialect" type="__type__e__dialect" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="dialect" type="__type__e__dialect" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="__type__e__dialect">

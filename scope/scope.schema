@@ -91,7 +91,7 @@ element language {
 
 element dialects {
     allowedContent: elements only;
-    subelements: [ dialect (n >= 0) ];
+    subelements: [ dialect (n >= 1) ];
 }
 
 element dialect {
