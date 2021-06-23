@@ -1,6 +1,6 @@
 # Release 1.1 - Release Notes
 
-## Summary of New Features
+## Summary of New Features and Changes
 
 This release includes:
 
@@ -13,3 +13,4 @@ This release includes:
 - example Scope XML files
 - a specification for Scope XML
 - two new attributes on <workflow> elements in Workflow XML - `type` and `limit_to_entity_types`
+- the attribute `for_content_entity` on the `<history>` element in History XML has been renamed to `for_entity`, for consistency with other attribute names

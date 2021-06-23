@@ -48,12 +48,12 @@ dataType actionType {
                     'removed_watcher';
 }
 
-attribute for_content_entity {
+attribute for_entity {
     valueType: uei;
 }
 
 root element history {
-    attributes: for_content_entity;
+    attributes: for_entity;
     allowedContent: elements only;
     subelements: [ state, actions ];
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<history for_content_entity="explainer/000000000000">
+<history for_entity="explainer/000000000000">
     <state>
         <workflow>new_explainer</workflow>
         <workflow_status>subject_review</workflow_status>

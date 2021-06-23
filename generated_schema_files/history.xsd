@@ -54,7 +54,7 @@
             <xs:element name="state" type="__type__e__state"/>
             <xs:element name="actions" type="__type__e__actions"/>
         </xs:sequence>
-        <xs:attribute name="for_content_entity" type="__type__d__uei" use="required"/>
+        <xs:attribute name="for_entity" type="__type__d__uei" use="required"/>
     </xs:complexType>
     <xs:complexType name="__type__e__state" mixed="false">
         <xs:sequence>
