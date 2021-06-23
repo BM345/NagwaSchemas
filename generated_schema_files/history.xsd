@@ -7,7 +7,7 @@
     </xs:simpleType>
     <xs:simpleType name="__type__d__uei">
         <xs:restriction base="xs:string">
-            <xs:pattern value="(question|explainer|lesson_video|question_video)/[A-Za-z0-9_\-]+"/>
+            <xs:pattern value="(question|explainer|lesson_video|question_video|lesson|scope|image)/[A-Za-z0-9_\-]+"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="__type__d__timestamp">

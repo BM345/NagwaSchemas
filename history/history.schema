@@ -6,7 +6,7 @@ dataType reference {
 
 dataType uei {
     baseType: string;
-    pattern: '(question|explainer|lesson_video|question_video)/[A-Za-z0-9_\-]+';
+    pattern: '(question|explainer|lesson_video|question_video|lesson|scope|image)/[A-Za-z0-9_\-]+';
 }
 
 dataType timestamp {

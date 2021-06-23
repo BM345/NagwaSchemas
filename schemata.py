@@ -62,6 +62,7 @@ class ElementStructure(Structure):
         self.allowedContent = "text only"
         self.subelements = None 
         self.elementCloseType = ""
+        self.valueType = None 
 
 class AttributeUsageReference(object):
     def __init__(self):
@@ -276,6 +277,8 @@ class Parser(object):
                     elementStructure.allowedContent = p[1]
                 if p[0] == "subelements":
                     elementStructure.subelements = p[1]
+                if p[0] == "valueType":
+                    elementStructure.valueType = p[1]
 
         self._parseWhiteSpace(inputText, marker)
 
@@ -966,7 +969,7 @@ class XSDExporter(object):
 
             elif elementStructure.attributes == [] and elementStructure.allowedContent == "text only":
                 e2 = XMLElement(QName(xs, "restriction"))
-                e2.set("base", "xs:string")
+                e2.set("base", self._getXSDTypeName(elementStructure.valueType))
 
                 e1.append(e2)
 
