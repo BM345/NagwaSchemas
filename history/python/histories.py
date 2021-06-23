@@ -42,7 +42,7 @@ class History(object):
 
     def toXML(self):
         e1 = XMLElement("history")
-        e1.set("for_content_entity", "{}/{}".format(self.contentEntityType, self.contentEntityId))
+        e1.set("for_entity", "{}/{}".format(self.contentEntityType, self.contentEntityId))
 
         e1.append(self.state.toXML())
 
@@ -57,6 +57,10 @@ class History(object):
         tree = XMLElementTree(self.toXML())
         indent(tree, space = "    ")
         tree.write(filePath, xml_declaration = True, encoding = "utf-8", pretty_print = True)
+
+    @staticmethod
+    def load(filePath):
+        return loadHistoryFromXML(filePath)
 
 
 class State(object):
@@ -108,6 +112,7 @@ class State(object):
             e11.append(version.toXML())
 
         return e1 
+
 
 class Developer(object):
     def __init__(self):
@@ -311,3 +316,103 @@ class RemoveWatcherAction(Action):
         e2.text = self.watcher 
 
         return e1 
+
+def loadHistoryFromXML(filePath):
+    tree = parse(filePath)
+    root = tree.getroot()
+
+    if root.tag != "history":
+        raise ValueError("The XML document provided is not a History XML document.")
+
+    history = History()
+
+    uei = tree.xpath("/history/@for_entity")[0]
+    entityType = uei[:uei.find("/")]
+    entityId = uei[uei.find("/"):]
+
+    history.contentEntityType = entityType 
+    history.contentEntityId = entityId 
+    history.state.workflowReference = tree.xpath("/history/state/workflow")[0].text 
+    history.state.workflowStatusReference = tree.xpath("/history/state/workflow_status")[0].text 
+    history.state.assignee = tree.xpath("/history/state/assignee")[0].text 
+    history.state.priority = tree.xpath("/history/state/priority")[0].text 
+
+    developers = tree.xpath("/history/state/developers/developer")
+    labels = tree.xpath("/history/state/labels/label")
+    watchers = tree.xpath("/history/state/watchers/watcher")
+    versions = tree.xpath("/history/state/versions/version")
+
+    for developer in developers:
+        d = Developer()
+
+        d.workflowReference = developer.xpath("./@workflow")[0]
+        d.role = developer.xpath("./@role")[0]
+        d.emailAddress = developer.text 
+
+        history.state.developers.append(d)
+
+    for label in labels:
+        history.state.labels.append(label.text)
+
+    for watcher in watchers:
+        history.state.watchers.append(watcher.text)
+
+    for version in versions:
+        v = Version()
+
+        v.fileName = version.xpath("./@file_name")[0]
+        v.reference = version.text 
+
+        history.state.versions.append(v)
+
+    actions = tree.xpath("/history/actions/action")
+
+    for action in actions:
+        taken_at = datetime.datetime.strptime(action.xpath("./@taken_at")[0], DATETIME_FORMAT)
+        taken_by =  action.xpath("./@taken_by")[0]
+        t = action.xpath("./@type")[0]
+
+        a = None 
+
+        if t == "created_entity":
+            a = CreateEntityAction(taken_at, taken_by)
+        if t == "created_new_version":
+            a = CreateNewVersionAction(taken_at, taken_by, "", "")
+            a.reference = action.xpath("./version")[0].text 
+            a.fileName = action.xpath("./file_name")[0].text 
+        if t == "changed_workflow":
+            a = ChangeWorkflowAction(taken_at, taken_by, "")
+            a.newWorkflowReference = action.xpath("./new_workflow")[0].text 
+        if t == "changed_workflow_status":
+            a = ChangeWorkflowStatusAction(taken_at, taken_by, "", "")
+            a.transition = action.xpath("./transition")[0].text 
+            a.newWorkflowStatusReference = action.xpath("./new_workflow_status")[0].text 
+        if t == "changed_assignee":
+            a = ChangeAssigneeAction(taken_at, taken_by, "")
+            a.newAssignee = action.xpath("./new_assignee")[0].text 
+        if t == "changed_priority":
+            a = ChangePriorityAction(taken_at, taken_by, "")
+            a.newPriority = action.xpath("./new_priority")[0].text 
+        if t == "added_comment":
+            a = AddCommentAction(taken_at, taken_by, "", "")
+            a.commentReference = action.xpath("./comment_reference")[0].text 
+            a.commentText = action.xpath("./comment_text")[0].text 
+        if t == "added_label":
+            a = AddLabelAction(taken_at, taken_by, "")
+            a.label = action.xpath("./label")[0].text 
+        if t == "removed_label":
+            a = RemoveLabelAction(taken_at, taken_by, "")
+            a.label = action.xpath("./label")[0].text 
+        if t == "added_watcher":
+            a = AddWatcherAction(taken_at, taken_by, "")
+            a.watcher = action.xpath("./watcher")[0].text 
+        if t == "removed_watcher":
+            a = RemoveWatcherAction(taken_at, taken_by, "")
+            a.watcher = action.xpath("./watcher")[0].text 
+
+        if a != None:
+            history.actions.append(a)
+
+    return history 
+
+
