@@ -115,15 +115,9 @@ element exclusions {
 }
 
 element skill {
-    allowedContent: elements and text;
-    subelements: { m (n >= 0) };
+    allowedContent: text only;
 }
 
 element item {
-    allowedContent: elements and text;
-    subelements: { m (n >= 0) };
-}
-
-element m {
-    allowedContent: elements and text;
+    allowedContent: text only;
 }

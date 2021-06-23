@@ -250,16 +250,11 @@
             <xs:element name="item" type="__type__e__item" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="__type__e__skill" mixed="true">
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:element name="m" type="__type__e__m"/>
-        </xs:choice>
-    </xs:complexType>
-    <xs:complexType name="__type__e__item" mixed="true">
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:element name="m" type="__type__e__m"/>
-        </xs:choice>
-    </xs:complexType>
-    <xs:complexType name="__type__e__m" mixed="true"/>
+    <xs:simpleType name="__type__e__skill">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__e__item">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
     <xs:element name="scope" type="__type__e__scope"/>
 </xs:schema>
