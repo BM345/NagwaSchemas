@@ -50,12 +50,12 @@ attribute for_content_entity {
 root element history {
     attributes: for_content_entity;
     allowedContent: elements only;
-    subelements: state, actions;
+    subelements: [ state, actions ];
 }
 
 element state {
     allowedContent: elements only;
-    subelements: workflow, workflow_status, developers, assignee, priority, labels, watchers, versions;
+    subelements: [ workflow, workflow_status, developers, assignee, priority, labels, watchers, versions ];
 }
 
 element workflow {
@@ -70,7 +70,7 @@ element workflow_status {
 
 element developers {
     allowedContent: elements only;
-    subelements: developer (n >= 0);
+    subelements: [ developer (n >= 0) ];
 }
 
 attribute workflow2 {
@@ -100,7 +100,7 @@ element priority {
 
 element labels {
     allowedContent: elements only;
-    subelements: label (n >= 0);
+    subelements: [ label (n >= 0) ];
 }
 
 element label {
@@ -109,7 +109,7 @@ element label {
 
 element watchers {
     allowedContent: elements only;
-    subelements: watcher (n >= 0);
+    subelements: [ watcher (n >= 0) ];
 }
 
 element watcher {
@@ -119,7 +119,7 @@ element watcher {
 
 element versions {
     allowedContent: elements only;
-    subelements: version (n >= 0);
+    subelements: [ version (n >= 0) ];
 }
 
 attribute file_name {
@@ -134,7 +134,7 @@ element version {
 
 element actions {
     allowedContent: elements only;
-    subelements: action (n >= 0);
+    subelements: [ action (n >= 0) ];
 }
 
 attribute taken_at {
@@ -152,7 +152,7 @@ attribute type {
 element action {
     attributes: taken_at, taken_by, type;
     allowedContent: elements only;
-    subelements: version2 (optional), 
+    subelements: [ version2 (optional), 
                  file_name (optional), 
                  new_workflow (optional), 
                  transition (optional), 
@@ -162,7 +162,7 @@ element action {
                  comment_reference (optional), 
                  comment_text (optional), watcher 
                  (optional), 
-                 label (optional);
+                 label (optional) ];
 }
 
 element version2 {

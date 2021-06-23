@@ -7,14 +7,14 @@ dataType reference {
 root element roles {
     tagName: 'roles';
     allowedContent: elements only;
-    subelements: role (n >= 0);
+    subelements: [ role (n >= 0) ];
 }
 
 element role {
     tagName: 'role';
     allowedContent: elements only;
     attributes: reference;
-    subelements: name, description (optional);
+    subelements: [ name, description (optional) ];
 }
 
 attribute reference {

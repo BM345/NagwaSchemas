@@ -60,7 +60,7 @@ class ElementStructure(Structure):
         self.canBeRootElement = False 
         self.attributes = []
         self.allowedContent = "text only"
-        self.subelements = []
+        self.subelements = None 
         self.elementCloseType = ""
 
 class AttributeUsageReference(object):
@@ -369,7 +369,7 @@ class Parser(object):
             propertyValue = self._parseList(inputText, marker, "attributeUsageReference")
 
         if propertyName == "subelements":
-            propertyValue = self._parseList(inputText, marker, "elementUsageReference")
+            propertyValue = self._parseSubelementList(inputText, marker)
 
         if propertyName == "pattern":
             propertyValue = self._parseString(inputText, marker)
@@ -469,8 +469,6 @@ class Parser(object):
                 item = self._parseString(inputText, marker)
             if objectType == "attributeUsageReference":
                 item = self._parseAttributeUsageReference(inputText, marker)
-            if objectType == "elementUsageReference":
-                item = self._parseElementUsageReference(inputText, marker)
 
             if item == None:
                 break 
@@ -482,7 +480,120 @@ class Parser(object):
         if n == 0:
             return None 
 
-        return items 
+        return items
+
+    def _parseSubelementUsages(self, inputText, marker):
+
+        item = self._parseElementUsageReference(inputText, marker)
+
+        if item != None:
+            return item 
+
+        logging.debug("Didn't find element usage reference.")
+
+        item = self._parseSubelementList(inputText, marker)
+
+        if item != None:
+            return item 
+
+        logging.debug("Didn't find subelement list.")
+
+        return None 
+
+    def _parseSubelementList(self, inputText, marker):
+        logging.debug("Attempting to parse a subelement list.")
+
+        m = marker.copy()
+
+        self._parseWhiteSpace(inputText, m)
+
+        bracketType = ""
+        separatorType = "comma"
+
+        if cut(inputText, m.position) == "{":
+            bracketType = "recurve"
+            m.position += 1
+        elif cut(inputText, m.position) == "[":
+            bracketType = "square"
+            m.position += 1
+        else:
+            return None 
+
+        logging.debug("Identified bracket type: {}.".format(bracketType))
+
+        self._parseWhiteSpace(inputText, m)
+
+        items = []
+        n = 0
+
+        while m.position < len(inputText):
+            self._parseWhiteSpace(inputText, m)
+
+            if n > 0:
+                c = cut(inputText, m.position)
+
+                if n == 1:
+                    if c == ",":
+                        separatorType = "comma"
+                        m.position += 1
+                    elif c == "/":
+                        separatorType = "slash"
+
+                        if bracketType == "square":
+                            raise SchemataParsingError("Expected ',' at position {}.".format(m.position))
+
+                        m.position += 1
+
+                elif n > 1:
+                    if (separatorType == "comma" and c == ",") or (separatorType == "slash" and c == "/"):
+                        m.position += 1
+                    elif (separatorType == "comma" and c == "/") or (separatorType == "slash" and c == "{"):
+                        raise SchemataParsingError("Separators must be the same throughout a list (position {}).".format(m.position))
+                    else:
+                        break
+            
+            self._parseWhiteSpace(inputText, m)
+
+            item = self._parseSubelementUsages(inputText, m)
+
+            if item == None:
+                break 
+
+            items.append(item)
+
+            n += 1
+
+        logging.debug("Separator type: {}.".format(separatorType))
+        logging.debug("List: {}.".format(items))
+
+        if n == 0:
+            return None 
+
+        self._parseWhiteSpace(inputText, m)
+
+        c = cut(inputText, m.position)
+
+        if bracketType == "recurve" and c == "}":
+            m.position += 1
+        elif bracketType == "square" and c == "]":
+            m.position += 1
+        else:
+            raise SchemataParsingError("Expected closing bracket at position {}.".format(m.position))
+
+        if bracketType == "square" and separatorType == "comma":
+            l = OrderedSubelementList()
+            l.elements = items 
+        elif bracketType == "recurve" and separatorType == "comma":
+            l = UnorderedSubelementList()
+            l.elements = items 
+        else:
+            return None 
+
+        logging.debug("Found subelement list {}.".format(l))
+
+        marker.position = m.position
+
+        return l
 
     def _parseAttributeUsageReference(self, inputText, marker):
         logging.debug("Attempting to parse attribute usage reference.")
@@ -743,15 +854,21 @@ class XSDExporter(object):
     def exportSchema(self, schema, filePath):
         xs = self._xs
 
+        logging.debug("Exporting schema for {} as XSD.".format(schema.formatName))
+
         e1 = XMLElement(QName(xs, "schema"))
         e1.set("elementFormDefault", "qualified")
 
         self._exportDataStructures(schema, e1)
         self._exportElementStructures(schema, e1)
 
+        logging.debug("Exporting root elements.")
+
         roots = schema.getPossibleRootElementStructures()
 
         for root in roots:
+            logging.debug("Exporting element <{}>.".format(root.elementName))
+
             e2 = XMLElement(QName(xs, "element"))
             e2.set("name", root.elementName)
             e2.set("type", self._getXSDTypeName(root))
@@ -765,9 +882,13 @@ class XSDExporter(object):
     def _exportDataStructures(self, schema, xsdElement):
         xs = self._xs 
 
+        logging.debug("Exporting data structures.")
+
         dataStructures = schema.getDataStructures()
 
         for dataStructure in dataStructures:
+            logging.debug("Exporting data structure '{}'.".format(dataStructure.reference))
+
             e1 = XMLElement(QName(xs, "simpleType"))
             e1.set("name", self._getXSDTypeName(dataStructure))
 
@@ -820,9 +941,13 @@ class XSDExporter(object):
     def _exportElementStructures(self, schema, xsdElement):
         xs = self._xs 
 
+        logging.debug("Exporting element structures.")
+
         elementStructures = schema.getElementStructures()
 
         for elementStructure in elementStructures:
+            logging.debug("Exporting element '{}' <{}>.".format(elementStructure.reference, elementStructure.elementName))
+
             hasAttributes = len(elementStructure.attributes) > 0
             xsdType = "simpleType" if not hasAttributes and elementStructure.allowedContent == "text only" else "complexType"
 
@@ -836,27 +961,7 @@ class XSDExporter(object):
                 else:
                     e1.set("mixed", "false")
 
-                e2 = XMLElement(QName(xs, "sequence"))
-
-                for subelement in elementStructure.subelements:
-                    e = schema.getElementStructureByReference(subelement.elementReference)
-
-                    e3 = XMLElement(QName(xs, "element"))
-                    e3.set("name", e.elementName)
-                    e3.set("type", self._getXSDTypeName(e))
-                    p =  subelement.minimumNumberOfOccurrences
-                    q = subelement.maximumNumberOfOccurrences 
-
-                    if p != 1:
-                        e3.set("minOccurs", str( p))
-
-                    if q != 1:
-                        e3.set("maxOccurs", "unbounded" if q == -1 else str( q) )
-
-                    e2.append(e3)
-
-                e1.append(e2)
-
+                self._exportSubelements(schema, elementStructure.subelements, e1)
                 self._exportAttributes(schema, elementStructure.attributes, e1)
 
             elif elementStructure.attributes == [] and elementStructure.allowedContent == "text only":
@@ -880,6 +985,35 @@ class XSDExporter(object):
                 self._exportAttributes(schema, elementStructure.attributes, e1)
 
             xsdElement.append(e1)
+
+    def _exportSubelements(self, schema, elements, xsdElement):
+        xs = self._xs 
+
+        if isinstance(elements, OrderedSubelementList):
+            e1 = XMLElement(QName(xs, "sequence"))
+        if isinstance(elements, UnorderedSubelementList):
+            e1 = XMLElement(QName(xs, "all"))
+        if elements == None:
+            return 
+
+        for element in elements.elements:
+            e = schema.getElementStructureByReference(element.elementReference)
+
+            e3 = XMLElement(QName(xs, "element"))
+            e3.set("name", e.elementName)
+            e3.set("type", self._getXSDTypeName(e))
+            p = element.minimumNumberOfOccurrences
+            q = element.maximumNumberOfOccurrences 
+
+            if p != 1:
+                e3.set("minOccurs", str(p))
+
+            if q != 1:
+                e3.set("maxOccurs", "unbounded" if q == -1 else str(q) )
+
+            e1.append(e3)
+
+        xsdElement.append(e1)
 
     def _exportAttributes(self, schema, attributes, xsdElement):
         xs = self._xs 

@@ -57,7 +57,7 @@ attribute limit_to_entity_types {
 root element workflow {
     attributes: reference, workflowType (optional), limit_to_entity_types (optional);
     allowedContent: elements only;
-    subelements: name, description (optional), statuses, transitions;
+    subelements: [ name, description (optional), statuses, transitions ];
 }
 
 element name {
@@ -79,7 +79,7 @@ attribute final {
 element statuses {
     attributes: initial, final;
     allowedContent: elements only;
-    subelements: status (n >= 0);
+    subelements: [ status (n >= 0) ];
 }
 
 attribute category {
@@ -94,12 +94,12 @@ attribute statusType {
 element status {
     attributes: reference, category (optional), statusType (optional);
     allowedContent: elements only;
-    subelements: name, description (optional);
+    subelements: [ name, description (optional) ];
 }
 
 element transitions {
     allowedContent: elements only;
-    subelements: transition (n >= 0);
+    subelements: [ transition (n >= 0) ];
 }
 
 attribute from {
@@ -126,7 +126,7 @@ attribute auto_assign_to {
 element transition {
     attributes: reference, from, to, transitionType (optional), comment_required (optional), auto_assign_to (optional);
     allowedContent: elements only;
-    subelements: name, button_text (optional), description (optional), rules;
+    subelements: [ name, button_text (optional), description (optional), rules ];
 }
 
 element button_text {
@@ -135,7 +135,7 @@ element button_text {
 
 element rules {
     allowedContent: elements only;
-    subelements: rule (n >= 0);
+    subelements: [ rule (n >= 0) ];
 }
 
 attribute allow_if {

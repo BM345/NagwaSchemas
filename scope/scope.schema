@@ -63,7 +63,7 @@ attribute version {
 root element scope {
     attributes: id, derivative_of (optional), derivative_type (optional), version;
     allowedContent: elements only;
-    subelements: language, dialects, objectives, prerequisites, exclusions;
+    subelements: [ language, dialects, objectives, prerequisites, exclusions ];
 }
 
 attribute name {
@@ -91,7 +91,7 @@ element language {
 
 element dialects {
     allowedContent: elements only;
-    subelements: dialect (n >= 0);
+    subelements: [ dialect (n >= 0) ];
 }
 
 element dialect {
@@ -101,27 +101,27 @@ element dialect {
 
 element objectives {
     allowedContent: elements only;
-    subelements: skill (n >= 0);
+    subelements: [ skill (n >= 0) ];
 }
 
 element prerequisites {
     allowedContent: elements only;
-    subelements: item (n >= 0);
+    subelements: [ item (n >= 0) ];
 }
 
 element exclusions {
     allowedContent: elements only;
-    subelements: item (n >= 0);
+    subelements: [ item (n >= 0) ];
 }
 
 element skill {
     allowedContent: elements and text;
-    subelements: m (n >= 0);
+    subelements: { m (n >= 0) };
 }
 
 element item {
     allowedContent: elements and text;
-    subelements: m (n >= 0);
+    subelements: { m (n >= 0) };
 }
 
 element m {

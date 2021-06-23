@@ -45,7 +45,7 @@ def validate():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.DEBUG)
 
     argumentParser = argparse.ArgumentParser()
     argumentParser.add_argument("action", default="generate_xsd_files")
