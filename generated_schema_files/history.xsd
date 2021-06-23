@@ -76,7 +76,7 @@
     </xs:complexType>
     <xs:complexType name="__type__e__developer">
         <xs:simpleContent>
-            <xs:extension base="xs:string">
+            <xs:extension base="__type__d__emailAddress">
                 <xs:attribute name="workflow" type="__type__d__reference" use="required"/>
                 <xs:attribute name="role" type="__type__d__reference" use="required"/>
             </xs:extension>
@@ -111,7 +111,7 @@
     </xs:complexType>
     <xs:complexType name="__type__e__version">
         <xs:simpleContent>
-            <xs:extension base="xs:string">
+            <xs:extension base="xs:integer">
                 <xs:attribute name="file_name" type="__type__d__xmlFileName" use="required"/>
             </xs:extension>
         </xs:simpleContent>

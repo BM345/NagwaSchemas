@@ -986,7 +986,16 @@ class XSDExporter(object):
                 e2 = XMLElement(QName(xs, "simpleContent"))
 
                 e3 = XMLElement(QName(xs, "extension"))
-                e3.set("base", "xs:string")
+                if elementStructure.valueType != None:
+                    if elementStructure.valueType == "integer":
+                        e3.set("base", "xs:integer")
+                    elif elementStructure.valueType == "boolean":
+                        e3.set("base", "xs:boolean")
+                    else:
+                        d = schema.getDataStructureByReference(elementStructure.valueType)
+                        e3.set("base", self._getXSDTypeName(d))
+                else:
+                    e3.set("base", "xs:string")
 
                 e2.append(e3)
                 e1.append(e2)
