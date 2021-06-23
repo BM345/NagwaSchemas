@@ -45,7 +45,7 @@ The `<workflow>` element is the root element of a Workflow XML file.
 Below is shown an example of the `<workflow>` element.
 
 ```xml
-<workflow reference="workflow1">
+<workflow reference="workflow1" type="creation" limit_to_entity_types="explainer">
     <name>...</name>
     <description>...</description>
     <statuses>
