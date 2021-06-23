@@ -31,7 +31,7 @@ The `<workflow>` element is the root element of a Workflow XML file.
 |---|---|---|---|
 | `reference` | Required | any | A string that's used by the system to identify this workflow. |
 | `type` | Optional | one of `creation`, `update`, `translation`, `translation_update`, `localization`, `localization_update` | The type of process that this workflow represents. |
-| `limit_to_entity_types` | Optional | A comma-separated list of [entity types](https://github.com/BM345/NagwaSchemas#entity-types) | a list of different entity types that this workflow can be used for. This prevents the workflow from being used with entity types that are not in the list. (The list can just be a single entity type if desired.) |
+| `limit_to_entity_types` | Optional | A comma-separated list of [entity types](https://github.com/BM345/NagwaSchemas#entity-types) | A list of different entity types that this workflow can be used for. This prevents the workflow from being used with entity types that are not in the list. (The list can just be a single entity type if desired.) |
 
 ### Possible Subelements
 
