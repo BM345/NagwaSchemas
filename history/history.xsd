@@ -29,6 +29,11 @@
     <xs:simpleType name="__type__d__xmlFileName">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
+    <xs:simpleType name="__type__d__versionNumber">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
     <xs:simpleType name="__type__d__actionType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="created_entity"/>
@@ -111,7 +116,7 @@
     </xs:complexType>
     <xs:complexType name="__type__e__version">
         <xs:simpleContent>
-            <xs:extension base="xs:integer">
+            <xs:extension base="__type__d__versionNumber">
                 <xs:attribute name="file_name" type="__type__d__xmlFileName" use="required"/>
             </xs:extension>
         </xs:simpleContent>
@@ -140,7 +145,7 @@
         <xs:attribute name="type" type="__type__d__actionType" use="required"/>
     </xs:complexType>
     <xs:simpleType name="__type__e__version2">
-        <xs:restriction base="xs:integer"/>
+        <xs:restriction base="__type__d__versionNumber"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__file_name">
         <xs:restriction base="__type__d__xmlFileName"/>

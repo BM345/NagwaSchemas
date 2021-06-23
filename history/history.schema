@@ -28,6 +28,11 @@ dataType xmlFileName {
     pattern: '[A-Za-z0-9\._\-]+\.xml'
 }
 
+dataType versionNumber {
+    baseType: integer;
+    minimumValue: 1;
+}
+
 dataType actionType {
     baseType: string;
     allowedValues:  'created_entity', 
@@ -129,7 +134,7 @@ attribute file_name {
 element version {
     attributes: file_name;
     allowedContent: text only;
-    valueType: integer;
+    valueType: versionNumber;
 }
 
 element actions {
@@ -168,7 +173,7 @@ element action {
 element version2 {
     tagName: 'version';
     allowedContent: text only;
-    valueType: integer;
+    valueType: versionNumber;
 }
 
 element file_name {
