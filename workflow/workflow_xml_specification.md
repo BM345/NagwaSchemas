@@ -30,6 +30,8 @@ The `<workflow>` element is the root element of a Workflow XML file.
 | Name | Required | Allowed Values | Description |
 |---|---|---|---|
 | `reference` | Required | any | A string that's used by the system to identify this workflow. |
+| `type` | Optional | one of 'creation', 'update', 'translation', 'translation_update', 'localization', 'localization_update' | The type of process that this workflow represents. |
+| `limit_to_entity_types` | Optional | a comma-separated list of entity types | a list of different entity types that this workflow can be used for; this prevents the workflow from being used with entity types that are not in the list (the list can just be a single entity type if desired) |
 
 ### Possible Subelements
 
