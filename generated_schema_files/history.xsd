@@ -64,10 +64,10 @@
         </xs:sequence>
     </xs:complexType>
     <xs:simpleType name="__type__e__workflow">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__reference"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__workflow_status">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__reference"/>
     </xs:simpleType>
     <xs:complexType name="__type__e__developers" mixed="false">
         <xs:sequence>
@@ -83,10 +83,10 @@
         </xs:simpleContent>
     </xs:complexType>
     <xs:simpleType name="__type__e__assignee">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__emailAddress"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__priority">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__priority"/>
     </xs:simpleType>
     <xs:complexType name="__type__e__labels" mixed="false">
         <xs:sequence>
@@ -102,7 +102,7 @@
         </xs:sequence>
     </xs:complexType>
     <xs:simpleType name="__type__e__watcher">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__emailAddress"/>
     </xs:simpleType>
     <xs:complexType name="__type__e__versions" mixed="false">
         <xs:sequence>
@@ -140,28 +140,28 @@
         <xs:attribute name="type" type="__type__d__actionType" use="required"/>
     </xs:complexType>
     <xs:simpleType name="__type__e__version2">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="xs:integer"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__file_name">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__xmlFileName"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__new_workflow">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__reference"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__new_workflow_status">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__reference"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__transition">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__new_assignee">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__emailAddress"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__new_priority">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__priority"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__comment_reference">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="__type__d__reference"/>
     </xs:simpleType>
     <xs:simpleType name="__type__e__comment_text">
         <xs:restriction base="xs:string"/>

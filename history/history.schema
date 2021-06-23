@@ -188,7 +188,6 @@ element new_workflow_status {
 
 element transition {
     allowedContent: text only;
-    valueType: reference;
 }
 
 element new_assignee {

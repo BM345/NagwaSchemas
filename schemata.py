@@ -969,7 +969,16 @@ class XSDExporter(object):
 
             elif elementStructure.attributes == [] and elementStructure.allowedContent == "text only":
                 e2 = XMLElement(QName(xs, "restriction"))
-                e2.set("base", self._getXSDTypeName(elementStructure.valueType))
+                if elementStructure.valueType != None:
+                    if elementStructure.valueType == "integer":
+                        e2.set("base", "xs:integer")
+                    elif elementStructure.valueType == "boolean":
+                        e2.set("base", "xs:boolean")
+                    else:
+                        d = schema.getDataStructureByReference(elementStructure.valueType)
+                        e2.set("base", self._getXSDTypeName(d))
+                else:
+                    e2.set("base", "xs:string")
 
                 e1.append(e2)
 
