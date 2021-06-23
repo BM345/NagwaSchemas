@@ -989,10 +989,16 @@ class XSDExporter(object):
     def _exportSubelements(self, schema, elements, xsdElement):
         xs = self._xs 
 
+        xsdIndicatorType = "sequence"
+
         if isinstance(elements, OrderedSubelementList):
             e1 = XMLElement(QName(xs, "sequence"))
         if isinstance(elements, UnorderedSubelementList):
-            e1 = XMLElement(QName(xs, "all"))
+            xsdIndicatorType = "choice"
+
+            e1 = XMLElement(QName(xs, "choice"))
+            e1.set("minOccurs", "0")
+            e1.set("maxOccurs", "unbounded")
         if elements == None:
             return 
 
@@ -1005,11 +1011,12 @@ class XSDExporter(object):
             p = element.minimumNumberOfOccurrences
             q = element.maximumNumberOfOccurrences 
 
-            if p != 1:
-                e3.set("minOccurs", str(p))
+            if xsdIndicatorType == "sequence":
+                if p != 1:
+                    e3.set("minOccurs", str(p))
 
-            if q != 1:
-                e3.set("maxOccurs", "unbounded" if q == -1 else str(q) )
+                if q != 1:
+                    e3.set("maxOccurs", "unbounded" if q == -1 else str(q))
 
             e1.append(e3)
 

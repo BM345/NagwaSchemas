@@ -251,14 +251,14 @@
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="__type__e__skill" mixed="true">
-        <xs:all>
-            <xs:element name="m" type="__type__e__m" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:all>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="m" type="__type__e__m"/>
+        </xs:choice>
     </xs:complexType>
     <xs:complexType name="__type__e__item" mixed="true">
-        <xs:all>
-            <xs:element name="m" type="__type__e__m" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:all>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="m" type="__type__e__m"/>
+        </xs:choice>
     </xs:complexType>
     <xs:complexType name="__type__e__m" mixed="true"/>
     <xs:element name="scope" type="__type__e__scope"/>
