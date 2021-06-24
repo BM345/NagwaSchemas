@@ -11,6 +11,8 @@ SCHEMAS = [
     "scope"
 ]
 
+REPOSITORY_VERSION_NUMBER = "v1.2.0"
+
 def generate():
     parser = schemata.Parser()
 
@@ -25,8 +27,8 @@ def generate():
             text = fileObject.read()
             schema = parser.parseSchema(text)
 
-            schemata.exportSchemaAsXSD(schema, fp2)
-            schemata.exportSchemaAsXSD(schema, fp3)
+            schemata.exportSchemaAsXSD(schema, REPOSITORY_VERSION_NUMBER, fp2)
+            schemata.exportSchemaAsXSD(schema, REPOSITORY_VERSION_NUMBER, fp3)
 
 def validate():
     for s in SCHEMAS:

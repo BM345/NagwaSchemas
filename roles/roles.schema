@@ -1,3 +1,6 @@
+/*
+Format Name: Roles XML
+*/
 
 dataType reference {
     baseType: string;

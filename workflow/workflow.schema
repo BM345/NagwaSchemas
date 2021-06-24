@@ -1,3 +1,6 @@
+/*
+Format Name: Workflow XML 
+*/
 
 dataType reference {
     baseType: string;

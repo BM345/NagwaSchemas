@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <!-- An XSD file for Workflow XML  (v1.2.0). -->
     <xs:simpleType name="__type__d__reference">
         <xs:restriction base="xs:string">
             <xs:pattern value="[A-Za-z0-9_\-]+"/>

@@ -1,6 +1,6 @@
 import logging 
 import re
-from lxml.etree import ElementTree as XMLElementTree, Element as XMLElement, SubElement as XMLSubelement, QName, indent 
+from lxml.etree import ElementTree as XMLElementTree, Element as XMLElement, SubElement as XMLSubelement, Comment as XMLComment, QName, indent 
 
 logger = logging.getLogger(__name__)
 
@@ -854,13 +854,18 @@ class XSDExporter(object):
 
         raise Exception("Cannot create XSD type name for {}.".format(structure.reference))
 
-    def exportSchema(self, schema, filePath):
+    def exportSchema(self, schema, versionNumber, filePath):
         xs = self._xs
 
         logging.debug("Exporting schema for {} as XSD.".format(schema.formatName))
 
         e1 = XMLElement(QName(xs, "schema"))
         e1.set("elementFormDefault", "qualified")
+
+        if schema.formatName != "":
+            c1 = XMLComment(" An XSD file for {} ({}). ".format(schema.formatName, versionNumber))
+
+            e1.append(c1)
 
         self._exportDataStructures(schema, e1)
         self._exportElementStructures(schema, e1)
@@ -1072,8 +1077,8 @@ class XSDExporter(object):
 
 xsdExporter = XSDExporter()
 
-def exportSchemaAsXSD(schema, filePath):
-    xsdExporter.exportSchema(schema, filePath) 
+def exportSchemaAsXSD(schema, versionNumber, filePath):
+    xsdExporter.exportSchema(schema, versionNumber, filePath) 
 
 def generateSpecification(schema, filePath):
     with open(filePath, "w") as fileObject:
