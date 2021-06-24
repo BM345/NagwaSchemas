@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<history for_entity="explainer/000000000000">
+    <state>
+        <workflow>new_explainer</workflow>
+        <workflow_status>subject_review</workflow_status>
+        <developers>
+            <developer workflow="new_explainer" role="content_writer">example.user.1@nagwa.com</developer>
+            <developer workflow="new_explainer" role="course_reviewer">example.user.2@nagwa.com</developer>
+            <developer workflow="new_explainer" role="subject_reviewer">example.user.3@nagwa.com</developer>
+        </developers>
+        <assignee>example.user.3@nagwa.com</assignee>
+        <priority>high</priority>
+        <labels>
+            <label>Images need updating</label>
+            <label>Showcase</label>
+            <label>Electromagnetism</label>
+        </labels>
+        <watchers>
+            <watcher>example.user.1@nagwa.com</watcher>
+        </watchers>
+        <versions>
+            <version file_name="000000000000.1.xml">1</version>
+        </versions>
+    </state>
+</history>
