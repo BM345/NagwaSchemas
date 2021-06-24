@@ -1,5 +1,16 @@
 # Nagwa Schemas
 
+This repository gives the specifications and schemas for the various different XML formats that underpin Nagwa content.
+
+## Schemas
+
+The table below gives links to the various different resources available for the different XML formats described in this repository.
+
+| XML Format | Example XML File | Specification | XSD File | Usage |
+|---|---|---|---|---|
+| Workflow XML | [Link](workflow/examples/new_explainer_workflow.xml) | [Link](workflow/workflow_xml_specification.md) | [Link](workflow/workflow.xsd) | |
+
+
 ## Entity Types
 
 The table below gives the references for the different types of entity that we have in Nagwa content. These references are used throughout the different XML formats defined in this repository.
