@@ -8,9 +8,10 @@ The table below gives links to the various different resources available for the
 
 | XML Format | Example XML File | Specification | XSD File | Usage |
 |---|---|---|---|---|
-| Workflow XML | [Link](workflow/examples/new_explainer.workflow.xml) | [Link](workflow/workflow_xml_specification.md) | [Link](workflow/workflow.xsd) | |
-| History XML | [Link](history/examples/000000000000.history.xml) | [Link](history/history_xml_specification.md) | [Link](history/history.xsd) | |
-| Roles XML | [Link](roles/examples/cds.roles.xml) | [Link](roles/roles_xml_specification.md) | [Link](roles/roles.xsd) | |
+| Workflow XML | [Link](workflow/examples/new_explainer.workflow.xml) | [Link](workflow/workflow_xml_specification.md) | [Link](workflow/workflow.xsd) | Defining the workflows used in the development of Nagwa content. |
+| History XML | [Link](history/examples/000000000000.history.xml) | [Link](history/history_xml_specification.md) | [Link](history/history.xsd) | Recording the history of work done and actions taken on content entities. |
+| Roles XML | [Link](roles/examples/cds.roles.xml) | [Link](roles/roles_xml_specification.md) | [Link](roles/roles.xsd) | Defining the user roles that exist on a system. |
+| Scope XML | [Link](scope/examples/189151468269.scope.xml) | [Link](scope/scope_xml_specification.md) | [Link](scope/scope.xsd) | Outlining the skills that are and are not included in a lesson. |
 
 
 ## Entity Types
