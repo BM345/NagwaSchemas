@@ -27,3 +27,18 @@ The table below gives the references for the different types of entity that we h
 | Scope | `scope` | A document that defines what skills are and are not covered by a given lesson. |
 | Lesson | `lesson` | An entity that connects together all of the other entities that are needed for a lesson. |
 | Image | `image` | An image (of any format: PNG, JPEG, SVG, et cetera). |
+
+## Commands
+
+### Building the XSD files from the Schemata files
+
+```bash
+python generate.py generate_xsd_files
+```
+
+### Running the Schemata unit tests
+
+```bash
+python -m unittest discover
+```
+
