@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<roles>
+    <role>
+        <name>Writer</name>
+        <description>A writer is someone who creates the first draft of a piece of content, whether it be a question, question solution, explanation, reading activity, listening activity, et cetera.</description>
+    </role>
+    <role reference="course_designer">
+        <name>Course Designer</name>
+        <description>A course designer is someone who checks that a new piece of content fits into existing courses, and into the existing Nagwa content, correctly. They check that a piece of content fits but does not exceed the required scope, uses suitable teaching methods and language, is relevant to the target age and country, and follows the plan for the development of new content in a given subject.</description>
+    </role>
+    <role reference="subject_specialist">
+        <name>Subject Specialist</name>
+        <description>A subject specialist is someone who checks a piece of content for technical correctness in a given subject. This includes checking: that subject-specific terms are used correctly, that any mathematics is free of errors, that all question keys are correct, that all question distractors are suitable, that diagrams are drawn clearly and accurately, that specific notations have been used correctly, and that all statements of fact made are correct and clearly worded, et cetera.</description>
+    </role>
+    <role reference="copyeditor">
+        <name>Copyeditor</name>
+        <description>A copyeditor is someone who checks a piece of content for correct use of non-subject-specific language. This includes checking: that there are no mistakes of spelling, punctuation, or grammar, that the wording chosen is correct for the specified dialect, and that the piece of content follows the conventions of the chosen style guide.</description>
+    </role>
+    <role reference="markup_editor">
+        <name>Markup Editor</name>
+        <description>A markup editor is someone who applies the correct markup to a piece of content.</description>
+    </role>
+    <role reference="markup_reviewer">
+        <name>Markup Reviewer</name>
+        <description>A markup reviewer is someone who checks that a piece of content has the correct markup applied to it.</description>
+    </role>
+    <role reference="creative_designer">
+        <name>Creative Designer</name>
+        <description>A creative designer is someone who provides non-technical illustrations for a piece of content.</description>
+    </role>
+    <role reference="creative_design_reviewer">
+        <name>Creative Design Reviewer</name>
+        <description>A creative design reviewer is someone who checks non-technical illustrations that have been added to a piece of content.</description>
+    </role>
+    <role reference="content_graphics_designer">
+        <name>Content Graphics Designer</name>
+        <description>A content graphics designer is someone who provides technical drawings - such as schematic diagrams, graphs and statistical plots, which must generally follow strict geometric rules - for a piece of content.</description>
+    </role>
+    <role reference="content_graphics_design_reviewer">
+        <name>Content Graphics Design Reviewer</name>
+        <description>A content graphics design reviewer is someone who checks technical drawings that have been added to a piece of content.</description>
+    </role>
+    <role reference="project_manager">
+        <name>Project Manager</name>
+        <description>A content project manager is someone who oversees content development projects, such as the creation of a set of written explanations, or the creation of new questions for a certain course, et cetera. Content project managers generally do not write or edit any content themselves, but may need to have the ability to move content items around workflows.</description>
+    </role>
+    <role reference="administrator">
+        <name>Administrator</name>
+        <description>An administrator is someone who can provide technical support for content developers who are using the system. Administrators can generally make any change they like to a piece of content at any stage, but it is generally expected that administrators will only interact with content to provide work-arounds for technical issues, and that otherwise administrators will not interact with the content at all.</description>
+    </role>
+</roles>
