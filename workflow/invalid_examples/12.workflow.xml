@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<workflow reference="new_explainer" type="creation" limit_to_entity_types="explainer">
+    <name>New Explainer Workflow</name>
+    <description>This workflow is used for creating new explainers.</description>
+    <statuses initial="drafting" final="published">
+        <status reference="drafting" category="writing">
+            <name>Drafting</name>
+            <description>The explainer is being drafted.</description>
+        </status>
+        <status reference="course_review" category="writing">
+            <name>Course Review</name>
+            <description>The explainer is being reviewed for course suitability.</description>
+        </status>
+        <status reference="published" category="published">
+            <name>Published</name>
+            <description>The explainer has been published.</description>
+        </status>
+    </statuses>
+    <transitions>
+        <transition reference="submit_to_course_review" from="drafting" to="course_review" type="submit">
+            <name>Submit to Course Review</name>
+            <button_text>Submit</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['content_writer']" />
+            </rules>
+            <another_element>...</another_element>
+        </transition>
+        <transition reference="send_back_to_drafting" from="course_review" to="drafting" type="reject" comment_required="true" auto_assign_to="content_writer">
+            <name>Send back to Drafting</name>
+            <button_text>Reject</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['course_designer']" />
+            </rules>
+        </transition>
+        <transition reference="publish" from="course_review" to="published" type="approve">
+            <name>Publish</name>
+            <button_text>Approve and Publish</button_text>
+            <description></description>
+            <rules>
+                <rule allow_if="role in ['course_designer']" />
+            </rules>
+        </transition>
+    </transitions>
+</workflow>

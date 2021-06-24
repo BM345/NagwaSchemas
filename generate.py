@@ -35,13 +35,35 @@ def validate():
         xsdDocument = parse(fp1)
         schema = XMLSchema(xsdDocument)
 
-        fps = glob.glob("{}/examples/*".format(s))
+        logging.info("Checking that all valid examples pass when validated against the XSD file.")
+
+        fps = glob.glob("{}/examples/*.xml".format(s))
 
         for fp in fps:
             xmlDocument = parse(fp)
-            logging.info("Validating {} ... {}.".format(fp, schema.validate(xmlDocument)))
+            isValid = schema.validate(xmlDocument)
 
-            schema.assertValid(xmlDocument)
+            if isValid == True:
+                logging.info(" - {} passes.".format(fp))
+            else:
+                logging.info(" - {} does not pass.".format(fp))
+
+                schema.assertValid(xmlDocument)
+
+        logging.info("Checking that all invalid examples fail when validated against the XSD file.")
+
+        fps = glob.glob("{}/invalid_examples/*.xml".format(s))
+
+        for fp in fps:
+            xmlDocument = parse(fp)
+            isValid = schema.validate(xmlDocument)
+
+            if isValid == False:
+                logging.info(" - {} fails.".format(fp))
+            else:
+                logging.info(" - {} does not fail.".format(fp))
+
+                raise Exception("{} should fail validation, but doesn't.".format(fp))
 
 
 if __name__ == "__main__":
