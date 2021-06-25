@@ -119,3 +119,32 @@ class TestParsing(unittest.TestCase):
         with self.assertRaises(SchemataParsingError) as context:
             parser._parseElementUsageReference(inputText, marker)
 
+    @parameterized.expand([
+        ["id", 0, "id", False],
+        ["id (optional)", 0, "id", True],
+    ])
+    def test_parse_attribute_usage_reference(self, inputText, p, attributeReference, isOptional):
+        parser = Parser()
+        marker = Marker()
+        marker.position = p
+
+        attributeUsageReference = parser._parseAttributeUsageReference(inputText, marker)
+
+        self.assertEqual(attributeUsageReference.attributeReference, attributeReference)
+        self.assertEqual(attributeUsageReference.isOptional, isOptional)
+
+    @parameterized.expand([
+        ["id (abc)", 0],
+        ["id (optional abc)", 0],
+        ["id (optional, abc)", 0],
+        ["id (optional, n >= 0)", 0],
+    ])
+    def test_parse_attribute_usage_reference_fail(self, inputText, p):
+        parser = Parser()
+        marker = Marker()
+        marker.position = p
+
+        with self.assertRaises(SchemataParsingError) as context:
+            parser._parseAttributeUsageReference(inputText, marker)
+
+
