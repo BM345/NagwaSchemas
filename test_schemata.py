@@ -147,4 +147,51 @@ class TestParsing(unittest.TestCase):
         with self.assertRaises(SchemataParsingError) as context:
             parser._parseAttributeUsageReference(inputText, marker)
 
+    @parameterized.expand([
+        ["{a, b, c}", 0, UnorderedSubelementList, 3],
+        ["{a, b, c, d, e}", 0, UnorderedSubelementList, 5],
+        ["{a, b, {c, d, e}, d, e}", 0, UnorderedSubelementList, 5],
+        ["{a, b, {c, [d, e, f, g, h], e}, d, e}", 0, UnorderedSubelementList, 5],
+        ["{a, b, {c, [d, e, f, g, h], e}, d, [e, f, g, {h, i, j, k}]}", 0, UnorderedSubelementList, 5],
+        ["{name, button_text, description, rules}", 0, UnorderedSubelementList, 4],
+        ["{name, button_text (optional), description (optional), rules}", 0, UnorderedSubelementList, 4],
+        ["{status (n >= 0)}", 0, UnorderedSubelementList, 1],
+        ["[name, button_text, description, rules]", 0, OrderedSubelementList, 4],
+        ["[name, button_text (optional), description (optional), rules]", 0, OrderedSubelementList, 4],
+        ["[status (n >= 0)]", 0, OrderedSubelementList, 1],
+    ])
+    def test_parse_subelement_list(self, inputText, p, listType, numberOfElements):
+        parser = Parser()
+        marker = Marker()
+        marker.position = p 
+
+        subelementList = parser._parseSubelementList(inputText, marker)
+
+        self.assertTrue(isinstance(subelementList, listType))
+        self.assertEqual(len(subelementList.elements), numberOfElements)
+
+    @parameterized.expand([
+        ["{a,, b, c}", 0],
+        ["{a,,, b, c}", 0],
+        ["{a,/ b, c}", 0],
+        ["{a,,/ b, c}", 0],
+        ["{a, b / c}", 0],
+        ["{a / b, c}", 0],
+        ["{a, b, ] c, d, e}", 0],
+        ["{a, b; c, d, e}", 0],
+        ["{name, button_text (optional) (optional), description (optional), rules}", 0],
+        ["{name, button_text (optional) (), description (optional), rules}", 0],
+        ["{name, button_text (optional)), description (optional), rules}", 0],
+        ["{name, button_text ((optional)), description (optional), rules}", 0],
+        ["{name, button_text {optional}, description (optional), rules}", 0],
+        ["{name, button_text [optional], description (optional), rules}", 0],
+    ])
+    def test_parse_subelement_list_fail(self, inputText, p):
+        parser = Parser()
+        marker = Marker()
+        marker.position = p 
+
+        with self.assertRaises(SchemataParsingError) as context:
+            parser._parseSubelementList(inputText, marker)
+
 

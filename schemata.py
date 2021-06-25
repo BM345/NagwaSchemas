@@ -550,7 +550,7 @@ class Parser(object):
                 elif n > 1:
                     if (separatorType == "comma" and c == ",") or (separatorType == "slash" and c == "/"):
                         m.position += 1
-                    elif (separatorType == "comma" and c == "/") or (separatorType == "slash" and c == "{"):
+                    elif (separatorType == "comma" and c == "/") or (separatorType == "slash" and c == ","):
                         raise SchemataParsingError("Separators must be the same throughout a list (position {}).".format(m.position))
                     else:
                         break
