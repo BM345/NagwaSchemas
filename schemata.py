@@ -149,7 +149,7 @@ class Parser(object):
         metadata = self._parseComment(inputText, marker)
 
         if metadata != None:
-            schema.formatName = re.search(r"Format Name:\s*(.+)\n", metadata).group(1)
+            schema.formatName = re.search(r"Format Name:\s*(.+)\n", metadata).group(1).strip()
 
         self._parseWhiteSpace(inputText, marker)
 
@@ -768,7 +768,7 @@ class Parser(object):
         e = []
 
         if n1 != None and o1 != None:
-            i = self._operators.find(o1)
+            i = self._operators.index(o1)
             o1b = self._negatedOperators[i]
             e += [(o1b, n1)]
 
@@ -809,16 +809,21 @@ class Parser(object):
         if cut(inputText, marker.position, 2) == "/*":
             marker.position += 2
             t = ""
+            foundClosingTag = False 
 
             while marker.position < len(inputText):
                 if cut(inputText, marker.position, 2) == "*/":
                     marker.position += 2
+                    foundClosingTag = True 
                     break 
                 else:
                     t += cut(inputText, marker.position)
                     marker.position += 1
 
-            return t 
+            if not foundClosingTag:
+                raise SchemataParsingError("Expected '*/' at position {}.".format(marker.position))
+
+            return t.strip()
         else:
             return None 
 
