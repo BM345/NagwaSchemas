@@ -149,7 +149,10 @@ class Parser(object):
         metadata = self._parseComment(inputText, marker)
 
         if metadata != None:
-            schema.formatName = re.search(r"Format Name:\s*(.+)\n", metadata).group(1).strip()
+            m = re.search(r"Format Name:\s*([.\s]+)\n", metadata)
+
+            if m != None:
+                schema.formatName = m.group(1).strip()
 
         self._parseWhiteSpace(inputText, marker)
 
@@ -262,6 +265,10 @@ class Parser(object):
             marker.position += 1
         else:
             raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
+
+        self._parseWhiteSpace(inputText, marker)
+
+        metadata = self._parseComment(inputText, marker)
 
         while marker.position < len(inputText):
             p = self._parseProperty(inputText, marker)
@@ -1127,7 +1134,7 @@ def generateSpecification(schema, filePath):
             ee = []
 
             if element.subelements:
-                for subelement in element.subelements:
+                for subelement in element.subelements.elements:
                     e = schema.getElementStructureByReference(subelement.elementReference)
                     ee.append(e)
 

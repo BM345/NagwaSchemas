@@ -78,8 +78,8 @@ if __name__ == "__main__":
 
     if arguments.action == "generate_specification":
         parser = schemata.Parser()
-        schema = parser.parseSchemaFromFile("scope/scope.schema")
-        schemata.generateSpecification(schema, "scope/scope_xml_specification.md")
+        schema = parser.parseSchemaFromFile("semantic_tags/semantic_tags.schema")
+        schemata.generateSpecification(schema, "semantic_tags/semantic_tags_xml_specification.md")
     else:
         generate()
         validate()

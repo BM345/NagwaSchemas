@@ -1,0 +1,36 @@
+/*
+Format Name: Semantic Tags
+*/
+
+element binomen {
+    /*
+    Name: The Binomen Element 
+    Description: The binomen element is used to identify binomina - binominal names used in biology - such as *Homo sapiens* or *Panthera leo*. Binomina consist of two names - a generic name and a specific name - the <generic_name> and <specific_name> elements can be used to identify these.
+    */
+    allowedContent: elements only;
+    subelements: [generic_name, specific_name];
+}
+
+element generic_name {
+    /*
+    Name: The Generic Name Element 
+    Description: The generic name element is used to identify the generic name - the genus - within a binomen. For example, in the binomen *Homo sapiens*, *Homo* is the generic name - humans are part of the genus *Homo*.
+    */
+    allowedContent: text only;
+}
+
+element specific_name {
+    /*
+    Name: The Specific Name Element 
+    Description: The specific name element is used to identify the specific name - the species - within a binomen. For example, in the binomen *Homo sapiens*, *sapiens* is the specific name.
+    */
+    allowedContent: text only;
+}
+
+element creative_work_title {
+    /*
+    Name: The Creative Work Title Element 
+    Description: The creative work title element is used to identify titles of creative works, such as J. R. R. Tolkien's *The Lord of the Rings*. Titles of creative works are typically rendered in italics.
+    */
+    allowedContent: elements and text;
+}
