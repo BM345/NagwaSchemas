@@ -156,7 +156,7 @@ Below is shown an example of the `<g_value>` element.
 
 ## The &lt;sections&gt; element
 
-
+The &lt;sections&gt; element contains the list of sections in this reading activity.
 
 ### Attributes
 
@@ -182,7 +182,7 @@ Below is shown an example of the `<sections>` element.
 
 ## The &lt;section&gt; element
 
-
+The &lt;section&gt; element describes a section of this reading activity. There are three types of section: reading for gist, reading for detail, and reading for specific information.
 
 ### Attributes
 
@@ -210,7 +210,7 @@ Below is shown an example of the `<section>` element.
 
 ## The &lt;questions&gt; element
 
-
+The &lt;questions&gt; element contains the list of questions in this section of the reading activity.
 
 ### Attributes
 
@@ -236,7 +236,7 @@ Below is shown an example of the `<questions>` element.
 
 ## The &lt;question&gt; element
 
-
+The &lt;question&gt; element gives a reference to a question that is part of this section.
 
 ### Attributes
 

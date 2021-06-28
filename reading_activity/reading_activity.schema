@@ -100,6 +100,9 @@ element g_value {
 }
 
 element sections {
+    /*
+    Description: The <sections> element contains the list of sections in this reading activity.
+    */
     allowedContent: elements only;
     subelements: [ section (n >= 0) ];
 }
@@ -110,17 +113,26 @@ attribute sectionType {
 }
 
 element section {
+    /*
+    Description: The <section> element describes a section of this reading activity. There are three types of section: reading for gist, reading for detail, and reading for specific information.
+    */
     attributes: sectionType;
     allowedContent: elements only;
     subelements: [ questions ];
 }
 
 element questions {
+    /*
+    Description: The <questions> element contains the list of questions in this section of the reading activity.
+    */
     allowedContent: elements only;
     subelements: [ question (n >= 0) ];
 }
 
 element question {
+    /*
+    Description: The <question> element gives a reference to a question that is part of this section.
+    */
     attributes: id;
     allowedContent: none;
 }
