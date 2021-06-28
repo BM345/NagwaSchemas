@@ -5,6 +5,7 @@ Format Name: Reading Activity XML
 dataType id {
     /*
     Description: a 12-digit entity id 
+    Example Value: 000000000000
     */
     baseType: string;
     pattern: '\d{12}';
@@ -13,6 +14,7 @@ dataType id {
 dataType versionNumber {
     /*
     Description: an integer 
+    Example Value: 1
     */
     baseType: integer;
     minimumValue: 1;
@@ -43,6 +45,13 @@ dataType gValue {
     maximumValue: 16;
 }
 
+dataType activitySectionType {
+    baseType: string;
+    allowedValues: 'gist',
+                    'detail',
+                    'specific_information';
+}
+
 attribute id {
     valueType: id;
 }
@@ -61,19 +70,31 @@ root element reading_activity {
 }
 
 element title {
+    /*
+    Description: The <title> element contains the title of this reading activity.
+    */
     allowedContent: text only;
 }
 
 element seo_description {
+    /*
+    Description: The <seo_description> element contains the SEO description of this reading activity.
+    */
     allowedContent: text only;
 }
 
 element subject {
+    /*
+    Description: The <subject> element gives the subject of this reading activity.
+    */
     allowedContent: text only;
     valueType: subject;
 }
 
 element g_value {
+    /*
+    Description: The <g_value> element gives the g-value of this reading activity.
+    */
     allowedContent: text only;
     valueType: gValue;
 }
@@ -83,7 +104,13 @@ element sections {
     subelements: [ section (n >= 0) ];
 }
 
+attribute sectionType {
+    tagName: 'type';
+    valueType: activitySectionType;
+}
+
 element section {
+    attributes: sectionType;
     allowedContent: elements only;
     subelements: [ questions ];
 }

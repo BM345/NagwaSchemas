@@ -1234,7 +1234,12 @@ def generateSpecification(schema, filePath):
                     d = schema.getDataStructureByReference(a.dataStructure)
                     aa.append(a)
 
-                    fileObject.write("| `{}` | {} | {} |  |\n".format(a.attributeName, "Required" if not attribute.isOptional else "Optional", d.description))
+                    allowedValuesText = d.description
+
+                    if d.allowedValues and d.description == "":
+                        allowedValuesText = "one of: {}".format(", ".join(["`{}`".format(v) for v in d.allowedValues]))
+
+                    fileObject.write("| `{}` | {} | {} |  |\n".format(a.attributeName, "Required" if not attribute.isOptional else "Optional", allowedValuesText))
 
                 fileObject.write("\n")
 

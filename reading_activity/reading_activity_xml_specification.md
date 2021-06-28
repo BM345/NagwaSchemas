@@ -56,7 +56,7 @@ Below is shown an example of the `<reading_activity>` element.
 
 ## The &lt;title&gt; element
 
-
+The &lt;title&gt; element contains the title of this reading activity.
 
 ### Attributes
 
@@ -81,7 +81,7 @@ Below is shown an example of the `<title>` element.
 
 ## The &lt;seo_description&gt; element
 
-
+The &lt;seo_description&gt; element contains the SEO description of this reading activity.
 
 ### Attributes
 
@@ -106,7 +106,7 @@ Below is shown an example of the `<seo_description>` element.
 
 ## The &lt;subject&gt; element
 
-
+The &lt;subject&gt; element gives the subject of this reading activity.
 
 ### Attributes
 
@@ -131,7 +131,7 @@ Below is shown an example of the `<subject>` element.
 
 ## The &lt;g_value&gt; element
 
-
+The &lt;g_value&gt; element gives the g-value of this reading activity.
 
 ### Attributes
 
@@ -186,7 +186,9 @@ Below is shown an example of the `<sections>` element.
 
 ### Attributes
 
-None
+| Name | Required | Allowed Values | Description |
+|---|---|---|---|
+| `type` | Required | one of: `gist`, `detail`, `specific_information` |  |
 
 ### Possible Subelements
 
@@ -197,7 +199,7 @@ None
 Below is shown an example of the `<section>` element.
 
 ```xml
-<section>
+<section type="...">
     <questions></questions>
 </section>
 ```
