@@ -46,6 +46,7 @@ class Schema(object):
 class Structure(object):
     def __init__(self, reference = ""):
         self.reference = reference
+        self.description = ""
 
 class DataStructure(Structure):
     def __init__(self, reference = ""):
@@ -264,6 +265,18 @@ class Parser(object):
             marker.position += 1
         else:
             raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
+
+        self._parseWhiteSpace(inputText, marker) 
+
+        metadata = self._parseComment(inputText, marker)
+
+        if metadata != None:
+            m = re.search(r"Description:\s*(.+)\n", metadata)
+
+            if m != None:
+                dataStructure.description = m.group(1).strip()
+
+        self._parseWhiteSpace(inputText, marker) 
 
         while marker.position < len(inputText):
             p = self._parseProperty(inputText, marker)
@@ -1209,9 +1222,10 @@ def generateSpecification(schema, filePath):
 
                 for attribute in element.attributes:
                     a = schema.getAttributeStructureByReference(attribute.attributeReference)
+                    d = schema.getDataStructureByReference(a.dataStructure)
                     aa.append(a)
 
-                    fileObject.write("| `{}` | {} | {} |  |\n".format(a.attributeName, "Required" if not attribute.isOptional else "Optional", ""))
+                    fileObject.write("| `{}` | {} | {} |  |\n".format(a.attributeName, "Required" if not attribute.isOptional else "Optional", d.description))
 
                 fileObject.write("\n")
 

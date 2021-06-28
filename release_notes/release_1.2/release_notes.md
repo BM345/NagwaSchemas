@@ -9,3 +9,4 @@ This release includes:
 - a set of N semantic tags
 - examples, a specification, and an XSD file for Reader XML
 - new attributes in Workflow XML: `limit_to_subjects` ✓
+- add an XML format for reading activities 

@@ -1,0 +1,96 @@
+/*
+Format Name: Reading Activity XML
+*/ 
+
+dataType id {
+    /*
+    Description: a 12-digit entity id 
+    */
+    baseType: string;
+    pattern: '\d{12}';
+}
+
+dataType versionNumber {
+    /*
+    Description: an integer 
+    */
+    baseType: integer;
+    minimumValue: 1;
+}
+
+dataType subject {
+    baseType: string;
+    allowedValues:  'mathematics',
+                    'physics',
+                    'chemistry',
+                    'biology',
+                    'science',
+                    'english',
+                    'arabic',
+                    'french',
+                    'philosophy',
+                    'psychology',
+                    'sociology',
+                    'history',
+                    'geography',
+                    'geology',
+                    'economics';
+}
+
+dataType gValue {
+    baseType: integer;
+    minimumValue: 1;
+    maximumValue: 16;
+}
+
+attribute id {
+    valueType: id;
+}
+
+attribute version {
+    valueType: versionNumber;
+}
+
+root element reading_activity {
+    attributes: id, version;
+    allowedContent: elements only;
+    subelements: [ title, seo_description, subject, g_value, sections ];
+}
+
+element title {
+    allowedContent: text only;
+}
+
+element seo_description {
+    allowedContent: text only;
+}
+
+element subject {
+    allowedContent: text only;
+    valueType: subject;
+}
+
+element g_value {
+    allowedContent: text only;
+    valueType: gValue;
+}
+
+element sections {
+    allowedContent: elements only;
+    subelements: [ section (n >= 0) ];
+}
+
+element section {
+    allowedContent: elements only;
+    subelements: [ questions ];
+}
+
+element questions {
+    allowedContent: elements only;
+    subelements: [ question (n >= 0) ];
+}
+
+element question {
+    attributes: id;
+    allowedContent: none;
+}

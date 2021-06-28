@@ -1,6 +1,6 @@
-#  Specification
+# Semantic Tags Specification
 
-This document gives the specification for .
+This document gives the specification for Semantic Tags.
 
 ## Table of Contents
 

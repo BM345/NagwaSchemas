@@ -30,7 +30,7 @@ The `<scope>` element is the root element of a Scope XML document.
 | `id` | Required | a 12-digit entity id | The id of this scope.  |
 | `derivative_of` | Optional | a 12-digit entity id | If this scope has been translated or localised from another scope, this is the id of that scope.  |
 | `derivative_type` | Optional | one of `translation`, `localization` | If this scope is a translation of another scope, then this should be set to `translation`. If this scope is a localisation of another scope, then this should be set to `localization`. |
-| `version` | Required | a integer | The version number of this scope. |
+| `version` | Required | an integer | The version number of this scope. |
 
 ### Possible Subelements
 

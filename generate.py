@@ -80,6 +80,8 @@ if __name__ == "__main__":
         parser = schemata.Parser()
         schema = parser.parseSchemaFromFile("semantic_tags/semantic_tags.schema")
         schemata.generateSpecification(schema, "semantic_tags/semantic_tags_xml_specification.md")
+        schema = parser.parseSchemaFromFile("reading_activity/reading_activity.schema")
+        schemata.generateSpecification(schema, "reading_activity/reading_activity_xml_specification.md")
     else:
         generate()
         validate()
