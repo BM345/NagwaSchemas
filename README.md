@@ -26,6 +26,8 @@ The table below gives the references for the different types of entity that we h
 | Lesson Video | `lesson_video` | A video that teaches the student what they need to know for a lesson. |
 | Scope | `scope` | A document that defines what skills are and are not covered by a given lesson. |
 | Lesson | `lesson` | An entity that connects together all of the other entities that are needed for a lesson. |
+| Reading Activity | `reading_activity` | An activity that involves the student reading and understanding a piece of text. |
+| Listening Activity | `listening_activity` | An activity that involves the student listening to and understanding some audio. |
 | Image | `image` | An image (of any format: PNG, JPEG, SVG, et cetera). |
 
 ## Subjects

@@ -8,3 +8,4 @@ This release includes:
 - unit tests for Schemata code ✓
 - a set of N semantic tags
 - examples, a specification, and an XSD file for Reader XML
+- new attributes in Workflow XML: `limit_to_subjects` ✓

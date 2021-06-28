@@ -25,6 +25,8 @@ dataType entityType {
                     'lesson_video',
                     'scope',
                     'lesson',
+                    'reading_activity',
+                    'listening_activity',
                     'image';
 }
 

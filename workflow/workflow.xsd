@@ -24,6 +24,8 @@
             <xs:enumeration value="lesson_video"/>
             <xs:enumeration value="scope"/>
             <xs:enumeration value="lesson"/>
+            <xs:enumeration value="reading_activity"/>
+            <xs:enumeration value="listening_activity"/>
             <xs:enumeration value="image"/>
         </xs:restriction>
     </xs:simpleType>
@@ -74,7 +76,7 @@
     </xs:simpleType>
     <xs:simpleType name="__type__d__list_of__entityType">
         <xs:restriction base="xs:string">
-            <xs:pattern value="(question|explainer|question_video|lesson_video|scope|lesson|image)(\s*,\s*(question|explainer|question_video|lesson_video|scope|lesson|image))*"/>
+            <xs:pattern value="(question|explainer|question_video|lesson_video|scope|lesson|reading_activity|listening_activity|image)(\s*,\s*(question|explainer|question_video|lesson_video|scope|lesson|reading_activity|listening_activity|image))*"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="__type__d__list_of__subject">
