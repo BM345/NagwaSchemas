@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<workflow reference="new_explainer" type="creation" limit_to_entity_types="explainer">
+<workflow reference="new_explainer" type="creation" limit_to_entity_types="explainer" limit_to_subjects="physics, chemistry, biology, mathematics">
     <name>New Explainer Workflow</name>
     <description>This workflow is used for creating new explainers.</description>
     <statuses initial="drafting" final="published">
