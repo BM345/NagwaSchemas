@@ -17,9 +17,15 @@ dataType workflowType {
                    'localization_update';
 }
 
-dataType entityTypeList {
+dataType entityType {
     baseType: string;
-    pattern: '(question|explainer|lesson_video|question_video|scope)(,\s*(question|explainer|lesson_video|question_video|scope))*';
+    allowedValues: 'question',
+                    'explainer',
+                    'question_video',
+                    'lesson_video',
+                    'scope',
+                    'lesson',
+                    'image';
 }
 
 dataType subject {
@@ -73,7 +79,7 @@ attribute workflowType {
 }
 
 attribute limit_to_entity_types {
-    valueType: entityTypeList;
+    valueType: list(entityType, ',');
 }
 
 attribute limit_to_subjects {
