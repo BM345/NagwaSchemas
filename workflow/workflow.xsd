@@ -21,6 +21,25 @@
             <xs:pattern value="(question|explainer|lesson_video|question_video|scope)(,\s*(question|explainer|lesson_video|question_video|scope))*"/>
         </xs:restriction>
     </xs:simpleType>
+    <xs:simpleType name="__type__d__subject">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="mathematics"/>
+            <xs:enumeration value="physics"/>
+            <xs:enumeration value="chemistry"/>
+            <xs:enumeration value="biology"/>
+            <xs:enumeration value="science"/>
+            <xs:enumeration value="english"/>
+            <xs:enumeration value="arabic"/>
+            <xs:enumeration value="french"/>
+            <xs:enumeration value="philosophy"/>
+            <xs:enumeration value="psychology"/>
+            <xs:enumeration value="sociology"/>
+            <xs:enumeration value="history"/>
+            <xs:enumeration value="geography"/>
+            <xs:enumeration value="geology"/>
+            <xs:enumeration value="economics"/>
+        </xs:restriction>
+    </xs:simpleType>
     <xs:simpleType name="__type__d__statusCategory">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
@@ -47,6 +66,11 @@
     <xs:simpleType name="__type__d__rulePredicate">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
+    <xs:simpleType name="__type__d__list_of__subject">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(mathematics|physics|chemistry|biology|science|english|arabic|french|philosophy|psychology|sociology|history|geography|geology|economics)(\s*,\s*(mathematics|physics|chemistry|biology|science|english|arabic|french|philosophy|psychology|sociology|history|geography|geology|economics))*"/>
+        </xs:restriction>
+    </xs:simpleType>
     <xs:complexType name="__type__e__workflow" mixed="false">
         <xs:sequence>
             <xs:element name="name" type="__type__e__name"/>
@@ -57,6 +81,7 @@
         <xs:attribute name="reference" type="__type__d__reference" use="required"/>
         <xs:attribute name="type" type="__type__d__workflowType" use="optional"/>
         <xs:attribute name="limit_to_entity_types" type="__type__d__entityTypeList" use="optional"/>
+        <xs:attribute name="limit_to_subjects" type="__type__d__list_of__subject" use="optional"/>
     </xs:complexType>
     <xs:simpleType name="__type__e__name">
         <xs:restriction base="xs:string"/>

@@ -1,5 +1,5 @@
 /*
-Format Name: Workflow XML 
+Format Name: Workflow XML
 */
 
 dataType reference {
@@ -20,6 +20,25 @@ dataType workflowType {
 dataType entityTypeList {
     baseType: string;
     pattern: '(question|explainer|lesson_video|question_video|scope)(,\s*(question|explainer|lesson_video|question_video|scope))*';
+}
+
+dataType subject {
+    baseType: string;
+    allowedValues:  'mathematics',
+                    'physics',
+                    'chemistry',
+                    'biology',
+                    'science',
+                    'english',
+                    'arabic',
+                    'french',
+                    'philosophy',
+                    'psychology',
+                    'sociology',
+                    'history',
+                    'geography',
+                    'geology',
+                    'economics';
 }
 
 dataType statusCategory {
@@ -57,8 +76,12 @@ attribute limit_to_entity_types {
     valueType: entityTypeList;
 }
 
+attribute limit_to_subjects {
+    valueType: list(subject, ',');
+}
+
 root element workflow {
-    attributes: reference, workflowType (optional), limit_to_entity_types (optional);
+    attributes: reference, workflowType (optional), limit_to_entity_types (optional), limit_to_subjects (optional);
     allowedContent: elements only;
     subelements: [ name, description (optional), statuses, transitions ];
 }

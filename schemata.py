@@ -13,7 +13,12 @@ class Schema(object):
         return [s for s in self.structures if isinstance(s, DataStructure)]
 
     def getDataStructureByReference(self, reference):
-        return [s for s in self.getDataStructures() if s.reference == reference][0]
+        dataStructures = [s for s in self.getDataStructures() if s.reference == reference]
+
+        if not dataStructures:
+            raise ValueError("Could not find data structure with the reference '{}'.".format(reference))
+
+        return dataStructures[0]
 
     def getPossibleRootElementStructures(self):
         return [s for s in self.structures if isinstance(s, ElementStructure) and s.canBeRootElement]
@@ -95,6 +100,11 @@ class AttributeStructure(Structure):
         self.attributeName = ""
         self.dataStructure = None 
 
+class ListFunction(object):
+    def __init__(self, reference, separator):
+        self.reference = reference 
+        self.separator = separator 
+
 
 class Marker(object):
     def __init__(self):
@@ -149,10 +159,13 @@ class Parser(object):
         metadata = self._parseComment(inputText, marker)
 
         if metadata != None:
-            m = re.search(r"Format Name:\s*([.\s]+)\n", metadata)
+            logging.debug("Found metadata comment.")
+
+            m = re.search(r"Format Name:\s*(.+)\n", metadata)
 
             if m != None:
                 schema.formatName = m.group(1).strip()
+                logging.debug("Got format name '{}'.".format(schema.formatName))
 
         self._parseWhiteSpace(inputText, marker)
 
@@ -160,6 +173,32 @@ class Parser(object):
             structure = self._parseStructure(inputText, marker)
 
             schema.structures.append(structure)
+
+        listDataStructures = []
+
+        for structure in schema.structures:
+            if isinstance(structure, AttributeStructure) and isinstance(structure.dataStructure, ListFunction):
+                lf = structure.dataStructure
+                d1 = schema.getDataStructureByReference(lf.reference)
+                pattern = ""
+
+                if d1.allowedValues:
+                    pattern = "|".join(d1.allowedValues)
+
+                d2 = DataStructure()
+                d2.reference = "list_of__{}".format(lf.reference)
+                d2.baseStructure = "string"
+                d2.allowedPattern = "({})(\s*{}\s*({}))*".format(pattern, lf.separator, pattern)
+
+                logging.debug("Creating list structure '{}'.".format(d2.reference))
+
+                structure.dataStructure = d2.reference 
+
+                listDataStructures.append(d2) 
+
+        schema.structures += listDataStructures 
+
+        logging.debug("Schema structures: {}".format(", ".join([str(structure) for structure in schema.structures])))
 
         return schema 
 
@@ -394,7 +433,10 @@ class Parser(object):
             propertyValue = self._parseInteger(inputText, marker)
         
         if propertyName == "valueType":
-            propertyValue = self._parseReference(inputText, marker)
+            propertyValue = self._parseListFunction(inputText, marker)
+
+            if propertyValue == None:
+                propertyValue = self._parseReference(inputText, marker)
 
         if propertyValue == None:
             return None 
@@ -491,6 +533,53 @@ class Parser(object):
             return None 
 
         return items
+
+    def _parseListFunction(self, inputText, marker):
+        logging.debug("Attempting to parse list function.")
+
+        self._parseWhiteSpace(inputText, marker)
+
+        if cut(inputText, marker.position, 4) == "list":
+            marker.position += 4
+        else:
+            return None 
+
+        self._parseWhiteSpace(inputText, marker)
+
+        if cut(inputText, marker.position, 1) == "(":
+            marker.position += 1
+        else:
+            raise SchemataParsingError("Expected '(' at position {}.".format(marker.position))
+
+        self._parseWhiteSpace(inputText, marker)
+
+        reference = self._parseReference(inputText, marker)
+
+        if reference == None:
+            raise SchemataParsingError("Expected a reference at position {}.".format(marker.position))
+
+        self._parseWhiteSpace(inputText, marker)
+
+        if cut(inputText, marker.position, 1) == ",":
+            marker.position += 1
+        else:
+            raise SchemataParsingError("Expected ',' at position {}.".format(marker.position))
+
+        self._parseWhiteSpace(inputText, marker)
+
+        separator = self._parseString(inputText, marker)
+
+        if separator == None:
+            raise SchemataParsingError("Expected a string at position {}.".format(marker.position))
+
+        self._parseWhiteSpace(inputText, marker)
+
+        if cut(inputText, marker.position, 1) == ")":
+            marker.position += 1
+        else:
+            raise SchemataParsingError("Expected ')' at position {}.".format(marker.position))
+
+        return ListFunction(reference, separator)
 
     def _parseSubelementUsages(self, inputText, marker):
 
@@ -830,7 +919,7 @@ class Parser(object):
             if not foundClosingTag:
                 raise SchemataParsingError("Expected '*/' at position {}.".format(marker.position))
 
-            return t.strip()
+            return t
         else:
             return None 
 
