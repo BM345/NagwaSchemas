@@ -206,7 +206,17 @@
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="__type__d__dialectCode">
-        <xs:restriction base="xs:string"/>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="en_british"/>
+            <xs:enumeration value="en_american"/>
+            <xs:enumeration value="ar_modern_standard"/>
+            <xs:enumeration value="fr_standard"/>
+            <xs:enumeration value="es_european"/>
+            <xs:enumeration value="es_latin_american"/>
+            <xs:enumeration value="pt_european"/>
+            <xs:enumeration value="pt_brazilian"/>
+            <xs:enumeration value="zh_simplified"/>
+        </xs:restriction>
     </xs:simpleType>
     <xs:complexType name="__type__e__scope" mixed="false">
         <xs:sequence>

@@ -42,6 +42,15 @@ dataType iso_639_1 {
 
 dataType dialectCode {
     baseType: string;
+    allowedValues: 'en_british',
+                   'en_american',
+                   'ar_modern_standard',
+                   'fr_standard',
+                   'es_european',
+                   'es_latin_american',
+                   'pt_european',
+                   'pt_brazilian',
+                   'zh_simplified';
 }
 
 attribute id {

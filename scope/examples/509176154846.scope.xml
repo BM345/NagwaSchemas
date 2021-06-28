@@ -2,7 +2,7 @@
 <scope id="509176154846" version="1">
     <language name_in_english="English" code="en" />
     <dialects>
-        <dialect name_in_english="American" code="US" />
+        <dialect name_in_english="American" code="en_american" />
     </dialects>
     <objectives>
         <skill>practise using the past simple to talk about completed actions in the past</skill>

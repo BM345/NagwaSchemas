@@ -2,10 +2,8 @@
 <scope id="257146536086" version="1">
     <language name_in_english="English" code="en" />
     <dialects>
-        <dialect name_in_english="British" code="GB" />
-        <dialect name_in_english="American" code="US" />
-        <dialect name_in_english="Canadian" code="CA" />
-        <dialect name_in_english="Australian" code="AU" />
+        <dialect name_in_english="British" code="en_british" />
+        <dialect name_in_english="American" code="en_american" />
     </dialects>
     <objectives>
         <skill>use ij notation to represent the components of a vector</skill>
