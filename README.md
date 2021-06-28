@@ -28,6 +28,28 @@ The table below gives the references for the different types of entity that we h
 | Lesson | `lesson` | An entity that connects together all of the other entities that are needed for a lesson. |
 | Image | `image` | An image (of any format: PNG, JPEG, SVG, et cetera). |
 
+## Subjects
+
+The table below gives the references for the different subjects that we teach in Nagwa content. These references are used throughout the different XML formats defined in this repository.
+
+| Subject | Reference |
+|---|---|
+| Mathematics | `mathematics` |
+| Physics | `physics` |
+| Chemistry | `chemistry` |
+| Biology | `biology` |
+| Science | `science` |
+| English | `english` | 
+| Arabic | `arabic` |
+| French | `french` |
+| Philosophy | `philosophy` |
+| Psychology | `psychology` |
+| Sociology | `sociology` |
+| History | `history` |
+| Geography | `geography` |
+| Geology | `geology` |
+| Economics | `economics` |
+
 ## Commands
 
 ### Building the XSD files from the Schemata files
