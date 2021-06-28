@@ -19,6 +19,8 @@ This document gives the specification for Reading Activity XML.
 
 ## The &lt;reading_activity&gt; element
 
+The &lt;reading_activity&gt; element is the root element of a Reading Activity XML file.
+
 ### Attributes
 
 | Name | Required | Allowed Values | Description |
@@ -54,6 +56,8 @@ Below is shown an example of the `<reading_activity>` element.
 
 ## The &lt;title&gt; element
 
+
+
 ### Attributes
 
 None
@@ -76,6 +80,8 @@ Below is shown an example of the `<title>` element.
 <br /><br />
 
 ## The &lt;seo_description&gt; element
+
+
 
 ### Attributes
 
@@ -100,6 +106,8 @@ Below is shown an example of the `<seo_description>` element.
 
 ## The &lt;subject&gt; element
 
+
+
 ### Attributes
 
 None
@@ -123,6 +131,8 @@ Below is shown an example of the `<subject>` element.
 
 ## The &lt;g_value&gt; element
 
+
+
 ### Attributes
 
 None
@@ -145,6 +155,8 @@ Below is shown an example of the `<g_value>` element.
 <br /><br />
 
 ## The &lt;sections&gt; element
+
+
 
 ### Attributes
 
@@ -170,6 +182,8 @@ Below is shown an example of the `<sections>` element.
 
 ## The &lt;section&gt; element
 
+
+
 ### Attributes
 
 None
@@ -194,6 +208,8 @@ Below is shown an example of the `<section>` element.
 
 ## The &lt;questions&gt; element
 
+
+
 ### Attributes
 
 None
@@ -217,6 +233,8 @@ Below is shown an example of the `<questions>` element.
 <br /><br />
 
 ## The &lt;question&gt; element
+
+
 
 ### Attributes
 

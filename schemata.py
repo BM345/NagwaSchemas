@@ -318,9 +318,17 @@ class Parser(object):
         else:
             raise SchemataParsingError("Expected '{{' at position {}.".format(marker.position))
 
-        self._parseWhiteSpace(inputText, marker)
+        self._parseWhiteSpace(inputText, marker) 
 
         metadata = self._parseComment(inputText, marker)
+
+        if metadata != None:
+            m = re.search(r"Description:\s*(.+)\n", metadata)
+
+            if m != None:
+                elementStructure.description = m.group(1).strip()
+
+        self._parseWhiteSpace(inputText, marker) 
 
         while marker.position < len(inputText):
             p = self._parseProperty(inputText, marker)
@@ -1212,6 +1220,7 @@ def generateSpecification(schema, filePath):
         for element in elements:
             fileObject.write("\n\n<br /><br />\n\n")
             fileObject.write("## The &lt;{}&gt; element\n\n".format(element.elementName))
+            fileObject.write("{}\n\n".format(element.description.replace("<", "&lt;").replace(">", "&gt;")))
             fileObject.write("### Attributes\n\n")
 
             aa = []

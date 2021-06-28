@@ -52,6 +52,9 @@ attribute version {
 }
 
 root element reading_activity {
+    /*
+    Description: The <reading_activity> element is the root element of a Reading Activity XML file.
+    */
     attributes: id, version;
     allowedContent: elements only;
     subelements: [ title, seo_description, subject, g_value, sections ];
