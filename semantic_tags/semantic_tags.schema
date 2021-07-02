@@ -27,10 +27,42 @@ element specific_name {
     allowedContent: text only;
 }
 
-element creative_work_title {
+element book_title {
     /*
-    Name: The Creative Work Title Element 
-    Description: The creative work title element is used to identify titles of creative works, such as J. R. R. Tolkien's *The Lord of the Rings*. Titles of creative works are typically rendered in italics.
+    Name: The Book Title Element
+    Description: The book title element is used to identify titles of books - for example: J. R. R. Tolkien's *The Lord of the Rings* or George R. R. Martin's *A Game of Thrones*.
     */
-    allowedContent: elements and text;
+    allowedContent: text only;
+}
+
+element journal_name {
+    /*
+    Name: The Journal Name Element
+    Description: The journal name element is used to identify names of academic journals - for example: *Physical Review* or *Applied Physics Letters*.
+    */
+    allowedContent: text only;
+}
+
+element newspaper_name {
+    /*
+    Name: The Newspaper Name Element 
+    Description: The newspaper name element is used to identify names of newspapers - for example: *The Guardian* or *The Independent*.
+    */
+    allowedContent: text only;
+}
+
+element magazine_name {
+    /*
+    Name: The Magazine Name Element 
+    Description: The magazine name element is used to identify names of magazines - for example: *Time* or *Vanity Fair*.
+    */
+    allowedContent: text only;
+}
+
+element movie_title {
+    /*
+    Name: The Movie Title Element
+    Description: The movie title element is used to identify titles of movies - for example: *Green Lantern* or *Airplane!*.
+    */
+    allowedContent: text only;
 }
