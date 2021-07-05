@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<listening_activity id="000000000000" version="1">
+    <title>Ecotourism in the Seychelles</title>
+    <seo_description>practise listening for gist, detail and specific information in the context of ecotourism.</seo_description>
+    <subject>english</subject>
+    <g_value>9</g_value>
+    <listening_material>
+    </listening_material>
+    <sections>
+        <section type="gist">
+            <questions>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+            </questions>
+        </section>
+        <section type="detail">
+            <questions>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+            </questions>
+        </section>
+        <section type="specific_information">
+            <questions>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+            </questions>
+        </section>
+    </sections>
+</listening_activity>

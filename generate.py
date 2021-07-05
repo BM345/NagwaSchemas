@@ -9,6 +9,7 @@ SCHEMAS = [
     "workflow",
     "history",
     "reading_activity",
+    "listening_activity",
     "scope",
 ]
 
@@ -81,12 +82,12 @@ if __name__ == "__main__":
         parser = schemata.Parser()
         schema = parser.parseSchemaFromFile("semantic_tags/semantic_tags.schema")
         schemata.generateSpecification(schema, "semantic_tags/semantic_tags_xml_specification.md")
-        schema = parser.parseSchemaFromFile("reading_activity/reading_activity.schema")
-        schemata.generateSpecification(schema, "reading_activity/reading_activity_xml_specification.md")
+        schema = parser.parseSchemaFromFile("listening_activity/listening_activity.schema")
+        schemata.generateSpecification(schema, "listening_activity/listening_activity_xml_specification.md")
     elif arguments.action == "generate_example_files":
         parser = schemata.Parser()
-        schema = parser.parseSchemaFromFile("reading_activity/reading_activity.schema")
-        schemata.exampleFileGenerator.generateExampleFiles(schema, "reading_activity/examples")
+        schema = parser.parseSchemaFromFile("listening_activity/listening_activity.schema")
+        schemata.exampleFileGenerator.generateExampleFiles(schema, "listening_activity/examples")
     else:
         generate()
         validate()

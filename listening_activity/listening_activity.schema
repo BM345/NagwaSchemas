@@ -1,0 +1,155 @@
+/*
+Format Name: Listening Activity XML
+*/ 
+
+dataType id {
+    /*
+    Description: a 12-digit entity id 
+    Example Value: 000000000000
+    */
+    baseType: string;
+    pattern: '\d{12}';
+}
+
+dataType versionNumber {
+    /*
+    Description: an integer 
+    Example Value: 1
+    */
+    baseType: integer;
+    minimumValue: 1;
+}
+
+dataType subject {
+    /*
+    Description: a [subject reference](https://github.com/BM345/NagwaSchemas#subjects)
+    Example Value: english 
+    */
+    baseType: string;
+    allowedValues:  'mathematics',
+                    'physics',
+                    'chemistry',
+                    'biology',
+                    'science',
+                    'english',
+                    'arabic',
+                    'french',
+                    'philosophy',
+                    'psychology',
+                    'sociology',
+                    'history',
+                    'geography',
+                    'geology',
+                    'economics';
+}
+
+dataType gValue {
+    /*
+    Description: a g-value
+    Example Value: 9
+    */
+    baseType: integer;
+    minimumValue: 1;
+    maximumValue: 16;
+}
+
+dataType activitySectionType {
+    baseType: string;
+    allowedValues: 'gist',
+                    'detail',
+                    'specific_information';
+}
+
+attribute id {
+    valueType: id;
+}
+
+attribute version {
+    valueType: versionNumber;
+}
+
+root element listening_activity {
+    /*
+    Description: The <listening_activity> element is the root element of a Listening Activity XML file.
+    */
+    attributes: id, version;
+    allowedContent: elements only;
+    subelements: [ title, seo_description, subject, g_value, listening_material, sections ];
+}
+
+element title {
+    /*
+    Description: The <title> element contains the title of this listening activity.
+    Example Value: Ecotourism in the Seychelles
+    */
+    allowedContent: text only;
+}
+
+element seo_description {
+    /*
+    Description: The <seo_description> element contains the SEO description of this reading activity.
+    Example Value: practise listening for gist, detail and specific information in the context of ecotourism.
+    */
+    allowedContent: text only;
+}
+
+element subject {
+    /*
+    Description: The <subject> element gives the subject of this listening activity.
+    */
+    allowedContent: text only;
+    valueType: subject;
+}
+
+element g_value {
+    /*
+    Description: The <g_value> element gives the g-value of this listening activity.
+    */
+    allowedContent: text only;
+    valueType: gValue;
+}
+
+element listening_material {
+    /*
+    Description: The <listening_material> element contains the audio that the student must listen to for this activity.
+    */
+    allowedContent: elements and text;
+}
+
+element sections {
+    /*
+    Description: The <sections> element contains the list of sections in this listening activity.
+    */
+    allowedContent: elements only;
+    subelements: [ section (n >= 0) ];
+}
+
+attribute sectionType {
+    tagName: 'type';
+    valueType: activitySectionType;
+}
+
+element section {
+    /*
+    Description: The <section> element describes a section of this listening activity. There are three types of section: listening for gist, listening for detail, and listening for specific information.
+    */
+    attributes: sectionType;
+    allowedContent: elements only;
+    subelements: [ questions ];
+}
+
+element questions {
+    /*
+    Description: The <questions> element contains the list of questions in this section of the listening activity.
+    */
+    allowedContent: elements only;
+    subelements: [ question (n >= 0) ];
+}
+
+element question {
+    /*
+    Description: The <question> element gives a reference to a question that is part of this section.
+    */
+    attributes: id;
+    allowedContent: none;
+}
