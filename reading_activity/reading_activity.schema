@@ -22,7 +22,7 @@ dataType versionNumber {
 
 dataType subject {
     /*
-    Description:
+    Description: a [subject reference](https://github.com/BM345/NagwaSchemas#subjects)
     Example Value: english 
     */
     baseType: string;
@@ -45,7 +45,7 @@ dataType subject {
 
 dataType gValue {
     /*
-    Description:
+    Description: a g-value
     Example Value: 9
     */
     baseType: integer;
@@ -110,6 +110,9 @@ element g_value {
 }
 
 element reading_material {
+    /*
+    Description: The <reading_material> element contains the text that the student must read for this activity.
+    */
     allowedContent: elements and text;
 }
 

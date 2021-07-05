@@ -9,6 +9,7 @@ This document gives the specification for Reading Activity XML.
 - [The &lt;seo_description&gt; element](#the-seo-description-element)
 - [The &lt;subject&gt; element](#the-subject-element)
 - [The &lt;g_value&gt; element](#the-g-value-element)
+- [The &lt;reading_material&gt; element](#the-reading-material-element)
 - [The &lt;sections&gt; element](#the-sections-element)
 - [The &lt;section&gt; element](#the-section-element)
 - [The &lt;questions&gt; element](#the-questions-element)
@@ -34,6 +35,7 @@ The &lt;reading_activity&gt; element is the root element of a Reading Activity X
 - &lt;seo_description&gt;
 - &lt;subject&gt;
 - &lt;g_value&gt;
+- &lt;reading_material&gt;
 - &lt;sections&gt;
 
 ### Examples
@@ -46,6 +48,7 @@ Below is shown an example of the `<reading_activity>` element.
     <seo_description></seo_description>
     <subject></subject>
     <g_value></g_value>
+    <reading_material></reading_material>
     <sections></sections>
 </reading_activity>
 ```
@@ -148,6 +151,31 @@ Below is shown an example of the `<g_value>` element.
 ```xml
 <g_value>
 </g_value>
+```
+
+
+
+<br /><br />
+
+## The &lt;reading_material&gt; element
+
+The &lt;reading_material&gt; element contains the text that the student must read for this activity.
+
+### Attributes
+
+None
+
+### Possible Subelements
+
+None
+
+### Examples
+
+Below is shown an example of the `<reading_material>` element.
+
+```xml
+<reading_material>
+</reading_material>
 ```
 
 
