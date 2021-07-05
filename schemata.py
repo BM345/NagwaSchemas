@@ -1,3 +1,4 @@
+import os 
 import logging 
 import re
 from lxml.etree import ElementTree as XMLElementTree, Element as XMLElement, SubElement as XMLSubelement, Comment as XMLComment, QName, indent 
@@ -47,6 +48,7 @@ class Structure(object):
     def __init__(self, reference = ""):
         self.reference = reference
         self.description = ""
+        self.exampleValue = ""
 
 class DataStructure(Structure):
     def __init__(self, reference = ""):
@@ -271,10 +273,14 @@ class Parser(object):
         metadata = self._parseComment(inputText, marker)
 
         if metadata != None:
-            m = re.search(r"Description:\s*(.+)\n", metadata)
+            m1 = re.search(r"Description:\s*(.+)\n", metadata)
+            m2 = re.search(r"Example Value:\s*(.+)\n", metadata)
 
-            if m != None:
-                dataStructure.description = m.group(1).strip()
+            if m1 != None:
+                dataStructure.description = m1.group(1).strip()
+
+            if m2 != None:
+                dataStructure.exampleValue = m2.group(1).strip()
 
         self._parseWhiteSpace(inputText, marker) 
 
@@ -323,10 +329,14 @@ class Parser(object):
         metadata = self._parseComment(inputText, marker)
 
         if metadata != None:
-            m = re.search(r"Description:\s*(.+)\n", metadata)
+            m1 = re.search(r"Description:\s*(.+)\n", metadata)
+            m2 = re.search(r"Example Value:\s*(.+)\n", metadata)
 
-            if m != None:
-                elementStructure.description = m.group(1).strip()
+            if m1 != None:
+                elementStructure.description = m1.group(1).strip()
+
+            if m2 != None:
+                elementStructure.exampleValue = m2.group(1).strip()
 
         self._parseWhiteSpace(inputText, marker) 
 
@@ -1278,4 +1288,60 @@ def generateSpecification(schema, filePath):
 
             fileObject.write("</{}>\n".format(element.elementName))
             fileObject.write("```\n\n")
+
+class ExampleFileGenerator(object):
+    def __init__(self):
+        pass 
+
+    def generateExampleFiles(self, schema, folderPath):
+
+        rootElements = schema.getPossibleRootElementStructures()
+
+        for rootElement in rootElements:
+
+            filePath = os.path.join(folderPath, "example1.xml")
+
+            e1 = XMLElement(rootElement.elementName)
+
+            self._generateAttributes(schema, rootElement, e1)
+            self._generateSubelements(schema, rootElement, e1)
+
+            tree = XMLElementTree(e1)
+            indent(tree, space="    ")
+            tree.write(filePath, xml_declaration=True, encoding="utf-8", pretty_print=True)
+
+    def _generateAttributes(self, schema, elementStructure, e1):
+        for attribute in elementStructure.attributes:
+            s = schema.getAttributeStructureByReference(attribute.attributeReference)
+            ds = schema.getDataStructureByReference(s.dataStructure)
+
+            e1.set(s.attributeName, ds.exampleValue)
+
+    def _generateSubelements(self, schema, elementStructure, e1):
+        if elementStructure.allowedContent == "text only":
+            if elementStructure.valueType != None:
+                ds = schema.getDataStructureByReference(elementStructure.valueType)
+                e1.text = ds.exampleValue
+            elif elementStructure.exampleValue != "":
+                e1.text = elementStructure.exampleValue
+
+        if isinstance(elementStructure.subelements, OrderedSubelementList):
+            for subelement in elementStructure.subelements.elements:
+                if isinstance(subelement, ElementUsageReference):
+                    es = schema.getElementStructureByReference(subelement.elementReference)
+
+                    n = 1
+
+                    if subelement.maximumNumberOfOccurrences == -1:
+                        n = 3
+
+                    for x in range(n):
+                        e2 = XMLElement(es.elementName)
+
+                        self._generateAttributes(schema, es, e2)
+                        self._generateSubelements(schema, es, e2)
+
+                        e1.append(e2)
+
+exampleFileGenerator = ExampleFileGenerator()
 

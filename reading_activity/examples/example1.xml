@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<reading_activity id="000000000000" version="1">
+    <title>My Holiday in Rome &amp; My Time in Manaus, Brazil</title>
+    <seo_description>practise reading for gist, detail and specific information in the context of going on holiday.</seo_description>
+    <subject>english</subject>
+    <g_value>9</g_value>
+    <reading_material/>
+    <sections>
+        <section type="">
+            <questions>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+            </questions>
+        </section>
+        <section type="">
+            <questions>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+            </questions>
+        </section>
+        <section type="">
+            <questions>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+                <question id="000000000000"/>
+            </questions>
+        </section>
+    </sections>
+</reading_activity>

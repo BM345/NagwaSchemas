@@ -82,6 +82,10 @@ if __name__ == "__main__":
         schemata.generateSpecification(schema, "semantic_tags/semantic_tags_xml_specification.md")
         schema = parser.parseSchemaFromFile("reading_activity/reading_activity.schema")
         schemata.generateSpecification(schema, "reading_activity/reading_activity_xml_specification.md")
+    elif arguments.action == "generate_example_files":
+        parser = schemata.Parser()
+        schema = parser.parseSchemaFromFile("reading_activity/reading_activity.schema")
+        schemata.exampleFileGenerator.generateExampleFiles(schema, "reading_activity/examples")
     else:
         generate()
         validate()

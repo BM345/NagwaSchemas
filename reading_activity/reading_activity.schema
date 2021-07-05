@@ -21,6 +21,10 @@ dataType versionNumber {
 }
 
 dataType subject {
+    /*
+    Description:
+    Example Value: english 
+    */
     baseType: string;
     allowedValues:  'mathematics',
                     'physics',
@@ -40,6 +44,10 @@ dataType subject {
 }
 
 dataType gValue {
+    /*
+    Description:
+    Example Value: 9
+    */
     baseType: integer;
     minimumValue: 1;
     maximumValue: 16;
@@ -66,12 +74,13 @@ root element reading_activity {
     */
     attributes: id, version;
     allowedContent: elements only;
-    subelements: [ title, seo_description, subject, g_value, sections ];
+    subelements: [ title, seo_description, subject, g_value, reading_material, sections ];
 }
 
 element title {
     /*
     Description: The <title> element contains the title of this reading activity.
+    Example Value: My Holiday in Rome & My Time in Manaus, Brazil
     */
     allowedContent: text only;
 }
@@ -79,6 +88,7 @@ element title {
 element seo_description {
     /*
     Description: The <seo_description> element contains the SEO description of this reading activity.
+    Example Value: practise reading for gist, detail and specific information in the context of going on holiday.
     */
     allowedContent: text only;
 }
@@ -97,6 +107,10 @@ element g_value {
     */
     allowedContent: text only;
     valueType: gValue;
+}
+
+element reading_material {
+    allowedContent: elements and text;
 }
 
 element sections {
