@@ -4,23 +4,24 @@
     <seo_description>practise reading for gist, detail and specific information in the context of going on holiday.</seo_description>
     <subject>english</subject>
     <g_value>9</g_value>
-    <reading_material/>
+    <reading_material>
+    </reading_material>
     <sections>
-        <section type="">
+        <section type="gist">
             <questions>
                 <question id="000000000000"/>
                 <question id="000000000000"/>
                 <question id="000000000000"/>
             </questions>
         </section>
-        <section type="">
+        <section type="detail">
             <questions>
                 <question id="000000000000"/>
                 <question id="000000000000"/>
                 <question id="000000000000"/>
             </questions>
         </section>
-        <section type="">
+        <section type="specific_information">
             <questions>
                 <question id="000000000000"/>
                 <question id="000000000000"/>
