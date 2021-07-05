@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <!-- An XSD file for Reading Activity XML (v1.2.0). -->
+    <xs:simpleType name="__type__d__id">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{12}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__versionNumber">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__subject">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="mathematics"/>
+            <xs:enumeration value="physics"/>
+            <xs:enumeration value="chemistry"/>
+            <xs:enumeration value="biology"/>
+            <xs:enumeration value="science"/>
+            <xs:enumeration value="english"/>
+            <xs:enumeration value="arabic"/>
+            <xs:enumeration value="french"/>
+            <xs:enumeration value="philosophy"/>
+            <xs:enumeration value="psychology"/>
+            <xs:enumeration value="sociology"/>
+            <xs:enumeration value="history"/>
+            <xs:enumeration value="geography"/>
+            <xs:enumeration value="geology"/>
+            <xs:enumeration value="economics"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__gValue">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="16"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="__type__d__activitySectionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="gist"/>
+            <xs:enumeration value="detail"/>
+            <xs:enumeration value="specific_information"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="__type__e__reading_activity" mixed="false">
+        <xs:sequence>
+            <xs:element name="title" type="__type__e__title"/>
+            <xs:element name="seo_description" type="__type__e__seo_description"/>
+            <xs:element name="subject" type="__type__e__subject"/>
+            <xs:element name="g_value" type="__type__e__g_value"/>
+            <xs:element name="reading_material" type="__type__e__reading_material"/>
+            <xs:element name="sections" type="__type__e__sections"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="__type__d__id" use="required"/>
+        <xs:attribute name="version" type="__type__d__versionNumber" use="required"/>
+    </xs:complexType>
+    <xs:simpleType name="__type__e__title">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__e__seo_description">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__e__subject">
+        <xs:restriction base="__type__d__subject"/>
+    </xs:simpleType>
+    <xs:simpleType name="__type__e__g_value">
+        <xs:restriction base="__type__d__gValue"/>
+    </xs:simpleType>
+    <xs:complexType name="__type__e__reading_material" mixed="true"/>
+    <xs:complexType name="__type__e__sections" mixed="false">
+        <xs:sequence>
+            <xs:element name="section" type="__type__e__section" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__e__section" mixed="false">
+        <xs:sequence>
+            <xs:element name="questions" type="__type__e__questions"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="__type__d__activitySectionType" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="__type__e__questions" mixed="false">
+        <xs:sequence>
+            <xs:element name="question" type="__type__e__question" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="__type__e__question">
+        <xs:attribute name="id" type="__type__d__id" use="required"/>
+    </xs:complexType>
+    <xs:element name="reading_activity" type="__type__e__reading_activity"/>
+</xs:schema>

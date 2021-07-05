@@ -8,7 +8,8 @@ SCHEMAS = [
     "roles",
     "workflow",
     "history",
-    "scope"
+    "reading_activity",
+    "scope",
 ]
 
 REPOSITORY_VERSION_NUMBER = "v1.2.0"
