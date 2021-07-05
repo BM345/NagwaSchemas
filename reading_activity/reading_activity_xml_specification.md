@@ -282,6 +282,6 @@ None
 Below is shown an example of the `<question>` element.
 
 ```xml
-<question id="..." />
+<question id="000000000000" />
 ```
 
