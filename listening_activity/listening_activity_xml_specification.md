@@ -26,8 +26,8 @@ The &lt;listening_activity&gt; element is the root element of a Listening Activi
 
 | Name | Required | Allowed Values | Description |
 |---|---|---|---|
-| `id` | Required | a 12-digit entity id |  |
-| `version` | Required | an integer |  |
+| `id` | Required | a 12-digit entity id | The id of this listening activity. |
+| `version` | Required | an integer | The version number of this content entity. |
 
 ### Possible Subelements
 
@@ -43,7 +43,7 @@ The &lt;listening_activity&gt; element is the root element of a Listening Activi
 Below is shown an example of the `<listening_activity>` element.
 
 ```xml
-<listening_activity id="..." version="...">
+<listening_activity id="000000000000" version="1">
     <title></title>
     <seo_description></seo_description>
     <subject></subject>
@@ -74,8 +74,7 @@ None
 Below is shown an example of the `<title>` element.
 
 ```xml
-<title>
-</title>
+<title>Ecotourism in the Seychelles</title>
 ```
 
 
@@ -99,8 +98,7 @@ None
 Below is shown an example of the `<seo_description>` element.
 
 ```xml
-<seo_description>
-</seo_description>
+<seo_description>practise listening for gist, detail and specific information in the context of ecotourism.</seo_description>
 ```
 
 
@@ -124,8 +122,7 @@ None
 Below is shown an example of the `<subject>` element.
 
 ```xml
-<subject>
-</subject>
+<subject>english</subject>
 ```
 
 
@@ -149,8 +146,7 @@ None
 Below is shown an example of the `<g_value>` element.
 
 ```xml
-<g_value>
-</g_value>
+<g_value>9</g_value>
 ```
 
 
@@ -175,6 +171,7 @@ Below is shown an example of the `<listening_material>` element.
 
 ```xml
 <listening_material>
+    ...
 </listening_material>
 ```
 
@@ -201,6 +198,8 @@ Below is shown an example of the `<sections>` element.
 ```xml
 <sections>
     <section></section>
+    <section></section>
+    <section></section>
 </sections>
 ```
 
@@ -216,7 +215,7 @@ The &lt;section&gt; element describes a section of this listening activity. Ther
 
 | Name | Required | Allowed Values | Description |
 |---|---|---|---|
-| `type` | Required | one of: `gist`, `detail`, `specific_information` |  |
+| `type` | Required | one of: `gist`, `detail`, `specific_information` | The type of this section. |
 
 ### Possible Subelements
 
@@ -254,7 +253,9 @@ Below is shown an example of the `<questions>` element.
 
 ```xml
 <questions>
-    <question></question>
+    <question id="000000000000" />
+    <question id="000000000000" />
+    <question id="000000000000" />
 </questions>
 ```
 
@@ -270,7 +271,7 @@ The &lt;question&gt; element gives a reference to a question that is part of thi
 
 | Name | Required | Allowed Values | Description |
 |---|---|---|---|
-| `id` | Required | a 12-digit entity id |  |
+| `id` | Required | a 12-digit entity id | The id of the question to include. |
 
 ### Possible Subelements
 
@@ -281,7 +282,6 @@ None
 Below is shown an example of the `<question>` element.
 
 ```xml
-<question id="...">
-</question>
+<question id="000000000000" />
 ```
 
