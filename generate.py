@@ -10,6 +10,7 @@ SCHEMAS = [
     "history",
     "reading_activity",
     "listening_activity",
+    "flashcard_set",
     "scope",
 ]
 
@@ -82,12 +83,12 @@ if __name__ == "__main__":
         parser = schemata.Parser()
         schema = parser.parseSchemaFromFile("semantic_tags/semantic_tags.schema")
         schemata.generateSpecification(schema, "semantic_tags/semantic_tags_xml_specification.md")
-        schema = parser.parseSchemaFromFile("listening_activity/listening_activity.schema")
-        schemata.generateSpecification(schema, "listening_activity/listening_activity_xml_specification.md")
+        schema = parser.parseSchemaFromFile("flashcard_set/flashcard_set.schema")
+        schemata.generateSpecification(schema, "flashcard_set/flashcard_set_xml_specification.md")
     elif arguments.action == "generate_example_files":
         parser = schemata.Parser()
-        schema = parser.parseSchemaFromFile("listening_activity/listening_activity.schema")
-        schemata.exampleFileGenerator.generateExampleFiles(schema, "listening_activity/examples")
+        schema = parser.parseSchemaFromFile("flashcard_set/flashcard_set.schema")
+        schemata.exampleFileGenerator.generateExampleFiles(schema, "flashcard_set/examples")
     else:
         generate()
         validate()

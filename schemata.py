@@ -1334,6 +1334,8 @@ class ExampleFileGenerator(object):
 
                     if subelement.maximumNumberOfOccurrences == -1:
                         n = 3
+                    elif subelement.maximumNumberOfOccurrences <= 3:
+                        n = subelement.maximumNumberOfOccurrences
 
                     for x in range(n):
                         e2 = XMLElement(es.elementName)

@@ -1,0 +1,101 @@
+/*
+Format Name: Flashcard Set XML
+*/ 
+
+dataType id {
+    /*
+    Description: a 12-digit entity id 
+    Example Value: 000000000000
+    */
+    baseType: string;
+    pattern: '\d{12}';
+}
+
+dataType versionNumber {
+    /*
+    Description: an integer 
+    Example Value: 1
+    */
+    baseType: integer;
+    minimumValue: 1;
+}
+
+dataType subject {
+    /*
+    Description: a [subject reference](https://github.com/BM345/NagwaSchemas#subjects)
+    Example Value: english 
+    */
+    baseType: string;
+    allowedValues:  'mathematics',
+                    'physics',
+                    'chemistry',
+                    'biology',
+                    'science',
+                    'english',
+                    'arabic',
+                    'french',
+                    'philosophy',
+                    'psychology',
+                    'sociology',
+                    'history',
+                    'geography',
+                    'geology',
+                    'economics';
+}
+
+dataType gValue {
+    /*
+    Description: a g-value
+    Example Value: 9
+    */
+    baseType: integer;
+    minimumValue: 1;
+    maximumValue: 16;
+}
+
+attribute id {
+    valueType: id;
+}
+
+attribute version {
+    valueType: versionNumber;
+}
+
+root element flashcard_set {
+    /*
+    Description: The <flashcard_set> element is the root element of a Flashcard Set XML file.
+    */
+    attributes: id, version;
+    allowedContent: elements only;
+    subelements: [ subject, g_value, cards ];
+}
+
+element subject {
+    /*
+    Description: The <subject> element gives the subject of this flashcard set.
+    */
+    allowedContent: text only;
+    valueType: subject;
+}
+
+element g_value {
+    /*
+    Description: The <g_value> element gives the g-value of this flashcard set.
+    */
+    allowedContent: text only;
+    valueType: gValue;
+}
+
+element cards {
+    allowedContent: elements only;
+    subelements: [card (n >= 0)];
+}
+
+element card {
+    allowedContent: elements only;
+    subelements: [side (n = 2)];
+}
+
+element side {
+    allowedContent: elements and text;
+}
