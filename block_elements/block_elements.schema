@@ -1,0 +1,135 @@
+
+dataType time {
+    baseType: decimal;
+    minimumValue: 0;
+}
+
+attribute beginsAt {
+    /*
+    Description: Used in transcripts to denote at what time a given word, phrase, sentence, or paragraph begins in the audio.
+    */
+    tagName: 'b';
+    valueType: time;
+}
+
+attribute endsAt {
+    /*
+    Description: Used in transcripts to denote at what time a given word, phrase, sentence, or paragraph ends in the audio.
+    */
+    tagName: 'e';
+    valueType: time;
+}
+
+element p {
+    /*
+    Description: The <p> tag defines a paragraph. It is the same as the HTML <p> tag.
+    */
+    attributes: beginsAt (optional), endsAt (optional);
+    allowedContent: elements and text;
+    subelements: { s (n >= 0), phrase (n >= 0), w (n >= 0), m (n >= 0) };
+}
+
+element s {
+    /*
+    Description: The <s> tag defines a sentence. Marking-up sentences is optional in the content, but if it is ever needed, the <s> tag can be used to do it.
+    */
+    attributes: beginsAt (optional), endsAt (optional);
+    allowedContent: elements and text;
+    subelements: { phrase (n >= 0), w (n >= 0), m (n >= 0) };
+}
+
+element phrase {
+    /*
+    Description: The <phrase> tag defines a phrase. Marking-up phrases is optional in the content, but if it is ever needed, the <phrase> tag can be used to do it.
+    */
+    attributes: beginsAt (optional), endsAt (optional);
+    allowedContent: elements and text;
+    subelements: { w (n >= 0), m (n >= 0) };
+}
+
+element w {
+    /*
+    Description: The <w> tag defines a word. Marking-up words is optional in the content, but if it is ever needed, the <w> tag can be used to do it.
+    */
+    attributes: beginsAt (optional), endsAt (optional);
+    allowedContent: elements and text;
+}
+
+element ul {
+    /*
+    Description: The <ul> tag defines an unordered list. It is the same as the HTML <ul> tag.
+    */
+    allowedContent: elements only;
+    subelements: [ li (n >= 0) ];
+}
+
+element ol {
+    /*
+    Description: The <ol> tag defines an ordered list. It is the same as the HTML <ol> tag.
+    */
+    allowedContent: elements only;
+    subelements: [ li (n >= 0) ];
+}
+
+element li {
+    /*
+    Description: The <li> tag defines a list item. It is the same as the HTML <li> tag.
+    */
+    allowedContent: elements and text;
+    subelements: { s (n >= 0), phrase (n >= 0), w (n >= 0), m (n >= 0) };
+}
+
+dataType mathsSyntax {
+    baseType: string;
+    allowedValues: 'latex', 'mathml';
+}
+
+attribute mathsSyntax {
+    tagName: 'syntax'
+    valueType: mathsSyntax;
+}
+
+element m {
+    attributes: mathsSyntax (optional);
+    allowedContent: elements and text;
+}
+
+dataType numberingScheme {
+    baseType: string;
+    allowedPattern: '[A-Za-z0-9_\-]+';
+}
+
+attribute include_in_numbering_scheme {
+    valueType: numberingScheme;
+}
+
+attribute show_figure_number {
+    valueType: boolean;
+}
+
+attribute show_caption {
+    valueType: boolean;
+}
+
+element figure {
+    attributes: include_in_numbering_scheme (optional), show_figure_number (optional), show_caption (optional);
+    allowedContent: elements only;
+    subelements: [ {image / video / audio}, caption ];
+}
+
+element caption {
+    allowedContent: elements and text;
+    subelements: { p (n >= 0), s (n >= 0), phrase (n >= 0), w (n >= 0), m (n >= 0) };
+}
+
+element image {
+
+}
+
+element video {
+
+}
+
+element audio {
+
+}
